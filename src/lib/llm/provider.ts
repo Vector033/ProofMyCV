@@ -15,6 +15,7 @@ const DEFAULT_MODELS = ["gemini-flash-lite-latest", "gemini-flash-latest"];
 const RETRYABLE = new Set([429, 500, 502, 503, 504]);
 const RETRIES_PER_MODEL = 2;
 const REQUEST_TIMEOUT_MS = 45_000;
+const MAX_RETRY_WAIT_S = 20;
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
@@ -64,8 +65,13 @@ export class GeminiProvider implements LlmProvider {
           this.used = model;
           return parseOutput(await res.json(), schema);
         }
-        lastError = `Gemini ${model} ${res.status}: ${(await res.text()).slice(0, 200)}`;
+        const errorBody = await res.text();
+        lastError = `Gemini ${model} ${res.status}: ${errorBody.slice(0, 200)}`;
         if (!RETRYABLE.has(res.status)) throw new LlmError(lastError);
+        // A per-minute rate limit says how long to wait; honour short waits
+        // instead of burning the retry. Daily quota waits are too long, so move on.
+        const wait = Number(errorBody.match(/"retryDelay":\s*"(\d+(?:\.\d+)?)s"/)?.[1]);
+        if (res.status === 429 && wait > 0 && wait <= MAX_RETRY_WAIT_S) await sleep(wait * 1000);
       }
     }
     throw new LlmError(lastError);

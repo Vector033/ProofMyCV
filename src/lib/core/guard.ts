@@ -3,7 +3,7 @@
 // purpose: the LLM is asked to cite its facts, but we never take its word for it.
 
 import { findTechTerms, withImplied } from "./vocab";
-import { factText, type BulletDraft, type Fact } from "./types";
+import { factText, type BulletDraft, type Experience, type Fact } from "./types";
 
 /**
  * A quantity. `unit` is "percent", "times", "plain" (no unit) or a measurement
@@ -136,7 +136,7 @@ const WEAK_STARTS = new Set(["responsible", "helped", "worked", "assisted", "par
 
 export const MAX_BULLET_WORDS = 32;
 
-export function checkBullet(bullet: BulletDraft, facts: Fact[]): GuardResult {
+export function checkBullet(bullet: BulletDraft, facts: Fact[], experiences: Experience[] = []): GuardResult {
   const violations: Violation[] = [];
   const warnings: Warning[] = [];
   const byId = new Map(facts.map((f) => [f.id, f]));
@@ -160,14 +160,19 @@ export function checkBullet(bullet: BulletDraft, facts: Fact[]): GuardResult {
     }
   }
 
+  // Names (not numbers) may also come from the bullet's own experience title
+  // and organisation: "for the KIT Robotics Club" under that experience is fine.
+  const own = experiences.find((e) => e.id === bullet.experienceId);
+  const nameEvidence = own ? `${evidence}\n${own.title}\n${own.org}` : evidence;
+
   // A fact naming Jest also backs "automated testing" in the bullet.
-  const evidenceTech = withImplied(findTechTerms(evidence));
+  const evidenceTech = withImplied(findTechTerms(nameEvidence));
   const bulletTech = findTechTerms(bullet.text);
   for (const term of bulletTech) {
     if (!evidenceTech.has(term)) violations.push({ type: "tech", term });
   }
 
-  const evidenceLower = evidence.toLowerCase();
+  const evidenceLower = nameEvidence.toLowerCase();
   for (const m of bullet.text.matchAll(TECHY_TOKEN_RE)) {
     const token = m[0];
     if (GENERIC_ACRONYMS.has(token)) continue;
@@ -184,7 +189,7 @@ export function checkBullet(bullet: BulletDraft, facts: Fact[]): GuardResult {
     if (before === "" || /[.!?:;]$/.test(before)) continue; // sentence start
     if (CALENDAR_WORDS.has(word) || findTechTerms(word).length > 0) continue;
     if (violations.some((v) => "term" in v && v.term.toLowerCase().includes(word.toLowerCase()))) continue;
-    if (!new RegExp(`\\b${word}`, "i").test(evidence)) violations.push({ type: "term", term: word });
+    if (!new RegExp(`\\b${word}`, "i").test(nameEvidence)) violations.push({ type: "term", term: word });
   }
 
   const words = bullet.text.trim().split(/\s+/).filter(Boolean);

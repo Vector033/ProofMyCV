@@ -317,3 +317,17 @@ describe("guard units and names", () => {
     expect(check("Fixed a memory leak found with Instruments in March").ok).toBe(true);
   });
 });
+
+describe("guard with experience context", () => {
+  const fact: Fact = { id: "p", experienceId: "club", did: "Wrote a Python script to plot sensor logs for PID tuning", tech: ["Python"] };
+  const club = { id: "club", kind: "activity" as const, title: "Firmware lead", org: "KIT Robotics Club" };
+
+  it("accepts names from the bullet's own experience, but not its numbers", () => {
+    const text = "Plotted sensor logs for PID tuning with a Python script for the KIT Robotics Club";
+    expect(checkBullet({ experienceId: "club", text, factIds: ["p"] }, [fact]).ok).toBe(false);
+    expect(checkBullet({ experienceId: "club", text, factIds: ["p"] }, [fact], [club]).ok).toBe(true);
+    expect(
+      checkBullet({ experienceId: "club", text: `${text}, winning 2 cups`, factIds: ["p"] }, [fact], [club]).ok,
+    ).toBe(false);
+  });
+});

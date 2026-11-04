@@ -56,7 +56,7 @@ export function autoFabrications(c: EvalCase): Fabrication[] {
     const other = c.facts.find((f) => f.experienceId !== g.experienceId);
     if (other) {
       const swapped = { ...base, factIds: [other.id], text: g.text };
-      if (!checkBullet(swapped, c.facts).ok) out.push({ ...swapped, kind: "citation" });
+      if (!checkBullet(swapped, c.facts, c.experiences).ok) out.push({ ...swapped, kind: "citation" });
     }
   }
   return out;
@@ -83,7 +83,7 @@ export function evaluateGuard(cases: EvalCase[]): GuardReport {
   for (const c of cases) {
     for (const g of c.gold) {
       report.gold.total++;
-      const r = checkBullet(g, c.facts);
+      const r = checkBullet(g, c.facts, c.experiences);
       if (r.ok) report.gold.accepted++;
       else report.gold.rejected.push({ caseId: c.id, text: g.text, why: reasons(r) });
     }
@@ -95,7 +95,7 @@ export function evaluateGuard(cases: EvalCase[]): GuardReport {
       const k = (report.fabricated.byKind[f.kind] ??= { total: 0, blocked: 0 });
       k.total++;
       report.fabricated.total++;
-      if (!checkBullet(f, c.facts).ok) {
+      if (!checkBullet(f, c.facts, c.experiences).ok) {
         k.blocked++;
         report.fabricated.blocked++;
       } else {

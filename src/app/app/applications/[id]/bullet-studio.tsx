@@ -24,7 +24,7 @@ export function BulletStudio({ applicationId, experiences, facts, initialBullets
   const [saving, startSaving] = useTransition();
 
   // The same guard the server runs on save, run live while the user edits.
-  const checks = useMemo(() => bullets.map((b) => checkBullet(b, facts)), [bullets, facts]);
+  const checks = useMemo(() => bullets.map((b) => checkBullet(b, facts, experiences)), [bullets, facts, experiences]);
   const blocked = checks.some((c) => !c.ok);
   const factById = useMemo(() => new Map(facts.map((f) => [f.id, f])), [facts]);
 

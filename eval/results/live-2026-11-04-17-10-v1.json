@@ -1,0 +1,2381 @@
+{
+  "summary": {
+    "date": "2026-11-04T17:10:56.783Z",
+    "prompt": "v1",
+    "analysis": "rules",
+    "style": {
+      "bullets": 117,
+      "strongVerb": 0.9829059829059829,
+      "usesMetric": 1,
+      "hasHow": 0.1111111111111111,
+      "toolTail": 0.10256410256410256,
+      "copiesFact": 0.6581196581196581,
+      "xyzShape": 0.3162393162393162,
+      "meanWords": 19.504273504273506
+    },
+    "models": "gemini:gemini-flash-lite-latest",
+    "cases": 30,
+    "errors": 0,
+    "drafts": 117,
+    "blockedByGuard": 0,
+    "baitLeaksBeforeGuard": 0,
+    "baitLeaksAfterGuard": 0,
+    "keywordCoverage": 0.8316326530612245,
+    "meanWords": 19.504273504273506,
+    "overLength": 0,
+    "extraction": {
+      "llm": {
+        "requiredRecall": 0.7050691244239631,
+        "recall": 0.6334164588528678,
+        "precision": 0.946969696969697
+      },
+      "rules": {
+        "requiredRecall": 0.7050691244239631,
+        "recall": 0.6334164588528678,
+        "precision": 0.946969696969697
+      }
+    },
+    "medianSeconds": 17.493
+  },
+  "results": [
+    {
+      "id": "web-01",
+      "model": "gemini:gemini-flash-lite-latest",
+      "seconds": 28.584,
+      "extraction": {
+        "required": {
+          "total": 8,
+          "found": 7
+        },
+        "all": {
+          "total": 13,
+          "found": 12
+        },
+        "extracted": 13,
+        "matchedExtracted": 12
+      },
+      "drafts": [
+        {
+          "experienceId": "e1",
+          "text": "Rebuilt the product listing page in Next.js with server-side rendering, dropping Largest Contentful Paint from 4.1 s to 1.8 s using Next.js, React, and TypeScript.",
+          "factIds": [
+            "f1"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 25,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Wrote unit tests for shared form components, increasing test coverage of the components folder from 35% to 72% using Jest and React Testing Library.",
+          "factIds": [
+            "f2"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 24,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Converted 14 legacy pages from plain CSS to Tailwind CSS.",
+          "factIds": [
+            "f3"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 10,
+          "leaks": []
+        },
+        {
+          "experienceId": "e2",
+          "text": "Built a campus buy-and-sell web app with a team of 3, achieving 1,200 registered students in the first semester using React, Firebase, and JavaScript.",
+          "factIds": [
+            "f4"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 24,
+          "leaks": []
+        }
+      ],
+      "coverage": {
+        "coverable": 9,
+        "mentioned": 7
+      }
+    },
+    {
+      "id": "web-02",
+      "model": "gemini:gemini-flash-lite-latest",
+      "seconds": 14.35,
+      "extraction": {
+        "required": {
+          "total": 8,
+          "found": 8
+        },
+        "all": {
+          "total": 13,
+          "found": 11
+        },
+        "extracted": 11,
+        "matchedExtracted": 11
+      },
+      "drafts": [
+        {
+          "experienceId": "e1",
+          "text": "Migrated the booking widget from Vue 2 to Vue 3 with the Composition API, reducing bundle size from 410 KB to 260 KB.",
+          "factIds": [
+            "f1"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 23,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Built a tour search page that calls the company REST API with date and price filters, achieving search results in under 800 ms.",
+          "factIds": [
+            "f2"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 23,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Wrote component tests for the checkout form, catching 5 validation bugs before release.",
+          "factIds": [
+            "f3"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 13,
+          "leaks": []
+        },
+        {
+          "experienceId": "e2",
+          "text": "Built a recipe search site with server-side rendering, achieving a Lighthouse SEO score of 98.",
+          "factIds": [
+            "f4"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 15,
+          "leaks": []
+        }
+      ],
+      "coverage": {
+        "coverable": 10,
+        "mentioned": 2
+      }
+    },
+    {
+      "id": "web-03",
+      "model": "gemini:gemini-flash-lite-latest",
+      "seconds": 23.633,
+      "extraction": {
+        "required": {
+          "total": 7,
+          "found": 7
+        },
+        "all": {
+          "total": 14,
+          "found": 14
+        },
+        "extracted": 15,
+        "matchedExtracted": 14
+      },
+      "drafts": [
+        {
+          "experienceId": "e1",
+          "text": "Built an endpoint to export 10,000 rows of invoices as CSV in 2.3 s by using Node.js, Express, TypeScript, and PostgreSQL.",
+          "factIds": [
+            "f1"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 21,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Dropped p95 query time from 640 ms to 45 ms by adding a database index on invoice lookups in PostgreSQL.",
+          "factIds": [
+            "f2"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 20,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Set up a lint and test workflow running on every pull request using GitHub Actions.",
+          "factIds": [
+            "f3"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 15,
+          "leaks": []
+        },
+        {
+          "experienceId": "e2",
+          "text": "Built a group study planner with shared calendars used by 85 classmates during finals using Next.js, React, TypeScript, and PostgreSQL.",
+          "factIds": [
+            "f4"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 20,
+          "leaks": []
+        },
+        {
+          "experienceId": "e2",
+          "text": "Containerized the app for local development using Docker so new teammates could run it in about 10 minutes.",
+          "factIds": [
+            "f5"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 18,
+          "leaks": []
+        },
+        {
+          "experienceId": "e3",
+          "text": "Built an expense tracker featuring a REST API and spending charts using React, Node.js, and REST.",
+          "factIds": [
+            "f6"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 16,
+          "leaks": []
+        }
+      ],
+      "coverage": {
+        "coverable": 11,
+        "mentioned": 11
+      }
+    },
+    {
+      "id": "web-04",
+      "model": "gemini:gemini-flash-lite-latest",
+      "seconds": 15.403,
+      "extraction": {
+        "required": {
+          "total": 8,
+          "found": 7
+        },
+        "all": {
+          "total": 13,
+          "found": 11
+        },
+        "extracted": 11,
+        "matchedExtracted": 11
+      },
+      "drafts": [
+        {
+          "experienceId": "e2",
+          "text": "Built a clinic queue booking system with SMS reminders, reducing the no-show rate from 18% to 7% in the pilot month using Laravel, PHP, and MySQL.",
+          "factIds": [
+            "f3"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 26,
+          "leaks": []
+        },
+        {
+          "experienceId": "e2",
+          "text": "Designed the database schema and wrote migrations for patients, doctors, and bookings using MySQL and Laravel.",
+          "factIds": [
+            "f4"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 16,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Sped up slow product pages on a client's WordPress shop by adding caching and resizing images, improving page load from 6.5 s to 2.1 s using PHP.",
+          "factIds": [
+            "f2"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 27,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Built 3 client landing sites from Figma designs that were all delivered before the deadline using HTML, CSS, and JavaScript.",
+          "factIds": [
+            "f1"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 20,
+          "leaks": []
+        }
+      ],
+      "coverage": {
+        "coverable": 7,
+        "mentioned": 7
+      }
+    },
+    {
+      "id": "web-05",
+      "model": "gemini:gemini-flash-lite-latest",
+      "seconds": 34.352,
+      "extraction": {
+        "required": {
+          "total": 9,
+          "found": 9
+        },
+        "all": {
+          "total": 14,
+          "found": 13
+        },
+        "extracted": 13,
+        "matchedExtracted": 13
+      },
+      "drafts": [
+        {
+          "experienceId": "e1",
+          "text": "Built Django REST Framework endpoints for insurance claim status lookup, replacing a manual email process handling about 300 requests a week.",
+          "factIds": [
+            "f1"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 21,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Wrote tests for the claims module using Python, increasing coverage from 40% to 81%.",
+          "factIds": [
+            "f2"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 14,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Moved PDF report generation into a background job using Redis, reducing request time from 12 s to 0.4 s.",
+          "factIds": [
+            "f3"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 19,
+          "leaks": []
+        },
+        {
+          "experienceId": "e2",
+          "text": "Built a dorm repair request portal with role-based login using Django, HTML, CSS, and JavaScript, handling 520 requests in its first term.",
+          "factIds": [
+            "f4"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 22,
+          "leaks": []
+        }
+      ],
+      "coverage": {
+        "coverable": 10,
+        "mentioned": 7
+      }
+    },
+    {
+      "id": "web-06",
+      "model": "gemini:gemini-flash-lite-latest",
+      "seconds": 26.895,
+      "extraction": {
+        "required": {
+          "total": 5,
+          "found": 5
+        },
+        "all": {
+          "total": 10,
+          "found": 10
+        },
+        "extracted": 12,
+        "matchedExtracted": 10
+      },
+      "drafts": [
+        {
+          "experienceId": "e1",
+          "text": "Built a shuttle tracking app showing live bus locations on a map, tested by 140 students in a pilot using React Native, TypeScript, Expo, and Firebase.",
+          "factIds": [
+            "f1"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 26,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Cached the route list on the device for offline use, improving app start time from 3.2 s to 1.1 s by doing React Native and AsyncStorage.",
+          "factIds": [
+            "f2"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 26,
+          "leaks": []
+        },
+        {
+          "experienceId": "e2",
+          "text": "Built an ordering app for a family restaurant taking 45 orders a day on average in its first month by using React Native and JavaScript.",
+          "factIds": [
+            "f4"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 25,
+          "leaks": []
+        },
+        {
+          "experienceId": "e2",
+          "text": "Connected the app to the restaurant's REST API for menus and order status utilizing REST and JavaScript.",
+          "factIds": [
+            "f5"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 17,
+          "leaks": []
+        }
+      ],
+      "coverage": {
+        "coverable": 5,
+        "mentioned": 5
+      }
+    },
+    {
+      "id": "web-07",
+      "model": "gemini:gemini-flash-lite-latest",
+      "seconds": 14.521,
+      "extraction": {
+        "required": {
+          "total": 5,
+          "found": 5
+        },
+        "all": {
+          "total": 12,
+          "found": 10
+        },
+        "extracted": 11,
+        "matchedExtracted": 10
+      },
+      "drafts": [
+        {
+          "experienceId": "e1",
+          "text": "Built the bill payment screens for a wallet app from Figma designs, shipping to the Play Store and App Store.",
+          "factIds": [
+            "f1"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 20,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Wrote widget tests for the payment flow covering 23 screens and caught a currency rounding bug before release.",
+          "factIds": [
+            "f2"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 18,
+          "leaks": []
+        }
+      ],
+      "coverage": {
+        "coverable": 4,
+        "mentioned": 1
+      }
+    },
+    {
+      "id": "web-08",
+      "model": "gemini:gemini-flash-lite-latest",
+      "seconds": 19.114,
+      "extraction": {
+        "required": {
+          "total": 5,
+          "found": 4
+        },
+        "all": {
+          "total": 11,
+          "found": 5
+        },
+        "extracted": 5,
+        "matchedExtracted": 4
+      },
+      "drafts": [
+        {
+          "experienceId": "e1",
+          "text": "Rebuilt settings and profile screens in SwiftUI using Swift, removing about 1,400 lines of UIKit code.",
+          "factIds": [
+            "f1"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 16,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Fixed an image gallery memory leak using Xcode and Instruments, decreasing peak memory from 380 MB to 150 MB.",
+          "factIds": [
+            "f2"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 19,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Wrote 18 unit tests for the login view model using XCTest.",
+          "factIds": [
+            "f3"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 11,
+          "leaks": []
+        }
+      ],
+      "coverage": {
+        "coverable": 6,
+        "mentioned": 5
+      }
+    },
+    {
+      "id": "web-09",
+      "model": "gemini:gemini-flash-lite-latest",
+      "seconds": 13.374,
+      "extraction": {
+        "required": {
+          "total": 6,
+          "found": 6
+        },
+        "all": {
+          "total": 16,
+          "found": 11
+        },
+        "extracted": 12,
+        "matchedExtracted": 11
+      },
+      "drafts": [
+        {
+          "experienceId": "e1",
+          "text": "Built an internal loan application review screen with reactive forms and validation, reducing review time per application from about 15 minutes to 6 minutes using Angular, TypeScript, and RxJS.",
+          "factIds": [
+            "f1"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 29,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Wrote unit tests for the form validators by adding 32 test cases using Jasmine and Karma.",
+          "factIds": [
+            "f2"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 16,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Worked in two-week sprints with daily stand-ups and sprint reviews using Scrum and Jira.",
+          "factIds": [
+            "f3"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": [
+              {
+                "type": "weak-start",
+                "word": "Worked"
+              }
+            ]
+          },
+          "words": 14,
+          "leaks": []
+        },
+        {
+          "experienceId": "e2",
+          "text": "Built a course registration dashboard that pulls data from a REST API, used by 3 faculty staff to track 2,300 enrollments using Angular, TypeScript, REST, and Chart.js.",
+          "factIds": [
+            "f4"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 27,
+          "leaks": []
+        },
+        {
+          "experienceId": "e2",
+          "text": "Made the dashboard keyboard-navigable and fixed color contrast issues, raising the Lighthouse accessibility score from 71 to 96 using HTML and CSS.",
+          "factIds": [
+            "f5"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 22,
+          "leaks": []
+        }
+      ],
+      "coverage": {
+        "coverable": 10,
+        "mentioned": 10
+      }
+    },
+    {
+      "id": "web-10",
+      "model": "gemini:gemini-flash-lite-latest",
+      "seconds": 16.935,
+      "extraction": {
+        "required": {
+          "total": 7,
+          "found": 5
+        },
+        "all": {
+          "total": 13,
+          "found": 7
+        },
+        "extracted": 7,
+        "matchedExtracted": 7
+      },
+      "drafts": [
+        {
+          "experienceId": "e3",
+          "text": "Built a component library of 24 React components with documented variants using React, TypeScript, Storybook, and CSS, which were reused across 3 club websites.",
+          "factIds": [
+            "f3"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 24,
+          "leaks": []
+        },
+        {
+          "experienceId": "e3",
+          "text": "Defined color, spacing and type tokens and synced them from Figma to CSS variables.",
+          "factIds": [
+            "f4"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 14,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Redesigned onboarding screens in Figma and ran 6 usability tests, increasing onboarding completion from 54% to 78%.",
+          "factIds": [
+            "f1"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 17,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Built a clickable prototype for a booking flow in Figma and ProtoPie, which was approved by the client in one review round.",
+          "factIds": [
+            "f2"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 22,
+          "leaks": []
+        }
+      ],
+      "coverage": {
+        "coverable": 6,
+        "mentioned": 6
+      }
+    },
+    {
+      "id": "be-01",
+      "model": "gemini:gemini-flash-lite-latest",
+      "seconds": 32.505,
+      "extraction": {
+        "required": {
+          "total": 8,
+          "found": 8
+        },
+        "all": {
+          "total": 13,
+          "found": 12
+        },
+        "extracted": 13,
+        "matchedExtracted": 12
+      },
+      "drafts": [
+        {
+          "experienceId": "e1",
+          "text": "Built REST endpoints for an order-tracking service in FastAPI, shipping 14 endpoints used by the mobile app.",
+          "factIds": [
+            "f1"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 17,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Added Redis caching to the product lookup endpoint, dropping p95 latency from 420 ms to 95 ms.",
+          "factIds": [
+            "f2"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 17,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Wrote Pytest tests for the order service and set them to run on every pull request, increasing coverage from 38% to 71%.",
+          "factIds": [
+            "f3"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 22,
+          "leaks": []
+        },
+        {
+          "experienceId": "e2",
+          "text": "Designed the PostgreSQL schema and SQL queries for a canteen queue system, handling about 600 orders during a 2-week campus pilot.",
+          "factIds": [
+            "f4"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 21,
+          "leaks": []
+        }
+      ],
+      "coverage": {
+        "coverable": 9,
+        "mentioned": 7
+      }
+    },
+    {
+      "id": "be-02",
+      "model": "gemini:gemini-flash-lite-latest",
+      "seconds": 21.161,
+      "extraction": {
+        "required": {
+          "total": 10,
+          "found": 7
+        },
+        "all": {
+          "total": 15,
+          "found": 11
+        },
+        "extracted": 12,
+        "matchedExtracted": 11
+      },
+      "drafts": [
+        {
+          "experienceId": "e1",
+          "text": "Built Spring Boot REST APIs for a claims status lookup used by about 150 agents by developing Java services with PostgreSQL.",
+          "factIds": [
+            "f1"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 21,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Rewrote a slow SQL report query using an index and a join instead of nested subqueries, reducing report time from 12 minutes to 40 seconds.",
+          "factIds": [
+            "f3"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 25,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Added 60 unit tests for the claims service by writing JUnit tests using Java.",
+          "factIds": [
+            "f2"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 14,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Worked in two-week sprints with daily stand-ups and sprint reviews using Scrum and Jira.",
+          "factIds": [
+            "f6"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": [
+              {
+                "type": "weak-start",
+                "word": "Worked"
+              }
+            ]
+          },
+          "words": 14,
+          "leaks": []
+        },
+        {
+          "experienceId": "e3",
+          "text": "Built a budgeting chatbot prototype with 2 teammates in 36 hours, finishing 2nd of 18 teams using Java, Spring Boot, and Git.",
+          "factIds": [
+            "f5"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 22,
+          "leaks": []
+        },
+        {
+          "experienceId": "e2",
+          "text": "Designed the class hierarchy for books, members and loans using OOP principles, scoring 92/100 on the project.",
+          "factIds": [
+            "f4"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 17,
+          "leaks": []
+        }
+      ],
+      "coverage": {
+        "coverable": 8,
+        "mentioned": 8
+      }
+    },
+    {
+      "id": "be-03",
+      "model": "gemini:gemini-flash-lite-latest",
+      "seconds": 12.511,
+      "extraction": {
+        "required": {
+          "total": 10,
+          "found": 9
+        },
+        "all": {
+          "total": 15,
+          "found": 12
+        },
+        "extracted": 15,
+        "matchedExtracted": 12
+      },
+      "drafts": [
+        {
+          "experienceId": "e1",
+          "text": "Built a Go service that assigns parcels to riders based on zone and load, handling 2,500 assignments per hour in a peak load test.",
+          "factIds": [
+            "f1"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 24,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Designed a gRPC endpoint between the assignment service and the rider app backend, replacing 3 REST calls with 1 gRPC call.",
+          "factIds": [
+            "f2"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 21,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Wrote table-driven unit tests for the zone matching logic, finding 4 edge-case bugs before release.",
+          "factIds": [
+            "f3"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 15,
+          "leaks": []
+        },
+        {
+          "experienceId": "e2",
+          "text": "Built a URL shortener with Redis for hot links and PostgreSQL for storage, serving redirects in under 5 ms locally in a 1,000-request load test.",
+          "factIds": [
+            "f4"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 25,
+          "leaks": []
+        },
+        {
+          "experienceId": "e3",
+          "text": "Utilized Linux servers and Git daily during operating systems and networks labs.",
+          "factIds": [
+            "f5"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 12,
+          "leaks": []
+        }
+      ],
+      "coverage": {
+        "coverable": 9,
+        "mentioned": 8
+      }
+    },
+    {
+      "id": "be-04",
+      "model": "gemini:gemini-flash-lite-latest",
+      "seconds": 12.214,
+      "extraction": {
+        "required": {
+          "total": 9,
+          "found": 8
+        },
+        "all": {
+          "total": 15,
+          "found": 13
+        },
+        "extracted": 14,
+        "matchedExtracted": 13
+      },
+      "drafts": [
+        {
+          "experienceId": "e1",
+          "text": "Built NestJS modules for a restaurant ordering API that went live for 3 client restaurants using Node.js, NestJS, TypeScript, and PostgreSQL.",
+          "factIds": [
+            "f1"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 21,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Wrote Jest unit and e2e tests for the orders and payments modules using Jest and TypeScript, catching a double-charge bug before release.",
+          "factIds": [
+            "f2"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 22,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Set up a GitHub Actions workflow to lint, test and deploy on merge using GitHub Actions and Docker, reducing deploy time from about 25 minutes by hand to 6 minutes.",
+          "factIds": [
+            "f3"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 30,
+          "leaks": []
+        }
+      ],
+      "coverage": {
+        "coverable": 10,
+        "mentioned": 8
+      }
+    },
+    {
+      "id": "be-05",
+      "model": "gemini:gemini-flash-lite-latest",
+      "seconds": 13.289,
+      "extraction": {
+        "required": {
+          "total": 5,
+          "found": 3
+        },
+        "all": {
+          "total": 12,
+          "found": 4
+        },
+        "extracted": 4,
+        "matchedExtracted": 4
+      },
+      "drafts": [
+        {
+          "experienceId": "e1",
+          "text": "Built a nightly Python ETL job that loads POS sales from CSV exports into PostgreSQL, loading about 1.2 million rows a night in 14 minutes.",
+          "factIds": [
+            "f1"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 25,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Designed a star schema with a sales fact table and store, product and date dimensions, used by 5 analysts for weekly sales reports.",
+          "factIds": [
+            "f2"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 23,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Added row-count and null checks that post to Slack when a load fails, catching 7 bad loads in the first month.",
+          "factIds": [
+            "f3"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 21,
+          "leaks": []
+        },
+        {
+          "experienceId": "e2",
+          "text": "Kept pipeline code and SQL in a shared Git repo with pull request reviews.",
+          "factIds": [
+            "f5"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 14,
+          "leaks": []
+        }
+      ],
+      "coverage": {
+        "coverable": 6,
+        "mentioned": 4
+      }
+    },
+    {
+      "id": "be-06",
+      "model": "gemini:gemini-flash-lite-latest",
+      "seconds": 13.128,
+      "extraction": {
+        "required": {
+          "total": 6,
+          "found": 3
+        },
+        "all": {
+          "total": 14,
+          "found": 6
+        },
+        "extracted": 6,
+        "matchedExtracted": 6
+      },
+      "drafts": [
+        {
+          "experienceId": "e1",
+          "text": "Built a Power BI dashboard tracking patient visits and no-shows across clinic branches, used weekly by 4 branch managers.",
+          "factIds": [
+            "f1"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 19,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Wrote SQL queries to remove about 3,400 duplicate rows of patient records before reporting.",
+          "factIds": [
+            "f2"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 14,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Automated the monthly Excel summary with pivot tables and XLOOKUP, reducing prep time from 2 days to 3 hours.",
+          "factIds": [
+            "f3"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 19,
+          "leaks": []
+        },
+        {
+          "experienceId": "e2",
+          "text": "Built a Tableau dashboard of tourist arrivals by province from public open data, covering 10 years of monthly data.",
+          "factIds": [
+            "f4"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 19,
+          "leaks": []
+        }
+      ],
+      "coverage": {
+        "coverable": 5,
+        "mentioned": 4
+      }
+    },
+    {
+      "id": "be-07",
+      "model": "gemini:gemini-flash-lite-latest",
+      "seconds": 28.739,
+      "extraction": {
+        "required": {
+          "total": 12,
+          "found": 10
+        },
+        "all": {
+          "total": 19,
+          "found": 12
+        },
+        "extracted": 13,
+        "matchedExtracted": 12
+      },
+      "drafts": [
+        {
+          "experienceId": "e1",
+          "text": "Trained a PyTorch CNN in Python to classify rice leaf diseases, achieving 0.91 accuracy on a held-out test set of 1,800 images.",
+          "factIds": [
+            "f1"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 22,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Cleaned and labeled field photo metadata using Pandas and NumPy, removing 640 blurry or mislabeled images.",
+          "factIds": [
+            "f2"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 16,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Compared CNN backbones in PyTorch and logged every run, picking a model 3x smaller with a 0.02 accuracy drop.",
+          "factIds": [
+            "f3"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 19,
+          "leaks": []
+        },
+        {
+          "experienceId": "e2",
+          "text": "Fine-tuned a WangchanBERTa model using PyTorch and Python for Thai review sentiment, reaching a Macro F1 of 0.84 on 3 classes.",
+          "factIds": [
+            "f4"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 21,
+          "leaks": []
+        },
+        {
+          "experienceId": "e2",
+          "text": "Wrote SQL to pull reviews from the course MySQL database, building a training set of 12,000 reviews.",
+          "factIds": [
+            "f5"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 17,
+          "leaks": []
+        }
+      ],
+      "coverage": {
+        "coverable": 5,
+        "mentioned": 5
+      }
+    },
+    {
+      "id": "be-08",
+      "model": "gemini:gemini-flash-lite-latest",
+      "seconds": 23.104,
+      "extraction": {
+        "required": {
+          "total": 10,
+          "found": 6
+        },
+        "all": {
+          "total": 15,
+          "found": 11
+        },
+        "extracted": 10,
+        "matchedExtracted": 10
+      },
+      "drafts": [
+        {
+          "experienceId": "e1",
+          "text": "Containerized 3 internal PHP tools using Docker and Docker Compose, enabling new staff to run them locally in under 10 minutes.",
+          "factIds": [
+            "f2"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 21,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Set up Prometheus and Grafana dashboards for CPU, disk and HTTP error rates on 30 hosting servers, catching 2 disk-full incidents before customers noticed.",
+          "factIds": [
+            "f3"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 24,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Wrote Bash scripts on Linux to automate nightly database backups, replacing a 45-minute manual task with a cron job.",
+          "factIds": [
+            "f1"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 19,
+          "leaks": []
+        }
+      ],
+      "coverage": {
+        "coverable": 7,
+        "mentioned": 5
+      }
+    },
+    {
+      "id": "be-09",
+      "model": "gemini:gemini-flash-lite-latest",
+      "seconds": 26.822,
+      "extraction": {
+        "required": {
+          "total": 11,
+          "found": 4
+        },
+        "all": {
+          "total": 19,
+          "found": 9
+        },
+        "extracted": 8,
+        "matchedExtracted": 8
+      },
+      "drafts": [
+        {
+          "experienceId": "e2",
+          "text": "Deployed a Flask web app on a Compute Engine VM with Cloud SQL for PostgreSQL running for 5 months for 60 test users.",
+          "factIds": [
+            "f3"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 23,
+          "leaks": []
+        },
+        {
+          "experienceId": "e2",
+          "text": "Debugged a VPC firewall rule that blocked HTTPS traffic to the Linux VM, restoring access in 25 minutes.",
+          "factIds": [
+            "f5"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 18,
+          "leaks": []
+        },
+        {
+          "experienceId": "e2",
+          "text": "Set up GCP IAM roles using the gcloud CLI to move 4 teammates from Owner to least-privilege roles.",
+          "factIds": [
+            "f4"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 18,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Answered student and staff Jira Service Management tickets, closing about 40 tickets a week with a median response of 15 minutes.",
+          "factIds": [
+            "f1"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 21,
+          "leaks": []
+        },
+        {
+          "experienceId": "e3",
+          "text": "Led a weekly GCP study group preparing for cloud fundamentals exams where 8 of 11 members passed.",
+          "factIds": [
+            "f6"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 17,
+          "leaks": []
+        }
+      ],
+      "coverage": {
+        "coverable": 7,
+        "mentioned": 7
+      }
+    },
+    {
+      "id": "be-10",
+      "model": "gemini:gemini-flash-lite-latest",
+      "seconds": 13.812,
+      "extraction": {
+        "required": {
+          "total": 14,
+          "found": 9
+        },
+        "all": {
+          "total": 22,
+          "found": 12
+        },
+        "extracted": 11,
+        "matchedExtracted": 11
+      },
+      "drafts": [
+        {
+          "experienceId": "e1",
+          "text": "Built a RAG chatbot answering questions from 140 course syllabus PDFs, achieving 78 correct answers out of 100 test questions using Python, Gemini, PostgreSQL, and pgvector.",
+          "factIds": [
+            "f1"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 26,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Tested 3 chunk sizes and added a reranking step, increasing retrieval hit rate at 5 from 0.62 to 0.81.",
+          "factIds": [
+            "f2"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 19,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Wrote a 100-question evaluation set with expected answers and source pages.",
+          "factIds": [
+            "f3"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 11,
+          "leaks": []
+        },
+        {
+          "experienceId": "e2",
+          "text": "Used the OpenAI API and Python to turn hotel descriptions into structured JSON tags, tagging 4,300 listings for about 9 USD in API cost.",
+          "factIds": [
+            "f5"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 24,
+          "leaks": []
+        },
+        {
+          "experienceId": "e2",
+          "text": "Shipped 6 FastAPI endpoints for the partner portal trip-booking backend using Python, MySQL, and Git.",
+          "factIds": [
+            "f4"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 15,
+          "leaks": []
+        },
+        {
+          "experienceId": "e3",
+          "text": "Built a Thai-language FAQ bot prototype with 3 teammates in 24 hours using Gemini and Streamlit, winning the people's choice award.",
+          "factIds": [
+            "f6"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 21,
+          "leaks": []
+        }
+      ],
+      "coverage": {
+        "coverable": 9,
+        "mentioned": 9
+      }
+    },
+    {
+      "id": "oth-01",
+      "model": "gemini:gemini-flash-lite-latest",
+      "seconds": 19.658,
+      "extraction": {
+        "required": {
+          "total": 6,
+          "found": 5
+        },
+        "all": {
+          "total": 13,
+          "found": 11
+        },
+        "extracted": 11,
+        "matchedExtracted": 11
+      },
+      "drafts": [
+        {
+          "experienceId": "e1",
+          "text": "Wrote 64 Playwright end-to-end tests in TypeScript for the canteen ordering web app, catching 9 bugs before demo day.",
+          "factIds": [
+            "f1"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 19,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Set up tests to run on every pull request using GitHub Actions and Git, completing the full suite in about 6 minutes.",
+          "factIds": [
+            "f2"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 22,
+          "leaks": []
+        },
+        {
+          "experienceId": "e2",
+          "text": "Logged 120 bug reports by manually testing mobile app releases from written test cases and tracking issues in Jira.",
+          "factIds": [
+            "f3"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 19,
+          "leaks": []
+        }
+      ],
+      "coverage": {
+        "coverable": 6,
+        "mentioned": 6
+      }
+    },
+    {
+      "id": "oth-02",
+      "model": "gemini:gemini-flash-lite-latest",
+      "seconds": 15.681,
+      "extraction": {
+        "required": {
+          "total": 4,
+          "found": 3
+        },
+        "all": {
+          "total": 9,
+          "found": 4
+        },
+        "extracted": 4,
+        "matchedExtracted": 4
+      },
+      "drafts": [
+        {
+          "experienceId": "e3",
+          "text": "Built an enemy spawning system using object pooling, dropping frame time from 22 ms to 14 ms in heavy waves.",
+          "factIds": [
+            "f3"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 20,
+          "leaks": []
+        },
+        {
+          "experienceId": "e3",
+          "text": "Modeled low-poly props for the prototype using Blender.",
+          "factIds": [
+            "f5"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 8,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Programmed player movement, crop growth timers and the save system in Unity C# for a 48-hour game jam, placing 2nd of 31 teams.",
+          "factIds": [
+            "f1"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 23,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Managed the team repo with branches and pull requests using Git.",
+          "factIds": [
+            "f6"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 11,
+          "leaks": []
+        }
+      ],
+      "coverage": {
+        "coverable": 4,
+        "mentioned": 4
+      }
+    },
+    {
+      "id": "oth-03",
+      "model": "gemini:gemini-flash-lite-latest",
+      "seconds": 16.397,
+      "extraction": {
+        "required": {
+          "total": 6,
+          "found": 0
+        },
+        "all": {
+          "total": 9,
+          "found": 1
+        },
+        "extracted": 1,
+        "matchedExtracted": 1
+      },
+      "drafts": [
+        {
+          "experienceId": "e1",
+          "text": "Resolved walk-in and email tickets for lab computers and staff laptops, closing about 340 tickets over 8 months.",
+          "factIds": [
+            "f1"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 18,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Managed user accounts and reset passwords for faculty staff using Active Directory.",
+          "factIds": [
+            "f2"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 12,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Wrote step-by-step guides for printer and Wi-Fi setup that were added to the lab FAQ page, keeping the knowledge base up to date.",
+          "factIds": [
+            "f5"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 23,
+          "leaks": []
+        }
+      ],
+      "coverage": {
+        "coverable": 2,
+        "mentioned": 1
+      }
+    },
+    {
+      "id": "oth-04",
+      "model": "gemini:gemini-flash-lite-latest",
+      "seconds": 19.144,
+      "extraction": {
+        "required": {
+          "total": 6,
+          "found": 1
+        },
+        "all": {
+          "total": 13,
+          "found": 3
+        },
+        "extracted": 3,
+        "matchedExtracted": 3
+      },
+      "drafts": [
+        {
+          "experienceId": "e3",
+          "text": "Wrote a Python script to plot sensor logs for PID tuning.",
+          "factIds": [
+            "f5"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 11,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Built a soil-moisture watering controller on an ESP32 in C++ that reads sensors over I2C, running for 3 weeks on a 2,000 mAh battery using deep sleep.",
+          "factIds": [
+            "f1"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 27,
+          "leaks": []
+        }
+      ],
+      "coverage": {
+        "coverable": 5,
+        "mentioned": 3
+      }
+    },
+    {
+      "id": "oth-05",
+      "model": "gemini:gemini-flash-lite-latest",
+      "seconds": 16.542,
+      "extraction": {
+        "required": {
+          "total": 6,
+          "found": 1
+        },
+        "all": {
+          "total": 12,
+          "found": 2
+        },
+        "extracted": 2,
+        "matchedExtracted": 2
+      },
+      "drafts": [
+        {
+          "experienceId": "e1",
+          "text": "Competed in capture-the-flag events focusing on web and forensics challenges, achieving a 7th place ranking out of 112 teams in a national student CTF using Linux.",
+          "factIds": [
+            "f1"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 26,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Wrote Python scripts to automate decoding steps in capture-the-flag challenges.",
+          "factIds": [
+            "f5"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 10,
+          "leaks": []
+        },
+        {
+          "experienceId": "e2",
+          "text": "Built a home lab with a Wazuh server collecting logs from 3 virtual machines, writing 5 custom detection rules for SSH brute force and new admin users on Linux.",
+          "factIds": [
+            "f2"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 29,
+          "leaks": []
+        }
+      ],
+      "coverage": {
+        "coverable": 4,
+        "mentioned": 3
+      }
+    },
+    {
+      "id": "oth-06",
+      "model": "gemini:gemini-flash-lite-latest",
+      "seconds": 32.444,
+      "extraction": {
+        "required": {
+          "total": 4,
+          "found": 2
+        },
+        "all": {
+          "total": 11,
+          "found": 8
+        },
+        "extracted": 8,
+        "matchedExtracted": 8
+      },
+      "drafts": [
+        {
+          "experienceId": "e3",
+          "text": "Analyzed a 250,000-row public grocery orders dataset using SQL to find churn drivers, revealing that customers with 2 or more late deliveries churned at 41% versus 18% for others.",
+          "factIds": [
+            "f4"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 29,
+          "leaks": []
+        },
+        {
+          "experienceId": "e3",
+          "text": "Built a dashboard showing weekly churn by region using Power BI.",
+          "factIds": [
+            "f5"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 11,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Built an Excel tracker for room upgrade requests and late checkouts that reduced the daily handover meeting from 30 minutes to 10 minutes.",
+          "factIds": [
+            "f1"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 23,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Collected guest complaints and turned them into change requests for the operations manager, resulting in 6 process changes adopted.",
+          "factIds": [
+            "f3"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 19,
+          "leaks": []
+        },
+        {
+          "experienceId": "e2",
+          "text": "Completed bootcamp modules on statistics and Python analysis with a final score of 92/100.",
+          "factIds": [
+            "f6"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 14,
+          "leaks": []
+        }
+      ],
+      "coverage": {
+        "coverable": 4,
+        "mentioned": 4
+      }
+    },
+    {
+      "id": "oth-07",
+      "model": "gemini:gemini-flash-lite-latest",
+      "seconds": 17.2,
+      "extraction": {
+        "required": {
+          "total": 6,
+          "found": 4
+        },
+        "all": {
+          "total": 12,
+          "found": 4
+        },
+        "extracted": 4,
+        "matchedExtracted": 4
+      },
+      "drafts": [
+        {
+          "experienceId": "e3",
+          "text": "Rewrote the getting-started guide for an open-source CLI tool in Markdown and submitted it as a pull request using Git, dropping setup questions in issues from about 15 a month to 4.",
+          "factIds": [
+            "f1"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 32,
+          "leaks": []
+        },
+        {
+          "experienceId": "e3",
+          "text": "Added Python code samples to API reference pages, resulting in 22 samples merged.",
+          "factIds": [
+            "f2"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 13,
+          "leaks": []
+        },
+        {
+          "experienceId": "e3",
+          "text": "Tested curl examples against a public REST API before documenting them, finding 3 outdated endpoints.",
+          "factIds": [
+            "f5"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 15,
+          "leaks": []
+        }
+      ],
+      "coverage": {
+        "coverable": 4,
+        "mentioned": 4
+      }
+    },
+    {
+      "id": "oth-08",
+      "model": "gemini:gemini-flash-lite-latest",
+      "seconds": 18.337,
+      "extraction": {
+        "required": {
+          "total": 6,
+          "found": 4
+        },
+        "all": {
+          "total": 11,
+          "found": 6
+        },
+        "extracted": 6,
+        "matchedExtracted": 6
+      },
+      "drafts": [
+        {
+          "experienceId": "e2",
+          "text": "Built the booking UI in React with CSS modules from Figma mockups, reducing booking task time from 95 seconds to 40 seconds across 6 testers.",
+          "factIds": [
+            "f2",
+            "f3"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 25,
+          "leaks": []
+        },
+        {
+          "experienceId": "e2",
+          "text": "Resolved color contrast and keyboard focus issues found by Lighthouse, increasing the accessibility score from 71 to 96 using HTML.",
+          "factIds": [
+            "f4"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 20,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Designed mobile screens and a small component library in Figma for a restaurant reservation app, handing off 36 components to developers.",
+          "factIds": [
+            "f1"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 21,
+          "leaks": []
+        }
+      ],
+      "coverage": {
+        "coverable": 6,
+        "mentioned": 5
+      }
+    },
+    {
+      "id": "oth-09",
+      "model": "gemini:gemini-flash-lite-latest",
+      "seconds": 15.221,
+      "extraction": {
+        "required": {
+          "total": 4,
+          "found": 1
+        },
+        "all": {
+          "total": 11,
+          "found": 5
+        },
+        "extracted": 5,
+        "matchedExtracted": 5
+      },
+      "drafts": [
+        {
+          "experienceId": "e3",
+          "text": "Reduced grading time per lab from 3 hours to 40 minutes by building an autograder with Pytest that runs student Python submissions in containers.",
+          "factIds": [
+            "f3"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 24,
+          "leaks": []
+        },
+        {
+          "experienceId": "e2",
+          "text": "Taught Scratch and beginner Python to children aged 10-14 across 8 Saturday sessions.",
+          "factIds": [
+            "f4"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 13,
+          "leaks": []
+        }
+      ],
+      "coverage": {
+        "coverable": 4,
+        "mentioned": 3
+      }
+    },
+    {
+      "id": "oth-10",
+      "model": "gemini:gemini-flash-lite-latest",
+      "seconds": 17.493,
+      "extraction": {
+        "required": {
+          "total": 6,
+          "found": 2
+        },
+        "all": {
+          "total": 12,
+          "found": 4
+        },
+        "extracted": 4,
+        "matchedExtracted": 4
+      },
+      "drafts": [
+        {
+          "experienceId": "e2",
+          "text": "Reduced monthly stock count time from 2 days to half a day by replacing paper stock cards with an Excel workbook using lookup formulas.",
+          "factIds": [
+            "f1"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 24,
+          "leaks": []
+        },
+        {
+          "experienceId": "e2",
+          "text": "Set up 4 Windows PCs, a shared printer, and the shop's Wi-Fi router.",
+          "factIds": [
+            "f2"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 13,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Tracked about 1,300 items by building an inventory web app with a MySQL database and SQL.",
+          "factIds": [
+            "f3"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 16,
+          "leaks": []
+        },
+        {
+          "experienceId": "e3",
+          "text": "Received a certificate upon completing an online Python data analysis course.",
+          "factIds": [
+            "f5"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 11,
+          "leaks": []
+        }
+      ],
+      "coverage": {
+        "coverable": 4,
+        "mentioned": 4
+      }
+    }
+  ]
+}

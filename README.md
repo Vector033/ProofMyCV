@@ -35,6 +35,8 @@ traced back to a fact you wrote. That check is plain code, not a prompt.
   "120 bookings").
 - Gemini Flash-Lite drafted 113 bullets on 28 cases with **0** fabrications found by the guard, an independent
   bait check, or a manual spot check.
+- A rewritten drafting prompt raised XYZ-style bullets from 31.6% to 75% (human-written: 86.7%) and cut
+  copy-the-fact bullets from 66% to 6%, still with no fabrications.
 - Gemini skill extraction recall on required skills: 82.8% (rule-based fallback: 70.5%).
 
 Each job gets its own saved version. You can download everything as JSON or delete your account, which cascades to all

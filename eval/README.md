@@ -59,11 +59,38 @@ and often append a tool list ("…using Java, Spring Boot, and PostgreSQL") inst
 writing is safe but plain. The guard's value is in the offline numbers above: it is what stops a stronger, more
 creative model, or a user's own edits, from slipping in a number the facts do not support.
 
+### Drafting prompt v1 → v2 (Gemini Flash-Lite, 30 tuning cases, same rule-based job analysis)
+
+The first live run showed the drafts were safe but plain, so `style.ts` measures XYZ writing without a judge model:
+a strong past-tense first verb, the measured result kept when the facts have one, not a word-for-word copy of the
+fact, and no trailing tool list ("…using Java, Spring Boot, and PostgreSQL"). Human-written faithful bullets in the
+cases score 86.7% on this check.
+
+| | v1 | v2 (current) | Human-written |
+|---|---|---|---|
+| XYZ-style bullets | 31.6% | **75.0%** | 86.7% |
+| Copies the fact sentence | 65.8% | **5.6%** | 4.4% |
+| Ends in a tool list | 10.3% | 16.7% | 7.8% |
+| Bullets blocked by the guard / bait leaks | 0 / 0 | 0 / 0 | |
+| Labelled skills mentioned in some bullet | 83.2% | 72.0% | |
+| Cases completed | 30 / 30 | 29 / 30 (free-tier 429) | |
+
+v2 rewrites instead of copying, leads with the outcome ("Cut daily report time from 25 minutes to 3 minutes by
+adding a PostgreSQL index…"), keeps team context, gives fictional good/bad examples, and names only the tools the
+job asks for. The trade-off is keyword coverage inside bullets: v2 drops filler like "using Git", "HTML" and
+"JavaScript", which still appear in the PDF's Skills section. A run that capped tools at two scored 81.1% XYZ but
+69.2% coverage, so the current prompt keeps up to three job-relevant tools. One v2 run also showed the guard
+blocking a correct bullet that named the experience's own club; names may now come from the bullet's own
+experience title and organisation (numbers still only from facts). Each figure is a single run at temperature 0.2,
+so differences of a few points are within noise.
+
 ## Run it
 
 ```bash
 npm run eval                      # offline: guard + rule extractor, tuning and held-out sets (also runs in npm test / CI)
 npm run eval:live                 # live: Gemini analysis + drafting on the tuning set; writes eval/results/*.json
 npm run eval:live -- --limit 5    # a quick sample
+npm run eval:live -- --rules-analysis --prompt v1   # compare an older drafting prompt (eval/prompts.ts)
+npx tsx eval/style-report.mts [eval/results/<file>.json]   # XYZ style scores for a saved run
 npx tsx eval/validate.ts eval/cases/*.json eval/holdout/*.json
 ```

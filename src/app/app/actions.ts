@@ -167,7 +167,7 @@ export async function saveBulletsAction(applicationId: string, bullets: unknown)
   for (const b of parsed.data) {
     const factIds = b.factIds.filter((id) => bank.facts.some((f) => f.id === id && f.experienceId === b.experienceId));
     if (factIds.length !== b.factIds.length) return { error: `"${b.text}" cites facts from another experience.` };
-    const r = checkBullet(b, bank.facts);
+    const r = checkBullet(b, bank.facts, bank.experiences);
     if (!r.ok) return { error: `Blocked: "${b.text}": ${r.violations.map(describeViolation).join("; ")}` };
   }
   await data.updateApplication(z.uuid().parse(applicationId), { bullets: parsed.data });

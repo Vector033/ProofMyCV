@@ -1,4 +1,6 @@
-// Live eval against the real model: npm run eval:live [-- --limit 5]
+// Live eval against the real model: npm run eval:live [-- --limit 5] [--prompt v1] [--rules-analysis]
+// --prompt v1 drafts with an earlier prompt from eval/prompts.ts (default: the current one).
+// --rules-analysis skips the model's job analysis, so two prompt runs differ only in drafting.
 // For each case: analyse the posting, draft bullets, run the guard, and check
 // the accepted bullets against the case labels. Writes eval/results/*.json and
 // prints a markdown summary.
@@ -6,7 +8,7 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { getLlm } from "@/lib/llm/provider";
-import { analyzeJob, draftBullets, type BulletCandidate } from "@/lib/llm/tasks";
+import { analyzeJob, BULLETS_SYSTEM, draftBullets, type BulletCandidate } from "@/lib/llm/tasks";
 import { extractJobRuleBased } from "@/lib/core/jd";
 import { matchRequirements } from "@/lib/core/match";
 import { mentions } from "@/lib/core/vocab";
@@ -21,6 +23,8 @@ import {
   wordCount,
   type ExtractionScore,
 } from "./metrics";
+import { PROMPTS } from "./prompts";
+import { checkStyle, summariseStyle } from "./style";
 
 try {
   process.loadEnvFile(".env.local");
@@ -30,6 +34,11 @@ try {
 
 const limitArg = process.argv.indexOf("--limit");
 const limit = limitArg > 0 ? Number(process.argv[limitArg + 1]) : Infinity;
+const promptArg = process.argv.indexOf("--prompt");
+const promptName = promptArg > 0 ? process.argv[promptArg + 1] : "current";
+const system = promptName === "current" ? BULLETS_SYSTEM : PROMPTS[promptName];
+if (!system) throw new Error(`Unknown prompt ${promptName}`);
+const rulesAnalysis = process.argv.includes("--rules-analysis");
 const llm = getLlm();
 if (!llm) {
   console.error("GEMINI_API_KEY is not set");
@@ -54,10 +63,10 @@ for (const c of cases) {
   ruleScores.push(scoreExtraction(c, extractJobRuleBased(c.jd)));
   const start = Date.now();
   try {
-    const analysis = await analyzeJob(llm, c.jd);
+    const analysis = rulesAnalysis ? extractJobRuleBased(c.jd) : await analyzeJob(llm, c.jd);
     const model = llm.name;
     const { experiences, facts } = bank(c);
-    const candidates = await draftBullets(llm, analysis, experiences, facts);
+    const candidates = await draftBullets(llm, analysis, experiences, facts, system);
     const drafts = candidates.map((d) => ({ ...d, words: wordCount(d.text), leaks: baitLeaks(c, d.text) }));
     // Labelled skills the facts can back: how many of them made it into an accepted bullet?
     const labels = [...c.expected.required, ...c.expected.preferred];
@@ -91,7 +100,7 @@ for (const c of cases) {
     console.error(`${c.id}: ERROR ${e instanceof Error ? e.message : e}`);
   }
   // Stay well inside free-tier rate limits.
-  await new Promise((r) => setTimeout(r, 1500));
+  await new Promise((r) => setTimeout(r, 4000));
 }
 
 const ok = results.filter((r) => !r.error);
@@ -104,9 +113,16 @@ const llmExtraction = sumExtraction(ok.map((r) => r.extraction));
 const ruleExtraction = sumExtraction(ruleScores);
 const cov = ok.reduce((t, r) => ({ a: t.a + r.coverage.mentioned, b: t.b + r.coverage.coverable }), { a: 0, b: 0 });
 const models = [...new Set(ok.map((r) => r.model))].join(", ");
+const caseById = new Map(cases.map((c) => [c.id, c]));
+const style = summariseStyle(
+  ok.flatMap((r) => r.drafts.map((d) => checkStyle(d.text, caseById.get(r.id)!.facts.filter((f) => d.factIds.includes(f.id))))),
+);
 
 const summary = {
   date: new Date().toISOString(),
+  prompt: promptName,
+  analysis: rulesAnalysis ? "rules" : "llm",
+  style,
   models,
   cases: results.length,
   errors: results.length - ok.length,
@@ -124,9 +140,9 @@ const summary = {
 const dir = join(process.cwd(), "eval", "results");
 mkdirSync(dir, { recursive: true });
 const stamp = summary.date.slice(0, 16).replace(/[:T]/g, "-");
-writeFileSync(join(dir, `live-${stamp}.json`), JSON.stringify({ summary, results }, null, 2));
+writeFileSync(join(dir, `live-${stamp}-${promptName}.json`), JSON.stringify({ summary, results }, null, 2));
 
-console.log(`## Live eval (${summary.date.slice(0, 10)}, ${models})
+console.log(`## Live eval (${summary.date.slice(0, 10)}, ${models}, prompt ${promptName}, ${summary.analysis} analysis)
 
 | Metric | Value |
 |---|---|
@@ -140,5 +156,7 @@ console.log(`## Live eval (${summary.date.slice(0, 10)}, ${models})
 | Skill extraction recall, required (LLM / rules) | ${pct(llmExtraction.requiredRecall)} / ${pct(ruleExtraction.requiredRecall)} |
 | Skill extraction recall, all (LLM / rules) | ${pct(llmExtraction.recall)} / ${pct(ruleExtraction.recall)} |
 | Skill extraction precision (LLM / rules) | ${pct(llmExtraction.precision)} / ${pct(ruleExtraction.precision)} |
+| XYZ-style bullets (strong verb, keeps metric, no copy, no tool tail) | ${pct(style.xyzShape)} |
+| Copies a fact sentence / ends in a tool list | ${pct(style.copiesFact)} / ${pct(style.toolTail)} |
 | Median seconds per case | ${summary.medianSeconds.toFixed(1)} |
 `);
