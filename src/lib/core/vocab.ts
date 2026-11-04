@@ -8,6 +8,8 @@ export type TechTerm = {
   aliases?: string[];
   /** Spellings matched with exact case only (for words that are also plain English). */
   exact?: string[];
+  /** Broader terms that using this one proves, e.g. Jest proves automated testing. */
+  implies?: string[];
 };
 
 export const TECH_TERMS: TechTerm[] = [
@@ -75,20 +77,22 @@ export const TECH_TERMS: TechTerm[] = [
   { name: "Vercel", aliases: ["vercel"] },
   { name: "Linux", aliases: ["linux"] },
   { name: "Git", aliases: ["git"] },
-  { name: "GitHub", aliases: ["github"] },
-  { name: "GitHub Actions", aliases: ["github actions"] },
-  { name: "CI/CD", aliases: ["ci/cd", "ci cd", "continuous integration"] },
-  { name: "Jest", aliases: ["jest"] },
-  { name: "Vitest", aliases: ["vitest"] },
-  { name: "Playwright", aliases: ["playwright"] },
-  { name: "Cypress", aliases: ["cypress"] },
-  { name: "Pytest", aliases: ["pytest"] },
-  { name: "Selenium", aliases: ["selenium"] },
+  { name: "GitHub", aliases: ["github"], implies: ["Git"] },
+  { name: "GitHub Actions", aliases: ["github actions"], implies: ["CI/CD", "GitHub"] },
+  { name: "CI/CD", aliases: ["ci/cd", "ci cd", "continuous integration", "continuous delivery"], exact: ["CI", "CD"] },
+  { name: "GitLab CI", aliases: ["gitlab ci"], implies: ["CI/CD"] },
+  { name: "Automated testing", aliases: ["automated testing", "automated tests", "test automation", "unit testing", "unit tests", "integration tests", "integration testing", "end-to-end tests", "e2e tests"] },
+  { name: "Jest", aliases: ["jest"], implies: ["Automated testing"] },
+  { name: "Vitest", aliases: ["vitest"], implies: ["Automated testing"] },
+  { name: "Playwright", aliases: ["playwright"], implies: ["Automated testing"] },
+  { name: "Cypress", aliases: ["cypress"], implies: ["Automated testing"] },
+  { name: "Pytest", aliases: ["pytest"], implies: ["Automated testing", "Python"] },
+  { name: "Selenium", aliases: ["selenium"], implies: ["Automated testing"] },
   { name: "Microservices", aliases: ["microservices", "microservice"] },
   { name: "Machine Learning", aliases: ["machine learning", "ml"] },
-  { name: "LLM", aliases: ["llm", "llms", "large language model", "large language models"] },
-  { name: "Gemini", aliases: ["gemini"] },
-  { name: "OpenAI", aliases: ["openai", "gpt-4", "chatgpt"] },
+  { name: "LLM", aliases: ["llm", "llms", "llm api", "llm apis", "large language model", "large language models"] },
+  { name: "Gemini", aliases: ["gemini"], implies: ["LLM"] },
+  { name: "OpenAI", aliases: ["openai", "gpt-4", "chatgpt"], implies: ["LLM"] },
   { name: "TensorFlow", aliases: ["tensorflow"] },
   { name: "PyTorch", aliases: ["pytorch"] },
   { name: "Pandas", aliases: ["pandas"] },
@@ -160,6 +164,21 @@ export function findTechTerms(text: string): string[] {
   return found;
 }
 
+const IMPLIES = new Map(TECH_TERMS.map((t) => [t.name, t.implies ?? []]));
+
+/** The given terms plus everything they imply, transitively. */
+export function withImplied(names: Iterable<string>): Set<string> {
+  const out = new Set<string>();
+  const queue = [...names];
+  while (queue.length) {
+    const n = queue.pop()!;
+    if (out.has(n)) continue;
+    out.add(n);
+    queue.push(...(IMPLIES.get(n) ?? []));
+  }
+  return out;
+}
+
 const STOPWORDS = new Set(
   "a an and or the of for to in on with by at from as is are be using use used via into across our your their this that".split(
     " ",
@@ -178,12 +197,13 @@ const contentWords = (s: string) =>
 
 /**
  * Does the text give evidence for a requirement? Vocabulary terms use their
- * aliases; anything else ("unit testing", "API design") needs every content
- * word of the phrase to appear in the text.
+ * aliases or a more specific term that implies them ("Jest" proves automated
+ * testing); anything else ("API design") needs every content word of the
+ * phrase to appear in the text.
  */
 export function mentions(text: string, requirement: string): boolean {
   const canonical = canonicalTech(requirement);
-  if (canonical) return matchesCompiled(BY_KEY.get(canonical.toLowerCase())!, text);
+  if (canonical) return withImplied(findTechTerms(text)).has(canonical);
   const needed = contentWords(requirement);
   if (needed.length === 0) return false;
   const have = new Set(contentWords(text));

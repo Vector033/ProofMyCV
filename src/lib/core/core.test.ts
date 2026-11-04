@@ -246,3 +246,35 @@ describe("matchRequirements", () => {
     expect(report.covered).toBe(3);
   });
 });
+
+describe("implied terms", () => {
+  it("lets a specific tool back the broader practice", () => {
+    expect(mentions("Wrote Jest tests", "automated tests")).toBe(true);
+    expect(mentions("Deployed with GitHub Actions", "CI")).toBe(true);
+    expect(mentions("Answers questions with Gemini", "LLM APIs")).toBe(true);
+    expect(mentions("Wrote docs", "automated tests")).toBe(false);
+  });
+
+  it("does not imply the specific tool from the practice", () => {
+    expect(mentions("Wrote automated tests", "Jest")).toBe(false);
+  });
+
+  it("lets the guard accept the broader term but not a sibling tool", () => {
+    const fact: Fact = { id: "j", experienceId: "e1", did: "Wrote Jest tests for checkout", tech: ["Jest"] };
+    expect(checkBullet({ experienceId: "e1", text: "Added automated tests for checkout", factIds: ["j"] }, [fact]).ok).toBe(true);
+    expect(
+      checkBullet({ experienceId: "e1", text: "Added Cypress tests for checkout", factIds: ["j"] }, [fact]).violations,
+    ).toContainEqual({ type: "tech", term: "Cypress" });
+  });
+});
+
+describe("matchRequirements with experience context", () => {
+  it("uses the experience title as evidence", () => {
+    const report = matchRequirements(
+      { role: "x", requirements: [{ name: "Computer Science", kind: "keyword", importance: "required" }], problems: [] },
+      [{ id: "g", experienceId: "edu", did: "GPA 3.52", tech: [] }],
+      [{ id: "edu", kind: "education", title: "B.Sc. Computer Science", org: "Example University" }],
+    );
+    expect(report.matches[0].factIds).toEqual(["g"]);
+  });
+});

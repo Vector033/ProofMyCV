@@ -38,7 +38,7 @@ export default async function ApplicationsPage() {
           {apps.map((a) => (
             <li key={a.id}>
               <Link href={`/app/applications/${a.id}`} className="flex items-center gap-4 px-5 py-4 hover:bg-stone-50">
-                <ScoreBadge score={matchRequirements(a.analysis, bank.facts).score} />
+                <ScoreBadge score={matchRequirements(a.analysis, bank.facts, bank.experiences).score} />
                 <div className="min-w-0 flex-1">
                   <p className="truncate font-medium">{a.role || "Untitled role"}</p>
                   <p className="truncate text-sm text-stone-500">{a.company || "Company not set"}</p>

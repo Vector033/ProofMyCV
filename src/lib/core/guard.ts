@@ -2,7 +2,7 @@
 // bullet must be traceable to the facts the bullet cites. This is plain code on
 // purpose: the LLM is asked to cite its facts, but we never take its word for it.
 
-import { findTechTerms } from "./vocab";
+import { findTechTerms, withImplied } from "./vocab";
 import { factText, type BulletDraft, type Fact } from "./types";
 
 export type NumberClaim = { raw: string; value: number; unit: "percent" | "times" | "plain" };
@@ -107,7 +107,8 @@ export function checkBullet(bullet: BulletDraft, facts: Fact[]): GuardResult {
     }
   }
 
-  const evidenceTech = new Set(findTechTerms(evidence));
+  // A fact naming Jest also backs "automated testing" in the bullet.
+  const evidenceTech = withImplied(findTechTerms(evidence));
   const bulletTech = findTechTerms(bullet.text);
   for (const term of bulletTech) {
     if (!evidenceTech.has(term)) violations.push({ type: "tech", term });

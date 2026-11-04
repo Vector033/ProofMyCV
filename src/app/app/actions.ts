@@ -122,7 +122,7 @@ export async function createApplicationAction(_prev: FormState, fd: FormData): P
     jdText,
     analysis,
     analyzedBy: llm?.name ?? "rules",
-    score: matchRequirements(analysis, bank.facts).score,
+    score: matchRequirements(analysis, bank.facts, bank.experiences).score,
   });
   redirect(`/app/applications/${id}`);
 }

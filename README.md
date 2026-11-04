@@ -19,7 +19,8 @@ traced back to a fact you wrote. That check is plain code, not a prompt.
    Y, by doing Z"). Each draft cites fact ids. The **fabrication guard** blocks any bullet that
    - cites no fact, or a fact that does not exist,
    - contains a number not in the cited facts (units count: a fact's "30 ms" never backs "30%"; "doubled" needs evidence),
-   - names a technology or tool-like term (`GraphQL`, `SQS`, `EC2`) not in the cited facts.
+   - names a technology or tool-like term (`GraphQL`, `SQS`, `EC2`) not in the cited facts. A specific tool backs
+     the broader practice ("Jest" backs "automated testing", "GitHub Actions" backs "CI/CD"), never the reverse.
 
    The guard runs live in the browser while you edit and again on the server when you save.
 5. **Export.** A single-column, text-only A4 PDF (standard fonts, selectable text, a few KB) that ATS parsers read
@@ -57,10 +58,13 @@ npm run dev
 ```
 
 Set `GEMINI_API_KEY` in `.env.local` to enable LLM job analysis and bullet drafting. Without it the rule-based
-extractor is used and bullets come from your facts as written.
+extractor is used and bullets come from your facts as written. `GEMINI_MODEL` is a comma-separated fallback chain
+(default `gemini-flash-lite-latest,gemini-flash-latest`): overloads and rate limits are retried with backoff, and a
+model that times out hands over to the next one.
 
 ```bash
 npm test          # unit tests
+npm run test:live # calls the real Gemini API with .env.local (opt-in, never runs in CI)
 npm run lint
 npm run typecheck
 ```

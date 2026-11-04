@@ -16,7 +16,7 @@ export default async function ApplicationPage({ params }: PageProps<"/app/applic
   const [app, bank] = await Promise.all([getApplication(id), getFactBank()]);
   if (!app) notFound();
 
-  const report = matchRequirements(app.analysis, bank.facts);
+  const report = matchRequirements(app.analysis, bank.facts, bank.experiences);
   const factById = new Map(bank.facts.map((f) => [f.id, f]));
   const missing = report.matches.filter((m) => m.factIds.length === 0);
   const covered = report.matches.filter((m) => m.factIds.length > 0);

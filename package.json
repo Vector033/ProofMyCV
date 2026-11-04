@@ -11,7 +11,8 @@
     "typecheck": "next typegen && tsc --noEmit",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
-    "seed:demo": "node --env-file=.env.local scripts/seed-demo.mts"
+    "seed:demo": "node --env-file=.env.local scripts/seed-demo.mts",
+    "test:live": "vitest run eval/live.test.ts"
   },
   "dependencies": {
     "@react-pdf/renderer": "^4.9.0",
