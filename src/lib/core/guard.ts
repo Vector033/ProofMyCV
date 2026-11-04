@@ -5,7 +5,11 @@
 import { findTechTerms, withImplied } from "./vocab";
 import { factText, type BulletDraft, type Fact } from "./types";
 
-export type NumberClaim = { raw: string; value: number; unit: "percent" | "times" | "plain" };
+/**
+ * A quantity. `unit` is "percent", "times", "plain" (no unit) or a measurement
+ * unit such as "ms", "week", "MB", "USD".
+ */
+export type NumberClaim = { raw: string; value: number; unit: string };
 
 export type Violation =
   | { type: "no-citation" }
@@ -35,25 +39,60 @@ const MULTIPLIER_WORDS: Record<string, number> = {
 
 const SCALE: Record<string, number> = { k: 1e3, m: 1e6, b: 1e9 };
 
+// Measurement units, longest spelling first, mapped to one canonical name.
+const UNITS: [RegExp, string][] = [
+  [/^(?:milliseconds?|msecs?|ms)$/i, "ms"],
+  [/^(?:seconds?|secs?|s)$/i, "s"],
+  [/^(?:minutes?|mins?)$/i, "min"],
+  [/^(?:hours?|hrs?|h)$/i, "h"],
+  [/^days?$/i, "day"],
+  [/^weeks?$/i, "week"],
+  [/^months?$/i, "month"],
+  [/^(?:years?|yrs?)$/i, "year"],
+  [/^(?:kb|kilobytes?)$/i, "KB"],
+  [/^(?:mb|megabytes?)$/i, "MB"],
+  [/^(?:gb|gigabytes?)$/i, "GB"],
+  [/^(?:tb|terabytes?)$/i, "TB"],
+  [/^mah$/i, "mAh"],
+  [/^(?:usd|dollars?)$/i, "USD"],
+  [/^(?:thb|baht)$/i, "THB"],
+  [/^(?:fps)$/i, "fps"],
+];
+const UNIT_WORDS =
+  "milliseconds?|msecs?|ms|seconds?|secs?|s|minutes?|mins?|hours?|hrs?|h|days?|weeks?|months?|years?|yrs?|kb|kilobytes?|mb|megabytes?|gb|gigabytes?|tb|terabytes?|mah|usd|dollars?|thb|baht|fps";
+
 // Digits not glued to letters on the left (so "S3", "EC2", "Web3" are names, not
-// numbers), with optional thousands separators, decimals, a k/M/B scale and a unit.
-const NUMBER_RE =
-  /(?<![A-Za-z\d.])(\d{1,3}(?:,\d{3})+|\d+)(?:\.(\d+))?\s?([kKmMbB](?![a-zA-Z]))?\s?(%|percent\b|x\b|×|times\b)?/g;
+// numbers), with optional thousands separators, decimals, a k/M/B scale, then
+// either a ratio unit (%, x) or a measurement unit ("410 ms", "3-week").
+const NUMBER_RE = new RegExp(
+  String.raw`(\$)?(?<![A-Za-z\d.])(\d{1,3}(?:,\d{3})+|\d+)(?:\.(\d+))?(?:\s?([kKmMbB])(?![a-zA-Z]))?` +
+    String.raw`(?:\s?(%|percent\b|x\b|×|times\b)|[\s-]?(${UNIT_WORDS})\b)?`,
+  "gi",
+);
+
+const canonicalUnit = (u: string) => UNITS.find(([re]) => re.test(u))?.[1] ?? "plain";
 
 export function extractNumbers(text: string): NumberClaim[] {
   const claims: NumberClaim[] = [];
   for (const m of text.matchAll(NUMBER_RE)) {
-    const [raw, int, frac, scale, unitRaw] = m;
+    const [raw, dollar, int, frac, scale, ratio, measure] = m;
     let value = Number(int.replace(/,/g, "") + (frac ? `.${frac}` : ""));
+    // A scale letter never touches another letter, so "380 MB" reads as a unit.
     if (scale) value *= SCALE[scale.toLowerCase()];
-    const unit = !unitRaw
-      ? "plain"
-      : unitRaw === "%" || unitRaw.startsWith("percent")
+    const unit = ratio
+      ? ratio === "%" || ratio.toLowerCase().startsWith("percent")
         ? "percent"
-        : "times";
+        : "times"
+      : dollar
+        ? "USD"
+        : measure
+          ? canonicalUnit(measure)
+          : "plain";
     claims.push({ raw: raw.trim(), value, unit });
   }
-  for (const m of text.toLowerCase().matchAll(/\b[a-z]+\b/g)) {
+  // Number and multiplier words. Hyphenated compounds ("double-charge",
+  // "single-page") are adjectives, not quantities.
+  for (const m of text.toLowerCase().matchAll(/(?<![a-z-])[a-z]+(?![a-z-])/g)) {
     const w = m[0];
     if (w in WORD_NUMBERS) claims.push({ raw: w, value: WORD_NUMBERS[w], unit: "plain" });
     else if (w in MULTIPLIER_WORDS) claims.push({ raw: w, value: MULTIPLIER_WORDS[w], unit: "times" });
@@ -61,11 +100,19 @@ export function extractNumbers(text: string): NumberClaim[] {
   return claims;
 }
 
+const RATIOS = new Set(["percent", "times"]);
+
+/**
+ * Same value and compatible units. Percent and multipliers must match exactly
+ * (a fact's "30 ms" never backs "30%"). Two different measurement units never
+ * match ("2 days" does not back "2 weeks"), but a bare number can pair with a
+ * measured one, as in "from 410 to 260 KB".
+ */
 const sameClaim = (a: NumberClaim, b: NumberClaim) =>
   Math.abs(a.value - b.value) < 1e-9 &&
-  // "3" in a fact can back "three" or "3x" style wording only when the units agree;
-  // a fact's "30 ms" never backs a bullet's "30%".
-  (a.unit === b.unit || (a.unit === "plain" && b.unit === "plain"));
+  (a.unit === b.unit ||
+    (a.unit === "plain" && !RATIOS.has(b.unit)) ||
+    (b.unit === "plain" && !RATIOS.has(a.unit)));
 
 // Tokens that look like a product or technology name: inner capitals
 // ("GraphQL"), digits mixed with letters ("EC2"), dots or symbols ("Socket.io",
@@ -78,6 +125,12 @@ const GENERIC_ACRONYMS = new Set([
   "IT", "QA", "HR", "CEO", "CTO", "B2B", "B2C", "FAQ", "PDF", "PDFs", "CSV", "JSON", "URL",
   "URLs", "CRUD", "MVPs", "TA", "GPA", "US", "UK", "EU",
 ]);
+
+const CALENDAR_WORDS = new Set(
+  "January February March April May June July August September October November December Monday Tuesday Wednesday Thursday Friday Saturday Sunday".split(
+    " ",
+  ),
+);
 
 const WEAK_STARTS = new Set(["responsible", "helped", "worked", "assisted", "participated", "involved", "tasked"]);
 
@@ -121,6 +174,17 @@ export function checkBullet(bullet: BulletDraft, facts: Fact[]): GuardResult {
     // Already judged by the vocabulary check above.
     if (findTechTerms(token).length > 0) continue;
     if (!evidenceLower.includes(token.toLowerCase())) violations.push({ type: "term", term: token });
+  }
+
+  // A capitalised word in mid-sentence is almost always a name: a product
+  // ("Splunk", "Jupyter-based"), a company or a place. It must come from the facts.
+  for (const m of bullet.text.matchAll(/(?<![\w.'-])[A-Z][a-z]+/g)) {
+    const word = m[0];
+    const before = bullet.text.slice(0, m.index).trimEnd();
+    if (before === "" || /[.!?:;]$/.test(before)) continue; // sentence start
+    if (CALENDAR_WORDS.has(word) || findTechTerms(word).length > 0) continue;
+    if (violations.some((v) => "term" in v && v.term.toLowerCase().includes(word.toLowerCase()))) continue;
+    if (!new RegExp(`\\b${word}`, "i").test(evidence)) violations.push({ type: "term", term: word });
   }
 
   const words = bullet.text.trim().split(/\s+/).filter(Boolean);

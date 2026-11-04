@@ -1,0 +1,1597 @@
+[
+  {
+    "id": "oth-01",
+    "title": "QA automation intern (CS student)",
+    "jd": "QA Automation Intern (6 months) - Lumora Pay\n\nAbout us\nLumora Pay builds a bill-payment app used by small shops across Southeast Asia. Our QA team keeps a regression suite of 1,500 cases green while we release every 2 weeks.\n\nResponsibilities\n- Write and maintain end-to-end UI tests with Playwright in TypeScript\n- Add API tests for our payments and merchant services\n- Run tests in the CI/CD pipeline and triage flaky failures\n- Report bugs clearly in Jira with steps to reproduce\n- Work with developers in Scrum ceremonies\n\nRequirements\n- Currently studying Computer Science, Software Engineering or similar\n- Experience writing automated tests (class projects are fine)\n- Working knowledge of Playwright or a similar framework\n- JavaScript or TypeScript basics\n- Comfortable with Git and pull requests\n\nNice to have\n- Cypress experience\n- Basic SQL to check test data\n- Docker for running local test environments\n- Load testing with k6",
+    "expected": {
+      "required": [
+        "Automated testing",
+        "Playwright",
+        "TypeScript",
+        "JavaScript",
+        "Git",
+        "API testing"
+      ],
+      "preferred": [
+        "Cypress",
+        "SQL",
+        "Docker",
+        "Load testing",
+        "CI/CD",
+        "Jira",
+        "Scrum"
+      ]
+    },
+    "missing": [
+      "Cypress",
+      "SQL",
+      "Docker",
+      "Load testing"
+    ],
+    "experiences": [
+      {
+        "id": "e1",
+        "kind": "project",
+        "title": "Canteen ordering app end-to-end tests",
+        "org": "Software Engineering course, Eastvale University",
+        "startDate": "2025-08",
+        "endDate": "2025-12"
+      },
+      {
+        "id": "e2",
+        "kind": "job",
+        "title": "Part-time QA Tester",
+        "org": "Bluepine Studio",
+        "startDate": "2024-06",
+        "endDate": "2025-05"
+      },
+      {
+        "id": "e3",
+        "kind": "education",
+        "title": "B.Sc. Computer Science",
+        "org": "Eastvale University",
+        "startDate": "2023-06",
+        "endDate": null
+      }
+    ],
+    "facts": [
+      {
+        "id": "f1",
+        "experienceId": "e1",
+        "did": "Wrote 64 Playwright end-to-end tests in TypeScript for the canteen ordering web app",
+        "result": "caught 9 bugs before demo day",
+        "tech": [
+          "Playwright",
+          "TypeScript"
+        ]
+      },
+      {
+        "id": "f2",
+        "experienceId": "e1",
+        "did": "Set up the tests to run on every pull request with GitHub Actions",
+        "result": "full suite runs in about 6 minutes",
+        "tech": [
+          "GitHub Actions",
+          "Git"
+        ]
+      },
+      {
+        "id": "f3",
+        "experienceId": "e2",
+        "did": "Manually tested mobile app releases from written test cases and logged bugs in Jira",
+        "result": "logged 120 bug reports",
+        "tech": [
+          "Jira"
+        ]
+      },
+      {
+        "id": "f4",
+        "experienceId": "e2",
+        "did": "Wrote Postman collections to check the booking API responses",
+        "result": "covered 38 endpoints",
+        "tech": [
+          "Postman"
+        ]
+      },
+      {
+        "id": "f5",
+        "experienceId": "e3",
+        "did": "Built a Pytest unit test project for the Software Testing course",
+        "result": "grade A",
+        "tech": [
+          "Python",
+          "Pytest"
+        ]
+      }
+    ],
+    "gold": [
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f1"
+        ],
+        "text": "Caught 9 bugs before demo day by writing 64 end-to-end Playwright tests in TypeScript for a canteen ordering web app"
+      },
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f2"
+        ],
+        "text": "Ran the test suite on every pull request with GitHub Actions, keeping a full run to about 6 minutes"
+      },
+      {
+        "experienceId": "e2",
+        "factIds": [
+          "f3",
+          "f4"
+        ],
+        "text": "Logged 120 bug reports in Jira and checked 38 booking API endpoints with Postman collections"
+      }
+    ],
+    "fabricated": [
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f1"
+        ],
+        "text": "Caught 19 bugs before release by writing 64 Playwright end-to-end tests in TypeScript",
+        "kind": "number"
+      },
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f1"
+        ],
+        "text": "Wrote 64 end-to-end tests in Playwright and Cypress, catching 9 bugs before demo day",
+        "kind": "tech"
+      },
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f2"
+        ],
+        "text": "Cut pipeline time by 6% by running tests on every pull request with GitHub Actions",
+        "kind": "unit"
+      }
+    ]
+  },
+  {
+    "id": "oth-02",
+    "title": "Game developer intern, Unity C# (CS student)",
+    "jd": "Gameplay Programmer Intern - Kitepunch Games (Bangkok, hybrid)\n\nKitepunch is a 25-person studio making cozy mobile games. We ship 4 titles a year and every one has to hold 60 FPS on mid-range Android phones.\n\nWhat you'll do\n• Prototype and build gameplay features in Unity with C#\n• Fix bugs and profile performance on mobile devices\n• Work with artists to bring models and animations into the engine\n• Join playtests and turn feedback into tasks\n\nWhat we need\n• Solid C# and at least one finished Unity project (game jams count)\n• Understanding of gameplay programming basics: input, physics, state\n• Git for version control\n\nBonus\n• Mobile optimization experience\n• Shader Graph or writing shaders\n• Multiplayer networking (Photon or Netcode for GameObjects)\n• Blender for quick placeholder art\n• A portfolio on itch.io or similar",
+    "expected": {
+      "required": [
+        "Unity",
+        "C#",
+        "Gameplay programming",
+        "Git"
+      ],
+      "preferred": [
+        "Mobile optimization",
+        "Performance profiling",
+        "Shader Graph",
+        "Multiplayer networking",
+        "Blender"
+      ]
+    },
+    "missing": [
+      "Shader Graph",
+      "Multiplayer networking",
+      "Mobile optimization",
+      "Shipped mobile title at 60 FPS"
+    ],
+    "experiences": [
+      {
+        "id": "e1",
+        "kind": "project",
+        "title": "Harvest Hollow (game jam entry)",
+        "org": "Lanna Indie Game Jam",
+        "startDate": "2025-01",
+        "endDate": "2025-01"
+      },
+      {
+        "id": "e2",
+        "kind": "activity",
+        "title": "Workshop Lead",
+        "org": "Game Development Club, Kestrel University",
+        "startDate": "2024-08",
+        "endDate": null
+      },
+      {
+        "id": "e3",
+        "kind": "project",
+        "title": "Wavebreak roguelike prototype",
+        "org": "Personal project",
+        "startDate": "2025-03",
+        "endDate": "2025-09"
+      }
+    ],
+    "facts": [
+      {
+        "id": "f1",
+        "experienceId": "e1",
+        "did": "Programmed player movement, crop growth timers and the save system in Unity C# for a 48-hour game jam",
+        "result": "placed 2nd of 31 teams",
+        "tech": [
+          "Unity",
+          "C#"
+        ]
+      },
+      {
+        "id": "f2",
+        "experienceId": "e1",
+        "did": "Published the jam game on itch.io",
+        "result": "1,200 downloads",
+        "tech": [
+          "itch.io"
+        ]
+      },
+      {
+        "id": "f3",
+        "experienceId": "e3",
+        "did": "Built an enemy spawning system using object pooling",
+        "result": "frame time dropped from 22 ms to 14 ms in heavy waves",
+        "tech": [
+          "Unity",
+          "C#",
+          "Unity Profiler"
+        ]
+      },
+      {
+        "id": "f4",
+        "experienceId": "e2",
+        "did": "Ran weekly Unity workshops for club members",
+        "result": "about 25 members attended regularly",
+        "tech": [
+          "Unity"
+        ]
+      },
+      {
+        "id": "f5",
+        "experienceId": "e3",
+        "did": "Modeled low-poly props for the prototype",
+        "result": null,
+        "tech": [
+          "Blender"
+        ]
+      },
+      {
+        "id": "f6",
+        "experienceId": "e1",
+        "did": "Managed the team repo with branches and pull requests",
+        "result": null,
+        "tech": [
+          "Git",
+          "GitHub"
+        ]
+      }
+    ],
+    "gold": [
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f1"
+        ],
+        "text": "Placed 2nd of 31 teams at a 48-hour game jam by programming player movement, crop growth timers and a save system in Unity C#"
+      },
+      {
+        "experienceId": "e3",
+        "factIds": [
+          "f3"
+        ],
+        "text": "Cut frame time from 22 ms to 14 ms in heavy enemy waves by building an object-pooled spawning system in Unity C#, measured with the Unity Profiler"
+      },
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f2"
+        ],
+        "text": "Published the team's jam game on itch.io, where it reached 1,200 downloads"
+      }
+    ],
+    "fabricated": [
+      {
+        "experienceId": "e3",
+        "factIds": [
+          "f3"
+        ],
+        "text": "Improved frame rate by 22% in heavy waves by building an object-pooled enemy spawner in Unity C#",
+        "kind": "unit"
+      },
+      {
+        "experienceId": "e3",
+        "factIds": [
+          "f3"
+        ],
+        "text": "Doubled frame rate in heavy waves by building an object-pooled spawning system in Unity C#",
+        "kind": "multiplier"
+      },
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f1"
+        ],
+        "text": "Built online co-op for a farming game in Unity C# with Netcode for GameObjects during a 48-hour game jam, placing 2nd of 31 teams",
+        "kind": "tech"
+      },
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f2"
+        ],
+        "text": "Published the jam game on itch.io, reaching 12,000 downloads",
+        "kind": "number"
+      }
+    ]
+  },
+  {
+    "id": "oth-03",
+    "title": "IT support / helpdesk technician (new grad)",
+    "jd": "IT Support Technician (New Graduate) - Riverbend Logistics\n\nOur IT team of 5 supports 800 employees across 3 warehouse sites and one head office. We aim to answer every ticket within our SLA of 4 hours.\n\nResponsibilities\n1. Respond to helpdesk tickets by phone, email and walk-in\n2. Set up and repair Windows laptops, printers and handheld scanners\n3. Manage user accounts and password resets in Active Directory\n4. Administer Microsoft 365 mailboxes and Teams\n5. Troubleshoot basic networking issues (Wi-Fi, switches, VLANs)\n6. Keep the knowledge base up to date\n\nRequirements\n1. Diploma or degree in IT or a related field\n2. Customer support experience with a ticketing system\n3. Hands-on Windows troubleshooting\n4. Basic networking knowledge (TCP/IP, DHCP, DNS)\n5. Able to explain technical things to non-technical staff\n\nNice to have\n1. PowerShell scripting\n2. CompTIA A+ or similar certification\n3. Linux basics",
+    "expected": {
+      "required": [
+        "Customer support",
+        "Ticketing system",
+        "Windows",
+        "Networking",
+        "Active Directory",
+        "Microsoft 365"
+      ],
+      "preferred": [
+        "PowerShell",
+        "CompTIA A+",
+        "Linux"
+      ]
+    },
+    "missing": [
+      "Microsoft 365",
+      "Networking",
+      "PowerShell",
+      "CompTIA A+",
+      "Linux"
+    ],
+    "experiences": [
+      {
+        "id": "e1",
+        "kind": "job",
+        "title": "Student IT Helpdesk Assistant",
+        "org": "Faculty of Science, Northfield University",
+        "startDate": "2024-11",
+        "endDate": "2025-07"
+      },
+      {
+        "id": "e2",
+        "kind": "activity",
+        "title": "Volunteer Tech Helper",
+        "org": "Maple Street Community Library",
+        "startDate": "2023-03",
+        "endDate": "2023-12"
+      },
+      {
+        "id": "e3",
+        "kind": "education",
+        "title": "B.Sc. Information Technology",
+        "org": "Northfield University",
+        "startDate": "2022-06",
+        "endDate": "2026-03"
+      }
+    ],
+    "facts": [
+      {
+        "id": "f1",
+        "experienceId": "e1",
+        "did": "Resolved walk-in and email tickets for lab computers and staff laptops",
+        "result": "closed about 340 tickets over 8 months",
+        "tech": [
+          "Windows",
+          "osTicket"
+        ]
+      },
+      {
+        "id": "f2",
+        "experienceId": "e1",
+        "did": "Reset passwords and managed user accounts for faculty staff",
+        "result": null,
+        "tech": [
+          "Active Directory"
+        ]
+      },
+      {
+        "id": "f3",
+        "experienceId": "e1",
+        "did": "Re-imaged lab PCs before each semester",
+        "result": "setup time per PC went from 50 minutes to 15 minutes",
+        "tech": [
+          "Windows",
+          "Clonezilla"
+        ]
+      },
+      {
+        "id": "f4",
+        "experienceId": "e2",
+        "did": "Taught older adults to use smartphones and video calls",
+        "result": "ran 12 sessions",
+        "tech": []
+      },
+      {
+        "id": "f5",
+        "experienceId": "e1",
+        "did": "Wrote step-by-step guides for printer and Wi-Fi setup",
+        "result": "guides were added to the lab FAQ page",
+        "tech": []
+      }
+    ],
+    "gold": [
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f1"
+        ],
+        "text": "Closed about 340 support tickets over 8 months for lab computers and staff laptops, tracked in osTicket"
+      },
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f3"
+        ],
+        "text": "Cut PC setup time from 50 to 15 minutes by re-imaging lab Windows machines with Clonezilla before each semester"
+      },
+      {
+        "experienceId": "e2",
+        "factIds": [
+          "f4"
+        ],
+        "text": "Ran 12 sessions teaching older adults to use smartphones and video calls"
+      }
+    ],
+    "fabricated": [
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f1"
+        ],
+        "text": "Closed about 340 support tickets over 8 months with a 98% first-contact resolution rate",
+        "kind": "number"
+      },
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f2"
+        ],
+        "text": "Managed faculty accounts in Active Directory and automated password resets with PowerShell scripts",
+        "kind": "tech"
+      },
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f2"
+        ],
+        "text": "Cut PC setup time from 50 to 15 minutes while managing staff accounts in Active Directory",
+        "kind": "citation"
+      }
+    ]
+  },
+  {
+    "id": "oth-04",
+    "title": "Embedded / IoT firmware intern (EE student)",
+    "jd": "Embedded Firmware Intern - Halvard Microsystems\n\nAbout the role\nHalvard designs low-power environmental sensors for cold-chain warehouses.\nOur devices run on a single coin cell for a battery life of 2 years, and we\nmanage a fleet of 10,000 devices in the field. As an intern you will join the\nfirmware team and write code that runs on real hardware from week one.\n\nWhat you will work on\nYou will write and test firmware in C and C++ for ARM Cortex-M microcontrollers,\nbring up new sensors over I2C and SPI, and help debug issues with a logic\nanalyzer and oscilloscope. You will also help improve our over-the-air (OTA)\nupdate process and write small Python tools for factory testing.\n\nWho we are looking for\nYou are studying electrical, computer or embedded engineering, or computer\nscience. You have written C for a microcontroller (Arduino, ESP32, STM32 or\nsimilar) and understand serial protocols such as UART, I2C and SPI. You can\nread a datasheet and a schematic.\n\nNice to have\nExperience with FreeRTOS or another RTOS, Bluetooth Low Energy, low-power\ndesign, and Git.",
+    "expected": {
+      "required": [
+        "C",
+        "C++",
+        "Microcontrollers",
+        "I2C",
+        "SPI",
+        "UART"
+      ],
+      "preferred": [
+        "FreeRTOS",
+        "Bluetooth Low Energy",
+        "Low-power design",
+        "Git",
+        "Python",
+        "OTA updates",
+        "Oscilloscope"
+      ]
+    },
+    "missing": [
+      "FreeRTOS",
+      "Bluetooth Low Energy",
+      "OTA updates",
+      "Git",
+      "Oscilloscope"
+    ],
+    "experiences": [
+      {
+        "id": "e1",
+        "kind": "project",
+        "title": "Smart Plant Watering Controller",
+        "org": "Personal project",
+        "startDate": "2025-02",
+        "endDate": "2025-05"
+      },
+      {
+        "id": "e2",
+        "kind": "job",
+        "title": "Embedded Systems Lab Assistant",
+        "org": "Dept. of Electrical Engineering, Kestrel Institute of Technology",
+        "startDate": "2025-06",
+        "endDate": null
+      },
+      {
+        "id": "e3",
+        "kind": "project",
+        "title": "Line-following robot",
+        "org": "KIT Robotics Club",
+        "startDate": "2024-01",
+        "endDate": "2024-04"
+      }
+    ],
+    "facts": [
+      {
+        "id": "f1",
+        "experienceId": "e1",
+        "did": "Built a soil-moisture watering controller on an ESP32 in C++ that reads sensors over I2C",
+        "result": "ran for 3 weeks on a 2,000 mAh battery using deep sleep",
+        "tech": [
+          "ESP32",
+          "C++",
+          "I2C"
+        ]
+      },
+      {
+        "id": "f2",
+        "experienceId": "e1",
+        "did": "Sent sensor readings to a web dashboard over MQTT",
+        "result": "a reading every 10 minutes",
+        "tech": [
+          "MQTT",
+          "ESP32"
+        ]
+      },
+      {
+        "id": "f3",
+        "experienceId": "e3",
+        "did": "Wrote PID motor control in C for an STM32 line-following robot",
+        "result": "finished 4th of 18 teams",
+        "tech": [
+          "STM32",
+          "C"
+        ]
+      },
+      {
+        "id": "f4",
+        "experienceId": "e2",
+        "did": "Helped students debug UART and SPI wiring in lab sessions",
+        "result": "supported about 40 students per term",
+        "tech": [
+          "UART",
+          "SPI",
+          "Logic analyzer"
+        ]
+      },
+      {
+        "id": "f5",
+        "experienceId": "e3",
+        "did": "Wrote a Python script to plot sensor logs for PID tuning",
+        "result": null,
+        "tech": [
+          "Python"
+        ]
+      }
+    ],
+    "gold": [
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f1"
+        ],
+        "text": "Kept an ESP32 soil-moisture controller running for 3 weeks on a 2,000 mAh battery by using deep sleep and reading sensors over I2C in C++"
+      },
+      {
+        "experienceId": "e3",
+        "factIds": [
+          "f3",
+          "f5"
+        ],
+        "text": "Finished 4th of 18 teams by writing PID motor control in C for an STM32 line-following robot, tuned with a Python log-plotting script"
+      },
+      {
+        "experienceId": "e2",
+        "factIds": [
+          "f4"
+        ],
+        "text": "Supported about 40 students per term in debugging UART and SPI wiring with a logic analyzer"
+      }
+    ],
+    "fabricated": [
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f1"
+        ],
+        "text": "Tripled battery life of an ESP32 soil-moisture controller by adding deep sleep in C++",
+        "kind": "multiplier"
+      },
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f1"
+        ],
+        "text": "Built a soil-moisture controller on an ESP32 running FreeRTOS tasks that read sensors over I2C",
+        "kind": "tech"
+      },
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f1"
+        ],
+        "text": "Kept an ESP32 soil-moisture controller running for 3 months on a 2,000 mAh battery using deep sleep",
+        "kind": "unit"
+      },
+      {
+        "experienceId": "e3",
+        "factIds": [
+          "f3"
+        ],
+        "text": "Won 1st of 18 teams by writing PID motor control in C for an STM32 line-following robot",
+        "kind": "number"
+      }
+    ]
+  },
+  {
+    "id": "oth-05",
+    "title": "Cybersecurity SOC analyst intern (CS student)",
+    "jd": "Northgate CyberDefense is hiring a SOC Analyst Intern for our Bangkok security\noperations center. Our analysts monitor 2,500 endpoints for 40 client companies\naround the clock, and interns sit with the day shift for a 4-month placement.\n\nYou will watch alerts in our SIEM, triage them with a senior analyst, and write\nshort incident notes. You will look at network traffic, Linux and Windows logs,\nand phishing emails, and learn how we escalate real incidents.\n\nWe are looking for students in computer science, IT or cybersecurity who are\ncomfortable on the Linux command line and understand networking fundamentals:\nTCP/IP, ports, DNS and HTTP. You should know how to read a packet capture in\nWireshark and be curious about how attacks work. Capture-the-flag experience is\na big plus.\n\nIt is a bonus if you have used Splunk or another SIEM hands-on, can script in\nPython or Bash, have configured firewalls, or hold Security+ or a similar\ncertificate.\n\nSend us your resume and a link to any write-ups or home lab notes.",
+    "expected": {
+      "required": [
+        "SIEM",
+        "Alert triage",
+        "Linux",
+        "Networking",
+        "Wireshark",
+        "Log analysis"
+      ],
+      "preferred": [
+        "CTF",
+        "Splunk",
+        "Python",
+        "Bash",
+        "Firewall configuration",
+        "Security+"
+      ]
+    },
+    "missing": [
+      "Splunk",
+      "Bash",
+      "Firewall configuration",
+      "Security+",
+      "Phishing analysis"
+    ],
+    "experiences": [
+      {
+        "id": "e1",
+        "kind": "activity",
+        "title": "CTF Team Member",
+        "org": "Byte Lotus CTF team",
+        "startDate": "2024-03",
+        "endDate": null
+      },
+      {
+        "id": "e2",
+        "kind": "project",
+        "title": "Wazuh home lab",
+        "org": "Personal project",
+        "startDate": "2025-04",
+        "endDate": "2025-08"
+      },
+      {
+        "id": "e3",
+        "kind": "job",
+        "title": "IT Intern",
+        "org": "SmileCare Dental Clinics",
+        "startDate": "2024-04",
+        "endDate": "2024-07"
+      }
+    ],
+    "facts": [
+      {
+        "id": "f1",
+        "experienceId": "e1",
+        "did": "Competed in capture-the-flag events focusing on web and forensics challenges",
+        "result": "team ranked 7th out of 112 in a national student CTF",
+        "tech": [
+          "Linux",
+          "Wireshark",
+          "Burp Suite"
+        ]
+      },
+      {
+        "id": "f2",
+        "experienceId": "e2",
+        "did": "Built a home lab with a Wazuh server collecting logs from 3 virtual machines",
+        "result": "wrote 5 custom detection rules for SSH brute force and new admin users",
+        "tech": [
+          "Wazuh",
+          "Linux",
+          "VirtualBox"
+        ]
+      },
+      {
+        "id": "f3",
+        "experienceId": "e2",
+        "did": "Analyzed packet captures of simulated attacks against the lab machines",
+        "result": null,
+        "tech": [
+          "Wireshark"
+        ]
+      },
+      {
+        "id": "f4",
+        "experienceId": "e3",
+        "did": "Patched and inventoried clinic computers",
+        "result": "brought 45 PCs up to date with Windows updates",
+        "tech": [
+          "Windows"
+        ]
+      },
+      {
+        "id": "f5",
+        "experienceId": "e1",
+        "did": "Wrote Python scripts to automate decoding steps in CTF challenges",
+        "result": null,
+        "tech": [
+          "Python"
+        ]
+      }
+    ],
+    "gold": [
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f1"
+        ],
+        "text": "Helped the team rank 7th out of 112 in a national student CTF by solving web and forensics challenges with Wireshark, Burp Suite and Linux tools"
+      },
+      {
+        "experienceId": "e2",
+        "factIds": [
+          "f2"
+        ],
+        "text": "Wrote 5 custom detection rules for SSH brute force and new admin users in a Wazuh home lab collecting logs from 3 virtual machines"
+      },
+      {
+        "experienceId": "e3",
+        "factIds": [
+          "f4"
+        ],
+        "text": "Brought 45 clinic PCs up to date with Windows updates while building a hardware inventory"
+      }
+    ],
+    "fabricated": [
+      {
+        "experienceId": "e2",
+        "factIds": [
+          "f2"
+        ],
+        "text": "Wrote 5 custom Splunk detection rules for SSH brute force and new admin users across 3 virtual machines",
+        "kind": "tech"
+      },
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f1"
+        ],
+        "text": "Helped the team rank 7th out of 312 teams in a national student CTF",
+        "kind": "number"
+      },
+      {
+        "experienceId": "e2",
+        "factIds": [
+          "f3"
+        ],
+        "text": "Ranked 7th out of 112 teams in a national CTF by analyzing packet captures of simulated attacks",
+        "kind": "citation"
+      }
+    ]
+  },
+  {
+    "id": "oth-06",
+    "title": "Junior business analyst (career switcher from hotel operations)",
+    "jd": "Junior Business Analyst - Cobalt Basket (online grocery)\n\nCobalt Basket delivers groceries in Bangkok and Chiang Mai. Our operations team needs an analyst who can turn messy order data into clear decisions. You will prepare weekly reports for 12 regional managers and help product teams write requirements for new features.\n\nResponsibilities:\n- Pull and clean order, delivery and customer data with SQL\n- Build and maintain Excel models and dashboards\n- Interview operations staff and turn their needs into requirements and user stories\n- Track work in Jira and join sprint planning\n- Present findings to managers who are not data people\n\nMust have:\n- SQL (joins, group by; window functions a plus)\n- Strong Excel (pivot tables, lookups)\n- Requirements gathering and clear stakeholder communication\n- Any degree; career switchers welcome\n\nGood to have:\n- Power BI or Tableau\n- Experience with A/B testing\n- Python for analysis\n- Agile/Scrum",
+    "expected": {
+      "required": [
+        "SQL",
+        "Excel",
+        "Requirements gathering",
+        "Stakeholder communication"
+      ],
+      "preferred": [
+        "Power BI",
+        "Tableau",
+        "A/B testing",
+        "Python",
+        "Agile",
+        "Scrum",
+        "Jira"
+      ]
+    },
+    "missing": [
+      "Jira",
+      "Tableau",
+      "A/B testing",
+      "Agile",
+      "Scrum"
+    ],
+    "experiences": [
+      {
+        "id": "e1",
+        "kind": "job",
+        "title": "Front Office Supervisor",
+        "org": "Lakeside Orchid Hotel",
+        "startDate": "2022-03",
+        "endDate": "2025-06"
+      },
+      {
+        "id": "e2",
+        "kind": "education",
+        "title": "Data Analytics Bootcamp",
+        "org": "SkillForge Academy",
+        "startDate": "2025-07",
+        "endDate": "2025-12"
+      },
+      {
+        "id": "e3",
+        "kind": "project",
+        "title": "Capstone: grocery delivery churn analysis",
+        "org": "SkillForge Academy",
+        "startDate": "2025-10",
+        "endDate": "2025-12"
+      }
+    ],
+    "facts": [
+      {
+        "id": "f1",
+        "experienceId": "e1",
+        "did": "Built an Excel tracker for room upgrade requests and late checkouts",
+        "result": "daily handover meeting went from 30 minutes to 10 minutes",
+        "tech": [
+          "Excel"
+        ]
+      },
+      {
+        "id": "f2",
+        "experienceId": "e1",
+        "did": "Trained and scheduled front desk staff",
+        "result": "team of 8",
+        "tech": []
+      },
+      {
+        "id": "f3",
+        "experienceId": "e1",
+        "did": "Collected guest complaints and turned them into change requests for the operations manager",
+        "result": "6 process changes adopted",
+        "tech": []
+      },
+      {
+        "id": "f4",
+        "experienceId": "e3",
+        "did": "Wrote SQL queries on a 250,000-row public grocery orders dataset to find churn drivers",
+        "result": "customers with 2 or more late deliveries churned at 41% vs 18% for others",
+        "tech": [
+          "SQL",
+          "PostgreSQL"
+        ]
+      },
+      {
+        "id": "f5",
+        "experienceId": "e3",
+        "did": "Built a dashboard showing weekly churn by region",
+        "result": null,
+        "tech": [
+          "Power BI"
+        ]
+      },
+      {
+        "id": "f6",
+        "experienceId": "e2",
+        "did": "Completed bootcamp modules on statistics and Python analysis",
+        "result": "final score 92/100",
+        "tech": [
+          "Python",
+          "pandas"
+        ]
+      }
+    ],
+    "gold": [
+      {
+        "experienceId": "e3",
+        "factIds": [
+          "f4"
+        ],
+        "text": "Found that customers with 2 or more late deliveries churned at 41% vs 18% by writing PostgreSQL queries on a 250,000-row grocery orders dataset"
+      },
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f1"
+        ],
+        "text": "Cut the daily handover meeting from 30 to 10 minutes by building an Excel tracker for room upgrades and late checkouts"
+      },
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f3"
+        ],
+        "text": "Turned guest complaints into change requests for the operations manager, leading to 6 adopted process changes"
+      }
+    ],
+    "fabricated": [
+      {
+        "experienceId": "e3",
+        "factIds": [
+          "f4"
+        ],
+        "text": "Identified late-delivery churn drivers with SQL, a finding projected to save 1.2M THB a year",
+        "kind": "number"
+      },
+      {
+        "experienceId": "e3",
+        "factIds": [
+          "f5"
+        ],
+        "text": "Built a Tableau dashboard showing weekly churn by region",
+        "kind": "tech"
+      },
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f3"
+        ],
+        "text": "Doubled the number of adopted process changes by turning guest complaints into change requests",
+        "kind": "multiplier"
+      },
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f2"
+        ],
+        "text": "Led a team of 8 and cut the daily handover meeting from 30 to 10 minutes",
+        "kind": "citation"
+      }
+    ]
+  },
+  {
+    "id": "oth-07",
+    "title": "Entry-level technical writer / developer relations (linguistics graduate)",
+    "jd": "TECHNICAL WRITER (ENTRY LEVEL) / DEVELOPER RELATIONS - QUILLSTACK\nRemote, Asia time zones\n\nABOUT QUILLSTACK\nQuillstack offers a messaging API for logistics apps. Our docs are read by 40,000 developers each month, and they are often the first thing a new customer sees.\n\nWHAT YOU WILL DO\n- Write and update guides, tutorials and API reference pages\n- Test every code sample before it ships\n- Keep docs in Git and review pull requests from engineers (docs-as-code)\n- Answer questions in our developer community forum\n- Help record short video tutorials\n\nREQUIREMENTS\n- Excellent written English; clear, plain technical writing\n- Comfortable with Markdown and Git\n- Understand how REST APIs work and can call one with curl or Postman\n- Able to read simple Python or JavaScript code\n\nBONUS\n- Experience with Docusaurus or another static site generator\n- Video tutorial or screencast experience\n- Speaking at meetups or running a developer community\n- A second language (Thai, Vietnamese or Bahasa)",
+    "expected": {
+      "required": [
+        "Technical writing",
+        "Markdown",
+        "Git",
+        "REST APIs",
+        "Python",
+        "JavaScript"
+      ],
+      "preferred": [
+        "Docs-as-code",
+        "Docusaurus",
+        "Video tutorials",
+        "Developer community",
+        "Public speaking",
+        "Second language"
+      ]
+    },
+    "missing": [
+      "JavaScript",
+      "Docusaurus",
+      "Video tutorials",
+      "Public speaking",
+      "Developer community"
+    ],
+    "experiences": [
+      {
+        "id": "e1",
+        "kind": "education",
+        "title": "B.A. English and Linguistics",
+        "org": "Eastbrook University",
+        "startDate": "2022-06",
+        "endDate": "2026-03"
+      },
+      {
+        "id": "e2",
+        "kind": "job",
+        "title": "Freelance Translator and Editor",
+        "org": "Self-employed",
+        "startDate": "2023-01",
+        "endDate": null
+      },
+      {
+        "id": "e3",
+        "kind": "project",
+        "title": "Open-source documentation contributor",
+        "org": "GitHub (various projects)",
+        "startDate": "2025-05",
+        "endDate": null
+      }
+    ],
+    "facts": [
+      {
+        "id": "f1",
+        "experienceId": "e3",
+        "did": "Rewrote the getting-started guide for an open-source CLI tool in Markdown and submitted it as a pull request",
+        "result": "merged; setup questions in issues dropped from about 15 a month to 4",
+        "tech": [
+          "Markdown",
+          "Git",
+          "GitHub"
+        ]
+      },
+      {
+        "id": "f2",
+        "experienceId": "e3",
+        "did": "Added Python code samples to API reference pages",
+        "result": "22 samples merged",
+        "tech": [
+          "Python",
+          "Markdown"
+        ]
+      },
+      {
+        "id": "f3",
+        "experienceId": "e2",
+        "did": "Translated and edited Thai-English software localization strings and help articles",
+        "result": "about 180,000 words delivered",
+        "tech": [
+          "Crowdin"
+        ]
+      },
+      {
+        "id": "f4",
+        "experienceId": "e1",
+        "did": "Wrote a thesis on plain-language guidelines for instructional texts",
+        "result": "graded A",
+        "tech": []
+      },
+      {
+        "id": "f5",
+        "experienceId": "e3",
+        "did": "Tested curl examples against a public REST API before documenting them",
+        "result": "found 3 outdated endpoints",
+        "tech": [
+          "curl",
+          "REST APIs"
+        ]
+      }
+    ],
+    "gold": [
+      {
+        "experienceId": "e3",
+        "factIds": [
+          "f1"
+        ],
+        "text": "Cut setup questions in issues from about 15 a month to 4 by rewriting an open-source CLI's getting-started guide in Markdown, merged through a GitHub pull request"
+      },
+      {
+        "experienceId": "e3",
+        "factIds": [
+          "f2",
+          "f5"
+        ],
+        "text": "Contributed 22 merged Python code samples to API reference pages and flagged 3 outdated REST API endpoints by testing every curl example"
+      },
+      {
+        "experienceId": "e2",
+        "factIds": [
+          "f3"
+        ],
+        "text": "Delivered about 180,000 words of Thai-English software localization strings and help articles in Crowdin"
+      }
+    ],
+    "fabricated": [
+      {
+        "experienceId": "e3",
+        "factIds": [
+          "f1"
+        ],
+        "text": "Rewrote a getting-started guide in Markdown that is read by 40,000 developers each month",
+        "kind": "number"
+      },
+      {
+        "experienceId": "e3",
+        "factIds": [
+          "f2"
+        ],
+        "text": "Added Python and JavaScript code samples to API reference pages, with 22 merged",
+        "kind": "tech"
+      },
+      {
+        "experienceId": "e3",
+        "factIds": [
+          "f1"
+        ],
+        "text": "Reduced setup-related issues by 15% by rewriting an open-source getting-started guide in Markdown",
+        "kind": "unit"
+      },
+      {
+        "experienceId": "e3",
+        "factIds": [
+          "f2"
+        ],
+        "text": "Doubled API reference coverage by adding Python code samples to the docs",
+        "kind": "multiplier"
+      }
+    ]
+  },
+  {
+    "id": "oth-08",
+    "title": "UX engineer / UI designer intern with front-end code",
+    "jd": "UX Engineer Intern - Tidewell Health\n\nTidewell builds a clinic booking app used by patients of all ages, so accessibility is not optional. We maintain a design system with 120+ components shared by web and mobile.\n\nWhat you'll do\n* Turn Figma designs into accessible, responsive React components\n* Prototype new booking flows and test them with real users\n* Help designers and engineers keep the design system in sync\n* Review UI for WCAG issues before release\n\nWhat we're looking for\n* Strong Figma skills and a portfolio showing your process\n* Solid HTML and CSS, including responsive layouts\n* Experience building UI in React\n* Knowledge of accessibility basics (contrast, focus, screen readers)\n\nBonus points\n* TypeScript\n* Storybook\n* Tailwind CSS\n* Usability testing experience",
+    "expected": {
+      "required": [
+        "Figma",
+        "HTML",
+        "CSS",
+        "React",
+        "Accessibility",
+        "Responsive design"
+      ],
+      "preferred": [
+        "TypeScript",
+        "Storybook",
+        "Tailwind CSS",
+        "Usability testing",
+        "Design systems"
+      ]
+    },
+    "missing": [
+      "TypeScript",
+      "Storybook",
+      "Tailwind CSS",
+      "Design system at 120+ component scale",
+      "Screen reader testing"
+    ],
+    "experiences": [
+      {
+        "id": "e1",
+        "kind": "job",
+        "title": "UI Design Intern",
+        "org": "Papaya Room Agency",
+        "startDate": "2025-06",
+        "endDate": "2025-08"
+      },
+      {
+        "id": "e2",
+        "kind": "project",
+        "title": "RoomSpot study room booking app",
+        "org": "Web Programming course, Kestrel University",
+        "startDate": "2024-08",
+        "endDate": "2024-12"
+      },
+      {
+        "id": "e3",
+        "kind": "activity",
+        "title": "Design Lead",
+        "org": "Hack the Hills hackathon",
+        "startDate": "2025-02",
+        "endDate": "2025-02"
+      }
+    ],
+    "facts": [
+      {
+        "id": "f1",
+        "experienceId": "e1",
+        "did": "Designed mobile screens and a small component library in Figma for a restaurant reservation app",
+        "result": "36 components handed off to developers",
+        "tech": [
+          "Figma"
+        ]
+      },
+      {
+        "id": "f2",
+        "experienceId": "e2",
+        "did": "Built the booking UI in React with CSS modules from my own Figma mockups",
+        "result": null,
+        "tech": [
+          "React",
+          "CSS",
+          "Figma",
+          "JavaScript"
+        ]
+      },
+      {
+        "id": "f3",
+        "experienceId": "e2",
+        "did": "Ran hallway usability tests with classmates and fixed the top issues",
+        "result": "booking task time went from 95 seconds to 40 seconds across 6 testers",
+        "tech": []
+      },
+      {
+        "id": "f4",
+        "experienceId": "e2",
+        "did": "Fixed color contrast and keyboard focus issues found by Lighthouse",
+        "result": "accessibility score rose from 71 to 96",
+        "tech": [
+          "Lighthouse",
+          "HTML"
+        ]
+      },
+      {
+        "id": "f5",
+        "experienceId": "e3",
+        "did": "Led design for a 24-hour hackathon team",
+        "result": "won the Best UX award",
+        "tech": [
+          "Figma"
+        ]
+      }
+    ],
+    "gold": [
+      {
+        "experienceId": "e2",
+        "factIds": [
+          "f3"
+        ],
+        "text": "Cut booking task time from 95 to 40 seconds across 6 testers by running hallway usability tests and fixing the top issues"
+      },
+      {
+        "experienceId": "e2",
+        "factIds": [
+          "f4"
+        ],
+        "text": "Raised the Lighthouse accessibility score from 71 to 96 by fixing color contrast and keyboard focus issues in the HTML"
+      },
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f1"
+        ],
+        "text": "Designed mobile screens for a restaurant reservation app and handed off 36 Figma components to developers"
+      }
+    ],
+    "fabricated": [
+      {
+        "experienceId": "e2",
+        "factIds": [
+          "f2"
+        ],
+        "text": "Built the booking UI in React and TypeScript with components documented in Storybook",
+        "kind": "tech"
+      },
+      {
+        "experienceId": "e2",
+        "factIds": [
+          "f4"
+        ],
+        "text": "Improved accessibility compliance by 96% by fixing color contrast and keyboard focus issues",
+        "kind": "unit"
+      },
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f1"
+        ],
+        "text": "Won the Best UX award at a 24-hour hackathon by designing 36 components in Figma",
+        "kind": "citation"
+      },
+      {
+        "experienceId": "e2",
+        "factIds": [
+          "f3"
+        ],
+        "text": "Cut booking task time from 95 to 40 seconds across 60 testers through usability testing",
+        "kind": "number"
+      }
+    ]
+  },
+  {
+    "id": "oth-09",
+    "title": "Computer science teaching assistant, edtech (CS student)",
+    "jd": "Part-time Teaching Assistant - Intro to Python (Brightloop Learning)\nBrightloop runs after-school and weekend coding courses for teenagers in Bangkok and online.\n\nThe role\nYou will support our lead instructor in cohorts of 30 students aged 13-17. Most of the job is walking around the room (or a Zoom breakout) helping students debug their code, plus grading weekly exercises and answering forum questions. We promise families a reply within 24 hours, so you should be able to check the forum a few times a week.\n\nRequirements\n• Comfortable with Python fundamentals: loops, functions, lists, dictionaries\n• Patient teaching style and clear communication with teens and parents\n• Strong debugging skills - you can find the bug without rewriting the student's code\n• Available 2 weekday evenings and Saturday mornings\n\nBonus\n• Prior tutoring or TA experience\n• Jupyter notebooks\n• Git and GitHub Classroom\n• JavaScript or Scratch for our younger track\n• Writing automated tests to check exercises",
+    "expected": {
+      "required": [
+        "Python",
+        "Teaching",
+        "Communication",
+        "Debugging"
+      ],
+      "preferred": [
+        "Tutoring experience",
+        "Jupyter",
+        "Git",
+        "GitHub Classroom",
+        "JavaScript",
+        "Scratch",
+        "Automated testing"
+      ]
+    },
+    "missing": [
+      "Jupyter",
+      "Git",
+      "GitHub Classroom",
+      "JavaScript"
+    ],
+    "experiences": [
+      {
+        "id": "e1",
+        "kind": "job",
+        "title": "Undergraduate Teaching Assistant, Data Structures",
+        "org": "Lanna Valley University",
+        "startDate": "2025-06",
+        "endDate": "2025-10"
+      },
+      {
+        "id": "e2",
+        "kind": "activity",
+        "title": "Volunteer Coding Instructor",
+        "org": "Code Sprouts Saturday Club",
+        "startDate": "2024-01",
+        "endDate": "2024-03"
+      },
+      {
+        "id": "e3",
+        "kind": "project",
+        "title": "Lab Autograder",
+        "org": "Lanna Valley University, CS Department",
+        "startDate": "2025-08",
+        "endDate": "2026-01"
+      }
+    ],
+    "facts": [
+      {
+        "id": "f1",
+        "experienceId": "e1",
+        "did": "Held weekly office hours and lab sessions for a Data Structures course in Java",
+        "result": "helped about 60 students per week",
+        "tech": [
+          "Java"
+        ]
+      },
+      {
+        "id": "f2",
+        "experienceId": "e1",
+        "did": "Graded programming assignments with written feedback",
+        "result": "graded 420 submissions over the term",
+        "tech": []
+      },
+      {
+        "id": "f3",
+        "experienceId": "e3",
+        "did": "Built an autograder with Pytest that runs student Python submissions in containers",
+        "result": "grading time per lab went from 3 hours to 40 minutes",
+        "tech": [
+          "Python",
+          "Pytest",
+          "Docker"
+        ]
+      },
+      {
+        "id": "f4",
+        "experienceId": "e2",
+        "did": "Taught Scratch and beginner Python to children aged 10-14",
+        "result": "8 Saturday sessions",
+        "tech": [
+          "Scratch",
+          "Python"
+        ]
+      },
+      {
+        "id": "f5",
+        "experienceId": "e1",
+        "did": "Wrote extra practice problems with hints for recursion and linked lists",
+        "result": null,
+        "tech": [
+          "Java"
+        ]
+      }
+    ],
+    "gold": [
+      {
+        "experienceId": "e3",
+        "factIds": [
+          "f3"
+        ],
+        "text": "Cut grading time per lab from 3 hours to 40 minutes by building a Pytest autograder that runs student Python submissions in Docker containers"
+      },
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f1",
+          "f2"
+        ],
+        "text": "Helped about 60 students per week in Java office hours and labs, and graded 420 submissions with written feedback"
+      },
+      {
+        "experienceId": "e2",
+        "factIds": [
+          "f4"
+        ],
+        "text": "Taught Scratch and beginner Python to children aged 10-14 across 8 Saturday sessions"
+      }
+    ],
+    "fabricated": [
+      {
+        "experienceId": "e3",
+        "factIds": [
+          "f3"
+        ],
+        "text": "Doubled student pass rates by building a Pytest autograder for Python lab submissions",
+        "kind": "multiplier"
+      },
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f1"
+        ],
+        "text": "Helped about 60 students per week, raising the average exam score by 12%",
+        "kind": "number"
+      },
+      {
+        "experienceId": "e3",
+        "factIds": [
+          "f3"
+        ],
+        "text": "Built a Jupyter-based autograder with Pytest that cut grading time per lab from 3 hours to 40 minutes",
+        "kind": "tech"
+      }
+    ]
+  },
+  {
+    "id": "oth-10",
+    "title": "Thai co-op (sahakit) student, IT department at a manufacturing company",
+    "jd": "Co-op Student (สหกิจศึกษา) - IT Department\nThanapat Molding Industry Co., Ltd. (บริษัท ธนพัฒน์ โมลดิ้ง อินดัสตรี จำกัด)\nLocation: Amata City Industrial Estate, Chonburi - company shuttle from Bang Na\n\nAbout us\nWe make plastic injection-molded parts for Japanese car and appliance makers. Our IT team of 6 supports 3 plants and about 600 users, plus the SAP system used by production planning and the warehouse.\n\nJob description\n1. Help users with Windows PCs, printers and the shop-floor network\n2. Pull data from SQL Server and build Excel reports for production and QC\n3. Help build Power BI dashboards for daily output and scrap rate\n4. Automate small office tasks with Python, VBA or Power Automate\n5. Document IT procedures in Thai and English\n\nQualifications\n- 3rd or 4th year student in Computer Science, IT or Computer Engineering\n- Co-op period of 16 weeks (June-October) approved by your university\n- SQL and Excel (VLOOKUP/XLOOKUP, pivot tables)\n- Basic networking and Windows support\n- Thai native; English for reading manuals and emails\n\nAdvantages\n- Experience with SAP, Power BI or VBA\n\nWelfare\n- Allowance 400 THB/day, free lunch at the canteen, uniform provided",
+    "expected": {
+      "required": [
+        "SQL",
+        "Excel",
+        "Windows",
+        "Networking",
+        "Thai language",
+        "English"
+      ],
+      "preferred": [
+        "SAP",
+        "Power BI",
+        "VBA",
+        "Python",
+        "Power Automate",
+        "Technical writing"
+      ]
+    },
+    "missing": [
+      "SAP",
+      "Power BI",
+      "VBA",
+      "Power Automate",
+      "SQL Server"
+    ],
+    "experiences": [
+      {
+        "id": "e1",
+        "kind": "project",
+        "title": "Store Room Inventory Web App",
+        "org": "Faculty of Science, Northern Lanna University",
+        "startDate": "2025-08",
+        "endDate": "2025-12"
+      },
+      {
+        "id": "e2",
+        "kind": "job",
+        "title": "Part-time IT and Admin Helper",
+        "org": "Somboon Hardware (family business)",
+        "startDate": "2022-04",
+        "endDate": "2025-05"
+      },
+      {
+        "id": "e3",
+        "kind": "education",
+        "title": "B.Sc. Information Technology (3rd year)",
+        "org": "Northern Lanna University",
+        "startDate": "2023-06",
+        "endDate": null
+      }
+    ],
+    "facts": [
+      {
+        "id": "f1",
+        "experienceId": "e2",
+        "did": "Replaced paper stock cards with an Excel workbook using lookup formulas for the family hardware shop",
+        "result": "monthly stock count went from 2 days to half a day",
+        "tech": [
+          "Excel"
+        ]
+      },
+      {
+        "id": "f2",
+        "experienceId": "e2",
+        "did": "Set up the shop's Wi-Fi router, a shared printer and 4 Windows PCs",
+        "result": null,
+        "tech": [
+          "Windows"
+        ]
+      },
+      {
+        "id": "f3",
+        "experienceId": "e1",
+        "did": "Built an inventory web app for the faculty store room with a MySQL database",
+        "result": "tracks about 1,300 items",
+        "tech": [
+          "PHP",
+          "MySQL",
+          "SQL"
+        ]
+      },
+      {
+        "id": "f4",
+        "experienceId": "e1",
+        "did": "Wrote SQL reports that list low-stock items",
+        "result": "store room staff use them weekly",
+        "tech": [
+          "SQL",
+          "MySQL"
+        ]
+      },
+      {
+        "id": "f5",
+        "experienceId": "e3",
+        "did": "Completed an online Python data analysis course",
+        "result": "received a certificate",
+        "tech": [
+          "Python",
+          "pandas"
+        ]
+      }
+    ],
+    "gold": [
+      {
+        "experienceId": "e2",
+        "factIds": [
+          "f1"
+        ],
+        "text": "Cut the monthly stock count from 2 days to half a day by replacing paper stock cards with an Excel workbook built on lookup formulas"
+      },
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f3",
+          "f4"
+        ],
+        "text": "Built a PHP and MySQL inventory web app tracking about 1,300 store-room items, with SQL low-stock reports that staff use weekly"
+      },
+      {
+        "experienceId": "e2",
+        "factIds": [
+          "f2"
+        ],
+        "text": "Set up the shop's Wi-Fi router, a shared printer and 4 Windows PCs"
+      }
+    ],
+    "fabricated": [
+      {
+        "experienceId": "e2",
+        "factIds": [
+          "f1"
+        ],
+        "text": "Automated stock counting with Excel VBA macros, cutting the monthly count from 2 days to half a day",
+        "kind": "tech"
+      },
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f3"
+        ],
+        "text": "Built an inventory web app tracking about 1,300 items for 600 users",
+        "kind": "number"
+      },
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f4"
+        ],
+        "text": "Halved stock-outs in the faculty store room by writing SQL low-stock reports",
+        "kind": "multiplier"
+      }
+    ]
+  }
+]

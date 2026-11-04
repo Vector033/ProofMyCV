@@ -278,3 +278,42 @@ describe("matchRequirements with experience context", () => {
     expect(report.matches[0].factIds).toEqual(["g"]);
   });
 });
+
+describe("guard units and names", () => {
+  const f: Fact = {
+    id: "u",
+    experienceId: "e1",
+    did: "Fixed a memory leak in the gallery found with Instruments",
+    result: "Peak memory fell from 380 MB to 150 MB; prep went from 2 days to 3 hours",
+    tech: ["Swift"],
+  };
+  const check = (text: string) => checkBullet({ experienceId: "e1", text, factIds: ["u"] }, [f]);
+
+  it("reads measurement units", () => {
+    expect(extractNumbers("380 MB, 3-week, 410ms, $9, 2,000 mAh").map((n) => [n.value, n.unit])).toEqual([
+      [380, "MB"],
+      [3, "week"],
+      [410, "ms"],
+      [9, "USD"],
+      [2000, "mAh"],
+    ]);
+  });
+
+  it("blocks a changed unit and allows a bare number next to a measured one", () => {
+    expect(check("Cut gallery load time from 380 ms to 150 ms").ok).toBe(false);
+    expect(check("Cut prep from 2 weeks to 3 hours").ok).toBe(false);
+    expect(check("Cut peak memory from 380 to 150 MB by fixing a leak found with Instruments").ok).toBe(true);
+  });
+
+  it("ignores hyphenated adjectives as multipliers", () => {
+    expect(extractNumbers("blocked a double-charge bug in a single-page app")).toEqual([]);
+  });
+
+  it("blocks capitalised names that are not in the facts", () => {
+    expect(check("Fixed a gallery memory leak found with Instruments on Splunk dashboards").violations).toContainEqual({
+      type: "term",
+      term: "Splunk",
+    });
+    expect(check("Fixed a memory leak found with Instruments in March").ok).toBe(true);
+  });
+});

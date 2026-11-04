@@ -12,7 +12,9 @@
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "seed:demo": "node --env-file=.env.local scripts/seed-demo.mts",
-    "test:live": "vitest run eval/live.test.ts"
+    "test:live": "vitest run eval/live.test.ts",
+    "eval": "vitest run eval/offline.test.ts --silent=false",
+    "eval:live": "tsx eval/run-live.mts"
   },
   "dependencies": {
     "@react-pdf/renderer": "^4.9.0",
@@ -37,6 +39,7 @@
     "eslint-config-next": "16.4.5",
     "supabase": "^3.0.0",
     "tailwindcss": "^4",
+    "tsx": "^4.23.15",
     "typescript": "^5",
     "vitest": "^5.1.0"
   },

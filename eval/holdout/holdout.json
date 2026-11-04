@@ -1,0 +1,331 @@
+[
+  {
+    "id": "hold-01",
+    "title": "Ruby on Rails web intern",
+    "jd": "Pebblework Studio - Web Engineering Intern (Ruby on Rails)\nLocation: Chiang Mai, hybrid | 6-month internship\n\nAbout us\nPebblework builds booking and membership software for independent yoga and climbing studios. Our Rails monolith serves around 40,000 monthly active users, and we are a small team that ships every day.\n\nWhat you'll do\n- Build features end to end in our Ruby on Rails app, from migration to view\n- Write and maintain RSpec tests for the code you touch\n- Work with PostgreSQL: write queries, add indexes, read query plans with a mentor\n- Move slow work into Sidekiq background jobs\n- Help us adopt Hotwire (Turbo + Stimulus) on new screens\n\nMust have\n- Ruby and Ruby on Rails (school, side project or internship is fine)\n- SQL, ideally PostgreSQL\n- Git and pull-request based workflow\n\nNice to have\n- RSpec\n- Hotwire / Stimulus\n- Sidekiq\n- Docker for local development\n\nPlease send a resume and a link to something you built.",
+    "expected": {
+      "required": ["Ruby", "Ruby on Rails", "PostgreSQL", "Git"],
+      "preferred": ["RSpec", "Hotwire", "Sidekiq", "Docker"]
+    },
+    "missing": ["Hotwire", "Docker", "40,000 monthly active users"],
+    "experiences": [
+      { "id": "e1", "kind": "job", "title": "Web Development Intern", "org": "Lanna Print Co.", "startDate": "2025-06", "endDate": "2025-10" },
+      { "id": "e2", "kind": "project", "title": "Club Room Booking App", "org": "Northern Valley University Robotics Club", "startDate": "2024-08", "endDate": "2024-12" },
+      { "id": "e3", "kind": "education", "title": "B.Sc. Computer Science", "org": "Northern Valley University", "startDate": "2023-06", "endDate": null }
+    ],
+    "facts": [
+      { "id": "f1", "experienceId": "e1", "did": "Built an order-status page in Ruby on Rails so customers could track their print jobs", "result": "'where is my order' emails dropped from about 60 to 25 per week", "tech": ["Ruby on Rails", "PostgreSQL"] },
+      { "id": "f2", "experienceId": "e1", "did": "Wrote RSpec tests for the checkout controller", "result": "checkout coverage went from 41% to 78%", "tech": ["RSpec", "Ruby"] },
+      { "id": "f3", "experienceId": "e1", "did": "Moved PDF proof generation into a background job", "result": "the proof page stopped timing out at 30 seconds", "tech": ["Sidekiq", "Redis"] },
+      { "id": "f4", "experienceId": "e2", "did": "Built a room booking app for the robotics club with 3 classmates", "result": "used by 120 members for one semester", "tech": ["Ruby on Rails", "SQLite", "Git"] },
+      { "id": "f5", "experienceId": "e2", "did": "Added email reminders sent the day before each booking", "result": null, "tech": ["Action Mailer"] }
+    ],
+    "gold": [
+      { "experienceId": "e1", "factIds": ["f1"], "text": "Built a Ruby on Rails order-status page backed by PostgreSQL, cutting 'where is my order' emails from about 60 to 25 per week" },
+      { "experienceId": "e1", "factIds": ["f2"], "text": "Raised checkout test coverage from 41% to 78% by writing RSpec tests for the checkout controller" },
+      { "experienceId": "e2", "factIds": ["f4"], "text": "Built a Ruby on Rails room booking app with 3 classmates that 120 club members used for one semester" }
+    ],
+    "fabricated": [
+      { "experienceId": "e1", "factIds": ["f1"], "kind": "number", "text": "Built a Ruby on Rails order-status page that cut 'where is my order' emails from about 60 to 20 per week" },
+      { "experienceId": "e1", "factIds": ["f2"], "kind": "multiplier", "text": "Nearly doubled checkout test coverage by writing RSpec tests for the checkout controller" },
+      { "experienceId": "e1", "factIds": ["f3"], "kind": "tech", "text": "Moved PDF proof generation into Sidekiq jobs and containerized the worker with Docker, ending 30-second page timeouts" },
+      { "experienceId": "e2", "factIds": ["f4"], "kind": "unit", "text": "Built a Ruby on Rails room booking app with 3 classmates that handled 120 bookings in its first semester" }
+    ]
+  },
+  {
+    "id": "hold-02",
+    "title": "C#/.NET backend developer, new grad (insurance)",
+    "jd": "Graduate Backend Developer (.NET) - Harborline Mutual Insurance, Bangkok\n\nHarborline Mutual processes more than 2 million motor and health claims a year, and the systems behind those claims are written mostly in C# on .NET. We are looking for a graduate developer to join the Claims Platform team.\n\nIn this role you will build and maintain REST APIs in ASP.NET Core that our call-center agents, brokers and mobile app depend on. You will write and tune queries against SQL Server, some of them inside stored procedures that are older than you are. You will write unit tests with xUnit and take part in code review from your first week.\n\nWe expect you to know C# and .NET well enough to read an unfamiliar codebase, to be comfortable with relational databases and SQL, and to understand how an HTTP API is designed and versioned.\n\nIt would help if you have used Entity Framework Core, deployed anything to Microsoft Azure, or worked with Docker. Knowledge of the insurance domain is not required.\n\nWe offer a 12-month rotation program, mentoring, and a hybrid schedule (3 days in office).\n\nTo apply, send your CV and, if you have one, a link to a repository you are proud of.",
+    "expected": {
+      "required": ["C#", ".NET", "ASP.NET Core", "SQL Server", "SQL", "REST API", "xUnit"],
+      "preferred": ["Entity Framework Core", "Azure", "Docker"]
+    },
+    "missing": ["Azure", "Docker", "2 million claims a year"],
+    "experiences": [
+      { "id": "e1", "kind": "job", "title": "Backend Developer Intern", "org": "Sathorn Assure Co.", "startDate": "2025-05", "endDate": "2025-09" },
+      { "id": "e2", "kind": "project", "title": "Senior Project: Clinic Queue API", "org": "Eastgate University", "startDate": "2025-01", "endDate": "2025-05" },
+      { "id": "e3", "kind": "job", "title": "Teaching Assistant, Data Structures", "org": "Eastgate University", "startDate": "2024-06", "endDate": "2025-03" }
+    ],
+    "facts": [
+      { "id": "f1", "experienceId": "e1", "did": "Built an ASP.NET Core endpoint that returns a policy's claim history for call-center agents", "result": "agent lookup time dropped from 4 minutes to under 1 minute", "tech": ["C#", "ASP.NET Core", "SQL Server"] },
+      { "id": "f2", "experienceId": "e1", "did": "Rewrote a slow stored procedure used for premium renewals", "result": "the nightly run went from 95 minutes to 22 minutes", "tech": ["SQL Server", "T-SQL"] },
+      { "id": "f3", "experienceId": "e1", "did": "Added unit tests to the claims validation library", "result": "212 tests; caught 3 rounding bugs before release", "tech": ["xUnit", "C#"] },
+      { "id": "f4", "experienceId": "e2", "did": "Designed a REST API for a clinic queue with a team of 4", "result": "handled a demo with 50 simulated patients without errors", "tech": [".NET", "Entity Framework Core", "PostgreSQL"] },
+      { "id": "f5", "experienceId": "e3", "did": "Ran weekly lab sessions for a data structures course", "result": "about 35 students per section", "tech": [] }
+    ],
+    "gold": [
+      { "experienceId": "e1", "factIds": ["f1"], "text": "Built a C# ASP.NET Core endpoint serving policy claim history from SQL Server, cutting call-center lookup time from 4 minutes to under 1 minute" },
+      { "experienceId": "e1", "factIds": ["f2"], "text": "Cut the nightly premium-renewal run from 95 to 22 minutes by rewriting a slow T-SQL stored procedure" },
+      { "experienceId": "e1", "factIds": ["f3"], "text": "Wrote 212 xUnit tests for the claims validation library, catching 3 rounding bugs before release" }
+    ],
+    "fabricated": [
+      { "experienceId": "e1", "factIds": ["f2"], "kind": "multiplier", "text": "Made the nightly premium-renewal job 5x faster by rewriting a slow SQL Server stored procedure" },
+      { "experienceId": "e1", "factIds": ["f1"], "kind": "tech", "text": "Built an ASP.NET Core claim-history endpoint hosted on Azure App Service, cutting agent lookup time from 4 minutes to under 1 minute" },
+      { "experienceId": "e2", "factIds": ["f4"], "kind": "citation", "text": "Designed a .NET REST API for a clinic queue with a team of 4, backed by 212 xUnit tests" },
+      { "experienceId": "e1", "factIds": ["f3"], "kind": "number", "text": "Wrote 250+ xUnit tests for the claims validation library, catching 3 rounding bugs before release" }
+    ]
+  },
+  {
+    "id": "hold-03",
+    "title": "Kotlin Android developer intern",
+    "jd": "ANDROID DEVELOPER INTERN - TAMARIND PAY\n\nTeam: Consumer Wallet\nWhere: Bangkok office, 4 days a week\nWhen: June - October\n\nTHE ROLE\nYou will build real screens in our Android wallet app with the mobile team. Our app is written in Kotlin and every new screen is built with Jetpack Compose.\n\nYOU HAVE\n* Solid Kotlin, including coroutines\n* Experience with the Android SDK and the activity/fragment lifecycle\n* At least one app built with Jetpack Compose (personal projects count)\n* Git\n\nBONUS POINTS\n* Room or another local database\n* Retrofit / OkHttp\n* Firebase (Crashlytics, Remote Config)\n* Unit tests with JUnit\n* CI with GitHub Actions\n\nTell us about an app you shipped and what broke along the way.",
+    "expected": {
+      "required": ["Kotlin", "Kotlin Coroutines", "Android SDK", "Jetpack Compose", "Git"],
+      "preferred": ["Room", "Retrofit", "Firebase", "JUnit", "GitHub Actions"]
+    },
+    "missing": ["Firebase", "JUnit", "GitHub Actions", "Git"],
+    "experiences": [
+      { "id": "e1", "kind": "job", "title": "Mobile Developer Intern", "org": "Ping River Logistics", "startDate": "2025-06", "endDate": "2025-10" },
+      { "id": "e2", "kind": "project", "title": "Bus Stop Arrival Tracker", "org": "Personal project", "startDate": "2024-03", "endDate": "2024-09" },
+      { "id": "e3", "kind": "activity", "title": "Android Study Group Lead", "org": "Mae Rim Developer Circle", "startDate": "2023-01", "endDate": "2024-12" }
+    ],
+    "facts": [
+      { "id": "f1", "experienceId": "e1", "did": "Built the proof-of-delivery screen in Jetpack Compose so drivers capture a photo and signature", "result": "replaced paper slips for 18 drivers", "tech": ["Kotlin", "Jetpack Compose", "CameraX"] },
+      { "id": "f2", "experienceId": "e1", "did": "Cached delivery lists locally so drivers could keep working offline", "result": "app showed the day's list in 1.2 s instead of waiting on the network", "tech": ["Room", "Kotlin Coroutines"] },
+      { "id": "f3", "experienceId": "e1", "did": "Fixed a crash when drivers rotated the phone during photo capture", "result": "crash-free sessions rose from 96.1% to 99.4%", "tech": ["Kotlin"] },
+      { "id": "f4", "experienceId": "e2", "did": "Published a bus stop arrival tracker on the Play Store", "result": "about 300 installs", "tech": ["Kotlin", "Retrofit", "Google Maps SDK"] },
+      { "id": "f5", "experienceId": "e3", "did": "Organized monthly Android study sessions", "result": "8 sessions with 15-25 attendees each", "tech": [] }
+    ],
+    "gold": [
+      { "experienceId": "e1", "factIds": ["f1"], "text": "Replaced paper delivery slips for 18 drivers by building a Kotlin and Jetpack Compose proof-of-delivery screen with photo and signature capture" },
+      { "experienceId": "e1", "factIds": ["f3"], "text": "Raised crash-free sessions from 96.1% to 99.4% by fixing a rotation crash during photo capture" },
+      { "experienceId": "e2", "factIds": ["f4"], "text": "Published a Kotlin bus arrival tracker on the Play Store using Retrofit and the Google Maps SDK, reaching about 300 installs" }
+    ],
+    "fabricated": [
+      { "experienceId": "e1", "factIds": ["f2"], "kind": "unit", "text": "Cut app cold-start time by 1.2 s by caching delivery lists in Room with Kotlin Coroutines" },
+      { "experienceId": "e2", "factIds": ["f4"], "kind": "number", "text": "Published a Kotlin bus arrival tracker on the Play Store that passed 3,000 installs" },
+      { "experienceId": "e1", "factIds": ["f2"], "kind": "tech", "text": "Cached delivery lists in Room and synced them through Firebase so drivers could keep working offline" },
+      { "experienceId": "e1", "factIds": ["f3"], "kind": "citation", "text": "Fixed a photo-capture rotation crash affecting all 18 drivers, raising crash-free sessions to 99.4%" }
+    ]
+  },
+  {
+    "id": "hold-04",
+    "title": "Data science intern (Python, scikit-learn, SQL)",
+    "jd": "Lumen Grocer is hiring: Data Science Intern\n\nLumen Grocer runs 85 supermarkets and an app. Our data team owns everything from demand forecasting to the loyalty program, built on a warehouse of more than 12 million transactions a month.\n\nResponsibilities:\n  - Explore customer and basket data with Python (pandas) and SQL\n  - Build and evaluate predictive models with scikit-learn, for example churn or next-basket prediction\n  - Help design and read A/B tests for app promotions\n  - Turn results into short write-ups and charts for business teams\n\nRequirements:\n  - Currently studying statistics, computer science, economics or similar\n  - Python with pandas and scikit-learn\n  - SQL (joins, window functions, CTEs)\n  - Basic statistics: hypothesis testing, confidence intervals\n\nNice to have:\n  - Experience with Airflow or another scheduler\n  - Tableau or another BI tool\n  - Any experiment design / A/B testing experience\n\nInternship length is 4 months, starting May or June.",
+    "expected": {
+      "required": ["Python", "pandas", "scikit-learn", "SQL", "statistics"],
+      "preferred": ["A/B testing", "Airflow", "Tableau"]
+    },
+    "missing": ["A/B testing", "Airflow", "Tableau", "12 million transactions a month"],
+    "experiences": [
+      { "id": "e1", "kind": "job", "title": "Data Science Intern", "org": "Kaset Fresh Market", "startDate": "2025-06", "endDate": "2025-10" },
+      { "id": "e2", "kind": "project", "title": "Course Project: Dorm Energy Forecast", "org": "Northern Valley University", "startDate": "2024-08", "endDate": "2024-12" },
+      { "id": "e3", "kind": "activity", "title": "Workshop Lead", "org": "Northern Valley University Data Club", "startDate": "2023-08", "endDate": null }
+    ],
+    "facts": [
+      { "id": "f1", "experienceId": "e1", "did": "Built a churn model for loyalty-card members using gradient boosting", "result": "AUC 0.81 on a held-out month, vs 0.72 for the old rule-based score", "tech": ["Python", "scikit-learn", "pandas"] },
+      { "id": "f2", "experienceId": "e1", "did": "Wrote SQL to build weekly basket features from the sales warehouse", "result": "feature table of 48 columns for 210,000 members", "tech": ["SQL", "BigQuery"] },
+      { "id": "f3", "experienceId": "e1", "did": "Presented the main churn drivers to the marketing team", "result": "they picked 2 of the 5 proposed retention offers to pilot", "tech": [] },
+      { "id": "f4", "experienceId": "e2", "did": "Forecast hourly dorm electricity use from weather and calendar data", "result": "MAE of 3.4 kWh, vs 5.1 kWh for a seasonal-naive baseline", "tech": ["Python", "statsmodels", "pandas"] },
+      { "id": "f5", "experienceId": "e3", "did": "Taught a 4-week intro to pandas workshop", "result": "around 40 sign-ups, 22 finished", "tech": ["pandas", "Jupyter"] }
+    ],
+    "gold": [
+      { "experienceId": "e1", "factIds": ["f1"], "text": "Built a scikit-learn gradient boosting churn model for loyalty-card members, raising AUC from 0.72 for the rule-based score to 0.81 on a held-out month" },
+      { "experienceId": "e1", "factIds": ["f2"], "text": "Wrote SQL in BigQuery to build a 48-column weekly basket feature table covering 210,000 members" },
+      { "experienceId": "e2", "factIds": ["f4"], "text": "Forecast hourly dorm electricity use in Python with statsmodels, reaching an MAE of 3.4 kWh against 5.1 kWh for a seasonal-naive baseline" }
+    ],
+    "fabricated": [
+      { "experienceId": "e1", "factIds": ["f1"], "kind": "number", "text": "Built a gradient boosting churn model in scikit-learn that improved AUC by 12.5% over the rule-based score" },
+      { "experienceId": "e1", "factIds": ["f2"], "kind": "unit", "text": "Wrote SQL in BigQuery to build weekly basket features from 210,000 transactions" },
+      { "experienceId": "e1", "factIds": ["f1"], "kind": "tech", "text": "Built a scikit-learn churn model reaching 0.81 AUC and scheduled its weekly retraining in Airflow" },
+      { "experienceId": "e1", "factIds": ["f3"], "kind": "citation", "text": "Presented churn drivers to marketing from a model with 0.81 AUC, leading to 2 retention offers being piloted" }
+    ]
+  },
+  {
+    "id": "hold-05",
+    "title": "Site reliability engineering intern",
+    "jd": "Cloudberry Hosting // SRE Intern // Bangkok or remote (TH)\n\nwho we are: managed hosting for ~4,000 small businesses. 1,200 nodes, 3 regions, 99.95% uptime SLO.\n\nwhat you'll work on\n> Prometheus alerting and Grafana dashboards for our Kubernetes clusters\n> Bash / Python tooling for day-to-day ops on Linux\n> shadowing the on-call rotation and writing up incidents\n> cleaning up our Terraform modules\n\nrequired\n> Linux, comfortable on the command line\n> Bash scripting\n> Kubernetes basics (pods, deployments, services)\n> Prometheus + Grafana, or a willingness to learn fast\n\nnice to have\n> Terraform\n> Go or Python\n> Helm\n> any incident response / on-call experience\n\n3-6 months, paid. Send a CV and one thing you broke and fixed.",
+    "expected": {
+      "required": ["Linux", "Bash", "Kubernetes", "Prometheus", "Grafana"],
+      "preferred": ["Terraform", "Go", "Python", "Helm", "incident response"]
+    },
+    "missing": ["Terraform", "Go", "Python", "on-call / incident response", "99.95% uptime SLO"],
+    "experiences": [
+      { "id": "e1", "kind": "job", "title": "Infrastructure Intern", "org": "Nimman Cloud Co.", "startDate": "2025-06", "endDate": "2025-10" },
+      { "id": "e2", "kind": "project", "title": "Homelab Cluster", "org": "Personal project", "startDate": "2024-01", "endDate": null },
+      { "id": "e3", "kind": "job", "title": "IT Helpdesk Student Worker", "org": "Northern Valley University", "startDate": "2023-06", "endDate": "2024-05" }
+    ],
+    "facts": [
+      { "id": "f1", "experienceId": "e1", "did": "Rewrote Prometheus alert rules for disk and memory pressure on the staging cluster", "result": "pages went from about 40 a week to 9", "tech": ["Prometheus", "Alertmanager"] },
+      { "id": "f2", "experienceId": "e1", "did": "Built Grafana dashboards for the payment service's latency and error rate", "result": "on-call engineers used them in 3 incident reviews", "tech": ["Grafana", "Prometheus"] },
+      { "id": "f3", "experienceId": "e1", "did": "Automated log rotation and cleanup on build servers with a Bash script and cron", "result": "freed about 600 GB in total across 14 Linux build servers", "tech": ["Bash", "Linux", "cron"] },
+      { "id": "f4", "experienceId": "e2", "did": "Run a 3-node k3s cluster on old laptops at home", "result": "hosts a Gitea instance and a media server", "tech": ["Kubernetes", "k3s", "Helm"] },
+      { "id": "f5", "experienceId": "e3", "did": "Reimaged lab PCs and handled helpdesk tickets", "result": "closed around 30 tickets a week", "tech": ["Windows", "Linux"] }
+    ],
+    "gold": [
+      { "experienceId": "e1", "factIds": ["f1"], "text": "Cut pages from about 40 a week to 9 by rewriting Prometheus alert rules for disk and memory pressure on the staging cluster" },
+      { "experienceId": "e1", "factIds": ["f3"], "text": "Freed about 600 GB across 14 Linux build servers by automating log rotation and cleanup with a Bash script and cron" },
+      { "experienceId": "e2", "factIds": ["f4"], "text": "Run a 3-node Kubernetes (k3s) homelab cluster deployed with Helm, hosting a Gitea instance and a media server" }
+    ],
+    "fabricated": [
+      { "experienceId": "e1", "factIds": ["f1"], "kind": "multiplier", "text": "Cut paging noise more than 4x by rewriting Prometheus alert rules for disk and memory pressure" },
+      { "experienceId": "e1", "factIds": ["f3"], "kind": "tech", "text": "Freed about 600 GB across 14 Linux build servers by rolling out log rotation with an Ansible playbook" },
+      { "experienceId": "e1", "factIds": ["f3"], "kind": "unit", "text": "Freed about 600 GB per server on 14 Linux build servers by automating log cleanup with Bash and cron" },
+      { "experienceId": "e1", "factIds": ["f2"], "kind": "citation", "text": "Built Grafana dashboards for the payment service that cut on-call pages from about 40 a week to 9" }
+    ]
+  },
+  {
+    "id": "hold-06",
+    "title": "Salesforce / CRM admin trainee",
+    "jd": "Junior CRM Administrator (Trainee Program)\nBluefin Learning - Education technology\n\nOur sales and student-success teams live in Salesforce. We are looking for an organized, curious graduate who wants to grow into a Salesforce Administrator. You will be trained on the job and supported toward certification.\n\nYou'll:\n- Maintain users, profiles, fields and page layouts in Salesforce\n- Build reports and dashboards for sales and student-success leads\n- Keep our data clean: find duplicates, fix imports, enforce validation rules\n- Automate simple processes with Salesforce Flow\n- Prepare data in Excel for imports and one-off analysis\n\nWe're looking for:\n- Hands-on experience with Salesforce, even from Trailhead or a student job\n- Strong Excel skills (VLOOKUP/XLOOKUP, pivot tables)\n- Attention to detail with data quality\n\nNice to have:\n- Salesforce Certified Administrator\n- Basic SOQL\n- Experience with HubSpot or another CRM\n\nFull time, Bangkok, Monday to Friday.",
+    "expected": {
+      "required": ["Salesforce", "Salesforce reports and dashboards", "data quality", "Excel", "Salesforce Flow"],
+      "preferred": ["Salesforce Certified Administrator", "SOQL", "HubSpot"]
+    },
+    "missing": ["Salesforce Certified Administrator", "SOQL", "HubSpot", "validation rules"],
+    "experiences": [
+      { "id": "e1", "kind": "job", "title": "CRM Assistant (part-time)", "org": "Ratchada Language School", "startDate": "2024-11", "endDate": "2025-08" },
+      { "id": "e2", "kind": "activity", "title": "Membership Officer", "org": "Northern Valley University Business Club", "startDate": "2023-08", "endDate": "2024-07" },
+      { "id": "e3", "kind": "education", "title": "BBA, Business Information Systems", "org": "Northern Valley University", "startDate": "2022-06", "endDate": null }
+    ],
+    "facts": [
+      { "id": "f1", "experienceId": "e1", "did": "Cleaned duplicate student records in Salesforce using duplicate rules and manual merges", "result": "merged about 1,150 duplicates out of 9,800 contacts", "tech": ["Salesforce"] },
+      { "id": "f2", "experienceId": "e1", "did": "Built a Salesforce dashboard showing enrollment by course and branch", "result": "branch managers now review it in the Monday meeting instead of an Excel export", "tech": ["Salesforce", "Excel"] },
+      { "id": "f3", "experienceId": "e1", "did": "Set up a Flow that emails the assigned teacher when a trial lesson is booked", "result": "trial lessons with no teacher assigned fell from 12 to 2 in the first month", "tech": ["Salesforce Flow"] },
+      { "id": "f4", "experienceId": "e2", "did": "Moved the club member list from paper forms to a spreadsheet with data validation", "result": "about 260 members", "tech": ["Google Sheets"] },
+      { "id": "f5", "experienceId": "e3", "did": "Completed Trailhead modules on Salesforce admin basics", "result": "earned 34 badges", "tech": ["Salesforce", "Trailhead"] }
+    ],
+    "gold": [
+      { "experienceId": "e1", "factIds": ["f1"], "text": "Merged about 1,150 duplicate student records out of 9,800 Salesforce contacts using duplicate rules and manual merges" },
+      { "experienceId": "e1", "factIds": ["f3"], "text": "Built a Salesforce Flow that emails the assigned teacher when a trial lesson is booked, cutting unassigned trial lessons from 12 to 2 in the first month" },
+      { "experienceId": "e1", "factIds": ["f2"], "text": "Replaced a manual Excel export with a Salesforce enrollment dashboard by course and branch that managers review every Monday" }
+    ],
+    "fabricated": [
+      { "experienceId": "e1", "factIds": ["f2"], "kind": "tech", "text": "Built Salesforce enrollment dashboards and synced lead data to HubSpot for the marketing team" },
+      { "experienceId": "e1", "factIds": ["f1"], "kind": "number", "text": "Merged nearly 1,500 duplicate student records out of 10,000 Salesforce contacts" },
+      { "experienceId": "e1", "factIds": ["f3"], "kind": "unit", "text": "Built a Salesforce Flow for trial bookings that cut unassigned trial lessons from 12% to 2%" },
+      { "experienceId": "e1", "factIds": ["f3"], "kind": "multiplier", "text": "Cut unassigned trial lessons sixfold in one month with a Salesforce Flow that notifies teachers" }
+    ]
+  },
+  {
+    "id": "hold-07",
+    "title": "Hardware test technician, entry level",
+    "jd": "POSITION: Hardware Test Technician (Entry Level)\nCOMPANY: Kestrel Power Systems - Amata Nakhon plant\nSHIFT: Day shift, Mon-Sat rotation\n\nKestrel builds power-supply and LED-driver boards for industrial customers. The test line handles up to 500 boards per shift, and we want to automate more of it.\n\nDuties\n1. Run functional and burn-in tests on PCB assemblies\n2. Diagnose failed boards with an oscilloscope, multimeter and schematics, then rework or route to repair\n3. Write and maintain Python scripts that drive bench instruments and log results\n4. Keep test procedures and failure records up to date\n\nRequirements\n1. Diploma or degree in electronics, electrical engineering or similar\n2. Confident with oscilloscopes and multimeters\n3. Able to read schematics and solder through-hole and SMD parts\n4. Basic Python\n\nPreferred\n1. LabVIEW or TestStand\n2. IPC-A-610 certification\n3. SCPI / PyVISA instrument control\n4. Git",
+    "expected": {
+      "required": ["oscilloscope", "multimeter", "reading schematics", "soldering", "Python"],
+      "preferred": ["LabVIEW", "TestStand", "IPC-A-610", "PyVISA", "Git"]
+    },
+    "missing": ["LabVIEW", "TestStand", "IPC-A-610", "Git", "500 boards per shift"],
+    "experiences": [
+      { "id": "e1", "kind": "job", "title": "Test Technician Intern", "org": "Sriracha Electronics Assembly", "startDate": "2025-04", "endDate": "2025-09" },
+      { "id": "e2", "kind": "project", "title": "Capstone: Solar Kiosk Battery Monitor", "org": "Northern Valley Polytechnic", "startDate": "2024-08", "endDate": "2025-03" },
+      { "id": "e3", "kind": "activity", "title": "Lab Assistant, Circuits I", "org": "Northern Valley Polytechnic", "startDate": "2023-08", "endDate": "2024-05" }
+    ],
+    "facts": [
+      { "id": "f1", "experienceId": "e1", "did": "Wrote Python scripts that read voltage and ripple from a bench oscilloscope over USB and log pass/fail per board", "result": "manual test time per board went from about 6 minutes to 2 minutes", "tech": ["Python", "PyVISA", "oscilloscope"] },
+      { "id": "f2", "experienceId": "e1", "did": "Traced a recurring power-supply failure to a cold solder joint on one connector", "result": "rework rate on that board fell from 7% to 1.5%", "tech": ["oscilloscope", "multimeter", "soldering"] },
+      { "id": "f3", "experienceId": "e1", "did": "Wrote a one-page test procedure for the new LED driver board", "result": "used on 2 shifts", "tech": [] },
+      { "id": "f4", "experienceId": "e2", "did": "Built a battery monitor for a solar kiosk that reports voltage every 10 minutes", "result": "ran for 6 weeks in the field without a reset", "tech": ["ESP32", "C++", "KiCad"] },
+      { "id": "f5", "experienceId": "e3", "did": "Helped students debug breadboard circuits in lab", "result": "2 lab sections per week", "tech": ["multimeter", "oscilloscope"] }
+    ],
+    "gold": [
+      { "experienceId": "e1", "factIds": ["f1"], "text": "Cut manual test time per board from about 6 to 2 minutes by writing Python and PyVISA scripts that log oscilloscope readings and pass/fail results" },
+      { "experienceId": "e1", "factIds": ["f2"], "text": "Traced a recurring power-supply failure to a cold solder joint using an oscilloscope and multimeter, dropping that board's rework rate from 7% to 1.5%" },
+      { "experienceId": "e2", "factIds": ["f4"], "text": "Built an ESP32 battery monitor for a solar kiosk that reported voltage every 10 minutes and ran 6 weeks in the field without a reset" }
+    ],
+    "fabricated": [
+      { "experienceId": "e1", "factIds": ["f1"], "kind": "multiplier", "text": "Tripled board test throughput by writing Python scripts that log oscilloscope readings automatically" },
+      { "experienceId": "e1", "factIds": ["f1"], "kind": "tech", "text": "Automated oscilloscope ripple checks with a LabVIEW and Python test station, cutting test time per board from about 6 to 2 minutes" },
+      { "experienceId": "e2", "factIds": ["f4"], "kind": "unit", "text": "Built an ESP32 battery monitor for a solar kiosk that ran 6 months in the field without a reset" },
+      { "experienceId": "e1", "factIds": ["f2"], "kind": "number", "text": "Found a cold solder joint behind recurring power-supply failures, bringing the board's rework rate from 7% to under 1%" }
+    ]
+  },
+  {
+    "id": "hold-08",
+    "title": "E-commerce operations analyst, new grad",
+    "jd": "Mango Lane Home is an online furniture and home-goods brand selling on our own site and on Shopee and Lazada.\n\nWe're hiring an Operations Analyst (new grads welcome) to keep orders, stock and marketplace payouts in good shape, and to tell us early when something is going wrong.\n\nDay to day you'll pull order and inventory data with SQL, keep our operations trackers in Google Sheets tidy and reliable, and own the Looker Studio dashboards the ops and finance teams check every morning. You'll also reconcile marketplace settlements and chase anything missing.\n\nWhat we look for\n- Strong Google Sheets (QUERY, IMPORTRANGE, pivot tables)\n- SQL you can write without copy-pasting\n- Looker Studio or another dashboard tool\n- Comfort with numbers and an eye for things that don't add up\n\nGood to have\n- Shopify admin experience\n- Python for automating reports\n- Inventory forecasting or reorder-point planning\n- Shopee or Lazada Seller Center\n\nOffice in Ari, Bangkok. Hybrid after probation.",
+    "expected": {
+      "required": ["Google Sheets", "SQL", "Looker Studio"],
+      "preferred": ["Shopify", "Python", "inventory forecasting", "Shopee Seller Center", "Lazada Seller Center"]
+    },
+    "missing": ["Shopify", "Python", "inventory forecasting", "Lazada"],
+    "experiences": [
+      { "id": "e1", "kind": "job", "title": "Operations Intern", "org": "Baan Craft Online", "startDate": "2025-05", "endDate": "2025-09" },
+      { "id": "e2", "kind": "job", "title": "Online Store Helper (part-time)", "org": "Siri Snacks (family business)", "startDate": "2022-03", "endDate": "2024-12" }
+    ],
+    "facts": [
+      { "id": "f1", "experienceId": "e1", "did": "Built a Looker Studio dashboard for daily orders, returns and late shipments from a Google Sheet", "result": "replaced a manual report that took about 3 hours every Monday", "tech": ["Looker Studio", "Google Sheets"] },
+      { "id": "f2", "experienceId": "e1", "did": "Wrote SQL to find SKUs that sold out more than twice in a quarter", "result": "flagged 37 SKUs for higher reorder points", "tech": ["SQL", "Metabase"] },
+      { "id": "f3", "experienceId": "e1", "did": "Reconciled marketplace payouts against orders", "result": "found 41,500 baht in missing payouts over 2 months", "tech": ["Google Sheets"] },
+      { "id": "f4", "experienceId": "e2", "did": "Listed and ran the family snack shop's products on an online marketplace", "result": "about 120 orders a month at peak", "tech": ["Shopee"] },
+      { "id": "f5", "experienceId": "e2", "did": "Kept stock counts in a shared spreadsheet with low-stock highlighting", "result": null, "tech": ["Google Sheets"] }
+    ],
+    "gold": [
+      { "experienceId": "e1", "factIds": ["f1"], "text": "Replaced a 3-hour Monday report with a Looker Studio dashboard of daily orders, returns and late shipments built on Google Sheets" },
+      { "experienceId": "e1", "factIds": ["f3"], "text": "Found 41,500 baht in missing marketplace payouts over 2 months by reconciling payouts against orders in Google Sheets" },
+      { "experienceId": "e2", "factIds": ["f4"], "text": "Ran the family snack shop's Shopee storefront, handling about 120 orders a month at peak" }
+    ],
+    "fabricated": [
+      { "experienceId": "e1", "factIds": ["f2"], "kind": "citation", "text": "Wrote SQL that flagged 37 frequently sold-out SKUs and uncovered 41,500 baht in missing payouts" },
+      { "experienceId": "e1", "factIds": ["f3"], "kind": "unit", "text": "Recovered 41,500 baht a month in missing marketplace payouts by reconciling settlements in Google Sheets" },
+      { "experienceId": "e2", "factIds": ["f4"], "kind": "tech", "text": "Ran the family snack shop's storefronts on Shopee and Shopify, handling about 120 orders a month at peak" },
+      { "experienceId": "e1", "factIds": ["f1"], "kind": "number", "text": "Saved 5 hours of manual reporting every week by building a Looker Studio operations dashboard" }
+    ]
+  },
+  {
+    "id": "hold-09",
+    "title": "Rust systems engineering intern",
+    "jd": "## Systems Engineering Intern (Rust) - Ironleaf Data\n\n### About the team\nIronleaf builds a time-series storage engine for factory sensor data. The write path is Rust, the query layer is moving from C++ to Rust, and our p99 ingest latency target is under 2 ms.\n\n### What you'll do\n- Work on the ingest and compaction code in Rust\n- Profile hot paths with perf and flamegraphs and make them faster\n- Write tests, including property-based and crash-recovery tests\n- Help expose internal services over gRPC\n\n### You should have\n- Real Rust experience (a project you can walk us through)\n- Comfort with Linux and the command line\n- An understanding of memory, threads and concurrency\n- Git\n\n### Nice to have\n- async Rust with Tokio\n- gRPC / Protocol Buffers\n- C or C++\n- Any storage or database internals coursework\n\nDuration: 5-6 months. Remote within Thailand is possible.",
+    "expected": {
+      "required": ["Rust", "Linux", "concurrency", "Git"],
+      "preferred": ["Tokio", "gRPC", "C++", "perf", "property-based testing"]
+    },
+    "missing": ["gRPC", "C++", "Linux", "Git", "p99 latency under 2 ms"],
+    "experiences": [
+      { "id": "e1", "kind": "job", "title": "Software Engineering Intern", "org": "Tidewater Analytics", "startDate": "2025-06", "endDate": "2025-10" },
+      { "id": "e2", "kind": "project", "title": "tinykv: a key-value store", "org": "Personal project", "startDate": "2024-06", "endDate": "2025-02" },
+      { "id": "e3", "kind": "education", "title": "B.Eng. Computer Engineering", "org": "Eastgate University", "startDate": "2022-06", "endDate": "2026-05" }
+    ],
+    "facts": [
+      { "id": "f1", "experienceId": "e1", "did": "Rewrote a Python CSV-to-Parquet converter in Rust", "result": "the 4 GB nightly file now converts in 70 seconds instead of 11 minutes", "tech": ["Rust", "Apache Arrow", "Python"] },
+      { "id": "f2", "experienceId": "e1", "did": "Added structured logging and a --dry-run flag to the internal ingest CLI", "result": null, "tech": ["Rust", "clap", "tracing"] },
+      { "id": "f3", "experienceId": "e1", "did": "Profiled the converter and removed per-row string allocations", "result": "peak memory dropped from 1.8 GB to 600 MB", "tech": ["Rust", "perf"] },
+      { "id": "f4", "experienceId": "e2", "did": "Built a single-node key-value store with a write-ahead log", "result": "about 45,000 writes per second on my laptop in my own benchmark", "tech": ["Rust", "Tokio"] },
+      { "id": "f5", "experienceId": "e2", "did": "Wrote property-based tests for crash recovery of the write-ahead log", "result": "found 2 bugs where the last record was lost", "tech": ["Rust", "proptest"] }
+    ],
+    "gold": [
+      { "experienceId": "e1", "factIds": ["f1"], "text": "Rewrote a Python CSV-to-Parquet converter in Rust with Apache Arrow, converting the 4 GB nightly file in 70 seconds instead of 11 minutes" },
+      { "experienceId": "e1", "factIds": ["f3"], "text": "Cut the converter's peak memory from 1.8 GB to 600 MB by profiling with perf and removing per-row string allocations" },
+      { "experienceId": "e2", "factIds": ["f5"], "text": "Found 2 crash-recovery bugs that lost the last record in a Rust key-value store's write-ahead log by writing proptest property-based tests" }
+    ],
+    "fabricated": [
+      { "experienceId": "e1", "factIds": ["f1"], "kind": "multiplier", "text": "Made the nightly CSV-to-Parquet conversion nearly 10x faster by rewriting it from Python in Rust" },
+      { "experienceId": "e2", "factIds": ["f4"], "kind": "number", "text": "Built a Rust key-value store with a write-ahead log sustaining about 50,000 writes per second" },
+      { "experienceId": "e1", "factIds": ["f3"], "kind": "unit", "text": "Reduced the converter's memory use by 600 MB by profiling with perf and removing per-row allocations" },
+      { "experienceId": "e2", "factIds": ["f4"], "kind": "tech", "text": "Built a key-value store in Rust with Tokio and a gRPC API, backed by a write-ahead log" }
+    ]
+  },
+  {
+    "id": "hold-10",
+    "title": "Product designer who codes, junior",
+    "jd": "Fernway Health - Junior Product Designer (design + front-end)\n\nFernway makes appointment and follow-up tools for small clinics. We're a team of 14 and our designers ship their own front-end changes, so this is not a hand-off-to-engineering job.\n\nWhat the work looks like: you'll take a messy problem, like a patient missing a follow-up, talk to clinic staff about it, sketch and prototype in Figma, and then build the screen in HTML and CSS with an engineer reviewing your code. Sometimes you'll put together a quick Framer page for a launch.\n\nYou might be a fit if:\n- You have a portfolio that shows how you got to a design, not only the final screens\n- You're fluent in Figma, including components and auto layout\n- You can write clean, responsive HTML and CSS\n- You've run usability tests or interviews yourself\n\nExtra points for:\n- JavaScript or React\n- Framer\n- Helping build or maintain a design system\n- Accessibility know-how (WCAG)\n\nBased in Chiang Mai or Bangkok. Please include a portfolio link.",
+    "expected": {
+      "required": ["Figma", "HTML", "CSS", "prototyping", "usability testing"],
+      "preferred": ["JavaScript", "React", "Framer", "design systems", "WCAG"]
+    },
+    "missing": ["JavaScript", "React", "user interviews", "healthcare experience"],
+    "experiences": [
+      { "id": "e1", "kind": "job", "title": "Product Design Intern", "org": "Pomelo Travel Studio", "startDate": "2025-06", "endDate": "2025-10" },
+      { "id": "e2", "kind": "project", "title": "Library Room Booking Redesign (class project)", "org": "Northern Valley University", "startDate": "2024-08", "endDate": "2024-12" },
+      { "id": "e3", "kind": "job", "title": "Freelance Web Designer", "org": "Self-employed", "startDate": "2023-03", "endDate": null }
+    ],
+    "facts": [
+      { "id": "f1", "experienceId": "e1", "did": "Redesigned the hotel checkout flow in Figma and tested it with 6 users", "result": "the shipped version went from 7 checkout steps to 4", "tech": ["Figma"] },
+      { "id": "f2", "experienceId": "e1", "did": "Built a component library of buttons, inputs and cards with light and dark variants", "result": "about 40 components, used by 3 designers", "tech": ["Figma"] },
+      { "id": "f3", "experienceId": "e2", "did": "Rebuilt the library room booking page in HTML and CSS from my own Figma design", "result": "task success in a 5-person usability test rose from 2 of 5 to 5 of 5", "tech": ["HTML", "CSS", "Figma"] },
+      { "id": "f4", "experienceId": "e3", "did": "Designed and built landing pages for small cafes and studios", "result": "7 sites shipped", "tech": ["Framer"] },
+      { "id": "f5", "experienceId": "e2", "did": "Checked color contrast across the booking page", "result": "all text met WCAG AA contrast", "tech": ["WCAG"] }
+    ],
+    "gold": [
+      { "experienceId": "e1", "factIds": ["f1"], "text": "Cut hotel checkout from 7 steps to 4 by redesigning the flow in Figma and testing it with 6 users" },
+      { "experienceId": "e1", "factIds": ["f2"], "text": "Built a Figma component library of about 40 components with light and dark variants, used by 3 designers" },
+      { "experienceId": "e3", "factIds": ["f4"], "text": "Designed and shipped 7 Framer landing pages for small cafes and studios" }
+    ],
+    "fabricated": [
+      { "experienceId": "e2", "factIds": ["f3"], "kind": "tech", "text": "Rebuilt the library room booking page in React and CSS from my Figma design, taking task success from 2 of 5 to 5 of 5" },
+      { "experienceId": "e3", "factIds": ["f4"], "kind": "citation", "text": "Shipped 7 Framer landing pages for small businesses, all meeting WCAG AA contrast" },
+      { "experienceId": "e1", "factIds": ["f1"], "kind": "number", "text": "Cut hotel checkout from 7 steps to 4 after redesigning the flow in Figma and testing it with 12 users" },
+      { "experienceId": "e2", "factIds": ["f3"], "kind": "multiplier", "text": "Improved usability-test task success 2.5x by rebuilding the library booking page in HTML and CSS" }
+    ]
+  }
+]

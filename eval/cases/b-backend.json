@@ -1,0 +1,1731 @@
+[
+  {
+    "id": "be-01",
+    "title": "Backend intern, Python/FastAPI, Bangkok fintech",
+    "jd": "Backend Engineer Intern (Python) - Kinnaree Pay, Bangkok\n\nKinnaree Pay runs QR and wallet payments for small merchants across Thailand. Our platform handles about 2 million payment requests a day, and we are looking for a 6-month backend intern to join the Payments Core team.\n\nResponsibilities\n- Build and maintain REST APIs in Python with FastAPI\n- Write SQL queries and migrations for PostgreSQL\n- Add caching with Redis to reduce load on hot endpoints\n- Write unit and integration tests with Pytest\n- Join code reviews and daily stand-ups\n\nRequirements\n- Currently studying Computer Science, Computer Engineering, or a related field\n- Solid Python fundamentals\n- Experience with at least one web framework (FastAPI, Django, or Flask)\n- Basic SQL and relational database knowledge\n- Comfortable with Git\n\nNice to have\n- Docker\n- Kafka or another message queue\n- Experience with payment or banking systems",
+    "expected": {
+      "required": [
+        "Python",
+        "FastAPI",
+        "REST",
+        "SQL",
+        "PostgreSQL",
+        "Redis",
+        "Pytest",
+        "Git"
+      ],
+      "preferred": [
+        "Django",
+        "Flask",
+        "Docker",
+        "Kafka",
+        "Payment systems"
+      ]
+    },
+    "missing": [
+      "Docker",
+      "Kafka",
+      "Payment systems"
+    ],
+    "experiences": [
+      {
+        "id": "e1",
+        "kind": "job",
+        "title": "Backend Developer Intern",
+        "org": "Tamarind Software",
+        "startDate": "2025-06",
+        "endDate": "2025-09"
+      },
+      {
+        "id": "e2",
+        "kind": "project",
+        "title": "Canteen queue system (class project)",
+        "org": "Lanna University of Technology",
+        "startDate": "2024-08",
+        "endDate": "2024-12"
+      },
+      {
+        "id": "e3",
+        "kind": "education",
+        "title": "B.Eng. Computer Engineering",
+        "org": "Lanna University of Technology",
+        "startDate": "2022-08",
+        "endDate": null
+      }
+    ],
+    "facts": [
+      {
+        "id": "f1",
+        "experienceId": "e1",
+        "did": "Built REST endpoints for an order-tracking service in FastAPI",
+        "result": "Shipped 14 endpoints used by the mobile app",
+        "tech": [
+          "Python",
+          "FastAPI",
+          "PostgreSQL"
+        ]
+      },
+      {
+        "id": "f2",
+        "experienceId": "e1",
+        "did": "Added Redis caching to the product lookup endpoint",
+        "result": "p95 latency dropped from 420 ms to 95 ms",
+        "tech": [
+          "Redis",
+          "FastAPI"
+        ]
+      },
+      {
+        "id": "f3",
+        "experienceId": "e1",
+        "did": "Wrote Pytest tests for the order service and set them to run on every pull request",
+        "result": "Coverage went from 38% to 71%",
+        "tech": [
+          "Pytest",
+          "GitHub Actions"
+        ]
+      },
+      {
+        "id": "f4",
+        "experienceId": "e2",
+        "did": "Designed the PostgreSQL schema and SQL queries for a canteen queue system with 3 classmates",
+        "result": "Handled about 600 orders during a 2-week campus pilot",
+        "tech": [
+          "PostgreSQL",
+          "SQL",
+          "Flask"
+        ]
+      },
+      {
+        "id": "f5",
+        "experienceId": "e2",
+        "did": "Used Git feature branches and pull requests to coordinate our 4-person team",
+        "result": null,
+        "tech": [
+          "Git",
+          "GitHub"
+        ]
+      },
+      {
+        "id": "f6",
+        "experienceId": "e3",
+        "did": "Took Database Systems and Software Testing courses",
+        "result": "GPA 3.42",
+        "tech": []
+      }
+    ],
+    "gold": [
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f2"
+        ],
+        "text": "Cut p95 latency on the product lookup endpoint from 420 ms to 95 ms by adding Redis caching to the FastAPI service"
+      },
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f3"
+        ],
+        "text": "Raised order-service test coverage from 38% to 71% by writing Pytest tests that run on every pull request in GitHub Actions"
+      },
+      {
+        "experienceId": "e2",
+        "factIds": [
+          "f4"
+        ],
+        "text": "Designed the PostgreSQL schema and SQL queries for a Flask canteen queue system that handled about 600 orders in a 2-week campus pilot"
+      }
+    ],
+    "fabricated": [
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f2"
+        ],
+        "text": "Cut p95 latency on the product lookup endpoint from 420 ms to 45 ms by adding Redis caching",
+        "kind": "number"
+      },
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f1"
+        ],
+        "text": "Built 14 FastAPI endpoints for an order-tracking service and shipped them as Docker containers",
+        "kind": "tech"
+      },
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f2"
+        ],
+        "text": "Reduced product lookup latency by 95% by adding Redis caching to the FastAPI service",
+        "kind": "unit"
+      },
+      {
+        "experienceId": "e2",
+        "factIds": [
+          "f5"
+        ],
+        "text": "Coordinated a 4-person team with Git pull requests to ship a canteen queue system that handled about 600 orders in a 2-week pilot",
+        "kind": "citation"
+      }
+    ]
+  },
+  {
+    "id": "be-02",
+    "title": "New-grad Java/Spring Boot developer, regional bank",
+    "jd": "Junior Java Developer (New Graduate Program 2027)\nAndaman Union Bank - Digital Banking Division, Bangkok (hybrid)\n\nAbout the role\nOur Core Integration squad, a team of 12 engineers, builds the services behind our mobile banking app, which must meet a 99.95% uptime target. New graduates join a 12-month program with a dedicated mentor.\n\nWhat you will do\n1. Develop backend services in Java 17 using Spring Boot\n2. Build and document REST APIs consumed by mobile and branch systems\n3. Write SQL against Oracle and PostgreSQL databases\n4. Write unit tests with JUnit and take part in code reviews\n5. Work in two-week Scrum sprints with product owners and QA\n\nQualifications\n1. Bachelor's degree in Computer Science, Computer Engineering, or a related field (2026 or 2027 graduates)\n2. Good knowledge of Java and object-oriented programming\n3. Understanding of relational databases and SQL\n4. Familiarity with Git\n\nPreferred\n1. Exposure to Kafka or RabbitMQ\n2. Docker basics\n3. Experience with Jenkins or GitHub Actions",
+    "expected": {
+      "required": [
+        "Java",
+        "Spring Boot",
+        "REST",
+        "SQL",
+        "Oracle",
+        "PostgreSQL",
+        "JUnit",
+        "Scrum",
+        "Object-oriented programming",
+        "Git"
+      ],
+      "preferred": [
+        "Kafka",
+        "RabbitMQ",
+        "Docker",
+        "Jenkins",
+        "GitHub Actions"
+      ]
+    },
+    "missing": [
+      "Oracle",
+      "Kafka",
+      "RabbitMQ",
+      "Docker",
+      "Jenkins"
+    ],
+    "experiences": [
+      {
+        "id": "e1",
+        "kind": "job",
+        "title": "Software Engineer Intern",
+        "org": "Northgate Insurance Tech",
+        "startDate": "2025-05",
+        "endDate": "2025-08"
+      },
+      {
+        "id": "e2",
+        "kind": "project",
+        "title": "Library loan system (OOP course project)",
+        "org": "Siam Polytechnic University",
+        "startDate": "2024-01",
+        "endDate": "2024-05"
+      },
+      {
+        "id": "e3",
+        "kind": "activity",
+        "title": "Hackathon participant",
+        "org": "Chao Phraya FinHack 2025",
+        "startDate": "2025-11",
+        "endDate": "2025-11"
+      }
+    ],
+    "facts": [
+      {
+        "id": "f1",
+        "experienceId": "e1",
+        "did": "Built Spring Boot REST APIs for a claims status lookup used by call-center staff",
+        "result": "Replaced a manual spreadsheet lookup for about 150 agents",
+        "tech": [
+          "Java",
+          "Spring Boot",
+          "PostgreSQL"
+        ]
+      },
+      {
+        "id": "f2",
+        "experienceId": "e1",
+        "did": "Wrote JUnit tests for the claims service",
+        "result": "Added 60 unit tests",
+        "tech": [
+          "JUnit",
+          "Java"
+        ]
+      },
+      {
+        "id": "f3",
+        "experienceId": "e1",
+        "did": "Rewrote a slow SQL report query using an index and a join instead of nested subqueries",
+        "result": "Report time went from 12 minutes to 40 seconds",
+        "tech": [
+          "SQL",
+          "PostgreSQL"
+        ]
+      },
+      {
+        "id": "f4",
+        "experienceId": "e2",
+        "did": "Designed the class hierarchy for books, members and loans using OOP principles",
+        "result": "Scored 92/100 on the project",
+        "tech": [
+          "Java"
+        ]
+      },
+      {
+        "id": "f5",
+        "experienceId": "e3",
+        "did": "Built a budgeting chatbot prototype with 2 teammates in 36 hours",
+        "result": "Finished 2nd of 18 teams",
+        "tech": [
+          "Java",
+          "Spring Boot",
+          "Git"
+        ]
+      },
+      {
+        "id": "f6",
+        "experienceId": "e1",
+        "did": "Worked in two-week sprints with daily stand-ups and sprint reviews",
+        "result": null,
+        "tech": [
+          "Scrum",
+          "Jira"
+        ]
+      }
+    ],
+    "gold": [
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f3"
+        ],
+        "text": "Cut a claims report from 12 minutes to 40 seconds by rewriting its SQL query with an index and a join in PostgreSQL"
+      },
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f1"
+        ],
+        "text": "Built Spring Boot REST APIs in Java for claims status lookup, replacing a manual spreadsheet process for about 150 call-center agents"
+      },
+      {
+        "experienceId": "e3",
+        "factIds": [
+          "f5"
+        ],
+        "text": "Placed 2nd of 18 teams at a 36-hour hackathon by building a budgeting chatbot prototype in Java and Spring Boot with 2 teammates"
+      }
+    ],
+    "fabricated": [
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f1"
+        ],
+        "text": "Doubled call-center lookup speed by building Spring Boot REST APIs for claims status",
+        "kind": "multiplier"
+      },
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f1"
+        ],
+        "text": "Built Spring Boot REST APIs on an Oracle database for claims status lookup used by about 150 call-center agents",
+        "kind": "tech"
+      },
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f2"
+        ],
+        "text": "Added 60 JUnit tests to the claims service, raising coverage to 85%",
+        "kind": "number"
+      },
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f3"
+        ],
+        "text": "Cut claims report runtime by 40% by rewriting its SQL query with an index",
+        "kind": "unit"
+      }
+    ]
+  },
+  {
+    "id": "be-03",
+    "title": "New-grad software engineer, Go microservices, logistics",
+    "jd": "Software Engineer, New Grad (Go) — Saeng Logistics Platform\n\nSaeng Logistics moves parcels for online sellers in Thailand, Vietnam and Malaysia. Our dispatch platform is built from about 40 Go microservices and peaks at 18,000 delivery updates per minute.\n\nResponsibilities\n• Build and maintain microservices in Go\n• Design gRPC and REST interfaces between services\n• Work with PostgreSQL and Redis for storage and caching\n• Handle delivery status events flowing between services\n• Write tests and help keep services healthy in production\n\nRequirements\n• Bachelor's degree in CS/CE or equivalent experience, graduating 2026\n• Programming experience in Go, or strong skills in another language (Java, Python, C++) and willingness to learn Go\n• Understanding of HTTP, REST APIs and SQL\n• Linux command line and Git\n\nBonus\n• Kafka or other event streaming\n• Docker and Kubernetes\n• Prometheus/Grafana monitoring",
+    "expected": {
+      "required": [
+        "Go",
+        "Microservices",
+        "gRPC",
+        "REST",
+        "PostgreSQL",
+        "Redis",
+        "SQL",
+        "Automated testing",
+        "Linux",
+        "Git"
+      ],
+      "preferred": [
+        "Kafka",
+        "Docker",
+        "Kubernetes",
+        "Prometheus",
+        "Grafana"
+      ]
+    },
+    "missing": [
+      "Kafka",
+      "Kubernetes",
+      "Prometheus",
+      "Grafana"
+    ],
+    "experiences": [
+      {
+        "id": "e1",
+        "kind": "job",
+        "title": "Backend Intern",
+        "org": "Rotfai Express",
+        "startDate": "2025-06",
+        "endDate": "2025-10"
+      },
+      {
+        "id": "e2",
+        "kind": "project",
+        "title": "URL shortener in Go (personal project)",
+        "org": "Personal project",
+        "startDate": "2024-10",
+        "endDate": "2025-01"
+      },
+      {
+        "id": "e3",
+        "kind": "education",
+        "title": "B.Sc. Computer Science",
+        "org": "Isan Institute of Technology",
+        "startDate": "2022-06",
+        "endDate": "2026-05"
+      }
+    ],
+    "facts": [
+      {
+        "id": "f1",
+        "experienceId": "e1",
+        "did": "Built a Go service that assigns parcels to riders based on zone and load",
+        "result": "Handled 2,500 assignments per hour in a peak load test",
+        "tech": [
+          "Go",
+          "PostgreSQL"
+        ]
+      },
+      {
+        "id": "f2",
+        "experienceId": "e1",
+        "did": "Added a gRPC endpoint between the assignment service and the rider app backend",
+        "result": "Replaced 3 REST calls with 1 gRPC call",
+        "tech": [
+          "Go",
+          "gRPC"
+        ]
+      },
+      {
+        "id": "f3",
+        "experienceId": "e1",
+        "did": "Wrote table-driven unit tests for the zone matching logic",
+        "result": "Found 4 edge-case bugs before release",
+        "tech": [
+          "Go"
+        ]
+      },
+      {
+        "id": "f4",
+        "experienceId": "e2",
+        "did": "Built a URL shortener with Redis for hot links and PostgreSQL for storage",
+        "result": "Served redirects in under 5 ms locally in a 1,000-request load test",
+        "tech": [
+          "Go",
+          "Redis",
+          "PostgreSQL",
+          "Docker"
+        ]
+      },
+      {
+        "id": "f5",
+        "experienceId": "e3",
+        "did": "Used Linux servers and Git daily in operating systems and networks labs",
+        "result": null,
+        "tech": [
+          "Linux",
+          "Git"
+        ]
+      }
+    ],
+    "gold": [
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f1"
+        ],
+        "text": "Built a Go service that assigns parcels to riders by zone and load, handling 2,500 assignments per hour in peak load testing"
+      },
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f2"
+        ],
+        "text": "Replaced 3 REST calls with a single gRPC call between the assignment service and the rider app backend in Go"
+      },
+      {
+        "experienceId": "e2",
+        "factIds": [
+          "f4"
+        ],
+        "text": "Built a Go URL shortener with Redis for hot links and PostgreSQL for storage, serving redirects in under 5 ms in a 1,000-request load test"
+      }
+    ],
+    "fabricated": [
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f1"
+        ],
+        "text": "Built a Go microservice that consumes Kafka events to assign parcels to riders, handling 2,500 assignments per hour",
+        "kind": "tech"
+      },
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f1"
+        ],
+        "text": "Built a Go service that assigns parcels to riders, handling 18,000 assignments per minute at peak",
+        "kind": "number"
+      },
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f3"
+        ],
+        "text": "Built a parcel-assignment service handling 2,500 assignments per hour, covered by table-driven Go unit tests",
+        "kind": "citation"
+      },
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f2"
+        ],
+        "text": "Halved request overhead between services by replacing 3 REST calls with 1 gRPC call in Go",
+        "kind": "multiplier"
+      }
+    ]
+  },
+  {
+    "id": "be-04",
+    "title": "Junior backend engineer, Node.js/NestJS, remote SaaS",
+    "jd": "Junior Backend Engineer (Node.js / NestJS)\nTidepool HQ\nLocation: Remote, Southeast Asia time zones\nEmployment: Full-time\n\nTidepool HQ is a remote-first SaaS company that makes scheduling and booking software for clinics and salons. Businesses in five countries rely on our product to run their day, and our public API is used by many of their own integrations.\n\nYou will join our small backend team working on the public REST API and internal services. Day to day, you will build features in TypeScript with NestJS, design database tables in PostgreSQL, write automated tests with Jest, and review pull requests from teammates. We deploy several times a day through GitHub Actions.\n\nWe are looking for someone with about one year of experience (internships and part-time work count) building APIs with Node.js. You should be comfortable with TypeScript, SQL and Git, and you should write clear English, because most of our communication is async in chat and design docs.\n\nIt would be great if you have used Docker, worked with GraphQL, or set up background jobs with a queue such as BullMQ or RabbitMQ. AWS experience is a plus but not required.\n\nWe offer a home-office budget, flexible hours and an annual team meetup.\n\nTo apply, send a CV and a link to code you are proud of.",
+    "expected": {
+      "required": [
+        "Node.js",
+        "NestJS",
+        "TypeScript",
+        "REST",
+        "PostgreSQL",
+        "SQL",
+        "Jest",
+        "Git",
+        "Written English"
+      ],
+      "preferred": [
+        "GitHub Actions",
+        "Docker",
+        "GraphQL",
+        "BullMQ",
+        "RabbitMQ",
+        "AWS"
+      ]
+    },
+    "missing": [
+      "GraphQL",
+      "BullMQ",
+      "RabbitMQ",
+      "AWS"
+    ],
+    "experiences": [
+      {
+        "id": "e1",
+        "kind": "job",
+        "title": "Backend Developer (part-time)",
+        "org": "Kluay Studio",
+        "startDate": "2024-09",
+        "endDate": "2025-08"
+      },
+      {
+        "id": "e2",
+        "kind": "project",
+        "title": "Senior project: clinic appointment API",
+        "org": "Rattanakosin Institute of Technology",
+        "startDate": "2025-08",
+        "endDate": null
+      }
+    ],
+    "facts": [
+      {
+        "id": "f1",
+        "experienceId": "e1",
+        "did": "Built NestJS modules for a restaurant ordering API",
+        "result": "Went live for 3 client restaurants",
+        "tech": [
+          "Node.js",
+          "NestJS",
+          "TypeScript",
+          "PostgreSQL"
+        ]
+      },
+      {
+        "id": "f2",
+        "experienceId": "e1",
+        "did": "Wrote Jest unit and e2e tests for the orders and payments modules",
+        "result": "Caught a double-charge bug before release",
+        "tech": [
+          "Jest",
+          "TypeScript"
+        ]
+      },
+      {
+        "id": "f3",
+        "experienceId": "e1",
+        "did": "Set up a GitHub Actions workflow to lint, test and deploy on merge",
+        "result": "Deploy time went from about 25 minutes by hand to 6 minutes",
+        "tech": [
+          "GitHub Actions",
+          "Docker"
+        ]
+      },
+      {
+        "id": "f4",
+        "experienceId": "e2",
+        "did": "Designed a REST API for booking clinic appointments with conflict checks",
+        "result": "9 endpoints; double-booking blocked by a database constraint",
+        "tech": [
+          "Node.js",
+          "Express",
+          "PostgreSQL",
+          "SQL"
+        ]
+      },
+      {
+        "id": "f5",
+        "experienceId": "e2",
+        "did": "Wrote the API documentation and setup guide in English using OpenAPI",
+        "result": "Advisor approved the design review on the first pass",
+        "tech": [
+          "OpenAPI"
+        ]
+      }
+    ],
+    "gold": [
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f3"
+        ],
+        "text": "Cut deploy time from about 25 minutes to 6 minutes by setting up a GitHub Actions workflow that lints, tests and deploys on merge"
+      },
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f1",
+          "f2"
+        ],
+        "text": "Built NestJS modules in TypeScript for a restaurant ordering API now live at 3 client restaurants, with Jest tests that caught a double-charge bug before release"
+      },
+      {
+        "experienceId": "e2",
+        "factIds": [
+          "f4"
+        ],
+        "text": "Designed a 9-endpoint REST API in Node.js and Express for clinic bookings, blocking double-booking with a PostgreSQL constraint"
+      }
+    ],
+    "fabricated": [
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f1"
+        ],
+        "text": "Built NestJS modules for a restaurant ordering API handling 12,000 orders a month across 3 client restaurants",
+        "kind": "number"
+      },
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f1"
+        ],
+        "text": "Built a GraphQL API with NestJS for restaurant ordering, now live at 3 client restaurants",
+        "kind": "tech"
+      },
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f3"
+        ],
+        "text": "Cut failed deployments by 25% by setting up a GitHub Actions workflow that lints, tests and deploys on merge",
+        "kind": "unit"
+      }
+    ]
+  },
+  {
+    "id": "be-05",
+    "title": "Data engineer intern, ETL/Airflow/Spark, telecom",
+    "jd": "Data Engineer Intern — Chaiyo Telecom (Bangkok HQ)\n\nThe Network Analytics team turns raw network and billing data into clean tables that our planning and marketing teams use every morning. You will work with senior data engineers on pipelines that process call and data-session logs from our cell sites nationwide.\n\nWhat you'll work on:\n- Build and maintain batch ETL pipelines scheduled with Apache Airflow\n- Write SQL transformations for our data warehouse\n- Process large datasets with Spark (PySpark)\n- Add data quality checks and alerts\n- Document tables and pipelines for analysts\n\nMust have:\n- Python and SQL\n- Understanding of ETL concepts and data modeling (star schema, fact/dimension tables)\n- Git\n- Currently enrolled in a bachelor's or master's program\n\nGood to have:\n- Apache Spark / PySpark\n- Airflow or another workflow scheduler\n- Cloud data warehouse experience (BigQuery, Redshift, or Snowflake)\n- Kafka",
+    "expected": {
+      "required": [
+        "Python",
+        "SQL",
+        "ETL",
+        "Data modeling",
+        "Git"
+      ],
+      "preferred": [
+        "Spark",
+        "Airflow",
+        "Data quality",
+        "BigQuery",
+        "Redshift",
+        "Snowflake",
+        "Kafka"
+      ]
+    },
+    "missing": [
+      "Spark",
+      "BigQuery",
+      "Redshift",
+      "Snowflake",
+      "Kafka"
+    ],
+    "experiences": [
+      {
+        "id": "e1",
+        "kind": "job",
+        "title": "Data Intern",
+        "org": "Pla Thong Retail Group",
+        "startDate": "2025-05",
+        "endDate": "2025-08"
+      },
+      {
+        "id": "e2",
+        "kind": "project",
+        "title": "Air quality data pipeline (course project)",
+        "org": "Chiang Rai Institute of Science",
+        "startDate": "2024-11",
+        "endDate": "2025-02"
+      },
+      {
+        "id": "e3",
+        "kind": "education",
+        "title": "B.Sc. Data Science",
+        "org": "Chiang Rai Institute of Science",
+        "startDate": "2023-08",
+        "endDate": null
+      }
+    ],
+    "facts": [
+      {
+        "id": "f1",
+        "experienceId": "e1",
+        "did": "Built a nightly Python ETL job that loads POS sales from CSV exports into PostgreSQL",
+        "result": "Loads about 1.2 million rows a night in 14 minutes",
+        "tech": [
+          "Python",
+          "Pandas",
+          "PostgreSQL",
+          "SQL"
+        ]
+      },
+      {
+        "id": "f2",
+        "experienceId": "e1",
+        "did": "Designed a star schema with a sales fact table and store, product and date dimensions",
+        "result": "Used by 5 analysts for weekly sales reports",
+        "tech": [
+          "SQL",
+          "PostgreSQL"
+        ]
+      },
+      {
+        "id": "f3",
+        "experienceId": "e1",
+        "did": "Added row-count and null checks that post to Slack when a load fails",
+        "result": "Caught 7 bad loads in the first month",
+        "tech": [
+          "Python",
+          "Slack"
+        ]
+      },
+      {
+        "id": "f4",
+        "experienceId": "e2",
+        "did": "Scheduled an hourly Airflow pipeline that pulls air quality readings from a public API",
+        "result": "Collected 6 months of readings from 85 stations",
+        "tech": [
+          "Airflow",
+          "Python",
+          "Docker"
+        ]
+      },
+      {
+        "id": "f5",
+        "experienceId": "e2",
+        "did": "Kept pipeline code and SQL in a shared Git repo with pull request reviews",
+        "result": null,
+        "tech": [
+          "Git",
+          "GitHub"
+        ]
+      }
+    ],
+    "gold": [
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f1"
+        ],
+        "text": "Built a nightly Python ETL job that loads about 1.2 million POS rows from CSV exports into PostgreSQL in 14 minutes"
+      },
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f2"
+        ],
+        "text": "Designed a star schema (sales fact table with store, product and date dimensions) used by 5 analysts for weekly sales reports"
+      },
+      {
+        "experienceId": "e2",
+        "factIds": [
+          "f4"
+        ],
+        "text": "Scheduled an hourly Airflow pipeline that collected 6 months of air quality readings from 85 stations"
+      }
+    ],
+    "fabricated": [
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f1"
+        ],
+        "text": "Built a nightly PySpark ETL job that loads about 1.2 million POS rows into PostgreSQL in 14 minutes",
+        "kind": "tech"
+      },
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f1"
+        ],
+        "text": "Built a nightly Python ETL job that loads about 12 million POS rows into PostgreSQL in 14 minutes",
+        "kind": "number"
+      },
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f2"
+        ],
+        "text": "Designed a star schema for retail sales and added data quality checks that caught 7 bad loads in the first month",
+        "kind": "citation"
+      },
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f3"
+        ],
+        "text": "Halved failed nightly loads by adding row-count and null checks that alert the team in Slack",
+        "kind": "multiplier"
+      }
+    ]
+  },
+  {
+    "id": "be-06",
+    "title": "Junior data analyst, SQL/Power BI/Excel, government-adjacent agency",
+    "jd": "Data Analyst (Junior) – Community Enterprise Data Office (CEDO), Bangkok\nContract: 1 year, renewable. Fresh graduates welcome.\nSalary: according to agency scale for bachelor's degree holders.\nThe Policy Insights unit tracks loan programs and training schemes for community enterprises in all 77 provinces. You will help turn program data into dashboards and short reports that directors use to decide where the budget goes.\nYou will write SQL queries to pull and clean data from our program database, build and maintain dashboards in Power BI, and prepare monthly summary tables in Excel for the finance unit.\nYou will also check data quality with field offices and explain trends in plain Thai and English to non-technical staff.\nWe are looking for a graduate in statistics, economics, computer science or a related field who is strong in SQL and Excel (pivot tables, VLOOKUP/XLOOKUP) and has built at least one dashboard in Power BI or Tableau.\nPython with Pandas for data cleaning is a plus, as is basic statistics such as regression and hypothesis testing.\nExperience with government or public-sector data, or with ArcGIS/QGIS maps, is an advantage.\nWork is mostly office-based, with occasional trips to regional field offices.\nPlease attach a transcript and a sample of your dashboard or report work.\nApplications close at the end of the month; shortlisted candidates will be invited to a short SQL exercise.",
+    "expected": {
+      "required": [
+        "SQL",
+        "Excel",
+        "Power BI",
+        "Data cleaning",
+        "Data quality",
+        "Communication"
+      ],
+      "preferred": [
+        "Tableau",
+        "Python",
+        "Pandas",
+        "Statistics",
+        "Regression analysis",
+        "ArcGIS",
+        "QGIS",
+        "Public-sector data"
+      ]
+    },
+    "missing": [
+      "Python",
+      "Pandas",
+      "Regression analysis",
+      "QGIS",
+      "Public-sector data"
+    ],
+    "experiences": [
+      {
+        "id": "e1",
+        "kind": "job",
+        "title": "Data Analyst Intern",
+        "org": "Sabai Health Clinic Network",
+        "startDate": "2025-06",
+        "endDate": "2025-09"
+      },
+      {
+        "id": "e2",
+        "kind": "project",
+        "title": "Provincial tourism dashboard (capstone)",
+        "org": "Korat Commerce University",
+        "startDate": "2025-01",
+        "endDate": "2025-05"
+      },
+      {
+        "id": "e3",
+        "kind": "activity",
+        "title": "Volunteer data coordinator",
+        "org": "Green Canal Clean-up Club",
+        "startDate": "2023-07",
+        "endDate": "2024-12"
+      }
+    ],
+    "facts": [
+      {
+        "id": "f1",
+        "experienceId": "e1",
+        "did": "Built a Power BI dashboard tracking patient visits and no-shows across clinic branches",
+        "result": "Used weekly by 4 branch managers",
+        "tech": [
+          "Power BI",
+          "SQL"
+        ]
+      },
+      {
+        "id": "f2",
+        "experienceId": "e1",
+        "did": "Wrote SQL queries to remove duplicate patient records before reporting",
+        "result": "Removed about 3,400 duplicate rows",
+        "tech": [
+          "SQL",
+          "SQL Server"
+        ]
+      },
+      {
+        "id": "f3",
+        "experienceId": "e1",
+        "did": "Automated the monthly Excel summary with pivot tables and XLOOKUP",
+        "result": "Prep time went from 2 days to 3 hours",
+        "tech": [
+          "Excel"
+        ]
+      },
+      {
+        "id": "f4",
+        "experienceId": "e2",
+        "did": "Built a Tableau dashboard of tourist arrivals by province from public open data",
+        "result": "Covered 10 years of monthly data",
+        "tech": [
+          "Tableau",
+          "Excel"
+        ]
+      },
+      {
+        "id": "f5",
+        "experienceId": "e2",
+        "did": "Presented the findings to faculty and provincial tourism officers in Thai",
+        "result": "Graded A",
+        "tech": []
+      },
+      {
+        "id": "f6",
+        "experienceId": "e3",
+        "did": "Kept volunteer sign-up and attendance sheets and shared monthly totals with the club board",
+        "result": "Tracked 120 volunteers across 15 events",
+        "tech": [
+          "Google Sheets"
+        ]
+      }
+    ],
+    "gold": [
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f3"
+        ],
+        "text": "Cut monthly report prep from 2 days to 3 hours by automating the Excel summary with pivot tables and XLOOKUP"
+      },
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f1",
+          "f2"
+        ],
+        "text": "Built a Power BI dashboard of patient visits and no-shows used weekly by 4 branch managers, after cleaning out about 3,400 duplicate records with SQL"
+      },
+      {
+        "experienceId": "e2",
+        "factIds": [
+          "f4"
+        ],
+        "text": "Built a Tableau dashboard of tourist arrivals by province covering 10 years of monthly open data"
+      }
+    ],
+    "fabricated": [
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f3"
+        ],
+        "text": "Cut monthly report prep from 2 weeks to 3 hours by automating the Excel summary with pivot tables and XLOOKUP",
+        "kind": "unit"
+      },
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f2"
+        ],
+        "text": "Cleaned about 3,400 duplicate patient records with Python and Pandas before reporting",
+        "kind": "tech"
+      },
+      {
+        "experienceId": "e2",
+        "factIds": [
+          "f4"
+        ],
+        "text": "Built a Tableau dashboard of tourist arrivals across all 77 provinces covering 10 years of monthly data",
+        "kind": "number"
+      },
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f1"
+        ],
+        "text": "Built a Power BI no-show dashboard that doubled follow-up calls by branch managers",
+        "kind": "multiplier"
+      }
+    ]
+  },
+  {
+    "id": "be-07",
+    "title": "Machine learning engineer intern, PyTorch, logistics",
+    "jd": "MACHINE LEARNING ENGINEER INTERN (6 months)\nJampa Express — Data & AI Team, Bangkok\n\nABOUT US\nJampa Express delivers parcels to every province in Thailand. Our Data & AI team builds models for delivery time prediction, address correction and fraud detection.\n\nWHAT YOU WILL DO\n- Train and evaluate machine learning models in Python using PyTorch or scikit-learn\n- Clean and explore data with Pandas and NumPy, and write SQL to build training sets\n- Track experiments and compare models with clear metrics (MAE, F1, AUC)\n- Help package models as REST services with FastAPI and Docker\n- Present results to the operations team\n\nWHAT WE ARE LOOKING FOR\n- 3rd/4th-year or master's student in CS, data science, statistics, or similar\n- Solid Python, Pandas and NumPy\n- Hands-on experience with PyTorch or TensorFlow\n- Understanding of model evaluation, overfitting and train/test splits\n- SQL basics\n\nNICE TO HAVE\n- NLP or Thai text processing\n- MLflow or Weights & Biases\n- Cloud ML (GCP Vertex AI or AWS SageMaker)",
+    "expected": {
+      "required": [
+        "Python",
+        "Machine Learning",
+        "PyTorch",
+        "TensorFlow",
+        "scikit-learn",
+        "Pandas",
+        "NumPy",
+        "SQL",
+        "Model evaluation",
+        "FastAPI",
+        "Docker",
+        "REST"
+      ],
+      "preferred": [
+        "NLP",
+        "MLflow",
+        "Weights & Biases",
+        "GCP",
+        "Vertex AI",
+        "AWS",
+        "SageMaker"
+      ]
+    },
+    "missing": [
+      "TensorFlow",
+      "FastAPI",
+      "Docker",
+      "MLflow",
+      "Vertex AI",
+      "SageMaker"
+    ],
+    "experiences": [
+      {
+        "id": "e1",
+        "kind": "job",
+        "title": "Undergraduate Research Assistant",
+        "org": "Smart Agriculture Lab, Lanna University of Technology",
+        "startDate": "2025-01",
+        "endDate": null
+      },
+      {
+        "id": "e2",
+        "kind": "project",
+        "title": "Thai product review sentiment classifier (course project)",
+        "org": "Lanna University of Technology",
+        "startDate": "2024-08",
+        "endDate": "2024-12"
+      }
+    ],
+    "facts": [
+      {
+        "id": "f1",
+        "experienceId": "e1",
+        "did": "Trained a PyTorch CNN to classify rice leaf diseases from phone photos",
+        "result": "0.91 accuracy on a held-out test set of 1,800 images",
+        "tech": [
+          "PyTorch",
+          "Python"
+        ]
+      },
+      {
+        "id": "f2",
+        "experienceId": "e1",
+        "did": "Cleaned and labeled field photo metadata",
+        "result": "Removed 640 blurry or mislabeled images",
+        "tech": [
+          "Pandas",
+          "NumPy"
+        ]
+      },
+      {
+        "id": "f3",
+        "experienceId": "e1",
+        "did": "Compared CNN backbones and logged every run in a shared spreadsheet",
+        "result": "Picked a model 3x smaller with a 0.02 accuracy drop",
+        "tech": [
+          "PyTorch"
+        ]
+      },
+      {
+        "id": "f4",
+        "experienceId": "e2",
+        "did": "Fine-tuned a WangchanBERTa model for Thai review sentiment",
+        "result": "Macro F1 of 0.84 on 3 classes",
+        "tech": [
+          "Python",
+          "Hugging Face Transformers",
+          "PyTorch"
+        ]
+      },
+      {
+        "id": "f5",
+        "experienceId": "e2",
+        "did": "Wrote SQL to pull reviews from the course MySQL database into a training set",
+        "result": "Built a dataset of 12,000 reviews",
+        "tech": [
+          "SQL",
+          "MySQL"
+        ]
+      },
+      {
+        "id": "f6",
+        "experienceId": "e2",
+        "did": "Presented the model and an error analysis to the class",
+        "result": null,
+        "tech": []
+      }
+    ],
+    "gold": [
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f1"
+        ],
+        "text": "Trained a PyTorch CNN that classifies rice leaf diseases from phone photos, reaching 0.91 accuracy on a 1,800-image held-out test set"
+      },
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f3"
+        ],
+        "text": "Compared CNN backbones and chose a model 3x smaller at the cost of only 0.02 accuracy"
+      },
+      {
+        "experienceId": "e2",
+        "factIds": [
+          "f4",
+          "f5"
+        ],
+        "text": "Fine-tuned WangchanBERTa for 3-class Thai review sentiment, reaching 0.84 macro F1 on a 12,000-review dataset pulled from MySQL with SQL"
+      }
+    ],
+    "fabricated": [
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f1"
+        ],
+        "text": "Trained a PyTorch CNN that classifies rice leaf diseases from phone photos with 0.97 accuracy on a 1,800-image test set",
+        "kind": "number"
+      },
+      {
+        "experienceId": "e2",
+        "factIds": [
+          "f4"
+        ],
+        "text": "Fine-tuned WangchanBERTa for Thai review sentiment, improving accuracy by 84%",
+        "kind": "unit"
+      },
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f1"
+        ],
+        "text": "Trained a PyTorch CNN for rice leaf disease classification and served it through a FastAPI endpoint at 0.91 accuracy",
+        "kind": "tech"
+      },
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f2"
+        ],
+        "text": "Doubled the usable training data by cleaning and relabeling field photo metadata with Pandas and NumPy",
+        "kind": "multiplier"
+      }
+    ]
+  },
+  {
+    "id": "be-08",
+    "title": "DevOps/SRE intern, Docker/Kubernetes/Terraform/AWS, telecom",
+    "jd": "SRE / DevOps Intern\nLumen Mobile (telecom) – Platform Reliability team, Bangkok, on-site 3 days a week\n\nOur platform team runs more than 200 services for 11 million mobile subscribers, with a 99.9% availability target for the self-care app.\n\nResponsibilities\n• Build and maintain Docker images and CI/CD pipelines in GitLab CI\n• Help deploy and operate workloads on our container platform\n• Manage AWS infrastructure (EC2, S3, RDS, IAM)\n• Improve monitoring and alerting with Prometheus and Grafana\n• Join incident reviews and write runbooks\n\nRequirements\n• Studying computer engineering, CS, or IT (internship of 4–6 months)\n• Comfortable with Linux and shell scripting (Bash)\n• Networking basics: DNS, HTTP, TCP/IP\n• Git\n• Docker fundamentals\n\nBonus\n• Kubernetes or CKA/CKAD study\n• Terraform or other infrastructure as code\n• Python or Go for automation\n• AWS Cloud Practitioner or similar certification",
+    "expected": {
+      "required": [
+        "Docker",
+        "CI/CD",
+        "GitLab CI",
+        "AWS",
+        "Prometheus",
+        "Grafana",
+        "Linux",
+        "Bash",
+        "Networking",
+        "Git"
+      ],
+      "preferred": [
+        "Kubernetes",
+        "Terraform",
+        "Python",
+        "Go",
+        "AWS certification"
+      ]
+    },
+    "missing": [
+      "Kubernetes",
+      "Terraform",
+      "AWS",
+      "GitLab CI"
+    ],
+    "experiences": [
+      {
+        "id": "e1",
+        "kind": "job",
+        "title": "DevOps Intern",
+        "org": "Mango Cloud Hosting",
+        "startDate": "2025-06",
+        "endDate": "2025-09"
+      },
+      {
+        "id": "e2",
+        "kind": "activity",
+        "title": "Infrastructure lead, club website",
+        "org": "Computer Club, Ubon Engineering College",
+        "startDate": "2024-06",
+        "endDate": null
+      },
+      {
+        "id": "e3",
+        "kind": "education",
+        "title": "B.Eng. Computer Engineering",
+        "org": "Ubon Engineering College",
+        "startDate": "2022-08",
+        "endDate": null
+      }
+    ],
+    "facts": [
+      {
+        "id": "f1",
+        "experienceId": "e1",
+        "did": "Wrote Bash scripts to automate nightly backups of customer VPS databases",
+        "result": "Replaced a 45-minute manual task with a cron job",
+        "tech": [
+          "Bash",
+          "Linux",
+          "cron"
+        ]
+      },
+      {
+        "id": "f2",
+        "experienceId": "e1",
+        "did": "Containerized 3 internal PHP tools with Docker and Docker Compose",
+        "result": "New staff could run them locally in under 10 minutes",
+        "tech": [
+          "Docker",
+          "Docker Compose"
+        ]
+      },
+      {
+        "id": "f3",
+        "experienceId": "e1",
+        "did": "Set up Prometheus and Grafana dashboards for CPU, disk and HTTP error rates on 30 hosting servers",
+        "result": "Caught 2 disk-full incidents before customers noticed",
+        "tech": [
+          "Prometheus",
+          "Grafana",
+          "Linux"
+        ]
+      },
+      {
+        "id": "f4",
+        "experienceId": "e2",
+        "did": "Built a GitHub Actions pipeline that tests and deploys the club website to a VPS on every merge",
+        "result": "Deploy time went from 20 minutes to 4 minutes",
+        "tech": [
+          "GitHub Actions",
+          "Docker",
+          "Nginx"
+        ]
+      },
+      {
+        "id": "f5",
+        "experienceId": "e2",
+        "did": "Fixed a DNS misconfiguration that broke HTTPS certificate renewal for the club website",
+        "result": "Site back up within 1 hour",
+        "tech": [
+          "DNS",
+          "Let's Encrypt",
+          "Nginx"
+        ]
+      }
+    ],
+    "gold": [
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f3"
+        ],
+        "text": "Set up Prometheus and Grafana dashboards for CPU, disk and HTTP errors across 30 hosting servers, catching 2 disk-full incidents before customers noticed"
+      },
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f1"
+        ],
+        "text": "Replaced a 45-minute manual backup task with a nightly cron job by writing Bash scripts on Linux"
+      },
+      {
+        "experienceId": "e2",
+        "factIds": [
+          "f4"
+        ],
+        "text": "Cut club website deploy time from 20 minutes to 4 minutes with a GitHub Actions pipeline that tests and deploys on every merge"
+      }
+    ],
+    "fabricated": [
+      {
+        "experienceId": "e2",
+        "factIds": [
+          "f4"
+        ],
+        "text": "Built a GitHub Actions pipeline that deploys the club website to Kubernetes on every merge, cutting deploy time from 20 minutes to 4 minutes",
+        "kind": "tech"
+      },
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f3"
+        ],
+        "text": "Set up Prometheus and Grafana dashboards covering 200 services, catching 2 disk-full incidents before customers noticed",
+        "kind": "number"
+      },
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f2"
+        ],
+        "text": "Containerized 3 internal tools with Docker, cutting deploy time from 20 minutes to 4 minutes",
+        "kind": "citation"
+      },
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f1"
+        ],
+        "text": "Reduced backup failures by 45% by automating nightly database backups with Bash and cron",
+        "kind": "unit"
+      }
+    ]
+  },
+  {
+    "id": "be-09",
+    "title": "Associate cloud support engineer, GCP, cloud services partner",
+    "jd": "Associate Cloud Support Engineer (GCP) — Kaset Cloud Services\nLocation: Bangkok or Chiang Mai | Full-time | New graduates welcome\n\nKaset Cloud Services helps Thai companies move to Google Cloud. Our support desk handles about 1,500 customer tickets a month with a first-response target of 30 minutes.\n\nIn this role you will:\n* Troubleshoot customer issues with Compute Engine, Cloud Storage, Cloud SQL and IAM\n* Reproduce problems in test projects and write clear replies and knowledge-base articles\n* Use the gcloud CLI and Linux tools to investigate VMs, networking and permissions\n* Escalate complex cases and follow up until they are resolved\n\nQualifications:\n* Degree in IT, CS, CE or similar (or graduating in 2026)\n* Hands-on experience with a public cloud (GCP preferred; AWS or Azure is fine)\n* Linux command line and basic networking (VPC, firewall rules, DNS)\n* SQL basics\n* Good written English and Thai for customer emails\n\nBonus points:\n* Google Cloud Associate Cloud Engineer certification\n* Terraform\n* Python or Bash scripting\n* Kubernetes / GKE",
+    "expected": {
+      "required": [
+        "GCP",
+        "Compute Engine",
+        "Cloud Storage",
+        "Cloud SQL",
+        "IAM",
+        "gcloud CLI",
+        "Linux",
+        "Networking",
+        "SQL",
+        "Technical writing",
+        "Troubleshooting"
+      ],
+      "preferred": [
+        "AWS",
+        "Azure",
+        "Associate Cloud Engineer certification",
+        "Terraform",
+        "Python",
+        "Bash",
+        "Kubernetes",
+        "GKE"
+      ]
+    },
+    "missing": [
+      "Cloud Storage",
+      "Associate Cloud Engineer certification",
+      "Terraform",
+      "Kubernetes",
+      "GKE"
+    ],
+    "experiences": [
+      {
+        "id": "e1",
+        "kind": "job",
+        "title": "IT Helpdesk Student Worker",
+        "org": "Central Library, Phayao Tech University",
+        "startDate": "2024-06",
+        "endDate": "2026-03"
+      },
+      {
+        "id": "e2",
+        "kind": "project",
+        "title": "Senior project deployment on Google Cloud",
+        "org": "Phayao Tech University",
+        "startDate": "2025-08",
+        "endDate": "2026-02"
+      },
+      {
+        "id": "e3",
+        "kind": "activity",
+        "title": "Cloud study group lead",
+        "org": "Phayao Tech University Computer Club",
+        "startDate": "2025-01",
+        "endDate": "2025-12"
+      }
+    ],
+    "facts": [
+      {
+        "id": "f1",
+        "experienceId": "e1",
+        "did": "Answered student and staff tickets about Wi-Fi, printers and account access",
+        "result": "Closed about 40 tickets a week with a median response of 15 minutes",
+        "tech": [
+          "Jira Service Management"
+        ]
+      },
+      {
+        "id": "f2",
+        "experienceId": "e1",
+        "did": "Wrote 12 how-to articles in Thai and English for the library help page",
+        "result": "Repeat password-reset tickets dropped by 30%",
+        "tech": []
+      },
+      {
+        "id": "f3",
+        "experienceId": "e2",
+        "did": "Deployed a Flask web app on a Compute Engine VM with Cloud SQL for PostgreSQL",
+        "result": "Ran for 5 months for 60 test users",
+        "tech": [
+          "GCP",
+          "Compute Engine",
+          "Cloud SQL",
+          "PostgreSQL",
+          "Flask",
+          "Linux"
+        ]
+      },
+      {
+        "id": "f4",
+        "experienceId": "e2",
+        "did": "Set up IAM roles so teammates could deploy without owner access",
+        "result": "Moved 4 teammates from Owner to least-privilege roles",
+        "tech": [
+          "GCP",
+          "IAM",
+          "gcloud CLI"
+        ]
+      },
+      {
+        "id": "f5",
+        "experienceId": "e2",
+        "did": "Debugged a VPC firewall rule that blocked HTTPS traffic to the VM",
+        "result": "Restored access in 25 minutes",
+        "tech": [
+          "GCP",
+          "VPC",
+          "Linux"
+        ]
+      },
+      {
+        "id": "f6",
+        "experienceId": "e3",
+        "did": "Led a weekly study group preparing for cloud fundamentals exams",
+        "result": "8 of 11 members passed",
+        "tech": [
+          "GCP"
+        ]
+      }
+    ],
+    "gold": [
+      {
+        "experienceId": "e2",
+        "factIds": [
+          "f3"
+        ],
+        "text": "Deployed a Flask web app on a Compute Engine VM with Cloud SQL for PostgreSQL that ran for 5 months for 60 test users"
+      },
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f1"
+        ],
+        "text": "Closed about 40 helpdesk tickets a week with a median response time of 15 minutes"
+      },
+      {
+        "experienceId": "e2",
+        "factIds": [
+          "f4"
+        ],
+        "text": "Moved 4 teammates from Owner to least-privilege IAM roles with the gcloud CLI so they could still deploy"
+      }
+    ],
+    "fabricated": [
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f1"
+        ],
+        "text": "Closed about 40 helpdesk tickets a week with a median response time of 5 minutes",
+        "kind": "number"
+      },
+      {
+        "experienceId": "e2",
+        "factIds": [
+          "f3"
+        ],
+        "text": "Deployed a Flask web app on GKE with Cloud SQL for PostgreSQL that served 60 test users for 5 months",
+        "kind": "tech"
+      },
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f2"
+        ],
+        "text": "Wrote 12 how-to articles in Thai and English and closed about 40 tickets a week",
+        "kind": "citation"
+      },
+      {
+        "experienceId": "e2",
+        "factIds": [
+          "f5"
+        ],
+        "text": "Halved downtime by debugging a VPC firewall rule that blocked HTTPS traffic to the VM",
+        "kind": "multiplier"
+      }
+    ]
+  },
+  {
+    "id": "be-10",
+    "title": "Junior LLM application engineer, RAG/Gemini/OpenAI, Bangkok fintech",
+    "jd": "LLM Application Engineer (Junior)\nRuamjai Lending - AI Products, Bangkok (hybrid)\n\nWe are building an assistant that helps our loan officers answer customer questions from policy documents in Thai and English. You will work with a product manager and two backend engineers to take it from prototype to production.\n\nResponsibilities\n- Build RAG pipelines: document chunking, embeddings, vector search and prompt design\n- Call LLM APIs (Gemini, OpenAI) and handle structured JSON output, retries and cost limits\n- Build backend endpoints in Python with FastAPI\n- Create evaluation sets and measure answer quality and hallucination rate\n- Store embeddings in PostgreSQL with pgvector\n\nQualifications\n- 0–2 years of experience; strong final-year projects count\n- Python\n- Hands-on experience with at least one LLM API\n- Understanding of embeddings and retrieval\n- SQL and Git\n\nBonus\n- LangChain or LlamaIndex\n- Thai NLP experience\n- Docker and deploying to GCP or AWS\n- Awareness of prompt injection and PII handling",
+    "expected": {
+      "required": [
+        "Python",
+        "LLM",
+        "RAG",
+        "Embeddings",
+        "Vector search",
+        "Prompt engineering",
+        "Gemini",
+        "OpenAI",
+        "FastAPI",
+        "PostgreSQL",
+        "pgvector",
+        "LLM evaluation",
+        "SQL",
+        "Git"
+      ],
+      "preferred": [
+        "LangChain",
+        "LlamaIndex",
+        "Thai NLP",
+        "Docker",
+        "GCP",
+        "AWS",
+        "Prompt injection",
+        "PII handling"
+      ]
+    },
+    "missing": [
+      "LangChain",
+      "LlamaIndex",
+      "Docker",
+      "Hallucination rate measurement",
+      "PII handling"
+    ],
+    "experiences": [
+      {
+        "id": "e1",
+        "kind": "project",
+        "title": "Course-syllabus Q&A chatbot (senior project)",
+        "org": "Lanna University of Technology",
+        "startDate": "2025-08",
+        "endDate": null
+      },
+      {
+        "id": "e2",
+        "kind": "job",
+        "title": "Software Engineer Intern",
+        "org": "Hoppa Travel",
+        "startDate": "2025-04",
+        "endDate": "2025-07"
+      },
+      {
+        "id": "e3",
+        "kind": "activity",
+        "title": "Hackathon participant",
+        "org": "Bangkok GenAI Jam 2025",
+        "startDate": "2025-09",
+        "endDate": "2025-09"
+      }
+    ],
+    "facts": [
+      {
+        "id": "f1",
+        "experienceId": "e1",
+        "did": "Built a RAG chatbot that answers questions from 140 course syllabus PDFs",
+        "result": "Answered 78 of 100 test questions correctly",
+        "tech": [
+          "Python",
+          "Gemini",
+          "PostgreSQL",
+          "pgvector"
+        ]
+      },
+      {
+        "id": "f2",
+        "experienceId": "e1",
+        "did": "Tried 3 chunk sizes and added a reranking step",
+        "result": "Retrieval hit rate at 5 rose from 0.62 to 0.81",
+        "tech": [
+          "Python"
+        ]
+      },
+      {
+        "id": "f3",
+        "experienceId": "e1",
+        "did": "Wrote a 100-question evaluation set with expected answers and source pages",
+        "result": null,
+        "tech": []
+      },
+      {
+        "id": "f4",
+        "experienceId": "e2",
+        "did": "Built FastAPI endpoints for a trip-booking backend",
+        "result": "Shipped 6 endpoints for the partner portal",
+        "tech": [
+          "Python",
+          "FastAPI",
+          "MySQL",
+          "Git"
+        ]
+      },
+      {
+        "id": "f5",
+        "experienceId": "e2",
+        "did": "Used the OpenAI API to turn hotel descriptions into structured JSON tags",
+        "result": "Tagged 4,300 listings for about 9 USD in API cost",
+        "tech": [
+          "OpenAI",
+          "Python"
+        ]
+      },
+      {
+        "id": "f6",
+        "experienceId": "e3",
+        "did": "Built a Thai-language FAQ bot prototype with 3 teammates in 24 hours",
+        "result": "Won the people's choice award",
+        "tech": [
+          "Gemini",
+          "Streamlit"
+        ]
+      }
+    ],
+    "gold": [
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f1",
+          "f3"
+        ],
+        "text": "Built a RAG chatbot over 140 course syllabus PDFs with Gemini and pgvector that answered 78 of 100 questions correctly on a hand-written evaluation set"
+      },
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f2"
+        ],
+        "text": "Raised retrieval hit rate at 5 from 0.62 to 0.81 by testing 3 chunk sizes and adding a reranking step"
+      },
+      {
+        "experienceId": "e2",
+        "factIds": [
+          "f5"
+        ],
+        "text": "Tagged 4,300 hotel listings for about 9 USD in API cost by using the OpenAI API to turn descriptions into structured JSON"
+      }
+    ],
+    "fabricated": [
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f1"
+        ],
+        "text": "Built a RAG chatbot over 140 course syllabus PDFs that answered 92% of test questions correctly",
+        "kind": "number"
+      },
+      {
+        "experienceId": "e2",
+        "factIds": [
+          "f5"
+        ],
+        "text": "Tagged 4,300 hotel listings with the OpenAI API in about 9 minutes by turning descriptions into structured JSON",
+        "kind": "unit"
+      },
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f1"
+        ],
+        "text": "Built a RAG chatbot with LangChain and pgvector over 140 course syllabus PDFs",
+        "kind": "tech"
+      },
+      {
+        "experienceId": "e1",
+        "factIds": [
+          "f2"
+        ],
+        "text": "Raised retrieval hit rate at 5 from 0.62 to 0.81, so the chatbot answered 78 of 100 test questions correctly",
+        "kind": "citation"
+      }
+    ]
+  }
+]

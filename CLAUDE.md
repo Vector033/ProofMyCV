@@ -1,6 +1,6 @@
 # FactFit: ปรับ resume ให้ตรงประกาศงาน โดยไม่แต่งข้อเท็จจริง
 
-> สถานะ (2026-11-04): milestone 1–2 และส่วนใหญ่ของ 3 เสร็จบนเครื่อง (ยังไม่ deploy, ยังไม่มี eval set) ทดสอบกับ Gemini key จริงแล้ว: Flash-Lite เป็นตัวหลักเพราะ gemini-flash-latest ตอบ 503/timeout บ่อย ดู Roadmap ใน README
+> สถานะ (2026-11-04): milestone 1–2 และส่วนใหญ่ของ 3 เสร็จบนเครื่อง (ยังไม่ deploy) eval set 30+10 held-out เสร็จแล้ว ผลอยู่ใน eval/README.md ทดสอบกับ Gemini key จริงแล้ว: Flash-Lite เป็นตัวหลักเพราะ gemini-flash-latest ตอบ 503/timeout บ่อย ดู Roadmap ใน README
 >
 > Stack ที่ตกลงแล้ว: Next.js 16 + Supabase (Auth + Postgres, dev ใช้ `npx supabase start` ใน Docker) + Drizzle + Gemini
 > Node 26 ติดตั้งแล้วที่ `C:\Program Files\nodejs` (ถ้า shell หา node ไม่เจอ ให้เพิ่ม path นี้)

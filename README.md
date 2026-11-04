@@ -26,6 +26,17 @@ traced back to a fact you wrote. That check is plain code, not a prompt.
 5. **Export.** A single-column, text-only A4 PDF (standard fonts, selectable text, a few KB) that ATS parsers read
    top to bottom.
 
+## Eval
+
+40 fictional cases (30 for tuning, 10 held out), details in [eval/README.md](eval/README.md):
+
+- The guard blocked **100%** of 547 fabrications on the tuning set and **96.8%** of 186 on the held-out set,
+  while accepting every faithful bullet (120 / 120). Its misses are same-number meaning swaps ("120 members" →
+  "120 bookings").
+- Gemini Flash-Lite drafted 113 bullets on 28 cases with **0** fabrications found by the guard, an independent
+  bait check, or a manual spot check.
+- Gemini skill extraction recall on required skills: 82.8% (rule-based fallback: 70.5%).
+
 Each job gets its own saved version. You can download everything as JSON or delete your account, which cascades to all
 of your data.
 
@@ -63,7 +74,7 @@ extractor is used and bullets come from your facts as written. `GEMINI_MODEL` is
 model that times out hands over to the next one.
 
 ```bash
-npm test          # unit tests
+npm test          # unit tests + offline eval
 npm run test:live # calls the real Gemini API with .env.local (opt-in, never runs in CI)
 npm run lint
 npm run typecheck
@@ -74,6 +85,6 @@ npm run typecheck
 - [x] Scaffold, Supabase auth, fact bank schema and CRUD
 - [x] JD extraction, mapping page, fit score
 - [x] Bullet drafting with the fabrication guard, saved versions, PDF export, data export and account deletion
-- [ ] Eval set: 30+ JD + fact bank pairs measuring fabrication rate (target 0%), keyword recall and bullet length
+- [x] Eval set: 30 tuning + 10 held-out cases measuring guard catch rate, false blocks, keyword recall and bullet length
 - [ ] Import facts from an existing resume (.docx / .pdf) for review
 - [ ] Deploy (Vercel + Supabase) and screenshots

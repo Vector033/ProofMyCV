@@ -1,0 +1,325 @@
+[
+  {
+    "id": "web-01",
+    "title": "Frontend intern, React/Next.js, Bangkok food-ordering startup",
+    "jd": "Frontend Developer Intern (React / Next.js)\nKinkao Labs, Bangkok (hybrid, Sukhumvit office)\n\nKinkao Labs builds the ordering app behind street-food stalls across Bangkok. Our app serves 2 million monthly users, and our frontend team of 9 ships to production every day.\n\nResponsibilities\n- Build and maintain customer-facing pages in React and Next.js\n- Turn Figma designs into responsive, accessible UI\n- Improve page speed and Core Web Vitals on high-traffic pages\n- Write tests for the components you ship\n- Review pull requests and pair with senior engineers\n\nRequirements\n- Currently studying Computer Science, Software Engineering or a related field\n- Solid JavaScript and TypeScript fundamentals\n- Experience building apps with React and Next.js\n- Good HTML and CSS skills, including responsive layouts\n- Basic understanding of web accessibility (WCAG)\n- Comfortable with Git and pull-request workflows\n\nNice to have\n- Tailwind CSS\n- Unit testing with Jest and end-to-end testing with Playwright\n- Experience consuming GraphQL APIs\n- Available for at least 4 months, full time",
+    "expected": {
+      "required": ["JavaScript", "TypeScript", "React", "Next.js", "HTML", "CSS", "accessibility", "Git"],
+      "preferred": ["Figma", "Tailwind CSS", "Jest", "Playwright", "GraphQL"]
+    },
+    "missing": ["Playwright", "GraphQL", "accessibility", "Figma"],
+    "experiences": [
+      { "id": "e1", "kind": "job", "title": "Frontend Developer Intern", "org": "Thanaporn Digital", "startDate": "2025-06", "endDate": "2025-10" },
+      { "id": "e2", "kind": "project", "title": "Campus Marketplace", "org": "Personal project", "startDate": "2024-08", "endDate": "2025-01" },
+      { "id": "e3", "kind": "education", "title": "B.Sc. Computer Science", "org": "Northern Valley University", "startDate": "2023-08", "endDate": null }
+    ],
+    "facts": [
+      { "id": "f1", "experienceId": "e1", "did": "Rebuilt the product listing page in Next.js with server-side rendering", "result": "Largest Contentful Paint dropped from 4.1 s to 1.8 s", "tech": ["Next.js", "React", "TypeScript"] },
+      { "id": "f2", "experienceId": "e1", "did": "Wrote unit tests for shared form components", "result": "Test coverage of the components folder went from 35% to 72%", "tech": ["Jest", "React Testing Library"] },
+      { "id": "f3", "experienceId": "e1", "did": "Converted 14 legacy pages from plain CSS to Tailwind CSS", "result": null, "tech": ["Tailwind CSS", "CSS"] },
+      { "id": "f4", "experienceId": "e2", "did": "Built a campus buy-and-sell web app with a team of 3", "result": "1,200 registered students in the first semester", "tech": ["React", "Firebase", "JavaScript"] },
+      { "id": "f5", "experienceId": "e2", "did": "Added image compression before upload", "result": "Average upload time fell from 9 seconds to 3 seconds", "tech": ["JavaScript"] },
+      { "id": "f6", "experienceId": "e3", "did": "Teaching assistant for the web programming lab", "result": "Helped about 60 students each week", "tech": ["HTML", "CSS", "Git"] }
+    ],
+    "gold": [
+      { "experienceId": "e1", "factIds": ["f1"], "text": "Cut Largest Contentful Paint on the product listing page from 4.1 s to 1.8 s by rebuilding it in Next.js with server-side rendering, React and TypeScript." },
+      { "experienceId": "e1", "factIds": ["f2"], "text": "Raised test coverage of shared form components from 35% to 72% by writing unit tests with Jest and React Testing Library." },
+      { "experienceId": "e2", "factIds": ["f4"], "text": "Built a campus buy-and-sell web app with React and Firebase in a team of 3, reaching 1,200 registered students in its first semester." }
+    ],
+    "fabricated": [
+      { "experienceId": "e1", "factIds": ["f1"], "kind": "number", "text": "Cut Largest Contentful Paint on the product listing page from 4.1 s to 0.9 s by rebuilding it in Next.js with server-side rendering." },
+      { "experienceId": "e1", "factIds": ["f2"], "kind": "tech", "text": "Raised test coverage of shared form components from 35% to 72% by writing unit tests in Jest and end-to-end tests in Playwright." },
+      { "experienceId": "e2", "factIds": ["f4"], "kind": "multiplier", "text": "Doubled sign-ups for a campus buy-and-sell web app to 1,200 registered students by rebuilding it in React and Firebase." }
+    ]
+  },
+  {
+    "id": "web-02",
+    "title": "Junior frontend engineer, Vue/Nuxt, regional e-commerce",
+    "jd": "Junior Frontend Engineer - Vue / Nuxt\nLumora Commerce (regional e-commerce, Bangkok hub)\n\nAbout the team\nOur storefront team owns the product, search and checkout pages that shoppers across Southeast Asia use every day.\n\nWhat you will do\n• Build storefront features in Vue and Nuxt with server-side rendering\n• Integrate with REST APIs owned by the catalog and payments teams\n• Keep pages fast on low-end Android phones and slow networks\n• Write component tests and help keep our end-to-end suite green\n\nWhat we are looking for\n• New grad or final-year student in Computer Science or similar\n• Good knowledge of JavaScript and TypeScript\n• Experience with Vue (Composition API) and Nuxt\n• Strong HTML and CSS fundamentals\n• Experience calling REST APIs\n• Daily use of Git\n\nBonus points\n• State management with Pinia\n• Vitest or Cypress\n• Docker for local development\n• Internationalization (i18n) for multi-language storefronts",
+    "expected": {
+      "required": ["JavaScript", "TypeScript", "Vue", "Nuxt", "HTML", "CSS", "REST", "Git"],
+      "preferred": ["Pinia", "Vitest", "Cypress", "Docker", "i18n"]
+    },
+    "missing": ["Cypress", "Docker", "i18n"],
+    "experiences": [
+      { "id": "e1", "kind": "job", "title": "Part-time Frontend Developer", "org": "Rimnam Travel", "startDate": "2025-01", "endDate": "2025-09" },
+      { "id": "e2", "kind": "project", "title": "Thai Recipe Finder", "org": "Personal project", "startDate": "2024-03", "endDate": "2024-07" },
+      { "id": "e3", "kind": "activity", "title": "Web Team Lead", "org": "CS Student Club, Northern Valley University", "startDate": "2023-08", "endDate": "2024-12" }
+    ],
+    "facts": [
+      { "id": "f1", "experienceId": "e1", "did": "Migrated the booking widget from Vue 2 to Vue 3 with the Composition API", "result": "Bundle size went from 410 KB to 260 KB", "tech": ["Vue", "JavaScript", "Vite"] },
+      { "id": "f2", "experienceId": "e1", "did": "Built a tour search page that calls the company REST API with date and price filters", "result": "Search results show in under 800 ms", "tech": ["Vue", "Pinia", "REST"] },
+      { "id": "f3", "experienceId": "e1", "did": "Wrote component tests for the checkout form", "result": "Caught 5 validation bugs before release", "tech": ["Vitest"] },
+      { "id": "f4", "experienceId": "e2", "did": "Built a recipe search site with server-side rendering", "result": "Lighthouse SEO score of 98", "tech": ["Nuxt", "TypeScript", "Tailwind CSS"] },
+      { "id": "f5", "experienceId": "e3", "did": "Led 4 club members to rebuild the club website", "result": "Site went live before the open house", "tech": ["HTML", "CSS", "Git"] }
+    ],
+    "gold": [
+      { "experienceId": "e1", "factIds": ["f1"], "text": "Shrank the booking widget bundle from 410 KB to 260 KB by migrating it from Vue 2 to Vue 3 with the Composition API and Vite." },
+      { "experienceId": "e1", "factIds": ["f2"], "text": "Built a tour search page in Vue and Pinia on the company REST API, returning date- and price-filtered results in under 800 ms." },
+      { "experienceId": "e2", "factIds": ["f4"], "text": "Reached a Lighthouse SEO score of 98 on a server-side rendered recipe search site built with Nuxt, TypeScript and Tailwind CSS." }
+    ],
+    "fabricated": [
+      { "experienceId": "e1", "factIds": ["f1"], "kind": "unit", "text": "Cut the booking widget's load time from 410 ms to 260 ms by migrating it from Vue 2 to Vue 3." },
+      { "experienceId": "e1", "factIds": ["f3"], "kind": "tech", "text": "Caught 5 validation bugs before release by writing end-to-end checkout tests in Cypress." },
+      { "experienceId": "e2", "factIds": ["f4"], "kind": "citation", "text": "Built a Nuxt recipe search site and caught 5 validation bugs before release with Vitest component tests." }
+    ]
+  },
+  {
+    "id": "web-03",
+    "title": "New-grad full-stack TypeScript engineer, remote SaaS",
+    "jd": "## Full-Stack Engineer, New Grad (Remote, APAC time zones)\n\nPaperkite is a remote-first SaaS company making shared knowledge bases for small teams. More than 4,000 customer teams rely on us, and we hold ourselves to 99.9% uptime.\n\n## What you'll work on\n- Ship features end to end: React UI, Node.js services and PostgreSQL schemas\n- Design and document REST endpoints used by our web app and public API\n- Investigate slow queries and performance regressions\n- Keep our CI pipeline healthy and our tests meaningful\n\n## Qualifications\n- Degree in Computer Science or equivalent practical experience\n- Strong TypeScript across frontend and backend\n- Experience with React and Node.js (Express or similar)\n- Comfortable writing SQL for PostgreSQL\n- Familiar with Git, code review and REST API design\n\n## Bonus\n- Next.js\n- GraphQL\n- Docker and AWS\n- GitHub Actions or another CI/CD tool\n- End-to-end testing with Playwright",
+    "expected": {
+      "required": ["TypeScript", "React", "Node.js", "Express", "PostgreSQL", "REST", "Git"],
+      "preferred": ["Next.js", "GraphQL", "Docker", "AWS", "GitHub Actions", "CI/CD", "Playwright"]
+    },
+    "missing": ["GraphQL", "AWS", "Playwright"],
+    "experiences": [
+      { "id": "e1", "kind": "job", "title": "Software Engineering Intern", "org": "Baan Ledger Co.", "startDate": "2025-06", "endDate": "2025-10" },
+      { "id": "e2", "kind": "project", "title": "StudySync group study planner", "org": "Class project, Northern Valley University", "startDate": "2024-09", "endDate": "2025-02" },
+      { "id": "e3", "kind": "project", "title": "Personal expense tracker", "org": "Personal project", "startDate": "2023-11", "endDate": "2024-02" }
+    ],
+    "facts": [
+      { "id": "f1", "experienceId": "e1", "did": "Built an endpoint to export invoices as CSV", "result": "Export of 10,000 rows finishes in 2.3 s", "tech": ["Node.js", "Express", "TypeScript", "PostgreSQL"] },
+      { "id": "f2", "experienceId": "e1", "did": "Added a database index on invoice lookups after profiling slow queries", "result": "p95 query time dropped from 640 ms to 45 ms", "tech": ["PostgreSQL"] },
+      { "id": "f3", "experienceId": "e1", "did": "Set up a lint and test workflow that runs on every pull request", "result": null, "tech": ["GitHub Actions", "Jest"] },
+      { "id": "f4", "experienceId": "e2", "did": "Built a group study planner with shared calendars", "result": "Used by 85 classmates during finals", "tech": ["Next.js", "React", "TypeScript", "Prisma", "PostgreSQL"] },
+      { "id": "f5", "experienceId": "e2", "did": "Containerized the app for local development", "result": "New teammates could run it in about 10 minutes", "tech": ["Docker"] },
+      { "id": "f6", "experienceId": "e3", "did": "Built an expense tracker with a REST API and spending charts", "result": null, "tech": ["React", "Node.js", "MongoDB", "REST"] }
+    ],
+    "gold": [
+      { "experienceId": "e1", "factIds": ["f2"], "text": "Cut p95 invoice lookup time from 640 ms to 45 ms by profiling slow PostgreSQL queries and adding an index." },
+      { "experienceId": "e1", "factIds": ["f1"], "text": "Built a Node.js and Express endpoint in TypeScript that exports 10,000 invoice rows from PostgreSQL to CSV in 2.3 s." },
+      { "experienceId": "e2", "factIds": ["f4", "f5"], "text": "Built a Next.js, React and PostgreSQL group study planner used by 85 classmates during finals, and containerized it with Docker so new teammates could run it in about 10 minutes." }
+    ],
+    "fabricated": [
+      { "experienceId": "e1", "factIds": ["f1"], "kind": "multiplier", "text": "Doubled CSV export speed for 10,000-row invoice files by rewriting the Express endpoint in TypeScript." },
+      { "experienceId": "e1", "factIds": ["f3"], "kind": "tech", "text": "Set up a GitHub Actions pipeline that lints, tests and deploys to AWS on every merged pull request." },
+      { "experienceId": "e2", "factIds": ["f4"], "kind": "number", "text": "Built a Next.js group study planner with shared calendars used by 850 classmates during finals." }
+    ]
+  },
+  {
+    "id": "web-04",
+    "title": "Junior PHP/Laravel developer, Bangkok web agency",
+    "jd": "PHP / Laravel Developer (Junior or Internship)\nSaengdao Digital Agency, Ari, Bangkok\n\nWe are a small agency that builds websites, booking systems and back-office tools for Thai restaurants, clinics and hotels. You will work directly with our lead developer and designers, and sometimes join client calls.\n\nWhat you'll do\n- Build and maintain client projects in Laravel\n- Turn designer mockups into working pages\n- Design MySQL tables and write migrations\n- Fix bugs and improve speed on existing client sites\n\nMust have\n- PHP and the Laravel framework\n- MySQL\n- HTML, CSS and JavaScript\n- Git\n- Able to explain technical issues to non-technical clients\n\nGood to have\n- Vue.js\n- WordPress\n- Tailwind CSS\n- Docker\n- Experience deploying to a Linux VPS",
+    "expected": {
+      "required": ["PHP", "Laravel", "MySQL", "HTML", "CSS", "JavaScript", "Git", "client communication"],
+      "preferred": ["Vue", "WordPress", "Tailwind CSS", "Docker", "Linux"]
+    },
+    "missing": ["Vue", "Tailwind CSS", "Docker", "Linux"],
+    "experiences": [
+      { "id": "e1", "kind": "job", "title": "Web Developer Intern", "org": "Pimai Creative", "startDate": "2025-05", "endDate": "2025-08" },
+      { "id": "e2", "kind": "project", "title": "Clinic queue booking system", "org": "Freelance project for a dental clinic", "startDate": "2024-06", "endDate": "2024-10" },
+      { "id": "e3", "kind": "education", "title": "B.Sc. Information Technology", "org": "Chao Mae University", "startDate": "2022-08", "endDate": null }
+    ],
+    "facts": [
+      { "id": "f1", "experienceId": "e1", "did": "Built 3 client landing sites from Figma designs", "result": "All delivered before deadline", "tech": ["HTML", "CSS", "JavaScript", "Figma"] },
+      { "id": "f2", "experienceId": "e1", "did": "Sped up slow product pages on a client's WordPress shop by adding caching and resizing images", "result": "Page load went from 6.5 s to 2.1 s", "tech": ["WordPress", "PHP"] },
+      { "id": "f3", "experienceId": "e2", "did": "Built a clinic queue booking system with SMS reminders", "result": "No-show rate fell from 18% to 7% in the pilot month", "tech": ["Laravel", "PHP", "MySQL"] },
+      { "id": "f4", "experienceId": "e2", "did": "Designed the database schema and wrote migrations for patients, doctors and bookings", "result": null, "tech": ["MySQL", "Laravel"] },
+      { "id": "f5", "experienceId": "e3", "did": "Completed a database systems course project on query optimization", "result": "Grade A", "tech": ["MySQL"] }
+    ],
+    "gold": [
+      { "experienceId": "e2", "factIds": ["f3"], "text": "Cut the no-show rate from 18% to 7% in the pilot month by building a clinic queue booking system with SMS reminders in Laravel, PHP and MySQL." },
+      { "experienceId": "e1", "factIds": ["f2"], "text": "Brought product page load on a client's WordPress shop from 6.5 s to 2.1 s by adding caching and resizing images." },
+      { "experienceId": "e1", "factIds": ["f1"], "text": "Delivered 3 client landing sites from Figma designs in HTML, CSS and JavaScript, all before deadline." }
+    ],
+    "fabricated": [
+      { "experienceId": "e2", "factIds": ["f3"], "kind": "unit", "text": "Reduced patient wait time from 18 minutes to 7 minutes by building a clinic queue booking system in Laravel." },
+      { "experienceId": "e1", "factIds": ["f1"], "kind": "tech", "text": "Built 3 client landing sites from Figma designs using Laravel Blade and Tailwind CSS, all delivered before deadline." },
+      { "experienceId": "e2", "factIds": ["f4"], "kind": "citation", "text": "Designed the booking database schema and migrations in MySQL and Laravel, cutting page load from 6.5 s to 2.1 s." }
+    ]
+  },
+  {
+    "id": "web-05",
+    "title": "Junior full-stack developer, Django, Bangkok edtech startup",
+    "jd": "Junior Full-Stack Developer (Django)\nKru Online - Bangkok\n\nAbout us\nKru Online runs live and recorded tutoring for Thai high-school students. More than 400,000 learners use our platform to prepare for university entrance exams, and our engineering team of 15 is growing.\n\nThe role\nYou will work on our Django monolith, building features for students, tutors and parents. Day to day that means designing models and REST endpoints with Django REST Framework, writing server-rendered templates and small JavaScript widgets, and keeping the PostgreSQL queries behind them fast during exam season.\nYou will write automated tests for what you build and take part in code review through Git.\n\nWhat we need\nYou should be comfortable with Python and Django and know your way around HTML, CSS and JavaScript.\nYou understand how REST APIs work and have used PostgreSQL or another relational database.\nWe hire final-year students and new graduates.\n\nNice to have\nExperience with background jobs using Celery and Redis, a React frontend, Docker, or deploying to Kubernetes will help you settle in faster, but we will teach you.",
+    "expected": {
+      "required": ["Python", "Django", "PostgreSQL", "HTML", "CSS", "JavaScript", "REST", "Git", "Automated testing"],
+      "preferred": ["Celery", "Redis", "React", "Docker", "Kubernetes"]
+    },
+    "missing": ["React", "Docker", "Kubernetes"],
+    "experiences": [
+      { "id": "e1", "kind": "job", "title": "Backend Developer Intern", "org": "Kraam Insurtech", "startDate": "2025-06", "endDate": "2025-10" },
+      { "id": "e2", "kind": "project", "title": "Dorm repair request portal", "org": "Student dormitory office, Chao Mae University", "startDate": "2024-01", "endDate": "2024-05" },
+      { "id": "e3", "kind": "activity", "title": "Hackathon participant", "org": "Chao Mae University Fintech Hackathon", "startDate": "2023-11", "endDate": "2023-11" }
+    ],
+    "facts": [
+      { "id": "f1", "experienceId": "e1", "did": "Built Django REST Framework endpoints for insurance claim status lookup", "result": "Replaced a manual email process handling about 300 requests a week", "tech": ["Django", "Python", "PostgreSQL"] },
+      { "id": "f2", "experienceId": "e1", "did": "Wrote tests for the claims module", "result": "Coverage rose from 40% to 81%", "tech": ["pytest", "Python"] },
+      { "id": "f3", "experienceId": "e1", "did": "Moved PDF report generation into a background job", "result": "Request time dropped from 12 s to 0.4 s", "tech": ["Celery", "Redis"] },
+      { "id": "f4", "experienceId": "e2", "did": "Built a dorm repair request portal with role-based login for students and staff", "result": "Handled 520 requests in its first term", "tech": ["Django", "HTML", "CSS", "JavaScript", "SQLite"] },
+      { "id": "f5", "experienceId": "e3", "did": "Built a budgeting chatbot prototype in 36 hours with 2 teammates", "result": "2nd place out of 22 teams", "tech": ["Python", "Flask"] }
+    ],
+    "gold": [
+      { "experienceId": "e1", "factIds": ["f3"], "text": "Cut PDF report request time from 12 s to 0.4 s by moving report generation into a Celery background job backed by Redis." },
+      { "experienceId": "e1", "factIds": ["f2"], "text": "Raised claims module test coverage from 40% to 81% by writing pytest tests in Python." },
+      { "experienceId": "e2", "factIds": ["f4"], "text": "Built a Django repair request portal with role-based login for students and staff that handled 520 requests in its first term." }
+    ],
+    "fabricated": [
+      { "experienceId": "e1", "factIds": ["f1"], "kind": "number", "text": "Built Django REST Framework endpoints for claim status lookup, replacing a manual email process that handled about 3,000 requests a week." },
+      { "experienceId": "e1", "factIds": ["f3"], "kind": "multiplier", "text": "Tripled report throughput by moving PDF generation into a Celery background job backed by Redis." },
+      { "experienceId": "e2", "factIds": ["f4"], "kind": "tech", "text": "Built a dorm repair request portal with a React frontend and Django backend, deployed with Docker, that handled 520 requests in its first term." }
+    ]
+  },
+  {
+    "id": "web-06",
+    "title": "React Native mobile intern, Bangkok parking startup",
+    "jd": "Jodrod is a Bangkok startup that helps drivers find and pay for parking in condos, malls and office buildings.\nWe are looking for a React Native intern to join our mobile squad for a full semester.\n\nYou will build new screens in our React Native app, which is written in TypeScript.\nYou will connect those screens to our REST APIs for bookings, payments and parking-lot availability.\nYou will also fix bugs reported by drivers and help improve app start-up time.\nLater in the internship you will help us add push notifications for booking reminders.\n\nWe would like you to have solid JavaScript and TypeScript.\nYou should have built at least one React Native app yourself; a class project counts.\nYou should have experience calling REST APIs and use Git every day.\n\nIt is a plus if you have used Redux for state management, Firebase for push notifications or analytics, or Jest for unit tests.\nIf you have ever written a native module in Swift or Kotlin, tell us about it.\n\nWe offer a monthly allowance, a MacBook for the internship, and a mentor from our senior mobile team.\nTo apply, send your resume and a link to your GitHub or an app store listing.",
+    "expected": {
+      "required": ["React Native", "JavaScript", "TypeScript", "REST", "Git"],
+      "preferred": ["Redux", "Firebase", "Jest", "Swift", "Kotlin"]
+    },
+    "missing": ["Redux", "Jest", "Swift", "Kotlin"],
+    "experiences": [
+      { "id": "e1", "kind": "project", "title": "CampusRide shuttle tracker (senior project)", "org": "Northern Valley University", "startDate": "2025-08", "endDate": null },
+      { "id": "e2", "kind": "job", "title": "Freelance Mobile Developer", "org": "Noodle Corner restaurant", "startDate": "2024-10", "endDate": "2025-02" },
+      { "id": "e3", "kind": "education", "title": "B.Eng. Computer Engineering", "org": "Northern Valley University", "startDate": "2022-08", "endDate": null }
+    ],
+    "facts": [
+      { "id": "f1", "experienceId": "e1", "did": "Built a shuttle tracking app showing live bus locations on a map", "result": "Tested by 140 students in a pilot", "tech": ["React Native", "TypeScript", "Expo", "Firebase"] },
+      { "id": "f2", "experienceId": "e1", "did": "Cached the route list on the device for offline use", "result": "App start time went from 3.2 s to 1.1 s", "tech": ["React Native", "AsyncStorage"] },
+      { "id": "f3", "experienceId": "e1", "did": "Sent push notifications when a shuttle is 5 minutes away", "result": null, "tech": ["Firebase", "Expo"] },
+      { "id": "f4", "experienceId": "e2", "did": "Built an ordering app for a family restaurant", "result": "Took 45 orders a day on average in its first month", "tech": ["React Native", "JavaScript"] },
+      { "id": "f5", "experienceId": "e2", "did": "Connected the app to the restaurant's REST API for menus and order status", "result": null, "tech": ["REST", "JavaScript"] }
+    ],
+    "gold": [
+      { "experienceId": "e1", "factIds": ["f2"], "text": "Cut app start time from 3.2 s to 1.1 s by caching the shuttle route list on the device with AsyncStorage for offline use." },
+      { "experienceId": "e1", "factIds": ["f1", "f3"], "text": "Built a React Native and TypeScript shuttle tracker with live bus locations and Firebase push notifications, piloted by 140 students." },
+      { "experienceId": "e2", "factIds": ["f4"], "text": "Built a React Native ordering app for a family restaurant that took 45 orders a day on average in its first month." }
+    ],
+    "fabricated": [
+      { "experienceId": "e1", "factIds": ["f2"], "kind": "unit", "text": "Cut the app bundle from 3.2 MB to 1.1 MB by caching the shuttle route list on the device." },
+      { "experienceId": "e2", "factIds": ["f4"], "kind": "citation", "text": "Built a React Native ordering app for a family restaurant, tested by 140 students in a pilot." },
+      { "experienceId": "e2", "factIds": ["f5"], "kind": "tech", "text": "Connected the ordering app to the restaurant's REST API and managed menu and order state with Redux." }
+    ]
+  },
+  {
+    "id": "web-07",
+    "title": "Junior Flutter developer, Bangkok health-tech startup",
+    "jd": "Junior Flutter Developer\nPhakwan Health, Bangkok (on-site 3 days a week)\n\nPhakwan Health helps people with diabetes log meals, track glucose and chat with nutritionists. Our app holds a 4.8-star rating with over 600,000 downloads.\n\nWHAT YOU'LL DO\n* Build new features in our Flutter app for Android and iOS\n* Work with designers to turn Figma files into polished screens\n* Connect screens to our REST APIs and Firebase services\n* Write widget and unit tests for your code\n\nWHAT WE NEED\n* Final-year student or graduate within the last year\n* Flutter and Dart, with at least one app you built\n* Experience with REST APIs\n* Firebase (Auth, Firestore or Cloud Messaging)\n* Git\n\nBONUS\n* State management with Riverpod or Bloc\n* Automated testing in Flutter\n* CI/CD for mobile apps\n* Some native Android (Kotlin) or iOS (Swift) experience",
+    "expected": {
+      "required": ["Flutter", "Dart", "REST", "Firebase", "Git"],
+      "preferred": ["Figma", "Riverpod", "Bloc", "Automated testing", "CI/CD", "Kotlin", "Swift"]
+    },
+    "missing": ["Firebase", "REST", "Bloc", "CI/CD"],
+    "experiences": [
+      { "id": "e1", "kind": "job", "title": "Flutter Developer Intern", "org": "Mekong Fintech Studio", "startDate": "2025-06", "endDate": "2025-10" },
+      { "id": "e2", "kind": "project", "title": "Streakly habit tracker", "org": "Personal project", "startDate": "2024-04", "endDate": "2024-08" },
+      { "id": "e3", "kind": "activity", "title": "Workshop Lead", "org": "Mobile Dev Club, Chao Mae University", "startDate": "2023-09", "endDate": "2024-03" }
+    ],
+    "facts": [
+      { "id": "f1", "experienceId": "e1", "did": "Built the bill payment screens for a wallet app from Figma designs", "result": "Shipped to the Play Store and App Store", "tech": ["Flutter", "Dart", "Figma"] },
+      { "id": "f2", "experienceId": "e1", "did": "Wrote widget tests for the payment flow", "result": "Covered 23 screens and caught a currency rounding bug before release", "tech": ["Flutter", "Dart"] },
+      { "id": "f3", "experienceId": "e1", "did": "Replaced setState with Riverpod in the transfer feature", "result": "Rebuilds on the transfer screen went from 30 to 6 per interaction", "tech": ["Riverpod"] },
+      { "id": "f4", "experienceId": "e2", "did": "Built a habit tracker with local reminders and streak charts", "result": "Published on Google Play with 1,050 downloads", "tech": ["Flutter", "Dart", "SQLite"] },
+      { "id": "f5", "experienceId": "e3", "did": "Ran 3 beginner Flutter workshops", "result": "About 90 attendees in total", "tech": ["Flutter"] }
+    ],
+    "gold": [
+      { "experienceId": "e1", "factIds": ["f3"], "text": "Cut widget rebuilds on the transfer screen from 30 to 6 per interaction by replacing setState with Riverpod." },
+      { "experienceId": "e1", "factIds": ["f2"], "text": "Wrote Flutter widget tests covering 23 payment-flow screens, catching a currency rounding bug before release." },
+      { "experienceId": "e2", "factIds": ["f4"], "text": "Published a Flutter and Dart habit tracker with local reminders and streak charts on Google Play, reaching 1,050 downloads." }
+    ],
+    "fabricated": [
+      { "experienceId": "e2", "factIds": ["f4"], "kind": "number", "text": "Published a Flutter habit tracker on Google Play that reached 10,500 downloads and a 4.8-star rating." },
+      { "experienceId": "e1", "factIds": ["f2"], "kind": "multiplier", "text": "Doubled test coverage of the payment flow by writing Flutter widget tests across 23 screens." },
+      { "experienceId": "e1", "factIds": ["f1"], "kind": "tech", "text": "Built bill payment screens from Figma designs in Flutter and wired them to Firebase for real-time balance updates." }
+    ]
+  },
+  {
+    "id": "web-08",
+    "title": "iOS engineer intern, Swift/SwiftUI, Bangkok fintech startup",
+    "jd": "iOS Engineer Intern (Swift)\nKradas Pay - Bangkok, Thonglor office\n\nAbout the role\nKradas Pay builds a bill-splitting and payment app for young professionals in Thailand. As our iOS intern you will own small features from design to release, working closely with a senior iOS engineer and our designer.\n\nYou will:\n- Build new screens in SwiftUI and maintain older UIKit screens\n- Connect the app to our REST APIs\n- Track down crashes, memory issues and slow screens using Xcode tools\n- Write unit tests with XCTest\n\nYou have:\n1. Experience building at least one iOS app in Swift\n2. Working knowledge of SwiftUI and UIKit\n3. Understanding of REST APIs and JSON\n4. Experience with Git\n\nNice to have:\n1. Combine or Swift Concurrency (async/await)\n2. Core Data or SwiftData\n3. Accessibility features such as VoiceOver and Dynamic Type\n4. CI/CD with Xcode Cloud or Fastlane",
+    "expected": {
+      "required": ["Swift", "SwiftUI", "UIKit", "REST", "Git"],
+      "preferred": ["Xcode", "XCTest", "Combine", "Core Data", "accessibility", "CI/CD"]
+    },
+    "missing": ["REST", "Combine", "CI/CD"],
+    "experiences": [
+      { "id": "e1", "kind": "job", "title": "iOS Developer Intern", "org": "Doi Software House", "startDate": "2025-06", "endDate": "2025-09" },
+      { "id": "e2", "kind": "project", "title": "LeafNote plant care app", "org": "Personal project", "startDate": "2024-07", "endDate": "2025-01" },
+      { "id": "e3", "kind": "education", "title": "B.Sc. Computer Science", "org": "Northern Valley University", "startDate": "2023-08", "endDate": null }
+    ],
+    "facts": [
+      { "id": "f1", "experienceId": "e1", "did": "Rebuilt the settings and profile screens in SwiftUI", "result": "Removed about 1,400 lines of UIKit code", "tech": ["SwiftUI", "Swift", "UIKit"] },
+      { "id": "f2", "experienceId": "e1", "did": "Fixed a memory leak in the image gallery found with Instruments", "result": "Peak memory fell from 380 MB to 150 MB", "tech": ["Swift", "Xcode", "Instruments"] },
+      { "id": "f3", "experienceId": "e1", "did": "Wrote unit tests for the login view model", "result": "18 tests added", "tech": ["XCTest"] },
+      { "id": "f4", "experienceId": "e2", "did": "Built a plant care reminder app with local notifications and a photo journal", "result": "Released on TestFlight to 40 testers", "tech": ["SwiftUI", "Core Data"] },
+      { "id": "f5", "experienceId": "e2", "did": "Added VoiceOver labels and Dynamic Type support to all screens", "result": null, "tech": ["SwiftUI"] }
+    ],
+    "gold": [
+      { "experienceId": "e1", "factIds": ["f2"], "text": "Cut peak memory in the image gallery from 380 MB to 150 MB by tracking down and fixing a memory leak with Xcode Instruments." },
+      { "experienceId": "e1", "factIds": ["f1"], "text": "Rebuilt the settings and profile screens in SwiftUI, removing about 1,400 lines of UIKit code." },
+      { "experienceId": "e2", "factIds": ["f4", "f5"], "text": "Built a SwiftUI and Core Data plant care app with local notifications, VoiceOver labels and Dynamic Type support, released on TestFlight to 40 testers." }
+    ],
+    "fabricated": [
+      { "experienceId": "e1", "factIds": ["f2"], "kind": "unit", "text": "Cut image gallery load time from 380 ms to 150 ms by fixing a memory leak found with Instruments." },
+      { "experienceId": "e2", "factIds": ["f5"], "kind": "citation", "text": "Added VoiceOver labels and Dynamic Type support to every screen and covered the app with 18 XCTest unit tests." },
+      { "experienceId": "e1", "factIds": ["f3"], "kind": "multiplier", "text": "Doubled unit test coverage of the login view model by adding 18 XCTest tests." }
+    ]
+  },
+  {
+    "id": "web-09",
+    "title": "Graduate Angular frontend developer, Thai bank",
+    "jd": "Graduate Frontend Developer - Angular\nChaophraya Union Bank, Digital Banking Division (Bangkok, Silom)\n\nOur Digital Banking Division builds the internet banking and internal operations portals used by more than 8 million retail customers and 6,000 branch staff. We run Angular on the front end with Java services behind it and target 99.95% availability.\n\nKey Responsibilities\n1. Develop and maintain Angular modules for internal banking portals\n2. Build complex forms with validation that follow the bank's UX guidelines\n3. Integrate with REST APIs provided by backend teams\n4. Write unit tests and take part in code review\n5. Work in two-week Scrum sprints with product owners and QA\n\nQualifications\n1. Bachelor's degree in Computer Science, Computer Engineering or a related field (new graduates welcome)\n2. Experience with Angular and TypeScript\n3. Good knowledge of HTML and CSS\n4. Understanding of REST APIs\n5. Familiar with Git\n\nAdvantages\n1. RxJS\n2. Java or Spring Boot exposure\n3. Unit testing with Jasmine/Karma or Jest\n4. CI/CD tools such as Jenkins\n5. Awareness of web accessibility standards",
+    "expected": {
+      "required": ["Angular", "TypeScript", "HTML", "CSS", "REST", "Git"],
+      "preferred": ["Scrum", "RxJS", "Java", "Spring Boot", "Jasmine", "Karma", "Jest", "CI/CD", "Jenkins", "accessibility"]
+    },
+    "missing": ["Java", "Spring Boot", "Jenkins", "CI/CD"],
+    "experiences": [
+      { "id": "e1", "kind": "job", "title": "IT Intern, Digital Channels", "org": "Phrae Cooperative Savings", "startDate": "2025-06", "endDate": "2025-10" },
+      { "id": "e2", "kind": "project", "title": "Course registration dashboard", "org": "Faculty of Science office, Chao Mae University", "startDate": "2024-08", "endDate": "2024-12" },
+      { "id": "e3", "kind": "education", "title": "B.Sc. Computer Science", "org": "Chao Mae University", "startDate": "2022-08", "endDate": "2026-05" }
+    ],
+    "facts": [
+      { "id": "f1", "experienceId": "e1", "did": "Built an internal loan application review screen with reactive forms and validation", "result": "Review time per application dropped from about 15 minutes to 6 minutes", "tech": ["Angular", "TypeScript", "RxJS"] },
+      { "id": "f2", "experienceId": "e1", "did": "Wrote unit tests for the form validators", "result": "32 test cases added", "tech": ["Jasmine", "Karma"] },
+      { "id": "f3", "experienceId": "e1", "did": "Worked in two-week sprints with daily stand-ups and sprint reviews", "result": null, "tech": ["Scrum", "Jira"] },
+      { "id": "f4", "experienceId": "e2", "did": "Built a course registration dashboard that pulls data from a REST API", "result": "Used by 3 faculty staff to track 2,300 enrollments", "tech": ["Angular", "TypeScript", "REST", "Chart.js"] },
+      { "id": "f5", "experienceId": "e2", "did": "Made the dashboard keyboard-navigable and fixed color contrast issues", "result": "Lighthouse accessibility score went from 71 to 96", "tech": ["HTML", "CSS"] }
+    ],
+    "gold": [
+      { "experienceId": "e1", "factIds": ["f1"], "text": "Cut loan application review time from about 15 minutes to 6 minutes by building an Angular review screen with reactive forms, validation and RxJS." },
+      { "experienceId": "e2", "factIds": ["f5"], "text": "Raised the dashboard's Lighthouse accessibility score from 71 to 96 by adding keyboard navigation and fixing color contrast issues in HTML and CSS." },
+      { "experienceId": "e2", "factIds": ["f4"], "text": "Built an Angular and TypeScript course registration dashboard on a REST API that 3 faculty staff use to track 2,300 enrollments." }
+    ],
+    "fabricated": [
+      { "experienceId": "e1", "factIds": ["f1"], "kind": "number", "text": "Cut loan application review time by 75% by building an Angular review screen with reactive forms and validation." },
+      { "experienceId": "e1", "factIds": ["f2"], "kind": "tech", "text": "Wrote 32 unit test cases for the form validators in Jasmine and Karma and ran them in a Jenkins CI pipeline." },
+      { "experienceId": "e1", "factIds": ["f3"], "kind": "citation", "text": "Worked in two-week Scrum sprints and raised the Lighthouse accessibility score from 71 to 96." }
+    ]
+  },
+  {
+    "id": "web-10",
+    "title": "Junior design engineer, Figma + React, remote scheduling SaaS",
+    "jd": "Design Engineer (Junior) - Remote\nFernway\n\nFernway makes scheduling software for clinics and studios, with customers in 30 countries. Our design system is used by 40 engineers across 6 product squads, and we are hiring our first junior design engineer to help it grow.\n\nWhat you'll do\nYou will sit between design and engineering. Some weeks you will be in Figma refining components and tokens with our designers; other weeks you will be building those same components in React and TypeScript, documenting them in Storybook and making sure they work for keyboard and screen-reader users.\nYou will also prototype new interaction ideas quickly, so the team can test them with real customers before committing to a full build.\n\nWhat we're looking for\nStrong Figma skills, including auto layout, variants and design tokens.\nSolid HTML and CSS, plus working experience with React and TypeScript.\nA real interest in accessibility; you should know what WCAG asks for.\nA portfolio that shows both design work and shipped code.\n\nBonus\nTailwind CSS, Framer Motion or Next.js experience.\nUsability testing experience is welcome too.",
+    "expected": {
+      "required": ["Figma", "HTML", "CSS", "React", "TypeScript", "accessibility", "design tokens"],
+      "preferred": ["Storybook", "prototyping", "Tailwind CSS", "Framer Motion", "Next.js", "usability testing"]
+    },
+    "missing": ["Tailwind CSS", "Framer Motion", "Next.js"],
+    "experiences": [
+      { "id": "e1", "kind": "job", "title": "UX/UI Design Intern", "org": "Tonkla Studio", "startDate": "2024-06", "endDate": "2024-09" },
+      { "id": "e2", "kind": "activity", "title": "Design Lead", "org": "Northern Valley University Hackathon Committee", "startDate": "2023-09", "endDate": "2024-03" },
+      { "id": "e3", "kind": "project", "title": "Club UI component library", "org": "Personal project", "startDate": "2025-01", "endDate": "2025-05" }
+    ],
+    "facts": [
+      { "id": "f1", "experienceId": "e1", "did": "Redesigned onboarding screens in Figma and ran 6 usability tests", "result": "Onboarding completion rose from 54% to 78% after the redesign", "tech": ["Figma"] },
+      { "id": "f2", "experienceId": "e1", "did": "Built a clickable prototype for a booking flow", "result": "Approved by the client in one review round", "tech": ["Figma", "ProtoPie"] },
+      { "id": "f3", "experienceId": "e3", "did": "Built a component library of 24 React components with documented variants", "result": "Reused across 3 club websites", "tech": ["React", "TypeScript", "Storybook", "CSS"] },
+      { "id": "f4", "experienceId": "e3", "did": "Defined color, spacing and type tokens and synced them from Figma to CSS variables", "result": null, "tech": ["Figma", "CSS"] },
+      { "id": "f5", "experienceId": "e2", "did": "Designed posters, website and badges for a student hackathon", "result": "Event drew 210 participants", "tech": ["Figma", "Illustrator"] },
+      { "id": "f6", "experienceId": "e3", "did": "Checked every component for keyboard focus and color contrast", "result": "All components passed WCAG AA contrast checks", "tech": ["axe DevTools"] }
+    ],
+    "gold": [
+      { "experienceId": "e1", "factIds": ["f1"], "text": "Raised onboarding completion from 54% to 78% by redesigning the onboarding screens in Figma and running 6 usability tests." },
+      { "experienceId": "e3", "factIds": ["f3"], "text": "Built a library of 24 React and TypeScript components with variants documented in Storybook, reused across 3 club websites." },
+      { "experienceId": "e3", "factIds": ["f4", "f6"], "text": "Defined color, spacing and type tokens synced from Figma to CSS variables, and verified with axe DevTools that every component passed WCAG AA contrast checks." }
+    ],
+    "fabricated": [
+      { "experienceId": "e1", "factIds": ["f1"], "kind": "multiplier", "text": "Doubled onboarding completion by redesigning the onboarding screens in Figma after 6 usability tests." },
+      { "experienceId": "e3", "factIds": ["f3"], "kind": "tech", "text": "Built 24 React components styled with Tailwind CSS and animated with Framer Motion, documented in Storybook." },
+      { "experienceId": "e3", "factIds": ["f3"], "kind": "number", "text": "Built a library of 24 React components in Storybook, reused across 8 club websites." }
+    ]
+  }
+]
