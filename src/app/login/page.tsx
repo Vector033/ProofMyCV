@@ -8,21 +8,28 @@ export const metadata: Metadata = { title: "Sign in" };
 
 export default function LoginPage() {
   return (
-    <main className="mx-auto flex w-full max-w-sm flex-1 flex-col justify-center px-4 py-16">
-      <Link href="/" className="mb-8 font-semibold tracking-tight">
-        Fact<span className="text-emerald-700">Fit</span>
-      </Link>
-      <h1 className="mb-6 text-2xl font-semibold tracking-tight">Your fact bank, your resume</h1>
-      <LoginForm />
-      {demoEmail() && (
-        <div className="mt-6 border-t border-stone-200 pt-6">
-          <DemoButton />
-          <p className="mt-2 text-xs text-stone-500">A shared account with a fictional fact bank. No sign-up needed.</p>
+    <main className="hero-glow flex flex-1 flex-col items-center justify-center px-4 py-12">
+      <div className="w-full max-w-sm">
+        <Link href="/" className="rounded-sm font-semibold tracking-tight text-stone-900">
+          Fact<span className="text-emerald-700">Fit</span>
+        </Link>
+        <h1 className="mt-8 text-2xl font-semibold tracking-tight text-stone-900">Your fact bank, your resume</h1>
+        <p className="mt-2 text-sm text-stone-600">Sign in to keep your facts and one tailored version per job.</p>
+
+        <div className="card mt-6 p-5 shadow-[0_1px_2px_rgb(28_25_23/0.04),0_12px_32px_-16px_rgb(28_25_23/0.12)]">
+          <LoginForm />
         </div>
-      )}
-      <p className="mt-6 text-xs text-stone-500">
-        FactFit stores only what you type into it. You can export or delete everything from Settings.
-      </p>
+
+        {demoEmail() && (
+          <div className="mt-6">
+            <DemoButton />
+            <p className="mt-2 text-xs text-stone-500">A shared account with a fictional fact bank. No sign-up needed.</p>
+          </div>
+        )}
+        <p className="mt-8 text-xs leading-relaxed text-stone-500">
+          FactFit stores only what you type into it. You can export or delete everything from Settings.
+        </p>
+      </div>
     </main>
   );
 }

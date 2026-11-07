@@ -6,6 +6,7 @@ import { matchRequirements } from "@/lib/core/match";
 import { getLlm } from "@/lib/llm/provider";
 import { ScoreBadge } from "@/components/score-badge";
 import { deleteApplicationAction } from "../../actions";
+import { ConfirmButton } from "@/components/confirm-button";
 import { BulletStudio } from "./bullet-studio";
 
 export const metadata: Metadata = { title: "Application" };
@@ -23,27 +24,32 @@ export default async function ApplicationPage({ params }: PageProps<"/app/applic
 
   return (
     <div className="space-y-8">
-      <header className="flex flex-wrap items-center gap-5">
-        <ScoreBadge score={report.score} size="lg" />
-        <div className="min-w-0 flex-1">
-          <h1 className="text-2xl font-semibold tracking-tight">{app.role || "Untitled role"}</h1>
-          <p className="text-stone-600">{app.company || "Company not set"}</p>
+      <header className="flex flex-wrap items-center gap-x-5 gap-y-4">
+        <ScoreBadge score={report.score} size="lg" animate />
+        <div className="min-w-[12rem] flex-1">
+          <h1 className="text-2xl font-semibold tracking-tight text-balance [overflow-wrap:anywhere]">{app.role || "Untitled role"}</h1>
+          <p className="text-stone-600 [overflow-wrap:anywhere]">{app.company || "Company not set"}</p>
           <p className="mt-1 text-xs text-stone-500">
             {report.covered} of {report.total} requirements backed by your facts · analysed by {app.analyzedBy}
           </p>
         </div>
-        <div className="flex gap-2">
+        <div className="flex w-full gap-2 sm:w-auto">
           <a href={`/app/applications/${app.id}/pdf`} className="btn-primary">
             Export PDF
           </a>
           <form action={deleteApplicationAction.bind(null, app.id)}>
-            <button className="btn">Delete</button>
+            <ConfirmButton
+              confirm={`Delete the application for ${app.role || "this role"}? Its saved bullets cannot be recovered.`}
+              className="btn text-red-700 hover:border-red-300 hover:bg-red-50"
+            >
+              Delete
+            </ConfirmButton>
           </form>
         </div>
       </header>
 
-      <section className="grid gap-4 lg:grid-cols-2">
-        <div className="card p-5">
+      <section className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+        <div className="card min-w-0 p-5">
           <h2 className="font-medium">Backed by your facts</h2>
           {covered.length === 0 && <p className="mt-3 text-sm text-stone-500">No matches yet.</p>}
           <ul className="mt-3 space-y-3">
@@ -52,7 +58,7 @@ export default async function ApplicationPage({ params }: PageProps<"/app/applic
                 <RequirementName requirement={m.requirement} tone="ok" />
                 <ul className="mt-1 space-y-0.5 pl-4 text-xs text-stone-600">
                   {m.factIds.slice(0, 3).map((fid) => (
-                    <li key={fid} className="truncate">
+                    <li key={fid} className="line-clamp-2 [overflow-wrap:anywhere]">
                       ↳ {factById.get(fid)?.did}
                     </li>
                   ))}
@@ -63,7 +69,7 @@ export default async function ApplicationPage({ params }: PageProps<"/app/applic
           </ul>
         </div>
 
-        <div className="space-y-4">
+        <div className="min-w-0 space-y-4">
           <div className="card p-5">
             <h2 className="font-medium">Not in your fact bank</h2>
             {missing.length === 0 ? (
@@ -78,7 +84,7 @@ export default async function ApplicationPage({ params }: PageProps<"/app/applic
                   ))}
                 </ul>
                 <p className="mt-3 text-xs text-stone-500">
-                  If you really have done one of these, <Link href="/app/facts" className="underline">add it as a fact</Link>.
+                  If you really have done one of these, <Link href="/app/facts" className="font-medium text-stone-700 underline underline-offset-2">add it as a fact</Link>.
                   Otherwise leave it out. FactFit will not write it for you.
                 </p>
               </>
@@ -87,7 +93,7 @@ export default async function ApplicationPage({ params }: PageProps<"/app/applic
           {app.analysis.problems.length > 0 && (
             <div className="card p-5">
               <h2 className="font-medium">What they want solved</h2>
-              <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-stone-700">
+              <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-stone-700 [overflow-wrap:anywhere]">
                 {app.analysis.problems.map((p) => (
                   <li key={p}>{p}</li>
                 ))}
@@ -115,11 +121,13 @@ function RequirementName({
   requirement: { name: string; importance: "required" | "preferred" };
   tone: "ok" | "missing";
 }) {
-  const colour = tone === "ok" ? "bg-emerald-50 text-emerald-800" : "bg-red-50 text-red-800";
+  // A missing skill is a gap, not an error: dashed and neutral, never red.
+  const colour =
+    tone === "ok" ? "bg-emerald-50 text-emerald-900 ring-1 ring-emerald-600/15" : "border border-dashed border-stone-300 bg-white text-stone-700";
   return (
-    <span className={`inline-flex items-center gap-1.5 rounded px-2 py-0.5 text-sm ${colour}`}>
+    <span className={`inline-flex max-w-full items-center gap-1.5 rounded-md px-2 py-0.5 text-sm [overflow-wrap:anywhere] ${colour}`}>
       {r.name}
-      {r.importance === "preferred" && <span className="text-[10px] uppercase opacity-70">nice to have</span>}
+      {r.importance === "preferred" && <span className="text-[10px] tracking-wide text-stone-500 uppercase">nice to have</span>}
     </span>
   );
 }

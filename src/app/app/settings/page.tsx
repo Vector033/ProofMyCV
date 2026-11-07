@@ -43,9 +43,20 @@ export default async function SettingsPage() {
         <form action={deleteAccountAction} className="mt-4 flex flex-wrap items-end gap-3">
           <label className="block">
             <span className="label">Type &quot;delete&quot; to confirm</span>
-            <input name="confirm" required pattern="delete" className="input" autoComplete="off" />
+            <input
+              name="confirm"
+              required
+              pattern="\s*[Dd][Ee][Ll][Ee][Tt][Ee]\s*"
+              title="Type the word delete"
+              aria-describedby="delete-hint"
+              className="input"
+              autoComplete="off"
+            />
+            <span id="delete-hint" className="hint">
+              Type the word delete. Download your data first if you want a copy.
+            </span>
           </label>
-          <button className="inline-flex rounded-md bg-red-700 px-4 py-2 text-sm font-medium text-white hover:bg-red-800">
+          <button className="press inline-flex min-h-10 items-center rounded-md bg-red-700 px-4 text-sm font-medium text-white hover:bg-red-800">
             Delete my data
           </button>
         </form>

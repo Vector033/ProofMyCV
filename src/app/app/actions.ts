@@ -105,7 +105,7 @@ export async function deleteFactAction(factId: string) {
 
 // ---------- applications ----------
 
-export type FormState = { error?: string };
+export type FormState = { error?: string; values?: Record<string, string> };
 
 const applicationSchema = z.object({
   company: text(120),
@@ -114,8 +114,10 @@ const applicationSchema = z.object({
 });
 
 export async function createApplicationAction(_prev: FormState, fd: FormData): Promise<FormState> {
-  const parsed = applicationSchema.safeParse(form(fd));
-  if (!parsed.success) return { error: parsed.error.issues[0].message };
+  const values = form(fd);
+  const parsed = applicationSchema.safeParse(values);
+  // Hand the typed values back on error: React resets the form after an action.
+  if (!parsed.success) return { error: parsed.error.issues[0].message, values };
   const { company, role, jdText } = parsed.data;
 
   let llm = getLlm();
@@ -128,7 +130,8 @@ export async function createApplicationAction(_prev: FormState, fd: FormData): P
   try {
     analysis = await analyzeJob(llm, jdText);
   } catch (e) {
-    return { error: e instanceof LlmError ? `The model failed: ${e.message}` : "Could not analyse the job." };
+    console.error("analyzeJob failed", e instanceof LlmError ? e.message : e);
+    return { error: "The AI could not analyse this posting just now. Your text is still here; try again in a minute.", values };
   }
   const bank = await data.getFactBank();
   const id = await data.createApplication({
@@ -164,7 +167,8 @@ export async function generateBulletsAction(applicationId: string): Promise<Gene
   try {
     return { candidates: await draftBullets(llm, app.analysis, bank.experiences, bank.facts) };
   } catch (e) {
-    return { error: e instanceof LlmError ? `The model failed: ${e.message}` : "Generation failed." };
+    console.error("draftBullets failed", e instanceof LlmError ? e.message : e);
+    return { error: "AI drafting failed just now. Try again in a minute, or add your facts as written below." };
   }
 }
 
@@ -180,7 +184,7 @@ const bulletsSchema = z
 
 export async function saveBulletsAction(applicationId: string, bullets: unknown): Promise<FormState> {
   const parsed = bulletsSchema.safeParse(bullets);
-  if (!parsed.success) return { error: "Invalid bullets." };
+  if (!parsed.success) return { error: "These bullets could not be saved. Reload the page and try again." };
   const bank = await data.getFactBank();
   // The guard runs again here: the client's verdict is never trusted.
   for (const b of parsed.data) {
@@ -208,7 +212,7 @@ export async function signOutAction() {
  */
 export async function deleteAccountAction(fd: FormData) {
   const user = await requireUser();
-  if (form(fd).confirm !== "delete" || isDemoUser(user.email)) return;
+  if (form(fd).confirm?.trim().toLowerCase() !== "delete" || isDemoUser(user.email)) return;
   await data.deleteAllMyData();
   const supabase = await createClient();
   await supabase.auth.signOut();

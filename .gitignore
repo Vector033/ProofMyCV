@@ -43,3 +43,7 @@ next-env.d.ts
 
 .vercel
 .env*
+
+# local design-hook config
+.impeccable/
+.playwright-mcp/

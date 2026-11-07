@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState, useTransition } from "react";
+import { useEffect, useMemo, useState, useTransition } from "react";
 import { checkBullet, describeViolation } from "@/lib/core/guard";
 import { factAsBullet } from "@/lib/core/bullets";
 import type { BulletDraft, Experience, Fact } from "@/lib/core/types";
@@ -20,22 +20,44 @@ export function BulletStudio({ applicationId, experiences, facts, initialBullets
   const [candidates, setCandidates] = useState<BulletCandidate[]>([]);
   const [status, setStatus] = useState<{ tone: "ok" | "error"; text: string } | null>(null);
   const [dirty, setDirty] = useState(false);
+  const [removed, setRemoved] = useState<{ bullet: BulletDraft; index: number } | null>(null);
   const [generating, startGenerating] = useTransition();
   const [saving, startSaving] = useTransition();
 
   // The same guard the server runs on save, run live while the user edits.
   const checks = useMemo(() => bullets.map((b) => checkBullet(b, facts, experiences)), [bullets, facts, experiences]);
-  const blocked = checks.some((c) => !c.ok);
+  const blockedCount = checks.filter((c) => !c.ok).length;
+  const blocked = blockedCount > 0;
   const factById = useMemo(() => new Map(facts.map((f) => [f.id, f])), [facts]);
+
+  // Unsaved edits would be lost on leaving; let the browser ask first.
+  useEffect(() => {
+    if (!dirty) return;
+    const warn = (e: BeforeUnloadEvent) => e.preventDefault();
+    window.addEventListener("beforeunload", warn);
+    return () => window.removeEventListener("beforeunload", warn);
+  }, [dirty]);
 
   const update = (next: BulletDraft[]) => {
     setBullets(next);
     setDirty(true);
     setStatus(null);
+    setRemoved(null);
   };
+  const has = (text: string) => bullets.some((x) => x.text === text);
   const add = (b: BulletDraft) => {
-    if (bullets.some((x) => x.text === b.text)) return;
+    if (has(b.text)) return;
     update([...bullets, { experienceId: b.experienceId, text: b.text, factIds: b.factIds }]);
+  };
+  const remove = (i: number) => {
+    update(bullets.filter((_, k) => k !== i));
+    setRemoved({ bullet: bullets[i], index: i });
+  };
+  const undoRemove = () => {
+    if (!removed) return;
+    const next = [...bullets];
+    next.splice(removed.index, 0, removed.bullet);
+    update(next);
   };
   const move = (i: number, d: -1 | 1) => {
     const j = i + d;
@@ -67,58 +89,108 @@ export function BulletStudio({ applicationId, experiences, facts, initialBullets
       }
     });
 
+  const summary =
+    bullets.length === 0
+      ? "Nothing on this version yet."
+      : blocked
+        ? `${blockedCount} of ${bullets.length} blocked. Fix or remove ${blockedCount === 1 ? "it" : "them"} to save.`
+        : `${bullets.length} ${bullets.length === 1 ? "bullet" : "bullets"}, all traceable to your facts.`;
+
   return (
-    <section className="space-y-4">
-      <div className="flex flex-wrap items-center gap-3">
-        <h2 className="mr-auto text-lg font-semibold tracking-tight">Bullets for this job</h2>
-        <button onClick={generate} disabled={!canGenerate || generating} className="btn" title={canGenerate ? "" : "Set GEMINI_API_KEY to enable"}>
+    <section aria-labelledby="bullets-heading" className="space-y-4">
+      <div className="z-[5] sm:sticky sm:top-[49px] -mx-4 flex flex-wrap items-center gap-3 border-b border-stone-200/80 bg-[#fafaf9]/95 px-4 py-3 backdrop-blur-sm sm:-mx-6 sm:px-6">
+        <div className="mr-auto min-w-0">
+          <h2 id="bullets-heading" className="text-lg font-semibold tracking-tight">
+            Bullets for this job
+          </h2>
+          <p className={`text-xs tabular-nums ${blocked ? "text-red-800" : "text-stone-600"}`} aria-live="polite">
+            {summary}
+            {dirty && !blocked && bullets.length > 0 && " Save to include these edits in the PDF."}
+          </p>
+        </div>
+        <button onClick={generate} disabled={!canGenerate || generating} className="btn">
           {generating ? "Drafting…" : "Draft with AI"}
         </button>
         <button onClick={save} disabled={!dirty || blocked || saving} className="btn-primary">
           {saving ? "Saving…" : dirty ? "Save version" : "Saved"}
         </button>
       </div>
+      {!canGenerate && (
+        <p className="text-xs text-stone-500">AI drafting is off on this server. Add facts as written, then reword them.</p>
+      )}
       {status && (
-        <p className={`text-sm ${status.tone === "error" ? "text-red-700" : "text-emerald-800"}`}>{status.text}</p>
+        <p
+          role={status.tone === "error" ? "alert" : "status"}
+          className={`rounded-md px-3 py-2 text-sm ${status.tone === "error" ? "bg-red-50 text-red-800" : "bg-emerald-50 text-emerald-900"}`}
+        >
+          {status.text}
+        </p>
+      )}
+      {removed && (
+        <p role="status" className="flex flex-wrap items-center gap-3 rounded-md bg-stone-100 px-3 py-2 text-sm text-stone-700">
+          Bullet removed.
+          <button onClick={undoRemove} className="font-medium text-stone-900 underline underline-offset-2">
+            Undo
+          </button>
+        </p>
       )}
 
-      <div className="grid gap-4 lg:grid-cols-[1fr_1fr]">
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
         {/* Left: the resume version being built */}
-        <div className="space-y-4">
+        <div className="min-w-0 space-y-4">
+          <p className="eyebrow">This version</p>
           {experiences.map((e) => {
             const rows = bullets.map((b, i) => ({ b, i })).filter(({ b }) => b.experienceId === e.id);
             return (
               <div key={e.id} className="card p-4">
-                <p className="text-sm font-medium">
-                  {e.title} <span className="font-normal text-stone-500">· {e.org}</span>
+                <p className="text-sm font-medium text-stone-900 [overflow-wrap:anywhere]">
+                  {e.title} {e.org && <span className="font-normal text-stone-500">· {e.org}</span>}
                 </p>
-                {rows.length === 0 && <p className="mt-2 text-xs text-stone-400">Not on this version.</p>}
-                <ul className="mt-2 space-y-2">
-                  {rows.map(({ b, i }) => {
+                {rows.length === 0 && <p className="mt-2 text-xs text-stone-500">Not on this version.</p>}
+                <ul className="mt-3 space-y-2">
+                  {rows.map(({ b, i }, k) => {
                     const check = checks[i];
                     return (
-                      <li key={i} className={`rounded-md border p-2 ${check.ok ? "border-stone-200" : "border-red-300 bg-red-50/50"}`}>
+                      <li
+                        key={i}
+                        className={`rounded-lg border p-3 transition-colors duration-150 ${
+                          check.ok
+                            ? "border-stone-200 focus-within:border-emerald-700 focus-within:ring-2 focus-within:ring-emerald-700/15"
+                            : "border-red-300 bg-red-50/40 focus-within:ring-2 focus-within:ring-red-600/15"
+                        }`}
+                      >
                         <textarea
                           value={b.text}
                           rows={2}
-                          onChange={(ev) => update(bullets.map((x, k) => (k === i ? { ...x, text: ev.target.value } : x)))}
-                          className="w-full resize-y bg-transparent text-sm outline-none"
-                          aria-label="Bullet text"
+                          onChange={(ev) => update(bullets.map((x, n) => (n === i ? { ...x, text: ev.target.value } : x)))}
+                          className="w-full resize-y bg-transparent text-base leading-relaxed text-stone-900 [field-sizing:content] focus:outline-none focus-visible:outline-none sm:text-sm"
+                          aria-label={`Bullet ${k + 1} for ${e.title}`}
+                          aria-invalid={!check.ok}
+                          aria-describedby={check.ok ? undefined : `bullet-${i}-problems`}
                         />
-                        <div className="flex flex-wrap items-center gap-2 text-xs">
+                        <div className="mt-1 flex flex-wrap items-center gap-2 text-xs">
                           <GuardBadge ok={check.ok} />
                           <span className="text-stone-500">
                             cites {b.factIds.length} fact{b.factIds.length === 1 ? "" : "s"}
                           </span>
-                          <span className="ml-auto flex gap-1">
-                            <button onClick={() => move(i, -1)} className="btn-danger text-stone-600" aria-label="Move up">↑</button>
-                            <button onClick={() => move(i, 1)} className="btn-danger text-stone-600" aria-label="Move down">↓</button>
-                            <button onClick={() => update(bullets.filter((_, k) => k !== i))} className="btn-danger">
+                          <span className="ml-auto flex gap-0.5">
+                            <button onClick={() => move(i, -1)} disabled={k === 0} className="btn-ghost" aria-label={`Move bullet ${k + 1} up`}>
+                              <Arrow up />
+                            </button>
+                            <button
+                              onClick={() => move(i, 1)}
+                              disabled={k === rows.length - 1}
+                              className="btn-ghost"
+                              aria-label={`Move bullet ${k + 1} down`}
+                            >
+                              <Arrow />
+                            </button>
+                            <button onClick={() => remove(i)} className="btn-danger" aria-label={`Remove bullet ${k + 1}`}>
                               Remove
                             </button>
                           </span>
                         </div>
-                        <Problems check={check} />
+                        <Problems check={check} id={`bullet-${i}-problems`} />
                       </li>
                     );
                   })}
@@ -126,30 +198,33 @@ export function BulletStudio({ applicationId, experiences, facts, initialBullets
               </div>
             );
           })}
-          {experiences.length === 0 && <p className="text-sm text-stone-500">Add experience to your fact bank first.</p>}
+          {experiences.length === 0 && <p className="text-sm text-stone-600">Add experience to your fact bank first.</p>}
         </div>
 
         {/* Right: sources to add from */}
-        <div className="space-y-4">
+        <div className="min-w-0 space-y-4">
+          <p className="eyebrow">Add from</p>
           {candidates.length > 0 && (
             <div className="card p-4">
-              <p className="text-sm font-medium">AI drafts</p>
-              <ul className="mt-2 space-y-2">
+              <p className="text-sm font-medium text-stone-900">AI drafts</p>
+              <ul className="mt-3 space-y-2">
                 {candidates.map((c, i) => (
-                  <li key={i} className={`rounded-md border p-2 text-sm ${c.guard.ok ? "border-stone-200" : "border-red-200 bg-red-50/60"}`}>
-                    <p className={c.guard.ok ? "" : "text-stone-500 line-through decoration-red-400"}>{c.text}</p>
-                    <ul className="mt-1 text-xs text-stone-500">
+                  <li key={i} className={`rounded-lg border p-3 text-sm ${c.guard.ok ? "border-stone-200" : "border-red-200 bg-red-50/50"}`}>
+                    <p className={`leading-relaxed ${c.guard.ok ? "text-stone-900" : "text-stone-500 line-through decoration-red-400"}`}>
+                      {c.text}
+                    </p>
+                    <ul className="mt-1.5 space-y-0.5 text-xs text-stone-500">
                       {c.factIds.map((id) => (
-                        <li key={id} className="truncate">
+                        <li key={id} className="line-clamp-2 [overflow-wrap:anywhere]">
                           ↳ {factById.get(id)?.did ?? `unknown fact ${id}`}
                         </li>
                       ))}
                     </ul>
-                    <div className="mt-1 flex items-center gap-2 text-xs">
+                    <div className="mt-2 flex items-center gap-2 text-xs">
                       <GuardBadge ok={c.guard.ok} />
                       {c.guard.ok && (
-                        <button onClick={() => add(c)} className="ml-auto btn">
-                          Add
+                        <button onClick={() => add(c)} disabled={has(c.text)} className="btn btn-sm ml-auto">
+                          {has(c.text) ? "Added" : "Add"}
                         </button>
                       )}
                     </div>
@@ -161,17 +236,20 @@ export function BulletStudio({ applicationId, experiences, facts, initialBullets
           )}
 
           <div className="card p-4">
-            <p className="text-sm font-medium">Your facts, as written</p>
-            <p className="text-xs text-stone-500">Always safe. Add one, then reword it on the left; the guard keeps checking.</p>
-            <ul className="mt-2 space-y-1">
-              {facts.map((f) => (
-                <li key={f.id} className="flex items-start gap-2 text-sm">
-                  <span className="min-w-0 flex-1 text-stone-700">{factAsBullet(f).text}</span>
-                  <button onClick={() => add(factAsBullet(f))} className="btn shrink-0 px-2 py-0.5 text-xs">
-                    Add
-                  </button>
-                </li>
-              ))}
+            <p className="text-sm font-medium text-stone-900">Your facts, as written</p>
+            <p className="mt-0.5 text-xs text-stone-500">Always safe. Add one, then reword it on the left; the guard keeps checking.</p>
+            <ul className="mt-3 divide-y divide-stone-100">
+              {facts.map((f) => {
+                const draft = factAsBullet(f);
+                return (
+                  <li key={f.id} className="flex items-start gap-3 py-2.5 text-sm">
+                    <span className="min-w-0 flex-1 leading-relaxed text-stone-700 [overflow-wrap:anywhere]">{draft.text}</span>
+                    <button onClick={() => add(draft)} disabled={has(draft.text)} className="btn btn-sm shrink-0">
+                      {has(draft.text) ? "Added" : "Add"}
+                    </button>
+                  </li>
+                );
+              })}
             </ul>
           </div>
         </div>
@@ -180,25 +258,37 @@ export function BulletStudio({ applicationId, experiences, facts, initialBullets
   );
 }
 
-function GuardBadge({ ok }: { ok: boolean }) {
-  return ok ? (
-    <span className="rounded bg-emerald-100 px-1.5 py-0.5 font-medium text-emerald-800">✓ traceable</span>
-  ) : (
-    <span className="rounded bg-red-100 px-1.5 py-0.5 font-medium text-red-800">✕ blocked</span>
+function Arrow({ up = false }: { up?: boolean }) {
+  return (
+    <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden className={`fill-none stroke-current stroke-2 ${up ? "" : "rotate-180"}`}>
+      <path d="M6 10V2M2.5 5.5L6 2l3.5 3.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
   );
 }
 
-function Problems({ check }: { check: ReturnType<typeof checkBullet> }) {
+function GuardBadge({ ok }: { ok: boolean }) {
+  return ok ? (
+    <span className="inline-flex items-center rounded-full bg-emerald-50 px-2 py-0.5 font-medium text-emerald-800 ring-1 ring-emerald-600/20">
+      ✓ Traceable
+    </span>
+  ) : (
+    <span className="inline-flex items-center rounded-full bg-red-50 px-2 py-0.5 font-medium text-red-800 ring-1 ring-red-600/20">
+      ✕ Blocked
+    </span>
+  );
+}
+
+function Problems({ check, id }: { check: ReturnType<typeof checkBullet>; id?: string }) {
   if (check.violations.length === 0 && check.warnings.length === 0) return null;
   return (
-    <ul className="mt-1 space-y-0.5 text-xs">
+    <ul id={id} className="mt-2 space-y-0.5 text-xs">
       {check.violations.map((v, i) => (
-        <li key={i} className="text-red-700">
+        <li key={i} className="text-red-800">
           {describeViolation(v)}
         </li>
       ))}
       {check.warnings.map((w, i) => (
-        <li key={`w${i}`} className="text-amber-700">
+        <li key={`w${i}`} className="text-amber-800">
           {w.type === "too-long" ? `${w.words} words; aim for 30 or fewer` : `Starts with "${w.word}"; lead with what you did`}
         </li>
       ))}

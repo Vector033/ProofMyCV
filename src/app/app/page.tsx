@@ -22,9 +22,9 @@ export default async function ApplicationsPage() {
       </header>
 
       {bank.facts.length === 0 && (
-        <div className="card border-amber-200 bg-amber-50 p-5 text-sm">
+        <div className="rounded-xl border border-amber-200 bg-amber-50 p-5 text-sm text-amber-950">
           Your fact bank is empty, so nothing can match yet.{" "}
-          <Link href="/app/facts" className="font-medium underline">
+          <Link href="/app/facts" className="font-medium underline underline-offset-2">
             Add your experience first
           </Link>
           .
@@ -32,19 +32,26 @@ export default async function ApplicationsPage() {
       )}
 
       {apps.length === 0 ? (
-        <p className="text-sm text-stone-500">No applications yet. Paste a job description to start one.</p>
+        <div className="rounded-xl border border-dashed border-stone-300 px-6 py-12 text-center">
+          <p className="font-medium text-stone-900">No applications yet</p>
+          <p className="mt-1 text-sm text-stone-600">Paste a job description and FactFit checks it against your facts.</p>
+          <Link href="/app/applications/new" className="btn mt-5">
+            Paste a job description
+          </Link>
+        </div>
       ) : (
-        <ul className="card divide-y divide-stone-100">
+        <ul className="card divide-y divide-stone-100 overflow-hidden">
           {apps.map((a) => (
             <li key={a.id}>
-              <Link href={`/app/applications/${a.id}`} className="flex items-center gap-4 px-5 py-4 hover:bg-stone-50">
+              <Link href={`/app/applications/${a.id}`} className="flex items-center gap-4 px-4 py-4 transition-colors duration-150 hover:bg-stone-50 sm:px-5">
                 <ScoreBadge score={matchRequirements(a.analysis, bank.facts, bank.experiences).score} />
                 <div className="min-w-0 flex-1">
                   <p className="truncate font-medium">{a.role || "Untitled role"}</p>
                   <p className="truncate text-sm text-stone-500">{a.company || "Company not set"}</p>
                 </div>
-                <span className="text-xs text-stone-500">
-                  {a.bullets.length} bullets · {a.updatedAt.toLocaleDateString("en-GB")}
+                <span className="shrink-0 text-right text-xs text-stone-500 tabular-nums">
+                  {a.bullets.length} {a.bullets.length === 1 ? "bullet" : "bullets"}
+                  <span className="block">{a.updatedAt.toLocaleDateString("en-GB", { day: "numeric", month: "short" })}</span>
                 </span>
               </Link>
             </li>
