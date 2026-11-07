@@ -9,6 +9,19 @@ traced back to a fact you wrote. That check is plain code, not a prompt.
 **Live:** https://factfit-five.vercel.app · press **Try the demo account** to use a shared account with a fictional
 fact bank, no sign-up needed.
 
+| Landing page with the live guard demo | Bullet studio: one bullet traceable, one blocked |
+|---|---|
+| ![FactFit landing page](docs/screenshots/landing.png) | ![Bullet studio with a blocked bullet](docs/screenshots/bullet-studio.png) |
+| **Job mapping and fit score** | **Fact bank** |
+| ![Application page with fit score](docs/screenshots/application.png) | ![Fact bank page](docs/screenshots/fact-bank.png) |
+
+<p>
+  <img src="docs/screenshots/landing-mobile.png" alt="Landing page on a phone" width="240">
+  <img src="docs/screenshots/application-mobile.png" alt="Application page on a phone" width="240">
+</p>
+
+Screenshots use the fictional demo account and are regenerated with `scripts/screenshots.mjs`.
+
 ## How it works
 
 1. **Fact bank.** Per job, project or degree you write short facts: what you did, the result, the number, the tools.
@@ -39,6 +52,11 @@ fact bank, no sign-up needed.
 - A rewritten drafting prompt raised XYZ-style bullets from 31.6% to 75% (human-written: 86.7%) and cut
   copy-the-fact bullets from 66% to 6%, still with no fabrications.
 - Gemini skill extraction recall on required skills: 82.8% (rule-based fallback: 70.5%).
+- **Against a model that does make things up:** Typhoon 2.5 (via FreeLLMAPI) given a typical "make it impressive,
+  add metrics" prompt wrote 26 bullets with invented or inflated numbers ("reduced rebuilds by 80%", "98% resolution
+  rate within SLA"). The guard blocked **all 26**; the independent bait check found 3 leaks before the guard and
+  **0** after. The cost: 10 of its 45 blocks were honest paraphrases it could not verify (410 KB → 260 KB written as
+  "36%", "0.91" as "91%", "VMs" for "virtual machines").
 
 Each job gets its own saved version. You can download everything as JSON or delete your account, which cascades to all
 of your data.
@@ -93,9 +111,15 @@ extractor is used and bullets come from your facts as written. `GEMINI_MODEL` is
 (default `gemini-flash-lite-latest,gemini-flash-latest`): overloads and rate limits are retried with backoff, and a
 model that times out hands over to the next one.
 
+For local dev and evals you can route through FreeLLMAPI, an
+OpenAI-compatible router over free model tiers running at `http://127.0.0.1:31415/v1`: set `LLM_PROVIDER=freellmapi`,
+`FREELLMAPI_KEY` (the unified key from its dashboard) and optionally `FREELLMAPI_MODEL` (default `auto`). It is never
+used on Vercel, which cannot reach a local router.
+
 ```bash
 npm test          # unit tests + offline eval
 npm run test:live # calls the real Gemini API with .env.local (opt-in, never runs in CI)
+npm run eval:live -- --provider freellmapi --model typhoon-2.5-30b-a3b-instruct   # other models, local only
 npm run lint
 npm run typecheck
 ```
@@ -108,4 +132,6 @@ npm run typecheck
 - [x] Eval set: 30 tuning + 10 held-out cases measuring guard catch rate, false blocks, keyword recall and bullet length
 - [ ] Import facts from an existing resume (.docx / .pdf) for review
 - [x] Deploy (Vercel + Supabase), demo account, daily AI limit
-- [ ] Screenshots in this README
+- [x] Screenshots in this README
+- [x] Second LLM provider (OpenAI-compatible, FreeLLMAPI for local evals) and a stress test with a model that fabricates
+- [ ] Guard: accept derived percentages and common abbreviations (the false blocks above)

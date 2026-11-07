@@ -1,6 +1,6 @@
 # FactFit: ปรับ resume ให้ตรงประกาศงาน โดยไม่แต่งข้อเท็จจริง
 
-> สถานะ (2026-11-07): **deploy แล้ว** ที่ https://factfit-five.vercel.app (มีปุ่มบัญชีเดโม) · eval 30+10 held-out และ prompt XYZ v2 เสร็จ ผลอยู่ใน eval/README.md · ยังไม่มี import resume และภาพหน้าจอใน README
+> สถานะ (2026-11-07 รอบ 2): deploy แล้วที่ https://factfit-five.vercel.app · UI redesign ตาม CLAUDE_DESIGN_GUIDE.md (landing มี guard demo จริง, score ring, confirm ลบ) + ภาพหน้าจอใน README (`scripts/screenshots.mjs`) · provider ตัวที่สอง FreeLLMAPI (`LLM_PROVIDER=freellmapi`, local เท่านั้น) + stress test `--prompt loose` ผลใน eval/README.md · ยังไม่มี import resume · guard ยังบล็อกผิดกับ % ที่คำนวณได้และตัวย่อ
 >
 > Production: Supabase project เดียวกับ HarnKan/SlipJot (ref ddyjypurrrzasbtfwncs) แยก schema `factfit` · ค่า production อยู่ใน `.env.vercel-production` (gitignored) · runtime ใช้ transaction pooler :6543 + DB_POOL_MAX=8 (ห้ามใช้ session pooler เพราะจำกัด 15 client ทั้ง project) · migrate ใช้ MIGRATE_DATABASE_URL (:5432) · deploy ด้วย `npx vercel@latest deploy --prod --yes` (GitHub ต่อกับ Vercel ไม่ได้เพราะ repo private)
 > Stack: Next.js 16 + Supabase (Auth + Postgres, dev ใช้ `npx supabase start` ใน Docker) + Drizzle + Gemini (Flash-Lite ก่อน) · Node 26 อยู่ที่ `C:\Program Files\nodejs`

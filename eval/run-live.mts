@@ -1,4 +1,5 @@
 // Live eval against the real model: npm run eval:live [-- --limit 5] [--prompt v1] [--rules-analysis]
+//   [--provider freellmapi] [--model <id>]   (FreeLLMAPI is the local router; see src/lib/llm/provider.ts)
 // --prompt v1 drafts with an earlier prompt from eval/prompts.ts (default: the current one).
 // --rules-analysis skips the model's job analysis, so two prompt runs differ only in drafting.
 // For each case: analyse the posting, draft bullets, run the guard, and check
@@ -32,6 +33,15 @@ try {
   // Use the environment as is.
 }
 
+const arg = (name: string) => {
+  const i = process.argv.indexOf(name);
+  return i > 0 ? process.argv[i + 1] : undefined;
+};
+const providerArg = arg("--provider");
+if (providerArg) process.env.LLM_PROVIDER = providerArg;
+const modelArg = arg("--model");
+if (modelArg) process.env[process.env.LLM_PROVIDER === "freellmapi" ? "FREELLMAPI_MODEL" : "GEMINI_MODEL"] = modelArg;
+
 const limitArg = process.argv.indexOf("--limit");
 const limit = limitArg > 0 ? Number(process.argv[limitArg + 1]) : Infinity;
 const promptArg = process.argv.indexOf("--prompt");
@@ -41,7 +51,7 @@ if (!system) throw new Error(`Unknown prompt ${promptName}`);
 const rulesAnalysis = process.argv.includes("--rules-analysis");
 const llm = getLlm();
 if (!llm) {
-  console.error("GEMINI_API_KEY is not set");
+  console.error("No LLM configured: set GEMINI_API_KEY, or FREELLMAPI_KEY with --provider freellmapi");
   process.exit(1);
 }
 
@@ -140,7 +150,8 @@ const summary = {
 const dir = join(process.cwd(), "eval", "results");
 mkdirSync(dir, { recursive: true });
 const stamp = summary.date.slice(0, 16).replace(/[:T]/g, "-");
-writeFileSync(join(dir, `live-${stamp}-${promptName}.json`), JSON.stringify({ summary, results }, null, 2));
+const tag = modelArg ? `-${modelArg.replace(/[^\w.-]/g, "_")}` : "";
+writeFileSync(join(dir, `live-${stamp}-${promptName}${tag}.json`), JSON.stringify({ summary, results }, null, 2));
 
 console.log(`## Live eval (${summary.date.slice(0, 10)}, ${models}, prompt ${promptName}, ${summary.analysis} analysis)
 

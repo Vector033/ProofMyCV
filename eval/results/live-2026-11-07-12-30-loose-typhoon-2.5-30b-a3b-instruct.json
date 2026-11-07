@@ -1,0 +1,2811 @@
+{
+  "summary": {
+    "date": "2026-11-07T12:30:20.126Z",
+    "prompt": "loose",
+    "analysis": "rules",
+    "style": {
+      "bullets": 129,
+      "strongVerb": 1,
+      "usesMetric": 0.9809523809523809,
+      "hasHow": 0.20930232558139536,
+      "toolTail": 0.031007751937984496,
+      "copiesFact": 0.007751937984496124,
+      "xyzShape": 0.9457364341085271,
+      "meanWords": 19.488372093023255
+    },
+    "models": "freellmapi:typhoon-2.5-30b-a3b-instruct, freellmapi:typhoon-v2.5-30b-a3b-instruct",
+    "cases": 30,
+    "errors": 0,
+    "drafts": 129,
+    "blockedByGuard": 45,
+    "baitLeaksBeforeGuard": 3,
+    "baitLeaksAfterGuard": 0,
+    "keywordCoverage": 0.5255102040816326,
+    "meanWords": 19.297619047619047,
+    "overLength": 0,
+    "extraction": {
+      "llm": {
+        "requiredRecall": 0.7050691244239631,
+        "recall": 0.6334164588528678,
+        "precision": 0.946969696969697
+      },
+      "rules": {
+        "requiredRecall": 0.7050691244239631,
+        "recall": 0.6334164588528678,
+        "precision": 0.946969696969697
+      }
+    },
+    "medianSeconds": 4.734
+  },
+  "results": [
+    {
+      "id": "web-01",
+      "model": "freellmapi:typhoon-2.5-30b-a3b-instruct",
+      "seconds": 7.071,
+      "extraction": {
+        "required": {
+          "total": 8,
+          "found": 7
+        },
+        "all": {
+          "total": 13,
+          "found": 12
+        },
+        "extracted": 13,
+        "matchedExtracted": 12
+      },
+      "drafts": [
+        {
+          "experienceId": "e1",
+          "text": "Rebuilt product listing page using Next.js with server-side rendering, reducing Largest Contentful Paint from 4.1s to 1.8s and improving Core Web Vitals.",
+          "factIds": [
+            "f1"
+          ],
+          "guard": {
+            "ok": false,
+            "violations": [
+              {
+                "type": "term",
+                "term": "Core"
+              },
+              {
+                "type": "term",
+                "term": "Web"
+              },
+              {
+                "type": "term",
+                "term": "Vitals"
+              }
+            ],
+            "warnings": []
+          },
+          "words": 22,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Increased component test coverage from 35% to 72% by writing unit tests with Jest and React Testing Library for shared form components.",
+          "factIds": [
+            "f2"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 22,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Modernized 14 legacy pages by migrating from plain CSS to Tailwind CSS, enhancing maintainability and responsiveness across devices.",
+          "factIds": [
+            "f3"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 18,
+          "leaks": []
+        },
+        {
+          "experienceId": "e2",
+          "text": "Developed a full-stack campus marketplace with React and Firebase, achieving 1,200 student sign-ups within the first semester.",
+          "factIds": [
+            "f4"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 17,
+          "leaks": []
+        },
+        {
+          "experienceId": "e2",
+          "text": "Optimized image uploads via compression, cutting average upload time from 9 seconds to 3 seconds and improving user engagement.",
+          "factIds": [
+            "f5"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 19,
+          "leaks": []
+        },
+        {
+          "experienceId": "e3",
+          "text": "Served as teaching assistant for web programming lab, mentoring 60+ students weekly in HTML, CSS, and Git best practices.",
+          "factIds": [
+            "f6"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 19,
+          "leaks": []
+        }
+      ],
+      "coverage": {
+        "coverable": 9,
+        "mentioned": 6
+      }
+    },
+    {
+      "id": "web-02",
+      "model": "freellmapi:typhoon-v2.5-30b-a3b-instruct",
+      "seconds": 3.634,
+      "extraction": {
+        "required": {
+          "total": 8,
+          "found": 8
+        },
+        "all": {
+          "total": 13,
+          "found": 11
+        },
+        "extracted": 11,
+        "matchedExtracted": 11
+      },
+      "drafts": [
+        {
+          "experienceId": "e1",
+          "text": "Migrated booking widget from Vue 2 to Vue 3 using Composition API, reducing bundle size by 36% from 410 KB to 260 KB.",
+          "factIds": [
+            "f1"
+          ],
+          "guard": {
+            "ok": false,
+            "violations": [
+              {
+                "type": "number",
+                "claim": "36%"
+              }
+            ],
+            "warnings": []
+          },
+          "words": 23,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Built tour search page integrating REST API with date and price filters, delivering results in under 800 ms.",
+          "factIds": [
+            "f2"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 18,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Wrote component tests for checkout form using Vitest, catching 5 critical validation bugs pre-release.",
+          "factIds": [
+            "f3"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 14,
+          "leaks": []
+        },
+        {
+          "experienceId": "e2",
+          "text": "Developed recipe search site with Nuxt SSR, achieving a Lighthouse SEO score of 98.",
+          "factIds": [
+            "f4"
+          ],
+          "guard": {
+            "ok": false,
+            "violations": [
+              {
+                "type": "term",
+                "term": "SSR"
+              }
+            ],
+            "warnings": []
+          },
+          "words": 14,
+          "leaks": []
+        },
+        {
+          "experienceId": "e3",
+          "text": "Led 4-member team to rebuild club website using HTML, CSS, and Git, launching successfully before open house.",
+          "factIds": [
+            "f5"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 17,
+          "leaks": []
+        }
+      ],
+      "coverage": {
+        "coverable": 10,
+        "mentioned": 5
+      }
+    },
+    {
+      "id": "web-03",
+      "model": "freellmapi:typhoon-v2.5-30b-a3b-instruct",
+      "seconds": 4.092,
+      "extraction": {
+        "required": {
+          "total": 7,
+          "found": 7
+        },
+        "all": {
+          "total": 14,
+          "found": 14
+        },
+        "extracted": 15,
+        "matchedExtracted": 14
+      },
+      "drafts": [
+        {
+          "experienceId": "e1",
+          "text": "Optimized invoice export endpoint using Node.js and Express, reducing 10,000-row CSV generation time from 15s to 2.3s.",
+          "factIds": [
+            "f1"
+          ],
+          "guard": {
+            "ok": false,
+            "violations": [
+              {
+                "type": "number",
+                "claim": "15s"
+              }
+            ],
+            "warnings": []
+          },
+          "words": 17,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Improved database performance by adding a PostgreSQL index, cutting p95 query latency from 640ms to 45ms.",
+          "factIds": [
+            "f2"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 16,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Implemented automated linting and testing via GitHub Actions on every PR, increasing code quality and reducing merge conflicts.",
+          "factIds": [
+            "f3"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 18,
+          "leaks": []
+        },
+        {
+          "experienceId": "e2",
+          "text": "Developed a shared calendar group study planner with Next.js and React, adopted by 85 classmates during finals.",
+          "factIds": [
+            "f4"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 17,
+          "leaks": []
+        },
+        {
+          "experienceId": "e2",
+          "text": "Containerized the application using Docker, enabling new team members to set up locally in under 10 minutes.",
+          "factIds": [
+            "f5"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 17,
+          "leaks": []
+        },
+        {
+          "experienceId": "e3",
+          "text": "Designed and deployed a full-stack expense tracker with React frontend, Node.js backend, and MongoDB, featuring real-time spending charts.",
+          "factIds": [
+            "f6"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 18,
+          "leaks": []
+        }
+      ],
+      "coverage": {
+        "coverable": 11,
+        "mentioned": 8
+      }
+    },
+    {
+      "id": "web-04",
+      "model": "freellmapi:typhoon-v2.5-30b-a3b-instruct",
+      "seconds": 2.743,
+      "extraction": {
+        "required": {
+          "total": 8,
+          "found": 7
+        },
+        "all": {
+          "total": 13,
+          "found": 11
+        },
+        "extracted": 11,
+        "matchedExtracted": 11
+      },
+      "drafts": [
+        {
+          "experienceId": "e1",
+          "text": "Transformed 3 Figma mockups into responsive landing pages using HTML, CSS, and JavaScript, delivering all projects ahead of schedule.",
+          "factIds": [
+            "f1"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 19,
+          "leaks": []
+        },
+        {
+          "experienceId": "e2",
+          "text": "Engineered a Laravel-based clinic booking system with SMS reminders, reducing patient no-shows from 18% to 7% in the first month.",
+          "factIds": [
+            "f3"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 20,
+          "leaks": []
+        },
+        {
+          "experienceId": "e2",
+          "text": "Designed MySQL database schema and implemented Laravel migrations for patients, doctors, and appointments, ensuring data integrity and scalability.",
+          "factIds": [
+            "f4"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 18,
+          "leaks": []
+        }
+      ],
+      "coverage": {
+        "coverable": 7,
+        "mentioned": 5
+      }
+    },
+    {
+      "id": "web-05",
+      "model": "freellmapi:typhoon-v2.5-30b-a3b-instruct",
+      "seconds": 3.581,
+      "extraction": {
+        "required": {
+          "total": 9,
+          "found": 9
+        },
+        "all": {
+          "total": 14,
+          "found": 13
+        },
+        "extracted": 13,
+        "matchedExtracted": 13
+      },
+      "drafts": [
+        {
+          "experienceId": "e1",
+          "text": "Developed Django REST Framework APIs for insurance claim status lookup, replacing a manual email process that handled 300 weekly requests.",
+          "factIds": [
+            "f1"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 20,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Increased test coverage from 40% to 81% using pytest, ensuring robustness of the claims module in Django and Python.",
+          "factIds": [
+            "f2"
+          ],
+          "guard": {
+            "ok": false,
+            "violations": [
+              {
+                "type": "tech",
+                "term": "Django"
+              }
+            ],
+            "warnings": []
+          },
+          "words": 19,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Reduced API response time from 12s to 0.4s by offloading PDF generation to Celery with Redis-backed background tasks.",
+          "factIds": [
+            "f3"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 18,
+          "leaks": []
+        },
+        {
+          "experienceId": "e2",
+          "text": "Designed and deployed a role-based dorm repair request portal using Django, HTML, CSS, JavaScript, and SQLite, processing 520 requests in its first term.",
+          "factIds": [
+            "f4"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 23,
+          "leaks": []
+        }
+      ],
+      "coverage": {
+        "coverable": 10,
+        "mentioned": 7
+      }
+    },
+    {
+      "id": "web-06",
+      "model": "freellmapi:typhoon-v2.5-30b-a3b-instruct",
+      "seconds": 6.632,
+      "extraction": {
+        "required": {
+          "total": 5,
+          "found": 5
+        },
+        "all": {
+          "total": 10,
+          "found": 10
+        },
+        "extracted": 12,
+        "matchedExtracted": 10
+      },
+      "drafts": [
+        {
+          "experienceId": "e1",
+          "text": "Developed a real-time shuttle tracking app using React Native and TypeScript, reducing app startup time by 65% through local caching with AsyncStorage.",
+          "factIds": [
+            "f1",
+            "f2"
+          ],
+          "guard": {
+            "ok": false,
+            "violations": [
+              {
+                "type": "number",
+                "claim": "65%"
+              }
+            ],
+            "warnings": []
+          },
+          "words": 22,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Implemented push notifications via Firebase and Expo, notifying 140+ pilot users when shuttles were 5 minutes away, improving user arrival punctuality.",
+          "factIds": [
+            "f1",
+            "f3"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 21,
+          "leaks": []
+        },
+        {
+          "experienceId": "e2",
+          "text": "Built a full-stack ordering app with React Native and REST integration, enabling 45 daily orders within the first month post-launch.",
+          "factIds": [
+            "f4",
+            "f5"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 20,
+          "leaks": []
+        }
+      ],
+      "coverage": {
+        "coverable": 5,
+        "mentioned": 3
+      }
+    },
+    {
+      "id": "web-07",
+      "model": "freellmapi:typhoon-v2.5-30b-a3b-instruct",
+      "seconds": 2.21,
+      "extraction": {
+        "required": {
+          "total": 5,
+          "found": 5
+        },
+        "all": {
+          "total": 12,
+          "found": 10
+        },
+        "extracted": 11,
+        "matchedExtracted": 10
+      },
+      "drafts": [
+        {
+          "experienceId": "e1",
+          "text": "Developed bill payment screens from Figma designs, delivering a seamless user experience across Android and iOS platforms.",
+          "factIds": [
+            "f1"
+          ],
+          "guard": {
+            "ok": false,
+            "violations": [
+              {
+                "type": "term",
+                "term": "iOS"
+              },
+              {
+                "type": "term",
+                "term": "Android"
+              }
+            ],
+            "warnings": []
+          },
+          "words": 17,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Achieved 100% widget test coverage for 23 critical screens, identifying and fixing a currency rounding bug pre-release.",
+          "factIds": [
+            "f2"
+          ],
+          "guard": {
+            "ok": false,
+            "violations": [
+              {
+                "type": "number",
+                "claim": "100%"
+              }
+            ],
+            "warnings": []
+          },
+          "words": 17,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Optimized state management by migrating from setState to Riverpod, reducing rebuilds by 80% during transfer interactions.",
+          "factIds": [
+            "f3"
+          ],
+          "guard": {
+            "ok": false,
+            "violations": [
+              {
+                "type": "number",
+                "claim": "80%"
+              }
+            ],
+            "warnings": []
+          },
+          "words": 16,
+          "leaks": []
+        }
+      ],
+      "coverage": {
+        "coverable": 4,
+        "mentioned": 0
+      }
+    },
+    {
+      "id": "web-08",
+      "model": "freellmapi:typhoon-v2.5-30b-a3b-instruct",
+      "seconds": 3.117,
+      "extraction": {
+        "required": {
+          "total": 5,
+          "found": 4
+        },
+        "all": {
+          "total": 11,
+          "found": 5
+        },
+        "extracted": 5,
+        "matchedExtracted": 4
+      },
+      "drafts": [
+        {
+          "experienceId": "e1",
+          "text": "Refactored iOS settings and profile screens using SwiftUI, reducing UIKit code by 1,400 lines and improving maintainability.",
+          "factIds": [
+            "f1"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 17,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Resolved a critical memory leak in the image gallery via Instruments, cutting peak memory usage from 380 MB to 150 MB.",
+          "factIds": [
+            "f2"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 21,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Implemented 18 unit tests for the login view model using XCTest, increasing test coverage and ensuring reliable authentication flows.",
+          "factIds": [
+            "f3"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 19,
+          "leaks": []
+        }
+      ],
+      "coverage": {
+        "coverable": 6,
+        "mentioned": 4
+      }
+    },
+    {
+      "id": "web-09",
+      "model": "freellmapi:typhoon-v2.5-30b-a3b-instruct",
+      "seconds": 2.996,
+      "extraction": {
+        "required": {
+          "total": 6,
+          "found": 6
+        },
+        "all": {
+          "total": 16,
+          "found": 11
+        },
+        "extracted": 12,
+        "matchedExtracted": 11
+      },
+      "drafts": [
+        {
+          "experienceId": "e1",
+          "text": "Reduced loan application review time by 60% through Angular reactive forms with custom validation logic and real-time feedback.",
+          "factIds": [
+            "f1"
+          ],
+          "guard": {
+            "ok": false,
+            "violations": [
+              {
+                "type": "number",
+                "claim": "60%"
+              }
+            ],
+            "warnings": []
+          },
+          "words": 18,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Enhanced code quality by writing 32 Jasmine/Karma unit tests for form validators, ensuring 100% coverage of critical validation paths.",
+          "factIds": [
+            "f2"
+          ],
+          "guard": {
+            "ok": false,
+            "violations": [
+              {
+                "type": "number",
+                "claim": "100%"
+              }
+            ],
+            "warnings": []
+          },
+          "words": 19,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Delivered features within two-week Scrum sprints using Jira, participating in daily stand-ups and sprint reviews with cross-functional teams.",
+          "factIds": [
+            "f3"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 18,
+          "leaks": []
+        }
+      ],
+      "coverage": {
+        "coverable": 10,
+        "mentioned": 1
+      }
+    },
+    {
+      "id": "web-10",
+      "model": "freellmapi:typhoon-v2.5-30b-a3b-instruct",
+      "seconds": 4.549,
+      "extraction": {
+        "required": {
+          "total": 7,
+          "found": 5
+        },
+        "all": {
+          "total": 13,
+          "found": 7
+        },
+        "extracted": 7,
+        "matchedExtracted": 7
+      },
+      "drafts": [
+        {
+          "experienceId": "e1",
+          "text": "Redesigned onboarding screens in Figma, increasing completion rate from 54% to 78% through 6 usability tests.",
+          "factIds": [
+            "f1"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 16,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Built a clickable prototype for a booking flow in Figma and ProtoPie, securing client approval in one review cycle.",
+          "factIds": [
+            "f2"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 19,
+          "leaks": []
+        },
+        {
+          "experienceId": "e3",
+          "text": "Developed a reusable React component library with 24 documented variants using TypeScript and Storybook, adopted across 3 club websites.",
+          "factIds": [
+            "f3"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 19,
+          "leaks": []
+        },
+        {
+          "experienceId": "e3",
+          "text": "Standardized design system tokens in Figma and synchronized them to CSS variables, ensuring consistent styling across projects.",
+          "factIds": [
+            "f4"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 17,
+          "leaks": []
+        },
+        {
+          "experienceId": "e3",
+          "text": "Validated all components for accessibility using axe DevTools, achieving full WCAG AA compliance for color contrast and keyboard navigation.",
+          "factIds": [
+            "f6"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 19,
+          "leaks": []
+        }
+      ],
+      "coverage": {
+        "coverable": 6,
+        "mentioned": 6
+      }
+    },
+    {
+      "id": "be-01",
+      "model": "freellmapi:typhoon-v2.5-30b-a3b-instruct",
+      "seconds": 5.033,
+      "extraction": {
+        "required": {
+          "total": 8,
+          "found": 8
+        },
+        "all": {
+          "total": 13,
+          "found": 12
+        },
+        "extracted": 13,
+        "matchedExtracted": 12
+      },
+      "drafts": [
+        {
+          "experienceId": "e1",
+          "text": "Built 14 high-performance REST endpoints using FastAPI to support mobile order tracking, reducing API response times by 60% through optimized query design.",
+          "factIds": [
+            "f1"
+          ],
+          "guard": {
+            "ok": false,
+            "violations": [
+              {
+                "type": "number",
+                "claim": "60%"
+              }
+            ],
+            "warnings": []
+          },
+          "words": 22,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Implemented Redis caching for product lookup endpoints, cutting p95 latency from 420 ms to 95 ms and improving system throughput under peak load.",
+          "factIds": [
+            "f2"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 23,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Increased test coverage from 38% to 71% by writing Pytest unit and integration tests, integrated into CI pipeline via GitHub Actions.",
+          "factIds": [
+            "f3"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 21,
+          "leaks": []
+        },
+        {
+          "experienceId": "e2",
+          "text": "Designed and executed PostgreSQL database schema and SQL queries for a real-time canteen queue system, supporting 600+ orders across a 2-week campus pilot.",
+          "factIds": [
+            "f4"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 23,
+          "leaks": []
+        },
+        {
+          "experienceId": "e2",
+          "text": "Led Git workflow using feature branches and pull requests in a 4-member team, ensuring clean code merges and consistent collaboration.",
+          "factIds": [
+            "f5"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 20,
+          "leaks": []
+        }
+      ],
+      "coverage": {
+        "coverable": 9,
+        "mentioned": 6
+      }
+    },
+    {
+      "id": "be-02",
+      "model": "freellmapi:typhoon-v2.5-30b-a3b-instruct",
+      "seconds": 3.457,
+      "extraction": {
+        "required": {
+          "total": 10,
+          "found": 7
+        },
+        "all": {
+          "total": 15,
+          "found": 11
+        },
+        "extracted": 12,
+        "matchedExtracted": 11
+      },
+      "drafts": [
+        {
+          "experienceId": "e1",
+          "text": "Developed Spring Boot REST APIs for claims status lookup, replacing manual spreadsheets used by 150+ call-center agents.",
+          "factIds": [
+            "f1"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 17,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Improved SQL report performance by 97%—reducing runtime from 12 minutes to 40 seconds—via indexing and optimized joins in PostgreSQL.",
+          "factIds": [
+            "f3"
+          ],
+          "guard": {
+            "ok": false,
+            "violations": [
+              {
+                "type": "number",
+                "claim": "97%"
+              }
+            ],
+            "warnings": []
+          },
+          "words": 19,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Enhanced code quality by writing 60 unit tests with JUnit, increasing test coverage and supporting successful peer code reviews.",
+          "factIds": [
+            "f2"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 19,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Executed tasks within two-week Scrum sprints, participating in daily stand-ups and sprint reviews using Jira.",
+          "factIds": [
+            "f6"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 15,
+          "leaks": []
+        }
+      ],
+      "coverage": {
+        "coverable": 8,
+        "mentioned": 4
+      }
+    },
+    {
+      "id": "be-03",
+      "model": "freellmapi:typhoon-v2.5-30b-a3b-instruct",
+      "seconds": 5.26,
+      "extraction": {
+        "required": {
+          "total": 10,
+          "found": 9
+        },
+        "all": {
+          "total": 15,
+          "found": 12
+        },
+        "extracted": 15,
+        "matchedExtracted": 12
+      },
+      "drafts": [
+        {
+          "experienceId": "e1",
+          "text": "Designed and implemented a Go-based parcel assignment service handling 2,500 assignments per hour under peak load using PostgreSQL for state management.",
+          "factIds": [
+            "f1"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 21,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Developed a gRPC interface between the assignment service and rider app backend, reducing latency by replacing three REST calls with a single efficient gRPC call.",
+          "factIds": [
+            "f2"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 25,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Engineered table-driven unit tests in Go that uncovered four critical edge-case bugs in zone-matching logic prior to production release.",
+          "factIds": [
+            "f3"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 19,
+          "leaks": []
+        },
+        {
+          "experienceId": "e2",
+          "text": "Built a high-performance URL shortener in Go leveraging Redis for caching hot links and PostgreSQL for persistent storage, achieving sub-5ms redirect response times under 1,000 RPS.",
+          "factIds": [
+            "f4"
+          ],
+          "guard": {
+            "ok": false,
+            "violations": [
+              {
+                "type": "term",
+                "term": "RPS"
+              }
+            ],
+            "warnings": []
+          },
+          "words": 26,
+          "leaks": []
+        },
+        {
+          "experienceId": "e3",
+          "text": "Utilized Linux and Git extensively in OS and networking labs, gaining hands-on experience with server environments and version-controlled development workflows.",
+          "factIds": [
+            "f5"
+          ],
+          "guard": {
+            "ok": false,
+            "violations": [
+              {
+                "type": "term",
+                "term": "OS"
+              }
+            ],
+            "warnings": []
+          },
+          "words": 20,
+          "leaks": []
+        }
+      ],
+      "coverage": {
+        "coverable": 9,
+        "mentioned": 5
+      }
+    },
+    {
+      "id": "be-04",
+      "model": "freellmapi:typhoon-v2.5-30b-a3b-instruct",
+      "seconds": 3.186,
+      "extraction": {
+        "required": {
+          "total": 9,
+          "found": 8
+        },
+        "all": {
+          "total": 15,
+          "found": 13
+        },
+        "extracted": 14,
+        "matchedExtracted": 13
+      },
+      "drafts": [
+        {
+          "experienceId": "e1",
+          "text": "Developed NestJS modules for a restaurant ordering API supporting 3 live client locations, improving order processing efficiency by 40% through modular architecture.",
+          "factIds": [
+            "f1"
+          ],
+          "guard": {
+            "ok": false,
+            "violations": [
+              {
+                "type": "number",
+                "claim": "40%"
+              }
+            ],
+            "warnings": []
+          },
+          "words": 22,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Implemented Jest unit and e2e tests covering 85% of core logic, preventing a critical double-charge bug from reaching production.",
+          "factIds": [
+            "f2"
+          ],
+          "guard": {
+            "ok": false,
+            "violations": [
+              {
+                "type": "number",
+                "claim": "85%"
+              }
+            ],
+            "warnings": []
+          },
+          "words": 19,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Automated deployment via GitHub Actions, reducing manual deployment time from 25 minutes to 6 minutes per release cycle.",
+          "factIds": [
+            "f3"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 18,
+          "leaks": []
+        }
+      ],
+      "coverage": {
+        "coverable": 10,
+        "mentioned": 2
+      }
+    },
+    {
+      "id": "be-05",
+      "model": "freellmapi:typhoon-v2.5-30b-a3b-instruct",
+      "seconds": 4.364,
+      "extraction": {
+        "required": {
+          "total": 5,
+          "found": 3
+        },
+        "all": {
+          "total": 12,
+          "found": 4
+        },
+        "extracted": 4,
+        "matchedExtracted": 4
+      },
+      "drafts": [
+        {
+          "experienceId": "e1",
+          "text": "Engineered a nightly Python ETL pipeline processing 1.2M POS records into PostgreSQL, reducing data ingestion time to 14 minutes.",
+          "factIds": [
+            "f1"
+          ],
+          "guard": {
+            "ok": false,
+            "violations": [
+              {
+                "type": "number",
+                "claim": "1.2M"
+              }
+            ],
+            "warnings": []
+          },
+          "words": 19,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Designed a star schema with 4 dimensions and a fact table, enabling 5 analysts to generate accurate weekly sales reports.",
+          "factIds": [
+            "f2"
+          ],
+          "guard": {
+            "ok": false,
+            "violations": [
+              {
+                "type": "number",
+                "claim": "4"
+              }
+            ],
+            "warnings": []
+          },
+          "words": 20,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Implemented automated row-count and null checks with Slack alerts, detecting 7 failed data loads within the first month.",
+          "factIds": [
+            "f3"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 18,
+          "leaks": []
+        },
+        {
+          "experienceId": "e2",
+          "text": "Orchestrated an hourly Airflow pipeline fetching 6 months of air quality data from 85 stations via public APIs using Dockerized Python services.",
+          "factIds": [
+            "f4"
+          ],
+          "guard": {
+            "ok": false,
+            "violations": [
+              {
+                "type": "term",
+                "term": "Dockerized"
+              }
+            ],
+            "warnings": []
+          },
+          "words": 22,
+          "leaks": []
+        },
+        {
+          "experienceId": "e2",
+          "text": "Maintained Git-based collaboration with pull request reviews, ensuring version control and code quality across pipeline components.",
+          "factIds": [
+            "f5"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 16,
+          "leaks": []
+        }
+      ],
+      "coverage": {
+        "coverable": 6,
+        "mentioned": 1
+      }
+    },
+    {
+      "id": "be-06",
+      "model": "freellmapi:typhoon-v2.5-30b-a3b-instruct",
+      "seconds": 5.669,
+      "extraction": {
+        "required": {
+          "total": 6,
+          "found": 3
+        },
+        "all": {
+          "total": 14,
+          "found": 6
+        },
+        "extracted": 6,
+        "matchedExtracted": 6
+      },
+      "drafts": [
+        {
+          "experienceId": "e1",
+          "text": "Developed a Power BI dashboard to monitor patient visits and no-show rates across clinic branches, adopted weekly by 4 branch managers for operational decisions.",
+          "factIds": [
+            "f1"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 24,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Eliminated 3,400 duplicate patient records using SQL queries, improving data accuracy and report reliability for clinical analytics.",
+          "factIds": [
+            "f2"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 17,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Automated monthly reporting in Excel using pivot tables and XLOOKUP, reducing preparation time from 2 days to 3 hours.",
+          "factIds": [
+            "f3"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 19,
+          "leaks": []
+        },
+        {
+          "experienceId": "e2",
+          "text": "Designed a Tableau dashboard visualizing 10 years of monthly tourist arrival data by province using open government datasets, enabling trend analysis.",
+          "factIds": [
+            "f4"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 21,
+          "leaks": []
+        },
+        {
+          "experienceId": "e2",
+          "text": "Presented data insights to faculty and provincial tourism officers in Thai, earning an A grade for clarity and relevance.",
+          "factIds": [
+            "f5"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 19,
+          "leaks": []
+        },
+        {
+          "experienceId": "e3",
+          "text": "Managed volunteer sign-ups and attendance across 15 clean-up events using Google Sheets, tracking 120 participants and delivering monthly summaries to leadership.",
+          "factIds": [
+            "f6"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 21,
+          "leaks": []
+        }
+      ],
+      "coverage": {
+        "coverable": 5,
+        "mentioned": 4
+      }
+    },
+    {
+      "id": "be-07",
+      "model": "freellmapi:typhoon-v2.5-30b-a3b-instruct",
+      "seconds": 6.356,
+      "extraction": {
+        "required": {
+          "total": 12,
+          "found": 10
+        },
+        "all": {
+          "total": 19,
+          "found": 12
+        },
+        "extracted": 13,
+        "matchedExtracted": 12
+      },
+      "drafts": [
+        {
+          "experienceId": "e1",
+          "text": "Trained a PyTorch CNN to classify rice leaf diseases from smartphone images, achieving 91% accuracy on a 1,800-image test set.",
+          "factIds": [
+            "f1"
+          ],
+          "guard": {
+            "ok": false,
+            "violations": [
+              {
+                "type": "number",
+                "claim": "91%"
+              }
+            ],
+            "warnings": []
+          },
+          "words": 20,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Cleaned and preprocessed 640 blurry or mislabeled field images using Pandas and NumPy, improving dataset quality for downstream ML tasks.",
+          "factIds": [
+            "f2"
+          ],
+          "guard": {
+            "ok": false,
+            "violations": [
+              {
+                "type": "tech",
+                "term": "Machine Learning"
+              }
+            ],
+            "warnings": []
+          },
+          "words": 20,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Evaluated multiple PyTorch CNN architectures and selected a 3x smaller model with only a 0.02 accuracy drop, optimizing for efficiency.",
+          "factIds": [
+            "f3"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 20,
+          "leaks": []
+        },
+        {
+          "experienceId": "e2",
+          "text": "Fine-tuned a WangchanBERTa model for Thai sentiment classification, achieving a macro F1 score of 0.84 across three classes.",
+          "factIds": [
+            "f4"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 18,
+          "leaks": []
+        },
+        {
+          "experienceId": "e2",
+          "text": "Extracted and prepared a training dataset of 12,000 product reviews by writing efficient SQL queries against a MySQL database.",
+          "factIds": [
+            "f5"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 19,
+          "leaks": []
+        },
+        {
+          "experienceId": "e2",
+          "text": "Presented model performance and error analysis to peers, clearly communicating technical results to non-expert stakeholders.",
+          "factIds": [
+            "f6"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 15,
+          "leaks": []
+        }
+      ],
+      "coverage": {
+        "coverable": 5,
+        "mentioned": 2
+      }
+    },
+    {
+      "id": "be-08",
+      "model": "freellmapi:typhoon-v2.5-30b-a3b-instruct",
+      "seconds": 5.033,
+      "extraction": {
+        "required": {
+          "total": 10,
+          "found": 6
+        },
+        "all": {
+          "total": 15,
+          "found": 11
+        },
+        "extracted": 10,
+        "matchedExtracted": 10
+      },
+      "drafts": [
+        {
+          "experienceId": "e1",
+          "text": "Automated nightly database backups using Bash and cron, reducing manual effort by 45 minutes per night.",
+          "factIds": [
+            "f1"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 16,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Containerized three internal PHP tools with Docker and Docker Compose, enabling new team members to set up locally in under 10 minutes.",
+          "factIds": [
+            "f2"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 22,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Implemented Prometheus and Grafana dashboards for 30 servers, detecting disk-full incidents 24+ hours before customer impact.",
+          "factIds": [
+            "f3"
+          ],
+          "guard": {
+            "ok": false,
+            "violations": [
+              {
+                "type": "number",
+                "claim": "24"
+              }
+            ],
+            "warnings": []
+          },
+          "words": 16,
+          "leaks": []
+        },
+        {
+          "experienceId": "e2",
+          "text": "Built a GitHub Actions CI/CD pipeline for the club website, cutting deployment time from 20 minutes to 4 minutes.",
+          "factIds": [
+            "f4"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 19,
+          "leaks": []
+        },
+        {
+          "experienceId": "e2",
+          "text": "Resolved DNS misconfiguration blocking Let's Encrypt HTTPS renewal, restoring site functionality within 1 hour.",
+          "factIds": [
+            "f5"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 14,
+          "leaks": []
+        }
+      ],
+      "coverage": {
+        "coverable": 7,
+        "mentioned": 4
+      }
+    },
+    {
+      "id": "be-09",
+      "model": "freellmapi:typhoon-v2.5-30b-a3b-instruct",
+      "seconds": 5.832,
+      "extraction": {
+        "required": {
+          "total": 11,
+          "found": 4
+        },
+        "all": {
+          "total": 19,
+          "found": 9
+        },
+        "extracted": 8,
+        "matchedExtracted": 8
+      },
+      "drafts": [
+        {
+          "experienceId": "e1",
+          "text": "Resolved 40+ IT support tickets weekly via Jira Service Management with a 15-minute median response time, improving service efficiency.",
+          "factIds": [
+            "f1"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 19,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Reduced repeat password-reset tickets by 30% by authoring 12 multilingual how-to guides in Thai and English for library users.",
+          "factIds": [
+            "f2"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 19,
+          "leaks": []
+        },
+        {
+          "experienceId": "e2",
+          "text": "Deployed a Flask web application on GCP Compute Engine with Cloud SQL for PostgreSQL, supporting 60 users over 5 months with zero downtime.",
+          "factIds": [
+            "f3"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 23,
+          "leaks": []
+        },
+        {
+          "experienceId": "e2",
+          "text": "Enforced least-privilege access by configuring IAM roles via gcloud CLI, transitioning 4 team members from Owner to restricted roles.",
+          "factIds": [
+            "f4"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 19,
+          "leaks": []
+        },
+        {
+          "experienceId": "e2",
+          "text": "Diagnosed and resolved a VPC firewall misconfiguration blocking HTTPS traffic within 25 minutes, restoring full VM accessibility.",
+          "factIds": [
+            "f5"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 17,
+          "leaks": []
+        },
+        {
+          "experienceId": "e3",
+          "text": "Led a weekly GCP Cloud Fundamentals study group, achieving an 8-of-11 member certification pass rate through structured technical training.",
+          "factIds": [
+            "f6"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 19,
+          "leaks": []
+        }
+      ],
+      "coverage": {
+        "coverable": 7,
+        "mentioned": 6
+      }
+    },
+    {
+      "id": "be-10",
+      "model": "freellmapi:typhoon-v2.5-30b-a3b-instruct",
+      "seconds": 6.257,
+      "extraction": {
+        "required": {
+          "total": 14,
+          "found": 9
+        },
+        "all": {
+          "total": 22,
+          "found": 12
+        },
+        "extracted": 11,
+        "matchedExtracted": 11
+      },
+      "drafts": [
+        {
+          "experienceId": "e1",
+          "text": "Engineered a RAG pipeline using Python, Gemini, and PostgreSQL with pgvector to process 140 course syllabus PDFs, achieving 78% accuracy on 100 test questions.",
+          "factIds": [
+            "f1"
+          ],
+          "guard": {
+            "ok": false,
+            "violations": [
+              {
+                "type": "number",
+                "claim": "78%"
+              }
+            ],
+            "warnings": []
+          },
+          "words": 24,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Optimized retrieval performance by testing three chunk sizes and implementing reranking, increasing top-5 hit rate from 62% to 81%.",
+          "factIds": [
+            "f2"
+          ],
+          "guard": {
+            "ok": false,
+            "violations": [
+              {
+                "type": "number",
+                "claim": "62%"
+              },
+              {
+                "type": "number",
+                "claim": "81%"
+              }
+            ],
+            "warnings": []
+          },
+          "words": 19,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Designed and executed a 100-question evaluation suite with ground-truth answers and source citations to measure hallucination rate and answer quality.",
+          "factIds": [
+            "f3"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 20,
+          "leaks": []
+        },
+        {
+          "experienceId": "e2",
+          "text": "Developed 6 production-ready FastAPI endpoints for a trip-booking system, enabling secure data exchange between partner portals and backend services.",
+          "factIds": [
+            "f4"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 19,
+          "leaks": []
+        },
+        {
+          "experienceId": "e2",
+          "text": "Integrated OpenAI API to extract structured JSON tags from 4,300 hotel descriptions at $9 total cost, ensuring consistent data formatting.",
+          "factIds": [
+            "f5"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 20,
+          "leaks": []
+        },
+        {
+          "experienceId": "e3",
+          "text": "Built a multilingual FAQ bot prototype using Gemini and Streamlit within 24 hours, earning the People’s Choice Award at Bangkok GenAI Jam 2025.",
+          "factIds": [
+            "f6"
+          ],
+          "guard": {
+            "ok": false,
+            "violations": [
+              {
+                "type": "number",
+                "claim": "2025"
+              }
+            ],
+            "warnings": []
+          },
+          "words": 23,
+          "leaks": []
+        }
+      ],
+      "coverage": {
+        "coverable": 9,
+        "mentioned": 3
+      }
+    },
+    {
+      "id": "oth-01",
+      "model": "freellmapi:typhoon-v2.5-30b-a3b-instruct",
+      "seconds": 2.503,
+      "extraction": {
+        "required": {
+          "total": 6,
+          "found": 5
+        },
+        "all": {
+          "total": 13,
+          "found": 11
+        },
+        "extracted": 11,
+        "matchedExtracted": 11
+      },
+      "drafts": [
+        {
+          "experienceId": "e1",
+          "text": "Developed 64 Playwright end-to-end tests in TypeScript for a canteen ordering web app, catching 9 critical bugs pre-demo using CI/CD pipelines.",
+          "factIds": [
+            "f1",
+            "f2"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 21,
+          "leaks": []
+        },
+        {
+          "experienceId": "e2",
+          "text": "Logged 120 detailed bug reports in Jira from manual testing and created Postman collections covering 38 API endpoints for booking services.",
+          "factIds": [
+            "f3",
+            "f4"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 21,
+          "leaks": []
+        }
+      ],
+      "coverage": {
+        "coverable": 6,
+        "mentioned": 5
+      }
+    },
+    {
+      "id": "oth-02",
+      "model": "freellmapi:typhoon-v2.5-30b-a3b-instruct",
+      "seconds": 6.449,
+      "extraction": {
+        "required": {
+          "total": 4,
+          "found": 3
+        },
+        "all": {
+          "total": 9,
+          "found": 4
+        },
+        "extracted": 4,
+        "matchedExtracted": 4
+      },
+      "drafts": [
+        {
+          "experienceId": "e1",
+          "text": "Developed core gameplay systems including player movement, crop growth timers, and save functionality in Unity using C# for a 48-hour game jam.",
+          "factIds": [
+            "f1"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 22,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Published a jam game on itch.io that achieved 1,200 downloads, demonstrating end-to-end delivery and distribution skills.",
+          "factIds": [
+            "f2"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 16,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Managed version control via Git with branching and pull request workflows, ensuring collaborative development efficiency.",
+          "factIds": [
+            "f6"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 15,
+          "leaks": []
+        },
+        {
+          "experienceId": "e2",
+          "text": "Led weekly Unity workshops for 25+ club members, teaching foundational programming and toolset usage in C# and Unity.",
+          "factIds": [
+            "f4"
+          ],
+          "guard": {
+            "ok": false,
+            "violations": [
+              {
+                "type": "tech",
+                "term": "C#"
+              }
+            ],
+            "warnings": []
+          },
+          "words": 18,
+          "leaks": []
+        },
+        {
+          "experienceId": "e3",
+          "text": "Optimized enemy spawning using object pooling in Unity C#, reducing frame time by 36% (from 22ms to 14ms) during intense combat phases.",
+          "factIds": [
+            "f3"
+          ],
+          "guard": {
+            "ok": false,
+            "violations": [
+              {
+                "type": "number",
+                "claim": "36%"
+              }
+            ],
+            "warnings": []
+          },
+          "words": 22,
+          "leaks": []
+        },
+        {
+          "experienceId": "e3",
+          "text": "Created low-poly environment assets in Blender to support visual design and improve scene performance in the prototype.",
+          "factIds": [
+            "f5"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 17,
+          "leaks": []
+        }
+      ],
+      "coverage": {
+        "coverable": 4,
+        "mentioned": 4
+      }
+    },
+    {
+      "id": "oth-03",
+      "model": "freellmapi:typhoon-v2.5-30b-a3b-instruct",
+      "seconds": 4.734,
+      "extraction": {
+        "required": {
+          "total": 6,
+          "found": 0
+        },
+        "all": {
+          "total": 9,
+          "found": 1
+        },
+        "extracted": 1,
+        "matchedExtracted": 1
+      },
+      "drafts": [
+        {
+          "experienceId": "e1",
+          "text": "Resolved 340+ walk-in and email IT tickets for lab computers and staff laptops using Windows and osTicket, achieving 98% resolution rate within SLA.",
+          "factIds": [
+            "f1"
+          ],
+          "guard": {
+            "ok": false,
+            "violations": [
+              {
+                "type": "number",
+                "claim": "98%"
+              },
+              {
+                "type": "term",
+                "term": "SLA"
+              }
+            ],
+            "warnings": []
+          },
+          "words": 23,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Managed 150+ Active Directory user accounts and performed password resets, reducing account access delays by 70% through streamlined processes.",
+          "factIds": [
+            "f2"
+          ],
+          "guard": {
+            "ok": false,
+            "violations": [
+              {
+                "type": "number",
+                "claim": "150"
+              },
+              {
+                "type": "number",
+                "claim": "70%"
+              }
+            ],
+            "warnings": []
+          },
+          "words": 19,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Reduced lab PC re-imaging time from 50 to 15 minutes per machine using Clonezilla, enabling faster deployment ahead of each semester.",
+          "factIds": [
+            "f3"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 21,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Authored and published 6 step-by-step knowledge base articles for printer and Wi-Fi setup, adopted across the faculty’s FAQ page.",
+          "factIds": [
+            "f5"
+          ],
+          "guard": {
+            "ok": false,
+            "violations": [
+              {
+                "type": "number",
+                "claim": "6"
+              }
+            ],
+            "warnings": []
+          },
+          "words": 19,
+          "leaks": [
+            "JD number 6"
+          ]
+        }
+      ],
+      "coverage": {
+        "coverable": 2,
+        "mentioned": 0
+      }
+    },
+    {
+      "id": "oth-04",
+      "model": "freellmapi:typhoon-v2.5-30b-a3b-instruct",
+      "seconds": 6.29,
+      "extraction": {
+        "required": {
+          "total": 6,
+          "found": 1
+        },
+        "all": {
+          "total": 13,
+          "found": 3
+        },
+        "extracted": 3,
+        "matchedExtracted": 3
+      },
+      "drafts": [
+        {
+          "experienceId": "e1",
+          "text": "Developed a low-power soil-moisture controller in C++ on ESP32 using I2C, achieving 3-week battery life on a 2,000 mAh coin cell via optimized deep sleep.",
+          "factIds": [
+            "f1"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 25,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Implemented MQTT-based telemetry to send sensor data every 10 minutes to a web dashboard, enabling remote monitoring and validation of real-time performance.",
+          "factIds": [
+            "f2"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 22,
+          "leaks": []
+        },
+        {
+          "experienceId": "e3",
+          "text": "Engineered PID motor control in C for an STM32-based line-following robot, improving tracking accuracy and securing 4th place among 18 competing teams.",
+          "factIds": [
+            "f3"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 22,
+          "leaks": []
+        },
+        {
+          "experienceId": "e3",
+          "text": "Automated sensor log analysis by developing a Python script to visualize data trends, reducing PID tuning time by 50% during iterative testing.",
+          "factIds": [
+            "f5"
+          ],
+          "guard": {
+            "ok": false,
+            "violations": [
+              {
+                "type": "number",
+                "claim": "50%"
+              }
+            ],
+            "warnings": []
+          },
+          "words": 22,
+          "leaks": []
+        }
+      ],
+      "coverage": {
+        "coverable": 5,
+        "mentioned": 2
+      }
+    },
+    {
+      "id": "oth-05",
+      "model": "freellmapi:typhoon-v2.5-30b-a3b-instruct",
+      "seconds": 5.461,
+      "extraction": {
+        "required": {
+          "total": 6,
+          "found": 1
+        },
+        "all": {
+          "total": 12,
+          "found": 2
+        },
+        "extracted": 2,
+        "matchedExtracted": 2
+      },
+      "drafts": [
+        {
+          "experienceId": "e1",
+          "text": "Competed in national student CTF event, achieving 7th place among 112 teams using Linux, Wireshark, and Burp Suite to solve web and forensics challenges.",
+          "factIds": [
+            "f1"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 24,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Developed Python scripts to automate decoding tasks in CTF challenges, reducing manual effort by 60% and accelerating solution time.",
+          "factIds": [
+            "f5"
+          ],
+          "guard": {
+            "ok": false,
+            "violations": [
+              {
+                "type": "number",
+                "claim": "60%"
+              }
+            ],
+            "warnings": []
+          },
+          "words": 19,
+          "leaks": []
+        },
+        {
+          "experienceId": "e2",
+          "text": "Built a Wazuh-based security monitoring lab with 3 VMs, creating 5 custom detection rules that identified SSH brute force and unauthorized admin accounts.",
+          "factIds": [
+            "f2"
+          ],
+          "guard": {
+            "ok": false,
+            "violations": [
+              {
+                "type": "term",
+                "term": "VMs"
+              }
+            ],
+            "warnings": []
+          },
+          "words": 23,
+          "leaks": []
+        },
+        {
+          "experienceId": "e2",
+          "text": "Analyzed simulated attack traffic via packet captures using Wireshark, improving threat detection accuracy by 40% in the lab environment.",
+          "factIds": [
+            "f3"
+          ],
+          "guard": {
+            "ok": false,
+            "violations": [
+              {
+                "type": "number",
+                "claim": "40%"
+              }
+            ],
+            "warnings": []
+          },
+          "words": 19,
+          "leaks": [
+            "JD number 40%"
+          ]
+        }
+      ],
+      "coverage": {
+        "coverable": 4,
+        "mentioned": 3
+      }
+    },
+    {
+      "id": "oth-06",
+      "model": "freellmapi:typhoon-v2.5-30b-a3b-instruct",
+      "seconds": 4.745,
+      "extraction": {
+        "required": {
+          "total": 4,
+          "found": 2
+        },
+        "all": {
+          "total": 11,
+          "found": 8
+        },
+        "extracted": 8,
+        "matchedExtracted": 8
+      },
+      "drafts": [
+        {
+          "experienceId": "e1",
+          "text": "Streamlined daily handover meetings by building an Excel tracker for room upgrade requests and late checkouts, reducing meeting time from 30 to 10 minutes.",
+          "factIds": [
+            "f1"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 24,
+          "leaks": []
+        },
+        {
+          "experienceId": "e3",
+          "text": "Extracted and cleaned grocery delivery data using SQL on a 250K-row dataset, identifying that customers with two or more late deliveries had a 41% churn rate versus 18% for others.",
+          "factIds": [
+            "f4"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 30,
+          "leaks": []
+        },
+        {
+          "experienceId": "e3",
+          "text": "Designed a Power BI dashboard to visualize weekly churn trends by region, enabling data-driven decisions for retention strategies.",
+          "factIds": [
+            "f5"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 18,
+          "leaks": []
+        }
+      ],
+      "coverage": {
+        "coverable": 4,
+        "mentioned": 3
+      }
+    },
+    {
+      "id": "oth-07",
+      "model": "freellmapi:typhoon-v2.5-30b-a3b-instruct",
+      "seconds": 3.598,
+      "extraction": {
+        "required": {
+          "total": 6,
+          "found": 4
+        },
+        "all": {
+          "total": 12,
+          "found": 4
+        },
+        "extracted": 4,
+        "matchedExtracted": 4
+      },
+      "drafts": [
+        {
+          "experienceId": "e3",
+          "text": "Rewrote a CLI tool’s getting-started guide in Markdown, reducing setup-related support queries by 73% after merge.",
+          "factIds": [
+            "f1"
+          ],
+          "guard": {
+            "ok": false,
+            "violations": [
+              {
+                "type": "number",
+                "claim": "73%"
+              }
+            ],
+            "warnings": []
+          },
+          "words": 16,
+          "leaks": []
+        },
+        {
+          "experienceId": "e3",
+          "text": "Added 22 tested Python code samples to API reference pages, improving accuracy and usability for developers.",
+          "factIds": [
+            "f2"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 16,
+          "leaks": []
+        },
+        {
+          "experienceId": "e3",
+          "text": "Validated 15+ REST API curl examples against live endpoints, identifying and fixing 3 outdated calls pre-publication.",
+          "factIds": [
+            "f5"
+          ],
+          "guard": {
+            "ok": false,
+            "violations": [
+              {
+                "type": "number",
+                "claim": "15"
+              }
+            ],
+            "warnings": []
+          },
+          "words": 16,
+          "leaks": []
+        }
+      ],
+      "coverage": {
+        "coverable": 4,
+        "mentioned": 1
+      }
+    },
+    {
+      "id": "oth-08",
+      "model": "freellmapi:typhoon-v2.5-30b-a3b-instruct",
+      "seconds": 4.009,
+      "extraction": {
+        "required": {
+          "total": 6,
+          "found": 4
+        },
+        "all": {
+          "total": 11,
+          "found": 6
+        },
+        "extracted": 6,
+        "matchedExtracted": 6
+      },
+      "drafts": [
+        {
+          "experienceId": "e1",
+          "text": "Translated 36 Figma mobile screens and component designs into accessible, responsive React components with proper semantic HTML and CSS.",
+          "factIds": [
+            "f1"
+          ],
+          "guard": {
+            "ok": false,
+            "violations": [
+              {
+                "type": "tech",
+                "term": "HTML"
+              },
+              {
+                "type": "tech",
+                "term": "CSS"
+              },
+              {
+                "type": "tech",
+                "term": "React"
+              }
+            ],
+            "warnings": []
+          },
+          "words": 19,
+          "leaks": []
+        },
+        {
+          "experienceId": "e2",
+          "text": "Built and tested a React-based booking UI from Figma mockups, reducing average task completion time by 58% through iterative usability testing.",
+          "factIds": [
+            "f2",
+            "f3"
+          ],
+          "guard": {
+            "ok": false,
+            "violations": [
+              {
+                "type": "number",
+                "claim": "58%"
+              }
+            ],
+            "warnings": []
+          },
+          "words": 21,
+          "leaks": []
+        },
+        {
+          "experienceId": "e2",
+          "text": "Improved WCAG compliance by fixing color contrast and keyboard navigation issues, boosting Lighthouse accessibility score from 71 to 96.",
+          "factIds": [
+            "f4"
+          ],
+          "guard": {
+            "ok": false,
+            "violations": [
+              {
+                "type": "term",
+                "term": "WCAG"
+              }
+            ],
+            "warnings": []
+          },
+          "words": 19,
+          "leaks": []
+        }
+      ],
+      "coverage": {
+        "coverable": 6,
+        "mentioned": 0
+      }
+    },
+    {
+      "id": "oth-09",
+      "model": "freellmapi:typhoon-v2.5-30b-a3b-instruct",
+      "seconds": 4.315,
+      "extraction": {
+        "required": {
+          "total": 4,
+          "found": 1
+        },
+        "all": {
+          "total": 11,
+          "found": 5
+        },
+        "extracted": 5,
+        "matchedExtracted": 5
+      },
+      "drafts": [
+        {
+          "experienceId": "e1",
+          "text": "Mentored 60 undergraduate students weekly in Data Structures using Java, improving problem-solving skills through guided lab sessions and office hours.",
+          "factIds": [
+            "f1"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 20,
+          "leaks": []
+        },
+        {
+          "experienceId": "e3",
+          "text": "Developed a containerized autograder using Python and Pytest, reducing lab grading time from 3 hours to 40 minutes across 420 submissions.",
+          "factIds": [
+            "f3"
+          ],
+          "guard": {
+            "ok": false,
+            "violations": [
+              {
+                "type": "number",
+                "claim": "420"
+              }
+            ],
+            "warnings": []
+          },
+          "words": 21,
+          "leaks": []
+        },
+        {
+          "experienceId": "e2",
+          "text": "Instructed 10–14-year-olds in beginner Python and Scratch across 8 Saturday sessions, fostering foundational coding skills in a project-based environment.",
+          "factIds": [
+            "f4"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 19,
+          "leaks": []
+        }
+      ],
+      "coverage": {
+        "coverable": 4,
+        "mentioned": 2
+      }
+    },
+    {
+      "id": "oth-10",
+      "model": "freellmapi:typhoon-v2.5-30b-a3b-instruct",
+      "seconds": 6.505,
+      "extraction": {
+        "required": {
+          "total": 6,
+          "found": 2
+        },
+        "all": {
+          "total": 12,
+          "found": 4
+        },
+        "extracted": 4,
+        "matchedExtracted": 4
+      },
+      "drafts": [
+        {
+          "experienceId": "e1",
+          "text": "Designed and deployed a MySQL-powered inventory web application tracking 1,300+ items, reducing manual tracking errors by 90% and enabling real-time stock visibility.",
+          "factIds": [
+            "f3"
+          ],
+          "guard": {
+            "ok": false,
+            "violations": [
+              {
+                "type": "number",
+                "claim": "90%"
+              }
+            ],
+            "warnings": []
+          },
+          "words": 22,
+          "leaks": []
+        },
+        {
+          "experienceId": "e1",
+          "text": "Developed automated SQL reports identifying low-stock items, adopted weekly by staff to streamline reordering and cut stockouts by 40%.",
+          "factIds": [
+            "f4"
+          ],
+          "guard": {
+            "ok": false,
+            "violations": [
+              {
+                "type": "number",
+                "claim": "40%"
+              }
+            ],
+            "warnings": []
+          },
+          "words": 19,
+          "leaks": []
+        },
+        {
+          "experienceId": "e2",
+          "text": "Transitioned paper-based stock management to an Excel workbook with VLOOKUPs, slashing monthly inventory counts from 2 days to 6 hours and improving accuracy.",
+          "factIds": [
+            "f1"
+          ],
+          "guard": {
+            "ok": false,
+            "violations": [
+              {
+                "type": "number",
+                "claim": "6 hours"
+              },
+              {
+                "type": "term",
+                "term": "VLOOKUPs"
+              }
+            ],
+            "warnings": []
+          },
+          "words": 23,
+          "leaks": [
+            "JD number 6 hours"
+          ]
+        },
+        {
+          "experienceId": "e2",
+          "text": "Configured Wi-Fi, shared printer, and 4 Windows PCs, ensuring seamless shop-floor connectivity and reducing device downtime by 75%.",
+          "factIds": [
+            "f2"
+          ],
+          "guard": {
+            "ok": false,
+            "violations": [
+              {
+                "type": "number",
+                "claim": "75%"
+              }
+            ],
+            "warnings": []
+          },
+          "words": 18,
+          "leaks": []
+        },
+        {
+          "experienceId": "e3",
+          "text": "Applied Python and pandas to analyze datasets, completing a certified data analysis course and building scalable scripts for automated reporting.",
+          "factIds": [
+            "f5"
+          ],
+          "guard": {
+            "ok": true,
+            "violations": [],
+            "warnings": []
+          },
+          "words": 20,
+          "leaks": []
+        }
+      ],
+      "coverage": {
+        "coverable": 4,
+        "mentioned": 1
+      }
+    }
+  ]
+}

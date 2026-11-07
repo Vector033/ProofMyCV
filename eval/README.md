@@ -84,6 +84,42 @@ blocking a correct bullet that named the experience's own club; names may now co
 experience title and organisation (numbers still only from facts). Each figure is a single run at temperature 0.2,
 so differences of a few points are within noise.
 
+### Other models and a fabrication stress test (2026-11-07, rules-based job analysis)
+
+Flash-Lite never fabricated, so the live runs above said nothing about whether the guard catches a real model's
+inventions. These runs go through FreeLLMAPI (`--provider freellmapi`), a local router over free model tiers.
+`--prompt loose` is not a product prompt: it is what a typical "make my resume impressive, add quantified impact,
+use the posting's keywords" request looks like, kept in `eval/prompts.ts` to provoke fabrications.
+
+| Model, prompt | Drafts | Blocked | Bait leaks before / after guard |
+|---|---|---|---|
+| Typhoon 2.5 30B, current prompt | 90 | 9 (10%) | 0 / 0 |
+| Typhoon 2.5 30B, loose prompt | 129 | 45 (35%) | 3 / 0 |
+| Gemini Flash-Lite, loose prompt | 133 | 10 (7.5%) | 0 / 0 |
+
+Every blocked bullet was read by hand against the whole fact bank and labelled:
+
+| Blocked bullets | Typhoon, current | Typhoon, loose | Flash-Lite, loose |
+|---|---|---|---|
+| Invented or inflated claim (number, meaning, year) | 3 | 26 | 2 |
+| True elsewhere in the bank, but not in the cited fact | 5 | 9 | 3 |
+| Honest paraphrase the guard could not verify (false block) | 1 | 10 | 5 |
+
+- **Caught:** "reduced rebuilds by 80%", "98% resolution rate within SLA", "from 15 s to 2.3 s" (the fact only says
+  2.3 s), "97% faster" (12 min → 40 s is 94%), "under 1,000 RPS" from a "1,000-request load test" (caught only because
+  "RPS" is a new token). The independent bait check agrees: 3 leaks before the guard, 0 after.
+- **Citation errors** are blocked on purpose: a bullet may only use what its cited facts say, even if another fact
+  in the bank would back it.
+- **False blocks** come from arithmetic and wording the guard does not do: 410 KB → 260 KB written as "36%",
+  "0.91" as "91%", "78 of 100" as "78%", "VMs" for "virtual machines", "SSR", "Dockerized", and inferred terms such
+  as "iOS" for an App Store release or "WCAG" for a Lighthouse contrast fix. These are the next guard improvement
+  (derived percentages, an abbreviation list), to be tuned on the 30 tuning cases only.
+- **Not caught by design:** soft overclaims with no number or name, e.g. "enabling operations teams to prioritize
+  interventions" or "WCAG AA compliance" from a fact that says contrast checks passed. A spot check of 12 accepted
+  Typhoon bullets (current prompt) found 2 of these and no invented numbers.
+- gpt-oss-20B and Qwen 3.8 27B were also tried but hit free-tier rate limits after a few cases, so they have no
+  numbers here. Single runs at temperature 0.2.
+
 ## Run it
 
 ```bash
@@ -91,6 +127,7 @@ npm run eval                      # offline: guard + rule extractor, tuning and 
 npm run eval:live                 # live: Gemini analysis + drafting on the tuning set; writes eval/results/*.json
 npm run eval:live -- --limit 5    # a quick sample
 npm run eval:live -- --rules-analysis --prompt v1   # compare an older drafting prompt (eval/prompts.ts)
+npm run eval:live -- --rules-analysis --prompt loose --provider freellmapi --model typhoon-2.5-30b-a3b-instruct
 npx tsx eval/style-report.mts [eval/results/<file>.json]   # XYZ style scores for a saved run
 npx tsx eval/validate.ts eval/cases/*.json eval/holdout/*.json
 ```
