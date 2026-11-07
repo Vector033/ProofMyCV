@@ -3,6 +3,8 @@ import { and, asc, desc, eq } from "drizzle-orm";
 import { db } from "@/db";
 import { applications, experiences, facts, profiles, type SavedBullet } from "@/db/schema";
 import { requireUser } from "./auth";
+import { extractJobRuleBased } from "./core/jd";
+import { DEMO_BANK, DEMO_JOB, DEMO_PROFILE } from "./demo-data";
 import type { Experience, ExperienceKind, Fact, JobAnalysis } from "./core/types";
 
 // Data Access Layer. Every function resolves the signed-in user itself and
@@ -169,3 +171,37 @@ export async function exportAll() {
   return { email, profile, ...bank, applications: apps };
 }
 
+
+/** Deletes every FactFit row of the signed-in user (facts go with their experiences). */
+export async function deleteAllMyData() {
+  const { id } = await requireUser();
+  await db.transaction(async (tx) => {
+    await tx.delete(applications).where(eq(applications.userId, id));
+    await tx.delete(experiences).where(eq(experiences.userId, id));
+    await tx.delete(profiles).where(eq(profiles.userId, id));
+  });
+}
+
+/** Replaces the signed-in (demo) user's data with the fictional demo fact bank and a sample job. */
+export async function resetDemoData() {
+  const { id } = await requireUser();
+  await deleteAllMyData();
+  await db.transaction(async (tx) => {
+    await tx.insert(profiles).values({ userId: id, ...DEMO_PROFILE });
+    for (const [i, e] of DEMO_BANK.entries()) {
+      const [row] = await tx
+        .insert(experiences)
+        .values({ userId: id, kind: e.kind, title: e.title, org: e.org, location: e.location ?? null, startDate: e.start, endDate: e.end, sort: i })
+        .returning({ id: experiences.id });
+      for (const f of e.facts) {
+        await tx.insert(facts).values({ userId: id, experienceId: row.id, did: f.did, result: f.result ?? null, tech: f.tech });
+      }
+    }
+    await tx.insert(applications).values({
+      userId: id,
+      ...DEMO_JOB,
+      analysis: extractJobRuleBased(DEMO_JOB.jdText),
+      analyzedBy: "rules",
+    });
+  });
+}

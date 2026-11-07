@@ -7,6 +7,8 @@ export default defineConfig({
   schema: "./src/db/schema.ts",
   out: "./drizzle",
   dialect: "postgresql",
-  schemaFilter: ["public"],
+  schemaFilter: ["factfit"],
+  // Keep the migration log inside our schema too; the hosted project is shared.
+  migrations: { schema: "factfit", table: "__drizzle_migrations" },
   dbCredentials: { url: process.env.DATABASE_URL! },
 });

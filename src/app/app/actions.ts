@@ -3,9 +3,10 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
-import { createClient as createAdminClient } from "@supabase/supabase-js";
 import * as data from "@/lib/data";
-import { requireUser } from "@/lib/auth";
+import { requireUser, type SessionUser } from "@/lib/auth";
+import { isDemoUser } from "@/lib/supabase/admin";
+import { LIMITS, clientIp, hit, retryText } from "@/lib/rate-limit";
 import { createClient } from "@/lib/supabase/server";
 import { canonicalTech } from "@/lib/core/vocab";
 import { checkBullet, describeViolation } from "@/lib/core/guard";
@@ -27,6 +28,15 @@ const month = z
   .transform((s) => s || null);
 
 const form = (fd: FormData) => Object.fromEntries(fd) as Record<string, string>;
+
+/**
+ * Counts one Gemini call against the daily limit (per user; one shared bucket
+ * for the demo account) and reports whether it may go ahead, so the owner's
+ * free API quota cannot be drained by one visitor.
+ */
+async function allowAi(user: SessionUser) {
+  return isDemoUser(user.email) ? hit(LIMITS.llmDemoDay, "demo") : hit(LIMITS.llmUserDay, user.id);
+}
 
 // ---------- profile ----------
 
@@ -108,7 +118,12 @@ export async function createApplicationAction(_prev: FormState, fd: FormData): P
   if (!parsed.success) return { error: parsed.error.issues[0].message };
   const { company, role, jdText } = parsed.data;
 
-  const llm = getLlm();
+  let llm = getLlm();
+  let analyzedBy = llm ? "" : "rules";
+  if (llm && !(await allowAi(await requireUser())).ok) {
+    llm = null;
+    analyzedBy = "rules (daily AI limit reached)";
+  }
   let analysis;
   try {
     analysis = await analyzeJob(llm, jdText);
@@ -121,7 +136,7 @@ export async function createApplicationAction(_prev: FormState, fd: FormData): P
     role: role || analysis.role,
     jdText,
     analysis,
-    analyzedBy: llm?.name ?? "rules",
+    analyzedBy: llm?.name ?? analyzedBy,
     score: matchRequirements(analysis, bank.facts, bank.experiences).score,
   });
   redirect(`/app/applications/${id}`);
@@ -142,6 +157,10 @@ export async function generateBulletsAction(applicationId: string): Promise<Gene
   if (!app) return { error: "Application not found." };
   const bank = await data.getFactBank();
   if (bank.facts.length === 0) return { error: "Add some facts to your fact bank first." };
+  const limit = await allowAi(await requireUser());
+  if (!limit.ok) {
+    return { error: `Today's AI limit is used up (resets in ${retryText(limit.retryAfterSec)}). Your facts as written still work.` };
+  }
   try {
     return { candidates: await draftBullets(llm, app.analysis, bank.experiences, bank.facts) };
   } catch (e) {
@@ -183,16 +202,25 @@ export async function signOutAction() {
   redirect("/");
 }
 
+/**
+ * Deletes every FactFit row of the signed-in user. The sign-in itself lives in
+ * a Supabase project shared with other apps, so it is not removed here.
+ */
 export async function deleteAccountAction(fd: FormData) {
   const user = await requireUser();
-  if (form(fd).confirm !== "delete") return;
-  const admin = createAdminClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.SUPABASE_SECRET_KEY!, {
-    auth: { persistSession: false },
-  });
-  // Deleting the auth user cascades to every FactFit table.
-  const { error } = await admin.auth.admin.deleteUser(user.id);
-  if (error) throw new Error(error.message);
+  if (form(fd).confirm !== "delete" || isDemoUser(user.email)) return;
+  await data.deleteAllMyData();
   const supabase = await createClient();
   await supabase.auth.signOut();
   redirect("/?deleted=1");
+}
+
+/** Restores the shared demo account to its fictional starting data. */
+export async function resetDemoAction() {
+  const user = await requireUser();
+  if (!isDemoUser(user.email)) return;
+  if (!(await hit(LIMITS.demoResetIp, await clientIp())).ok) return;
+  await data.resetDemoData();
+  revalidatePath("/app", "layout");
+  redirect("/app");
 }

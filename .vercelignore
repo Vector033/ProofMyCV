@@ -1,0 +1,7 @@
+# Never upload local or production env files; Vercel gets its values from `vercel env`.
+.env*
+!.env.example
+.next
+node_modules
+supabase/.temp
+eval/results

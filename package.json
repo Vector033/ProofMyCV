@@ -11,7 +11,7 @@
     "typecheck": "next typegen && tsc --noEmit",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
-    "seed:demo": "node --env-file=.env.local scripts/seed-demo.mts",
+    "seed:demo": "tsx --env-file=.env.local scripts/seed-demo.mts",
     "test:live": "vitest run eval/live.test.ts",
     "eval": "vitest run eval/offline.test.ts --silent=false",
     "eval:live": "tsx eval/run-live.mts"

@@ -1,9 +1,9 @@
 # FactFit: ปรับ resume ให้ตรงประกาศงาน โดยไม่แต่งข้อเท็จจริง
 
-> สถานะ (2026-11-04): milestone 1–2 และส่วนใหญ่ของ 3 เสร็จบนเครื่อง (ยังไม่ deploy) eval set 30+10 held-out เสร็จแล้ว ผลอยู่ใน eval/README.md ทดสอบกับ Gemini key จริงแล้ว: Flash-Lite เป็นตัวหลักเพราะ gemini-flash-latest ตอบ 503/timeout บ่อย ดู Roadmap ใน README
+> สถานะ (2026-11-07): **deploy แล้ว** ที่ https://factfit-five.vercel.app (มีปุ่มบัญชีเดโม) · eval 30+10 held-out และ prompt XYZ v2 เสร็จ ผลอยู่ใน eval/README.md · ยังไม่มี import resume และภาพหน้าจอใน README
 >
-> Stack ที่ตกลงแล้ว: Next.js 16 + Supabase (Auth + Postgres, dev ใช้ `npx supabase start` ใน Docker) + Drizzle + Gemini
-> Node 26 ติดตั้งแล้วที่ `C:\Program Files\nodejs` (ถ้า shell หา node ไม่เจอ ให้เพิ่ม path นี้)
+> Production: Supabase project เดียวกับ HarnKan/SlipJot (ref ddyjypurrrzasbtfwncs) แยก schema `factfit` · ค่า production อยู่ใน `.env.vercel-production` (gitignored) · runtime ใช้ transaction pooler :6543 + DB_POOL_MAX=8 (ห้ามใช้ session pooler เพราะจำกัด 15 client ทั้ง project) · migrate ใช้ MIGRATE_DATABASE_URL (:5432) · deploy ด้วย `npx vercel@latest deploy --prod --yes` (GitHub ต่อกับ Vercel ไม่ได้เพราะ repo private)
+> Stack: Next.js 16 + Supabase (Auth + Postgres, dev ใช้ `npx supabase start` ใน Docker) + Drizzle + Gemini (Flash-Lite ก่อน) · Node 26 อยู่ที่ `C:\Program Files\nodejs`
 
 ## เจ้าของโปรเจกต์
 Nawat Wattanawong นักศึกษาวิทยาการคอมพิวเตอร์ มช. ปี 3 เป้าหมายคือสาย **full-stack**

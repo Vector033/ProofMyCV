@@ -1,12 +1,12 @@
 {
-  "id": "2f9ca98a-43ac-4b54-834b-e95194490dad",
+  "id": "497e231b-23b2-498f-a6dd-b330fa2a2f23",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
-    "public.applications": {
+    "factfit.applications": {
       "name": "applications",
-      "schema": "",
+      "schema": "factfit",
       "columns": {
         "id": {
           "name": "id",
@@ -121,9 +121,9 @@
       "checkConstraints": {},
       "isRLSEnabled": true
     },
-    "public.experiences": {
+    "factfit.experiences": {
       "name": "experiences",
-      "schema": "",
+      "schema": "factfit",
       "columns": {
         "id": {
           "name": "id",
@@ -236,9 +236,9 @@
       "checkConstraints": {},
       "isRLSEnabled": true
     },
-    "public.facts": {
+    "factfit.facts": {
       "name": "facts",
-      "schema": "",
+      "schema": "factfit",
       "columns": {
         "id": {
           "name": "id",
@@ -344,6 +344,7 @@
           "name": "facts_experience_id_experiences_id_fk",
           "tableFrom": "facts",
           "tableTo": "experiences",
+          "schemaTo": "factfit",
           "columnsFrom": [
             "experience_id"
           ],
@@ -360,9 +361,9 @@
       "checkConstraints": {},
       "isRLSEnabled": true
     },
-    "public.profiles": {
+    "factfit.profiles": {
       "name": "profiles",
-      "schema": "",
+      "schema": "factfit",
       "columns": {
         "user_id": {
           "name": "user_id",
@@ -435,10 +436,52 @@
       "policies": {},
       "checkConstraints": {},
       "isRLSEnabled": true
+    },
+    "factfit.rate_limits": {
+      "name": "rate_limits",
+      "schema": "factfit",
+      "columns": {
+        "key": {
+          "name": "key",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "window_start": {
+          "name": "window_start",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "count": {
+          "name": "count",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "rate_limits_key_window_start_pk": {
+          "name": "rate_limits_key_window_start_pk",
+          "columns": [
+            "key",
+            "window_start"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": true
     }
   },
   "enums": {},
-  "schemas": {},
+  "schemas": {
+    "factfit": "factfit"
+  },
   "sequences": {},
   "roles": {},
   "policies": {},

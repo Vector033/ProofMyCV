@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { demoEmail } from "@/lib/supabase/admin";
+import { DemoButton } from "./login/demo-button";
 
 const steps = [
   {
@@ -30,7 +32,7 @@ export default async function Home({ searchParams }: PageProps<"/">) {
 
       {deleted && (
         <p className="mt-6 rounded-md bg-emerald-50 px-3 py-2 text-sm text-emerald-800">
-          Your account and all of its data have been deleted.
+          Your FactFit data has been deleted.
         </p>
       )}
 
@@ -46,6 +48,7 @@ export default async function Home({ searchParams }: PageProps<"/">) {
           <Link href="/login" className="btn-primary">
             Start your fact bank
           </Link>
+          {demoEmail() && <DemoButton className="btn h-full px-4 py-2" />}
         </div>
       </section>
 

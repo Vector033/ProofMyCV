@@ -6,7 +6,8 @@ AI resume writers happily make up numbers and tools. FactFit keeps a **fact bank
 job description against it, and only lets a bullet onto your resume if every number and every technology in it can be
 traced back to a fact you wrote. That check is plain code, not a prompt.
 
-> Status: early development (milestones 1–2 done locally, see [Roadmap](#roadmap)). No live deployment yet.
+**Live:** https://factfit-five.vercel.app · press **Try the demo account** to use a shared account with a fictional
+fact bank, no sign-up needed.
 
 ## How it works
 
@@ -57,6 +58,23 @@ src/proxy.ts       session refresh + optimistic redirect to /login
 drizzle/           SQL migrations (RLS enabled, no public policies)
 ```
 
+## Deployment
+
+Vercel (region sin1) with a hosted Supabase project shared with two other apps of mine, so everything FactFit stores
+lives in its own Postgres schema `factfit` (migration log included). Accounts are created server-side through the
+Supabase admin API, so no confirmation emails or redirect URLs are configured on the shared project, and "Delete my
+data" removes every FactFit row while leaving the shared sign-in alone. Gemini calls are capped per user per day
+(and for the demo account as a whole) with Postgres-backed rate limits whose keys are HMAC hashes, never raw IPs or
+emails. The runtime connects through Supabase's transaction pooler: the session pooler allows only 15 clients for
+the whole project, and postgres.js stays reliable there as long as its pool is at least as large as the number of
+queries run at once (it pipelines otherwise, which the pooler does not handle).
+
+```bash
+npx vercel@latest deploy --prod --yes                                               # deploy
+DATABASE_URL=<session pooler url> npx drizzle-kit migrate                           # migrate the hosted schema
+node --env-file=<prod env file> --import tsx scripts/seed-demo.mts --remote         # reset the hosted demo account
+```
+
 ## Run locally
 
 Needs Node 24+ and Docker Desktop.
@@ -89,4 +107,5 @@ npm run typecheck
 - [x] Bullet drafting with the fabrication guard, saved versions, PDF export, data export and account deletion
 - [x] Eval set: 30 tuning + 10 held-out cases measuring guard catch rate, false blocks, keyword recall and bullet length
 - [ ] Import facts from an existing resume (.docx / .pdf) for review
-- [ ] Deploy (Vercel + Supabase) and screenshots
+- [x] Deploy (Vercel + Supabase), demo account, daily AI limit
+- [ ] Screenshots in this README

@@ -1,11 +1,15 @@
-import { index, integer, jsonb, pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
+import { index, integer, jsonb, pgSchema, primaryKey, text, timestamp, uuid } from "drizzle-orm/pg-core";
 import { authUsers } from "drizzle-orm/supabase";
 import type { ExperienceKind, JobAnalysis } from "@/lib/core/types";
 
-// Every table hangs off auth.users with ON DELETE CASCADE, so deleting the
-// account deletes all of the user's data. RLS is on with no policies: the app
-// reads through the server-side DATABASE_URL connection and filters by user id
-// itself, and the public Supabase API key cannot read these tables at all.
+// All tables live in their own "factfit" schema: the hosted Supabase project is
+// shared with other apps (HarnKan, SlipJot), so FactFit never touches "public".
+// Every table hangs off auth.users with ON DELETE CASCADE. RLS is on with no
+// policies: the app reads through the server-side DATABASE_URL connection and
+// filters by user id itself, and the public Supabase API key cannot read these
+// tables at all.
+
+export const factfit = pgSchema("factfit");
 
 const owner = () =>
   uuid("user_id")
@@ -20,7 +24,7 @@ const timestamps = {
     .$onUpdate(() => new Date()),
 };
 
-export const profiles = pgTable("profiles", {
+export const profiles = factfit.table("profiles", {
   userId: owner().primaryKey(),
   fullName: text("full_name").notNull().default(""),
   headline: text("headline").notNull().default(""),
@@ -30,7 +34,7 @@ export const profiles = pgTable("profiles", {
   ...timestamps,
 }).enableRLS();
 
-export const experiences = pgTable(
+export const experiences = factfit.table(
   "experiences",
   {
     id: uuid("id").primaryKey().defaultRandom(),
@@ -47,7 +51,7 @@ export const experiences = pgTable(
   (t) => [index("experiences_user_idx").on(t.userId)],
 ).enableRLS();
 
-export const facts = pgTable(
+export const facts = factfit.table(
   "facts",
   {
     id: uuid("id").primaryKey().defaultRandom(),
@@ -66,7 +70,7 @@ export const facts = pgTable(
 export type SavedBullet = { experienceId: string; text: string; factIds: string[] };
 
 /** One tailored resume version per job applied to. */
-export const applications = pgTable(
+export const applications = factfit.table(
   "applications",
   {
     id: uuid("id").primaryKey().defaultRandom(),
@@ -82,3 +86,16 @@ export const applications = pgTable(
   },
   (t) => [index("applications_user_idx").on(t.userId)],
 ).enableRLS();
+
+/** Fixed-window counters for rate limits. Keys are HMAC hashes, never raw IPs or emails. */
+export const rateLimits = factfit
+  .table(
+    "rate_limits",
+    {
+      key: text("key").notNull(),
+      windowStart: timestamp("window_start", { withTimezone: true }).notNull(),
+      count: integer("count").notNull().default(0),
+    },
+    (t) => [primaryKey({ columns: [t.key, t.windowStart] })],
+  )
+  .enableRLS();

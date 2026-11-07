@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
-import { deleteAccountAction } from "../actions";
+import { requireUser } from "@/lib/auth";
+import { isDemoUser } from "@/lib/supabase/admin";
+import { deleteAccountAction, resetDemoAction } from "../actions";
 
 export const metadata: Metadata = { title: "Settings" };
 
-export default function SettingsPage() {
+export default async function SettingsPage() {
+  const demo = isDemoUser((await requireUser()).email);
   return (
     <div className="max-w-2xl space-y-6">
       <h1 className="text-2xl font-semibold tracking-tight">Settings</h1>
@@ -19,10 +22,23 @@ export default function SettingsPage() {
         </a>
       </section>
 
+      {demo ? (
+        <section className="card p-5">
+          <h2 className="font-medium">Demo account</h2>
+          <p className="mt-1 text-sm text-stone-600">
+            Everyone who opens the demo shares this account and its fictional data, so it cannot be deleted. Put it back
+            to the starting fact bank and sample job if someone has changed it.
+          </p>
+          <form action={resetDemoAction} className="mt-4">
+            <button className="btn">Reset demo data</button>
+          </form>
+        </section>
+      ) : (
       <section className="card border-red-200 p-5">
-        <h2 className="font-medium text-red-800">Delete account</h2>
+        <h2 className="font-medium text-red-800">Delete my data</h2>
         <p className="mt-1 text-sm text-stone-600">
-          Permanently deletes your account, fact bank and every application. This cannot be undone.
+          Permanently deletes your resume header, fact bank and every application. This cannot be undone. You are signed
+          out afterwards.
         </p>
         <form action={deleteAccountAction} className="mt-4 flex flex-wrap items-end gap-3">
           <label className="block">
@@ -30,10 +46,11 @@ export default function SettingsPage() {
             <input name="confirm" required pattern="delete" className="input" autoComplete="off" />
           </label>
           <button className="inline-flex rounded-md bg-red-700 px-4 py-2 text-sm font-medium text-white hover:bg-red-800">
-            Delete my account
+            Delete my data
           </button>
         </form>
       </section>
+      )}
     </div>
   );
 }
