@@ -98,7 +98,7 @@ export function BulletStudio({ applicationId, experiences, facts, initialBullets
 
   return (
     <section aria-labelledby="bullets-heading" className="space-y-4">
-      <div className="z-[5] sm:sticky sm:top-0 -mx-4 flex flex-wrap items-center gap-3 border-b border-slate-200/80 bg-slate-50/95 px-4 py-3 backdrop-blur-sm sm:-mx-6 sm:px-6">
+      <div className="z-[5] md:sticky md:top-16 -mx-4 flex flex-wrap items-center gap-3 border-b border-slate-200/80 bg-slate-50/95 px-4 py-3 backdrop-blur-sm sm:-mx-6 sm:px-6">
         <div className="mr-auto min-w-0">
           <h2 id="bullets-heading" className="text-lg font-semibold tracking-tight">
             Bullets for this job

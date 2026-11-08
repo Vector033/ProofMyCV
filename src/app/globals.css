@@ -18,7 +18,12 @@
 }
 
 html {
-  scroll-padding-top: 5rem; /* the bullet toolbar is sticky */
+  scroll-padding-top: 1rem;
+}
+@media (min-width: 768px) {
+  html {
+    scroll-padding-top: 9rem; /* sticky top bar + bullet toolbar */
+  }
 }
 
 body {
