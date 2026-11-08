@@ -48,9 +48,9 @@ export function ScoreBadge({ score, size = "sm", animate = false }: { score: num
           style={{ "--ring-length": length } as React.CSSProperties}
         />
       </svg>
-      <span aria-hidden className={`absolute font-semibold text-stone-900 tabular-nums ${text}`}>
+      <span aria-hidden className={`absolute font-semibold text-slate-900 tabular-nums ${text}`}>
         {shown}
-        <span className="text-[0.7em] font-medium text-stone-500">%</span>
+        <span className="text-[0.7em] font-medium text-slate-500">%</span>
       </span>
     </span>
   );

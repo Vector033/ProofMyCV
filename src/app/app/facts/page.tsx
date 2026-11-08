@@ -30,12 +30,12 @@ export default async function FactsPage() {
       <header className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <h1 className="text-2xl font-semibold tracking-tight">Fact bank</h1>
-          <p className="mt-1 max-w-2xl text-sm leading-relaxed text-stone-600">
+          <p className="mt-1 max-w-2xl text-sm leading-relaxed text-slate-600">
             Write what really happened, in plain words. Bullets may only use the numbers and technologies you put here,
             so be specific: <em>what you did</em>, <em>what changed</em>, <em>the number</em>.
           </p>
         </div>
-        <p className="text-sm text-stone-500 tabular-nums">
+        <p className="text-sm text-slate-500 tabular-nums">
           {bank.facts.length} {bank.facts.length === 1 ? "fact" : "facts"} · {bank.experiences.length}{" "}
           {bank.experiences.length === 1 ? "entry" : "entries"}
         </p>
@@ -45,23 +45,23 @@ export default async function FactsPage() {
       <section className="space-y-4">
         <h2 className="font-medium">Experience, projects and education</h2>
         {bank.experiences.length === 0 && (
-          <p className="text-sm text-stone-600">Nothing here yet. Add your first job, project or degree below.</p>
+          <p className="text-sm text-slate-600">Nothing here yet. Add your first job, project or degree below.</p>
         )}
         {bank.experiences.map((e) => (
           <ExperienceCard key={e.id} experience={e} facts={bank.facts.filter((f) => f.experienceId === e.id)} />
         ))}
 
-        <details className="group rounded-xl border border-dashed border-stone-300 bg-white/60 p-5 open:border-solid open:border-stone-200/80 open:bg-white" open={bank.experiences.length === 0}>
-          <summary className="flex min-h-8 cursor-pointer list-none items-center gap-2 font-medium text-stone-800 [&::-webkit-details-marker]:hidden">
+        <details className="group rounded-xl border border-dashed border-slate-300 bg-white/60 p-5 open:border-solid open:border-slate-200/80 open:bg-white" open={bank.experiences.length === 0}>
+          <summary className="flex min-h-8 cursor-pointer list-none items-center gap-2 font-medium text-slate-800 [&::-webkit-details-marker]:hidden">
             <Plus /> Add experience, project or degree
           </summary>
           <ExperienceForm action={createExperienceAction} submit="Add experience" />
         </details>
       </section>
 
-      <section className="card p-5">
+      <section id="resume-header" className="card scroll-mt-8 p-5">
         <h2 className="font-medium">Resume header</h2>
-        <p className="mt-1 text-sm text-stone-600">The top of your exported PDF.</p>
+        <p className="mt-1 text-sm text-slate-600">The top of your exported PDF.</p>
         <form action={saveProfileAction} className="mt-4 grid gap-4 sm:grid-cols-2">
           <Field name="fullName" label="Full name" defaultValue={profile.fullName} />
           <Field name="headline" label="Headline" defaultValue={profile.headline} placeholder="Computer Science student, Chiang Mai University" />
@@ -79,14 +79,14 @@ export default async function FactsPage() {
 function ExperienceCard({ experience: e, facts }: { experience: Experience; facts: Fact[] }) {
   return (
     <article className="card">
-      <div className="flex flex-wrap items-start gap-3 border-b border-stone-100 p-5">
+      <div className="flex flex-wrap items-start gap-3 border-b border-slate-100 p-5">
         <div className="min-w-0 flex-1">
           <p className="eyebrow">
             {KIND_LABEL[e.kind]} · {formatRange(e) || "No dates"} · {facts.length} {facts.length === 1 ? "fact" : "facts"}
           </p>
-          <h3 className="mt-1.5 font-medium [overflow-wrap:anywhere] text-stone-900">
+          <h3 className="mt-1.5 font-medium [overflow-wrap:anywhere] text-slate-900">
             {e.title}
-            {e.org && <span className="font-normal text-stone-600"> · {e.org}</span>}
+            {e.org && <span className="font-normal text-slate-600"> · {e.org}</span>}
           </h3>
         </div>
         <details className="w-full text-sm sm:w-auto [&[open]]:w-full">
@@ -105,28 +105,28 @@ function ExperienceCard({ experience: e, facts }: { experience: Experience; fact
         </details>
       </div>
 
-      <ul className="divide-y divide-stone-100">
+      <ul className="divide-y divide-slate-100">
         {facts.map((f) => (
           <li key={f.id} className="px-5 py-3.5">
             <details className="group">
               <summary className="flex cursor-pointer list-none gap-3 rounded-md [&::-webkit-details-marker]:hidden">
                 <div className="min-w-0 flex-1">
-                <p className="text-sm text-stone-900 [overflow-wrap:anywhere]">{f.did}</p>
+                <p className="text-sm text-slate-900 [overflow-wrap:anywhere]">{f.did}</p>
                 {f.result && (
-                  <p className="mt-0.5 border-l-2 border-stone-300 pl-2 text-sm text-stone-700 [overflow-wrap:anywhere]">{f.result}</p>
+                  <p className="mt-0.5 border-l-2 border-slate-300 pl-2 text-sm text-slate-700 [overflow-wrap:anywhere]">{f.result}</p>
                 )}
                 {f.tech.length > 0 && (
                   <p className="mt-1 flex flex-wrap gap-1">
                     {f.tech.map((t) => (
-                      <span key={t} className="max-w-full rounded bg-stone-100 px-1.5 py-0.5 font-mono text-[11px] text-stone-600 [overflow-wrap:anywhere]">
+                      <span key={t} className="max-w-full rounded bg-slate-100 px-1.5 py-0.5 font-mono text-[11px] text-slate-600 [overflow-wrap:anywhere]">
                         {t}
                       </span>
                     ))}
                   </p>
                 )}
                 </div>
-                <span className="shrink-0 pt-0.5 text-xs text-stone-500 group-open:hidden">Edit</span>
-                <span className="hidden shrink-0 pt-0.5 text-xs text-stone-500 group-open:inline">Close</span>
+                <span className="shrink-0 pt-0.5 text-xs text-slate-500 group-open:hidden">Edit</span>
+                <span className="hidden shrink-0 pt-0.5 text-xs text-slate-500 group-open:inline">Close</span>
               </summary>
               <FactForm action={updateFactAction.bind(null, f.id)} submit="Save fact" initial={f} />
               <form action={deleteFactAction.bind(null, f.id)} className="mt-2">
@@ -139,7 +139,7 @@ function ExperienceCard({ experience: e, facts }: { experience: Experience; fact
         ))}
       </ul>
 
-      <details className="border-t border-stone-100 px-5 py-3" open={facts.length === 0}>
+      <details className="border-t border-slate-100 px-5 py-3" open={facts.length === 0}>
         <summary className="flex min-h-8 cursor-pointer list-none items-center gap-1.5 text-sm font-medium text-emerald-800 [&::-webkit-details-marker]:hidden">
           <Plus /> Add fact
         </summary>

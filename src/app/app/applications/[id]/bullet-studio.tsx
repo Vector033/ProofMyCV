@@ -98,12 +98,12 @@ export function BulletStudio({ applicationId, experiences, facts, initialBullets
 
   return (
     <section aria-labelledby="bullets-heading" className="space-y-4">
-      <div className="z-[5] sm:sticky sm:top-[49px] -mx-4 flex flex-wrap items-center gap-3 border-b border-stone-200/80 bg-[#fafaf9]/95 px-4 py-3 backdrop-blur-sm sm:-mx-6 sm:px-6">
+      <div className="z-[5] sm:sticky sm:top-0 -mx-4 flex flex-wrap items-center gap-3 border-b border-slate-200/80 bg-slate-50/95 px-4 py-3 backdrop-blur-sm sm:-mx-6 sm:px-6">
         <div className="mr-auto min-w-0">
           <h2 id="bullets-heading" className="text-lg font-semibold tracking-tight">
             Bullets for this job
           </h2>
-          <p className={`text-xs tabular-nums ${blocked ? "text-red-800" : "text-stone-600"}`} aria-live="polite">
+          <p className={`text-xs tabular-nums ${blocked ? "text-red-800" : "text-slate-600"}`} aria-live="polite">
             {summary}
             {dirty && !blocked && bullets.length > 0 && " Save to include these edits in the PDF."}
           </p>
@@ -116,7 +116,7 @@ export function BulletStudio({ applicationId, experiences, facts, initialBullets
         </button>
       </div>
       {!canGenerate && (
-        <p className="text-xs text-stone-500">AI drafting is off on this server. Add facts as written, then reword them.</p>
+        <p className="text-xs text-slate-500">AI drafting is off on this server. Add facts as written, then reword them.</p>
       )}
       {status && (
         <p
@@ -127,9 +127,9 @@ export function BulletStudio({ applicationId, experiences, facts, initialBullets
         </p>
       )}
       {removed && (
-        <p role="status" className="flex flex-wrap items-center gap-3 rounded-md bg-stone-100 px-3 py-2 text-sm text-stone-700">
+        <p role="status" className="flex flex-wrap items-center gap-3 rounded-md bg-slate-100 px-3 py-2 text-sm text-slate-700">
           Bullet removed.
-          <button onClick={undoRemove} className="font-medium text-stone-900 underline underline-offset-2">
+          <button onClick={undoRemove} className="font-medium text-slate-900 underline underline-offset-2">
             Undo
           </button>
         </p>
@@ -143,10 +143,10 @@ export function BulletStudio({ applicationId, experiences, facts, initialBullets
             const rows = bullets.map((b, i) => ({ b, i })).filter(({ b }) => b.experienceId === e.id);
             return (
               <div key={e.id} className="card p-4">
-                <p className="text-sm font-medium text-stone-900 [overflow-wrap:anywhere]">
-                  {e.title} {e.org && <span className="font-normal text-stone-500">· {e.org}</span>}
+                <p className="text-sm font-medium text-slate-900 [overflow-wrap:anywhere]">
+                  {e.title} {e.org && <span className="font-normal text-slate-500">· {e.org}</span>}
                 </p>
-                {rows.length === 0 && <p className="mt-2 text-xs text-stone-500">Not on this version.</p>}
+                {rows.length === 0 && <p className="mt-2 text-xs text-slate-500">Not on this version.</p>}
                 <ul className="mt-3 space-y-2">
                   {rows.map(({ b, i }, k) => {
                     const check = checks[i];
@@ -155,7 +155,7 @@ export function BulletStudio({ applicationId, experiences, facts, initialBullets
                         key={i}
                         className={`rounded-lg border p-3 transition-colors duration-150 ${
                           check.ok
-                            ? "border-stone-200 focus-within:border-emerald-700 focus-within:ring-2 focus-within:ring-emerald-700/15"
+                            ? "border-slate-200 focus-within:border-emerald-700 focus-within:ring-2 focus-within:ring-emerald-700/15"
                             : "border-red-300 bg-red-50/40 focus-within:ring-2 focus-within:ring-red-600/15"
                         }`}
                       >
@@ -163,14 +163,14 @@ export function BulletStudio({ applicationId, experiences, facts, initialBullets
                           value={b.text}
                           rows={2}
                           onChange={(ev) => update(bullets.map((x, n) => (n === i ? { ...x, text: ev.target.value } : x)))}
-                          className="w-full resize-y bg-transparent text-base leading-relaxed text-stone-900 [field-sizing:content] focus:outline-none focus-visible:outline-none sm:text-sm"
+                          className="w-full resize-y bg-transparent text-base leading-relaxed text-slate-900 [field-sizing:content] focus:outline-none focus-visible:outline-none sm:text-sm"
                           aria-label={`Bullet ${k + 1} for ${e.title}`}
                           aria-invalid={!check.ok}
                           aria-describedby={check.ok ? undefined : `bullet-${i}-problems`}
                         />
                         <div className="mt-1 flex flex-wrap items-center gap-2 text-xs">
                           <GuardBadge ok={check.ok} />
-                          <span className="text-stone-500">
+                          <span className="text-slate-500">
                             cites {b.factIds.length} fact{b.factIds.length === 1 ? "" : "s"}
                           </span>
                           <span className="ml-auto flex gap-0.5">
@@ -198,7 +198,7 @@ export function BulletStudio({ applicationId, experiences, facts, initialBullets
               </div>
             );
           })}
-          {experiences.length === 0 && <p className="text-sm text-stone-600">Add experience to your fact bank first.</p>}
+          {experiences.length === 0 && <p className="text-sm text-slate-600">Add experience to your fact bank first.</p>}
         </div>
 
         {/* Right: sources to add from */}
@@ -206,14 +206,14 @@ export function BulletStudio({ applicationId, experiences, facts, initialBullets
           <p className="eyebrow">Add from</p>
           {candidates.length > 0 && (
             <div className="card p-4">
-              <p className="text-sm font-medium text-stone-900">AI drafts</p>
+              <p className="text-sm font-medium text-slate-900">AI drafts</p>
               <ul className="mt-3 space-y-2">
                 {candidates.map((c, i) => (
-                  <li key={i} className={`rounded-lg border p-3 text-sm ${c.guard.ok ? "border-stone-200" : "border-red-200 bg-red-50/50"}`}>
-                    <p className={`leading-relaxed ${c.guard.ok ? "text-stone-900" : "text-stone-500 line-through decoration-red-400"}`}>
+                  <li key={i} className={`rounded-lg border p-3 text-sm ${c.guard.ok ? "border-slate-200" : "border-red-200 bg-red-50/50"}`}>
+                    <p className={`leading-relaxed ${c.guard.ok ? "text-slate-900" : "text-slate-500 line-through decoration-red-400"}`}>
                       {c.text}
                     </p>
-                    <ul className="mt-1.5 space-y-0.5 text-xs text-stone-500">
+                    <ul className="mt-1.5 space-y-0.5 text-xs text-slate-500">
                       {c.factIds.map((id) => (
                         <li key={id} className="line-clamp-2 [overflow-wrap:anywhere]">
                           ↳ {factById.get(id)?.did ?? `unknown fact ${id}`}
@@ -236,14 +236,14 @@ export function BulletStudio({ applicationId, experiences, facts, initialBullets
           )}
 
           <div className="card p-4">
-            <p className="text-sm font-medium text-stone-900">Your facts, as written</p>
-            <p className="mt-0.5 text-xs text-stone-500">Always safe. Add one, then reword it on the left; the guard keeps checking.</p>
-            <ul className="mt-3 divide-y divide-stone-100">
+            <p className="text-sm font-medium text-slate-900">Your facts, as written</p>
+            <p className="mt-0.5 text-xs text-slate-500">Always safe. Add one, then reword it on the left; the guard keeps checking.</p>
+            <ul className="mt-3 divide-y divide-slate-100">
               {facts.map((f) => {
                 const draft = factAsBullet(f);
                 return (
                   <li key={f.id} className="flex items-start gap-3 py-2.5 text-sm">
-                    <span className="min-w-0 flex-1 leading-relaxed text-stone-700 [overflow-wrap:anywhere]">{draft.text}</span>
+                    <span className="min-w-0 flex-1 leading-relaxed text-slate-700 [overflow-wrap:anywhere]">{draft.text}</span>
                     <button onClick={() => add(draft)} disabled={has(draft.text)} className="btn btn-sm shrink-0">
                       {has(draft.text) ? "Added" : "Add"}
                     </button>

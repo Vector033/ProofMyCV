@@ -50,22 +50,22 @@ export function ProofDemo() {
   const good = result.ok ? [...extractNumbers(text).map((n) => n.raw), ...findTechTerms(text)] : [];
 
   return (
-    <div className="card overflow-hidden shadow-[0_1px_2px_rgb(28_25_23/0.04),0_12px_32px_-12px_rgb(28_25_23/0.12)]">
-      <div className="border-b border-stone-200/80 bg-stone-50/60 px-5 py-4">
+    <div className="card overflow-hidden shadow-[0_1px_2px_rgb(15_23_42/0.04),0_12px_32px_-12px_rgb(15_23_42/0.12)]">
+      <div className="border-b border-slate-200/80 bg-slate-50/60 px-5 py-4">
         <p className="eyebrow">Fact you wrote · {EXPERIENCE.org}</p>
-        <p className="mt-2 text-sm text-stone-800">
-          {FACT.did}. <span className="text-stone-600">{FACT.result}.</span>
+        <p className="mt-2 text-sm text-slate-800">
+          {FACT.did}. <span className="text-slate-600">{FACT.result}.</span>
         </p>
         <p className="mt-2 flex flex-wrap gap-1">
           {FACT.tech.map((t) => (
-            <span key={t} className="rounded bg-white px-1.5 py-0.5 font-mono text-[11px] text-stone-600 ring-1 ring-stone-200">
+            <span key={t} className="rounded bg-white px-1.5 py-0.5 font-mono text-[11px] text-slate-600 ring-1 ring-slate-200">
               {t}
             </span>
           ))}
         </p>
       </div>
 
-      <div role="tablist" aria-label="Compare drafts" onKeyDown={onTabKey} className="flex gap-1 overflow-x-auto overflow-y-hidden [scrollbar-width:none] border-b border-stone-200/80 px-3 pt-2">
+      <div role="tablist" aria-label="Compare drafts" onKeyDown={onTabKey} className="flex gap-1 overflow-x-auto overflow-y-hidden [scrollbar-width:none] border-b border-slate-200/80 px-3 pt-2">
         {TABS.map((t) => (
           <button
             key={t.id}
@@ -77,7 +77,7 @@ export function ProofDemo() {
             aria-controls={`${base}-panel`}
             onClick={() => setTab(t.id)}
             className={`min-h-10 shrink-0 border-b-2 px-3 text-sm transition-colors duration-150 ${
-              tab === t.id ? "border-emerald-700 font-medium text-stone-900" : "border-transparent text-stone-500 hover:text-stone-800"
+              tab === t.id ? "border-slate-800 font-medium text-slate-900" : "border-transparent text-slate-500 hover:text-slate-800"
             }`}
           >
             {t.label}
@@ -92,7 +92,7 @@ export function ProofDemo() {
             <textarea value={own} onChange={(e) => setOwn(e.target.value)} rows={3} className="input text-[15px] leading-relaxed" />
           </label>
         ) : (
-          <p className="text-[15px] leading-relaxed text-stone-900">
+          <p className="text-[15px] leading-relaxed text-slate-900">
             <Marked text={text} bad={bad} good={good} />
           </p>
         )}
@@ -103,7 +103,7 @@ export function ProofDemo() {
               <span role="status" className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2.5 py-0.5 font-medium text-emerald-800 ring-1 ring-emerald-600/20">
                 <Check /> Traceable
               </span>
-              <span className="text-stone-600">Every number and tool appears in the fact it cites.</span>
+              <span className="text-slate-600">Every number and tool appears in the fact it cites.</span>
             </p>
           ) : (
             <div className="space-y-2 text-sm">

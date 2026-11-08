@@ -14,6 +14,8 @@ fact bank, no sign-up needed.
 | ![FactFit landing page](docs/screenshots/landing.png) | ![Bullet studio with a blocked bullet](docs/screenshots/bullet-studio.png) |
 | **Job mapping and fit score** | **Fact bank** |
 | ![Application page with fit score](docs/screenshots/application.png) | ![Fact bank page](docs/screenshots/fact-bank.png) |
+| **Settings: security checklist, password with show/hide, signed-in devices** | **Settings: sign-in methods (email + Google)** |
+| ![Security settings](docs/screenshots/settings-security.png) | ![Account settings](docs/screenshots/settings-account.png) |
 
 <p>
   <img src="docs/screenshots/landing-mobile.png" alt="Landing page on a phone" width="240">
@@ -58,6 +60,12 @@ Screenshots use the fictional demo account and are regenerated with `scripts/scr
   **0** after. The cost: 10 of its 45 blocks were honest paraphrases it could not verify (410 KB → 260 KB written as
   "36%", "0.91" as "91%", "VMs" for "virtual machines").
 
+**Account settings.** Sign in with email and password or with Google (when configured). Settings has three tabs:
+*Account* (email, sign-in methods, connect or disconnect Google), *Security* (a checklist of real account facts,
+changing the password after re-checking the current one, every password field with a show/hide button, the list of
+signed-in devices with "sign out" per device or everywhere else) and *Your data*. The shared demo account can look
+but not change any of it, and its device list is hidden because every visitor shares it.
+
 Each job gets its own saved version. You can download everything as JSON or delete your account, which cascades to all
 of your data.
 
@@ -92,6 +100,23 @@ npx vercel@latest deploy --prod --yes                                           
 DATABASE_URL=<session pooler url> npx drizzle-kit migrate                           # migrate the hosted schema
 node --env-file=<prod env file> --import tsx scripts/seed-demo.mts --remote         # reset the hosted demo account
 ```
+
+## Google sign-in
+
+The code is in place (`googleSignInAction`, `linkGoogleAction`, `src/app/auth/callback/route.ts`); the button only
+appears when `GOOGLE_AUTH_ENABLED=true`. To turn it on:
+
+1. Google Cloud Console → APIs & Services → Credentials → *Create OAuth client ID* (Web application). Authorised
+   redirect URI: `https://<project-ref>.supabase.co/auth/v1/callback` (locally `http://127.0.0.1:54321/auth/v1/callback`).
+2. Supabase dashboard → Authentication → Sign In / Providers → Google: paste the client ID and secret, enable it.
+   Same page: turn on *Allow manual linking* so "Connect Google" works in Settings.
+3. Authentication → URL Configuration → Redirect URLs: add `https://factfit-five.vercel.app/**`.
+4. Set `GOOGLE_AUTH_ENABLED=true` in Vercel (and in `.env.local` for local use, together with
+   `SUPABASE_AUTH_EXTERNAL_GOOGLE_CLIENT_ID` / `_SECRET` and `enabled = true` under `[auth.external.google]` in
+   `supabase/config.toml`).
+
+The production Supabase project is shared with other apps, so enabling the provider there is a project-wide switch;
+it only shows up where an app offers the button.
 
 ## Run locally
 

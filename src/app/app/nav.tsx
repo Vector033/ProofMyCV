@@ -2,30 +2,83 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { IconFile, IconLayers, IconUser } from "@/components/icons";
 
-const nav = [
-  { href: "/app", label: "Applications" },
-  { href: "/app/facts", label: "Fact bank" },
-  { href: "/app/settings", label: "Settings" },
-] as const;
+type NavItem = { href: string; label: string; icon: typeof IconFile };
 
-export function AppNav() {
+const groups: { label: string; items: NavItem[] }[] = [
+  {
+    label: "Workspace",
+    items: [
+      { href: "/app", label: "Applications", icon: IconFile },
+      { href: "/app/facts", label: "Fact bank", icon: IconLayers },
+    ],
+  },
+  {
+    label: "Account",
+    items: [{ href: "/app/settings", label: "Settings", icon: IconUser }],
+  },
+]
+
+function isActive(path: string, href: string) {
+  if (href === "/app") return path === "/app" || path.startsWith("/app/applications");
+  return path.startsWith(href);
+}
+
+/** Sidebar navigation on large screens. */
+export function SideNav() {
   const path = usePathname();
-  const active = (href: string) => (href === "/app" ? path === "/app" || path.startsWith("/app/applications") : path.startsWith(href));
   return (
-    <nav aria-label="Main" className="order-last flex w-full gap-1 overflow-x-auto overflow-y-hidden [scrollbar-width:none] text-sm sm:order-none sm:w-auto">
-      {nav.map((n) => (
-        <Link
-          key={n.href}
-          href={n.href}
-          aria-current={active(n.href) ? "page" : undefined}
-          className={`inline-flex min-h-11 shrink-0 items-center border-b-2 px-2.5 transition-colors duration-150 ${
-            active(n.href) ? "border-emerald-700 font-medium text-stone-900" : "border-transparent text-stone-600 hover:text-stone-900"
-          }`}
-        >
-          {n.label}
-        </Link>
+    <nav aria-label="Main" className="flex-1 space-y-6 overflow-y-auto px-3 py-4">
+      {groups.map((g) => (
+        <div key={g.label}>
+          <p className="px-3 pb-2 text-xs font-medium tracking-wide text-slate-500 uppercase">{g.label}</p>
+          <ul className="space-y-0.5">
+            {g.items.map(({ href, label, icon: Icon }) => {
+              const active = isActive(path, href);
+              return (
+                <li key={href}>
+                  <Link
+                    href={href}
+                    aria-current={active ? "page" : undefined}
+                    className={`flex min-h-10 items-center gap-3 rounded-lg px-3 text-sm transition-colors duration-150 ${
+                      active ? "bg-slate-100 font-medium text-slate-900" : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
+                    }`}
+                  >
+                    <Icon className={active ? "text-slate-900" : "text-slate-400"} />
+                    {label}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
       ))}
+    </nav>
+  );
+}
+
+/** The same links as a scrollable row under the top bar on small screens. */
+export function TopNav() {
+  const path = usePathname();
+  const items = groups.flatMap((g) => g.items);
+  return (
+    <nav aria-label="Main" className="flex gap-1 overflow-x-auto overflow-y-hidden px-4 [scrollbar-width:none]">
+      {items.map(({ href, label }) => {
+        const active = isActive(path, href);
+        return (
+          <Link
+            key={href}
+            href={href}
+            aria-current={active ? "page" : undefined}
+            className={`inline-flex min-h-11 shrink-0 items-center border-b-2 px-2.5 text-sm transition-colors duration-150 ${
+              active ? "border-slate-800 font-medium text-slate-900" : "border-transparent text-slate-600 hover:text-slate-900"
+            }`}
+          >
+            {label}
+          </Link>
+        );
+      })}
     </nav>
   );
 }

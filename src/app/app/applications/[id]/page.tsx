@@ -28,8 +28,8 @@ export default async function ApplicationPage({ params }: PageProps<"/app/applic
         <ScoreBadge score={report.score} size="lg" animate />
         <div className="min-w-[12rem] flex-1">
           <h1 className="text-2xl font-semibold tracking-tight text-balance [overflow-wrap:anywhere]">{app.role || "Untitled role"}</h1>
-          <p className="text-stone-600 [overflow-wrap:anywhere]">{app.company || "Company not set"}</p>
-          <p className="mt-1 text-xs text-stone-500">
+          <p className="text-slate-600 [overflow-wrap:anywhere]">{app.company || "Company not set"}</p>
+          <p className="mt-1 text-xs text-slate-500">
             {report.covered} of {report.total} requirements backed by your facts · analysed by {app.analyzedBy}
           </p>
         </div>
@@ -51,12 +51,12 @@ export default async function ApplicationPage({ params }: PageProps<"/app/applic
       <section className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         <div className="card min-w-0 p-5">
           <h2 className="font-medium">Backed by your facts</h2>
-          {covered.length === 0 && <p className="mt-3 text-sm text-stone-500">No matches yet.</p>}
+          {covered.length === 0 && <p className="mt-3 text-sm text-slate-500">No matches yet.</p>}
           <ul className="mt-3 space-y-3">
             {covered.map((m) => (
               <li key={m.requirement.name} className="text-sm">
                 <RequirementName requirement={m.requirement} tone="ok" />
-                <ul className="mt-1 space-y-0.5 pl-4 text-xs text-stone-600">
+                <ul className="mt-1 space-y-0.5 pl-4 text-xs text-slate-600">
                   {m.factIds.slice(0, 3).map((fid) => (
                     <li key={fid} className="line-clamp-2 [overflow-wrap:anywhere]">
                       ↳ {factById.get(fid)?.did}
@@ -73,7 +73,7 @@ export default async function ApplicationPage({ params }: PageProps<"/app/applic
           <div className="card p-5">
             <h2 className="font-medium">Not in your fact bank</h2>
             {missing.length === 0 ? (
-              <p className="mt-3 text-sm text-stone-500">Every requirement has evidence.</p>
+              <p className="mt-3 text-sm text-slate-500">Every requirement has evidence.</p>
             ) : (
               <>
                 <ul className="mt-3 flex flex-wrap gap-2">
@@ -83,8 +83,8 @@ export default async function ApplicationPage({ params }: PageProps<"/app/applic
                     </li>
                   ))}
                 </ul>
-                <p className="mt-3 text-xs text-stone-500">
-                  If you really have done one of these, <Link href="/app/facts" className="font-medium text-stone-700 underline underline-offset-2">add it as a fact</Link>.
+                <p className="mt-3 text-xs text-slate-500">
+                  If you really have done one of these, <Link href="/app/facts" className="font-medium text-slate-700 underline underline-offset-2">add it as a fact</Link>.
                   Otherwise leave it out. FactFit will not write it for you.
                 </p>
               </>
@@ -93,7 +93,7 @@ export default async function ApplicationPage({ params }: PageProps<"/app/applic
           {app.analysis.problems.length > 0 && (
             <div className="card p-5">
               <h2 className="font-medium">What they want solved</h2>
-              <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-stone-700 [overflow-wrap:anywhere]">
+              <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-slate-700 [overflow-wrap:anywhere]">
                 {app.analysis.problems.map((p) => (
                   <li key={p}>{p}</li>
                 ))}
@@ -123,11 +123,11 @@ function RequirementName({
 }) {
   // A missing skill is a gap, not an error: dashed and neutral, never red.
   const colour =
-    tone === "ok" ? "bg-emerald-50 text-emerald-900 ring-1 ring-emerald-600/15" : "border border-dashed border-stone-300 bg-white text-stone-700";
+    tone === "ok" ? "bg-emerald-50 text-emerald-900 ring-1 ring-emerald-600/15" : "border border-dashed border-slate-300 bg-white text-slate-700";
   return (
     <span className={`inline-flex max-w-full items-center gap-1.5 rounded-md px-2 py-0.5 text-sm [overflow-wrap:anywhere] ${colour}`}>
       {r.name}
-      {r.importance === "preferred" && <span className="text-[10px] tracking-wide text-stone-500 uppercase">nice to have</span>}
+      {r.importance === "preferred" && <span className="text-[10px] tracking-wide text-slate-500 uppercase">nice to have</span>}
     </span>
   );
 }

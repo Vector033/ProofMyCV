@@ -1,32 +1,35 @@
 @import "tailwindcss";
 
 @theme inline {
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-inter);
   --font-mono: var(--font-geist-mono);
 }
 
-/* 60-30-10: stone-50 canvas, stone-900 ink + stone-200 hairlines, emerald-700 for
-   the primary action and "traceable" states only. Red/amber are for guard results. */
+/* Slate system (after the Brandlize docs template): white and slate-50 surfaces,
+   slate-800 ink and primary buttons, slate-200 hairlines, a slate-700 band for the
+   hero. Emerald is kept for one meaning only: "traceable / verified" (and focus).
+   Sky tints the small icon tiles. Red/amber are for guard results. */
 :root {
-  --canvas: #fafaf9;
-  --ink: #1c1917;
-  --hairline: rgb(231 229 228 / 0.8);
+  --canvas: #f8fafc;
+  --ink: #1e293b;
+  --hairline: rgb(226 232 240);
   --accent: #047857;
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 html {
-  scroll-padding-top: 7rem; /* app header + bullet toolbar are sticky */
+  scroll-padding-top: 5rem; /* the bullet toolbar is sticky */
 }
 
 body {
   background: var(--canvas);
   color: var(--ink);
-  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-feature-settings: "cv11", "ss01"; /* Inter: single-storey a, open digits */
 }
 
 ::selection {
-  background: rgb(4 120 87 / 0.18);
+  background: rgb(14 165 233 / 0.2);
 }
 
 /* One visible focus style everywhere, keyboard only. */
@@ -37,34 +40,42 @@ body {
 
 @layer components {
   .label {
-    @apply mb-1 block text-xs font-medium text-stone-600;
+    @apply mb-1 block text-xs font-medium text-slate-600;
   }
   .hint {
-    @apply mt-1 block text-xs text-stone-500;
+    @apply mt-1 block text-xs text-slate-500;
   }
   .input {
-    @apply w-full rounded-md border border-stone-300 bg-white px-3 py-2 text-base text-stone-900 sm:text-sm placeholder:text-stone-400 focus:border-emerald-700 focus:ring-2 focus:ring-emerald-700/15 focus:outline-none;
+    @apply w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-base text-slate-900 sm:text-sm placeholder:text-slate-400 focus:border-slate-500 focus:ring-4 focus:ring-slate-200 focus:outline-none;
   }
   .btn-primary {
-    @apply press inline-flex min-h-10 items-center justify-center gap-2 rounded-md bg-emerald-700 px-4 text-sm font-medium text-white shadow-sm shadow-emerald-900/10 hover:bg-emerald-800 disabled:pointer-events-none disabled:opacity-50;
+    @apply press inline-flex min-h-10 items-center justify-center gap-2 rounded-lg bg-slate-800 px-4 text-sm font-medium text-white shadow-sm shadow-slate-900/10 hover:bg-slate-700 disabled:pointer-events-none disabled:opacity-50;
   }
   .btn {
-    @apply press inline-flex min-h-10 items-center justify-center gap-2 rounded-md border border-stone-300 bg-white px-3.5 text-sm text-stone-800 hover:border-stone-400 hover:bg-stone-50 disabled:pointer-events-none disabled:opacity-50;
+    @apply press inline-flex min-h-10 items-center justify-center gap-2 rounded-lg border border-slate-300 bg-white px-3.5 text-sm font-medium text-slate-700 shadow-xs hover:border-slate-400 hover:bg-slate-50 hover:text-slate-900 disabled:pointer-events-none disabled:opacity-50;
+  }
+  /* The light button on the dark hero band (Brandlize's slate-200 + slate-300 border). */
+  .btn-light {
+    @apply press inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-slate-300 bg-slate-100 px-5 text-[15px] font-medium text-slate-800 hover:bg-white;
   }
   .btn-sm {
     @apply min-h-8 px-2.5 text-xs;
   }
   .btn-ghost {
-    @apply press inline-flex min-h-8 min-w-8 items-center justify-center rounded-md px-2 text-xs text-stone-600 hover:bg-stone-100 hover:text-stone-900 disabled:pointer-events-none disabled:opacity-40;
+    @apply press inline-flex min-h-8 min-w-8 items-center justify-center rounded-lg px-2 text-xs text-slate-600 hover:bg-slate-100 hover:text-slate-900 disabled:pointer-events-none disabled:opacity-40;
   }
   .btn-danger {
-    @apply press inline-flex min-h-8 items-center justify-center rounded-md px-2 text-xs text-red-700 hover:bg-red-50;
+    @apply press inline-flex min-h-8 items-center justify-center rounded-lg px-2 text-xs text-red-700 hover:bg-red-50;
   }
   .card {
-    @apply rounded-xl border border-stone-200/80 bg-white;
+    @apply rounded-xl border border-slate-200 bg-white;
   }
   .eyebrow {
-    @apply font-mono text-[11px] tracking-wide text-stone-500 uppercase;
+    @apply text-xs font-medium tracking-wide text-slate-500 uppercase;
+  }
+  /* Small square icon tile used on cards and setting rows. */
+  .icon-tile {
+    @apply inline-grid size-10 shrink-0 place-items-center rounded-lg bg-sky-100 text-sky-800;
   }
 }
 
@@ -77,7 +88,7 @@ body {
   }
 }
 
-/* Landing page: one soft light behind the hero, nothing else decorative. */
+/* Login: one soft light at the top of the page, nothing else decorative. */
 .hero-glow {
   position: relative;
   isolation: isolate;
@@ -89,8 +100,18 @@ body {
   inset: -10% -20% auto;
   height: 520px;
   z-index: -1;
-  background: radial-gradient(50% 50% at 50% 40%, rgb(16 185 129 / 0.1), transparent 70%);
+  background: radial-gradient(50% 50% at 50% 40%, rgb(14 165 233 / 0.08), transparent 70%);
   pointer-events: none;
+}
+
+/* Landing hero band: slate-700 with a faint grid, like a blueprint of the page. */
+.hero-band {
+  background-color: #334155;
+  background-image:
+    linear-gradient(rgb(255 255 255 / 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(255 255 255 / 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  background-position: center top;
 }
 
 /* Scroll reveal. Content is visible without JS; <Reveal> only hides what is still

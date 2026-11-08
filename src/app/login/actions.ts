@@ -5,6 +5,8 @@ import { z } from "zod";
 import { createAdminClient, demoEmail } from "@/lib/supabase/admin";
 import { LIMITS, RateLimitError, clientIp, enforce, hit, retryText } from "@/lib/rate-limit";
 import { createClient } from "@/lib/supabase/server";
+import { passwordProblem } from "@/lib/password";
+import { googleEnabled, requestOrigin } from "@/lib/site";
 
 export type AuthState = { error?: string; message?: string };
 
@@ -31,7 +33,8 @@ export async function authAction(_prev: AuthState, fd: FormData): Promise<AuthSt
   }
 
   if (mode === "signup") {
-    if (password.length < 10) return { error: "New passwords need at least 10 characters." };
+    const problem = passwordProblem(password, email);
+    if (problem) return { error: problem };
     // Accounts are created server-side and marked confirmed. FactFit sends no
     // email, so the Supabase project (shared with other apps) needs no
     // confirmation link or redirect URL configured for it.
@@ -56,4 +59,18 @@ export async function demoLoginAction(): Promise<AuthState> {
   const { error } = await supabase.auth.signInWithPassword({ email, password: process.env.DEMO_PASSWORD! });
   if (error) return { error: "Could not open the demo account." };
   redirect("/app");
+}
+
+/** Starts "Continue with Google": Supabase sends the browser to Google and back to /auth/callback. */
+export async function googleSignInAction(): Promise<AuthState> {
+  if (!googleEnabled()) return { error: "Google sign-in is not set up on this server." };
+  const limit = await hit(LIMITS.signinIp, await clientIp());
+  if (!limit.ok) return { error: `Too many attempts. Try again in ${retryText(limit.retryAfterSec)}.` };
+  const supabase = await createClient();
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: "google",
+    options: { redirectTo: `${await requestOrigin()}/auth/callback?next=/app` },
+  });
+  if (error || !data.url) return { error: "Could not reach Google. Try again, or sign in with your email." };
+  redirect(data.url);
 }
