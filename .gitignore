@@ -47,3 +47,6 @@ next-env.d.ts
 # local design-hook config
 .impeccable/
 .playwright-mcp/
+
+# Google OAuth client downloads, never commit or upload
+client_secret*.json
