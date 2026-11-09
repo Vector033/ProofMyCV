@@ -127,7 +127,7 @@ function RequirementName({
   return (
     <span className={`inline-flex max-w-full items-center gap-1.5 rounded-md px-2 py-0.5 text-sm [overflow-wrap:anywhere] ${colour}`}>
       {r.name}
-      {r.importance === "preferred" && <span className="text-[10px] tracking-wide text-slate-500 uppercase">nice to have</span>}
+      {r.importance === "preferred" && <span className="text-xs text-slate-500">nice to have</span>}
     </span>
   );
 }

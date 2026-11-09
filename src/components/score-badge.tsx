@@ -14,9 +14,8 @@ function tone(score: number) {
 }
 
 /**
- * Fit score as a ring. `animate` draws the ring and counts the number up once,
- * for the big badge on an application page; list rows stay static because they are
- * seen many times a day.
+ * Fit score as a precision ring. `animate` draws the ring and counts the number up once,
+ * using cubic-bezier(0.16, 1, 0.3, 1) ease. Scores >= 85 trigger an ambient emerald pulse.
  */
 export function ScoreBadge({ score, size = "sm", animate = false }: { score: number; size?: "sm" | "lg"; animate?: boolean }) {
   const value = Math.max(0, Math.min(100, Math.round(score)));
@@ -25,12 +24,15 @@ export function ScoreBadge({ score, size = "sm", animate = false }: { score: num
   const length = 2 * Math.PI * r;
   const t = tone(value);
   const shown = useCountUp(value, animate);
+  const isHighFit = value >= 85;
 
   return (
     <span
       role="img"
       aria-label={`Fit score ${value}%, ${t.label}`}
-      className="relative inline-grid shrink-0 place-items-center"
+      className={`relative inline-grid shrink-0 place-items-center rounded-full ${
+        isHighFit && animate ? "animate-verify-pulse" : ""
+      }`}
       style={{ width: box, height: box }}
     >
       <svg width={box} height={box} viewBox={`0 0 ${box} ${box}`} className="-rotate-90" aria-hidden>
@@ -56,7 +58,7 @@ export function ScoreBadge({ score, size = "sm", animate = false }: { score: num
   );
 }
 
-// Same 900ms strong ease-out as the ring, so number and stroke land together.
+// 900ms smooth roll-up matching ring-draw
 function useCountUp(target: number, enabled: boolean) {
   const [n, setN] = useState(enabled ? 0 : target);
   useEffect(() => {
@@ -68,6 +70,7 @@ function useCountUp(target: number, enabled: boolean) {
     const start = performance.now();
     const tick = (now: number) => {
       const p = Math.min(1, (now - start) / 900);
+      // cubic-bezier(0.16, 1, 0.3, 1) approximation: 1 - (1 - p)^4
       setN(Math.round(target * (1 - Math.pow(1 - p, 4))));
       if (p < 1) frame = requestAnimationFrame(tick);
     };

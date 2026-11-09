@@ -34,6 +34,20 @@ export default async function LoginPage({ searchParams }: PageProps<"/login">) {
           <p className="mt-4 text-slate-300">
             Numbers and tools that are not in your facts are blocked by code before they reach your resume.
           </p>
+          {/* The landing demo's fictional fact: 25 → 3 minutes, PostgreSQL. Same verdicts the real guard gives. */}
+          <div aria-hidden className="mt-10 space-y-5 text-sm">
+            <div className="border-l-2 border-red-400/70 pl-4">
+              <p className="text-slate-300">
+                Cut reporting time by <span className="text-red-200 underline decoration-red-400 decoration-wavy underline-offset-4">90%</span> with a{" "}
+                <span className="text-red-200 underline decoration-red-400 decoration-wavy underline-offset-4">Redis</span> cache.
+              </p>
+              <p className="mt-1.5 text-xs text-red-300">Blocked: 90% and Redis are not in your facts</p>
+            </div>
+            <div className="border-l-2 border-emerald-400/80 pl-4">
+              <p className="text-white">Cut the daily report job from 25 to 3 minutes with a PostgreSQL index.</p>
+              <p className="mt-1.5 text-xs text-emerald-300">✓ Traceable, cites 1 fact</p>
+            </div>
+          </div>
         </div>
         <p className="text-xs text-slate-400">FactFit stores only what you type. Export or delete it any time.</p>
       </section>

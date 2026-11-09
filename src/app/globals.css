@@ -5,16 +5,21 @@
   --font-mono: var(--font-geist-mono);
 }
 
-/* Slate system (after the Brandlize docs template): white and slate-50 surfaces,
-   slate-800 ink and primary buttons, slate-200 hairlines, a slate-700 band for the
-   hero. Emerald is kept for one meaning only: "traceable / verified" (and focus).
-   Sky tints the small icon tiles. Red/amber are for guard results. */
+/* 60-30-10 Slate & Emerald Precision Design System:
+   60% Slate-50 canvas (--canvas: #f8fafc)
+   30% Slate-800 typography & hairlines (--ink: #1e293b, --hairline: #e2e8f0)
+   10% Emerald accent (--accent: #047857) strictly for verified status and trust guarantees.
+   Red/danger tokens strictly for hallucination and guard rejections. */
 :root {
   --canvas: #f8fafc;
   --ink: #1e293b;
-  --hairline: rgb(226 232 240);
+  --hairline: #e2e8f0;
   --accent: #047857;
-  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --accent-soft: #d1fae5;
+  --accent-surface: #ecfdf5;
+  --danger: #b91c1c;
+  --danger-soft: #fee2e2;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 html {
@@ -31,10 +36,13 @@ body {
   color: var(--ink);
   font-family: var(--font-inter), system-ui, sans-serif;
   font-feature-settings: "cv11", "ss01"; /* Inter: single-storey a, open digits */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 ::selection {
-  background: rgb(14 165 233 / 0.2);
+  background: rgb(4 120 87 / 0.18);
+  color: #064e3b;
 }
 
 /* One visible focus style everywhere, keyboard only. */
@@ -45,82 +53,96 @@ body {
 
 @layer components {
   .label {
-    @apply mb-1 block text-xs font-medium text-slate-600;
+    @apply mb-1.5 block text-xs font-medium text-slate-700;
   }
   .hint {
     @apply mt-1 block text-xs text-slate-500;
   }
   .input {
-    @apply w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-base text-slate-900 sm:text-sm placeholder:text-slate-400 focus:border-slate-500 focus:ring-4 focus:ring-slate-200 focus:outline-none;
+    @apply w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-base text-slate-900 placeholder:text-slate-400 focus:border-slate-500 focus:ring-4 focus:ring-slate-200 focus:outline-none sm:text-sm;
   }
   .btn-primary {
-    @apply press inline-flex min-h-10 items-center justify-center gap-2 rounded-lg bg-slate-800 px-4 text-sm font-medium text-white shadow-sm shadow-slate-900/10 hover:bg-slate-700 disabled:pointer-events-none disabled:opacity-50;
+    @apply press inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-slate-900 px-5 text-sm font-medium text-white shadow-xs shadow-slate-950/20 hover:bg-slate-800 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50;
   }
   .btn {
-    @apply press inline-flex min-h-10 items-center justify-center gap-2 rounded-lg border border-slate-300 bg-white px-3.5 text-sm font-medium text-slate-700 shadow-xs hover:border-slate-400 hover:bg-slate-50 hover:text-slate-900 disabled:pointer-events-none disabled:opacity-50;
+    @apply press inline-flex min-h-10 items-center justify-center gap-2 rounded-lg border border-slate-300 bg-white px-3.5 text-sm font-medium text-slate-700 shadow-xs hover:border-slate-400 hover:bg-slate-50 hover:text-slate-900 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50;
   }
-  /* The light button on the dark hero band (Brandlize's slate-200 + slate-300 border). */
   .btn-light {
-    @apply press inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-slate-300 bg-slate-100 px-5 text-[15px] font-medium text-slate-800 hover:bg-white;
+    @apply press inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-slate-300 bg-slate-100 px-5 text-[15px] font-medium text-slate-800 hover:bg-white active:scale-[0.98];
   }
   .btn-sm {
     @apply min-h-8 px-2.5 text-xs;
   }
   .btn-ghost {
-    @apply press inline-flex min-h-8 min-w-8 items-center justify-center rounded-lg px-2 text-xs text-slate-600 hover:bg-slate-100 hover:text-slate-900 disabled:pointer-events-none disabled:opacity-40;
+    @apply press inline-flex min-h-8 min-w-8 items-center justify-center rounded-lg px-2 text-xs text-slate-600 hover:bg-slate-100 hover:text-slate-900 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-40;
   }
   .btn-danger {
-    @apply press inline-flex min-h-8 items-center justify-center rounded-lg px-2 text-xs text-red-700 hover:bg-red-50;
+    @apply press inline-flex min-h-8 items-center justify-center rounded-lg px-2 text-xs text-red-700 hover:bg-red-50 active:scale-[0.98];
   }
   .card {
-    @apply rounded-xl border border-slate-200 bg-white;
+    @apply rounded-xl border border-slate-200/90 bg-white shadow-xs;
   }
   .eyebrow {
-    @apply text-xs font-medium tracking-wide text-slate-500 uppercase;
+    @apply text-xs font-semibold tracking-wider text-slate-500 uppercase;
   }
-  /* Small square icon tile used on cards and setting rows. */
   .icon-tile {
-    @apply inline-grid size-10 shrink-0 place-items-center rounded-lg bg-sky-100 text-sky-800;
+    @apply inline-grid size-10 shrink-0 place-items-center rounded-lg bg-slate-100 text-slate-700;
   }
 }
 
 @utility press {
   transition-property: transform, background-color, border-color, color, box-shadow;
-  transition-duration: 140ms;
+  transition-duration: 150ms;
   transition-timing-function: var(--ease-out);
   &:active {
-    transform: scale(0.97);
+    transform: scale(0.98);
   }
 }
 
-/* Login: one soft light at the top of the page, nothing else decorative. */
-.hero-glow {
-  position: relative;
-  isolation: isolate;
-  overflow-x: clip; /* the light is wider than the box; it fades out before the edge */
+.press-scale {
+  transition: transform 150ms var(--ease-out);
 }
-.hero-glow::before {
-  content: "";
-  position: absolute;
-  inset: -10% -20% auto;
-  height: 520px;
-  z-index: -1;
-  background: radial-gradient(50% 50% at 50% 40%, rgb(14 165 233 / 0.08), transparent 70%);
-  pointer-events: none;
+.press-scale:active {
+  transform: scale(0.98);
 }
 
-/* Landing hero band: slate-700 with a faint grid, like a blueprint of the page. */
-.hero-band {
-  background-color: #334155;
-  background-image:
-    linear-gradient(rgb(255 255 255 / 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(255 255 255 / 0.04) 1px, transparent 1px);
-  background-size: 48px 48px;
-  background-position: center top;
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* Scroll reveal. Content is visible without JS; <Reveal> only hides what is still
-   below the fold, then sets data-shown when it enters the viewport. */
+@keyframes verifyPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(4, 120, 87, 0.35);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(4, 120, 87, 0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-verify-pulse {
+  animation: verifyPulse 2.4s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+/* Subtle Linear hairline grid background */
+.bg-grid-hairline {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, rgba(226, 232, 240, 0.6) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(226, 232, 240, 0.6) 1px, transparent 1px);
+}
+
+/* Scroll reveal. Native scroll is untouched. */
 [data-reveal="pending"] > * {
   opacity: 0;
   transform: translateY(14px);
@@ -153,7 +175,11 @@ body {
   .ring-animate {
     animation: none;
   }
-  .press:active {
+  .press:active,
+  .press-scale:active {
     transform: none;
+  }
+  .animate-verify-pulse {
+    animation: none;
   }
 }
