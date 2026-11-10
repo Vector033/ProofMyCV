@@ -207,7 +207,24 @@ export function BulletStudio({ applicationId, experiences, facts, initialBullets
         {/* Right: sources to add from */}
         <div className="min-w-0 space-y-4">
           <p className="eyebrow">Add from</p>
-          {candidates.length > 0 && (
+          {generating && (
+            <div aria-live="polite" className="card p-4">
+              <div className="flex items-center justify-between gap-2">
+                <p className="text-sm font-medium text-slate-900">Drafting &amp; verifying against Fact Bank…</p>
+                <span className="size-2 rounded-full bg-emerald-600 animate-pulse" />
+              </div>
+              <div className="mt-3 space-y-2.5">
+                {[0, 1, 2].map((idx) => (
+                  <div key={idx} className="shimmer-bar rounded-lg border border-slate-200/80 bg-slate-50/70 p-3">
+                    <div className="h-3.5 w-11/12 rounded bg-slate-200/80 animate-pulse" />
+                    <div className="mt-2 h-3 w-3/4 rounded bg-slate-200/70 animate-pulse" />
+                    <div className="mt-2.5 h-4 w-20 rounded-full bg-emerald-100/70 animate-pulse" />
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+          {!generating && candidates.length > 0 && (
             <div className="card p-4">
               <p className="text-sm font-medium text-slate-900">AI drafts</p>
               <ul className="mt-3 space-y-2">
@@ -275,7 +292,7 @@ function GuardBadge({ ok }: { ok: boolean }) {
       ✓ Traceable
     </span>
   ) : (
-    <span className="inline-flex items-center rounded-full bg-red-50 px-2 py-0.5 font-medium text-red-800 ring-1 ring-red-600/20">
+    <span className="animate-shake inline-flex items-center rounded-full bg-red-50 px-2 py-0.5 font-medium text-red-800 ring-1 ring-red-600/20">
       ✕ Blocked
     </span>
   );

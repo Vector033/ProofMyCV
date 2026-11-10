@@ -232,20 +232,132 @@ body {
   animation: ring-draw 900ms var(--ease-out) both;
 }
 
+/* 1px AST Guard laser sweep across resume preview sheets */
+@keyframes scan-sweep {
+  0% {
+    transform: translateY(-10%);
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.9;
+  }
+  88% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(110%);
+    opacity: 0;
+  }
+}
+.animate-scan-sweep {
+  animation: scan-sweep 2.6s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+/* Stripe-style animated SVG packet pulse along hairline pipes */
+@keyframes packet-flow {
+  from {
+    stroke-dashoffset: 36;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.animate-packet-flow {
+  stroke-dasharray: 6 12;
+  animation: packet-flow 1.4s linear infinite;
+}
+
+/* SVG curved citation connector draw-in */
+@keyframes trace-draw {
+  from {
+    stroke-dashoffset: 140;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.animate-trace-draw {
+  stroke-dasharray: 140;
+  animation: trace-draw 550ms var(--ease-out) forwards;
+}
+
+/* Gentle horizontal shake on guard block feedback (Rule #20) */
+@keyframes gentle-shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-4px);
+  }
+  45% {
+    transform: translateX(4px);
+  }
+  70% {
+    transform: translateX(-2px);
+  }
+  85% {
+    transform: translateX(2px);
+  }
+}
+.animate-shake {
+  animation: gentle-shake 360ms var(--ease-out) both;
+}
+
+/* Scanning skeleton shimmer while LLM + guard verifies drafts (Rule #19) */
+@keyframes shimmer-scan {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(200%);
+  }
+}
+.shimmer-bar {
+  position: relative;
+  overflow: hidden;
+}
+.shimmer-bar::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgb(4 120 87 / 0.08), transparent);
+  animation: shimmer-scan 1.6s var(--ease-out) infinite;
+}
+
+/* Empirical benchmark bar grow */
+@keyframes bar-grow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+.animate-bar-grow {
+  transform-origin: left;
+  animation: bar-grow 900ms var(--ease-out) both;
+}
+
 @media (prefers-reduced-motion: reduce) {
   [data-reveal="pending"] > *,
   [data-reveal="shown"] > * {
     transform: none;
     transition-property: opacity;
   }
-  .ring-animate {
+  .ring-animate,
+  .animate-verify-pulse,
+  .animate-scan-sweep,
+  .animate-packet-flow,
+  .animate-trace-draw,
+  .animate-shake,
+  .animate-bar-grow {
+    animation: none;
+  }
+  .shimmer-bar::after {
     animation: none;
   }
   .press:active,
   .press-scale:active {
     transform: none;
-  }
-  .animate-verify-pulse {
-    animation: none;
   }
 }
