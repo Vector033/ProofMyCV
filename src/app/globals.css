@@ -232,25 +232,25 @@ body {
   animation: ring-draw 900ms var(--ease-out) both;
 }
 
-/* 1px AST Guard laser sweep across resume preview sheets */
+/* 1px AST Guard laser sweep across 100% height of resume preview sheets */
 @keyframes scan-sweep {
   0% {
-    transform: translateY(-10%);
+    transform: translateY(-100%);
     opacity: 0;
   }
-  12% {
-    opacity: 0.9;
+  10% {
+    opacity: 0.95;
   }
-  88% {
-    opacity: 0.9;
+  90% {
+    opacity: 0.95;
   }
   100% {
-    transform: translateY(110%);
+    transform: translateY(15%);
     opacity: 0;
   }
 }
 .animate-scan-sweep {
-  animation: scan-sweep 2.6s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  animation: scan-sweep 2.8s cubic-bezier(0.16, 1, 0.3, 1) infinite;
 }
 
 /* Stripe-style animated SVG packet pulse along hairline pipes */

@@ -49,7 +49,7 @@ export default async function AccountPage({ searchParams }: PageProps<"/app/sett
         </Row>
       </Section>
 
-      <Section title="Sign-in methods" description="Ways you can get into this account. Keep at least two, in case one stops working.">
+      <Section title="Sign-in methods" description={"Ways you can get into this account. Keep at least two, in case one stops\u00A0working."}>
         <Row label="Email and password">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div className="flex items-center gap-3">

@@ -11,7 +11,7 @@ export default async function DataPage() {
     <div className="space-y-8">
       <Section
         title="What FactFit keeps"
-        description="Your login email, the resume header you typed, your fact bank and your saved applications. Nothing else."
+        description={"Your login email, the resume header you typed, your fact bank and your saved applications. Nothing\u00A0else."}
       >
         <Row label="Download" hint="Everything above, as one JSON file.">
           <a href="/app/settings/export" className="btn">

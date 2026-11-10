@@ -32,7 +32,7 @@ export default async function FactsPage() {
           <h1 className="text-2xl font-semibold tracking-tight">Fact bank</h1>
           <p className="mt-1 max-w-2xl text-sm leading-relaxed text-slate-600">
             Write what really happened, in plain words. Bullets may only use the numbers and technologies you put here,
-            so be specific: what you did, what changed, the number.
+            so be specific: what you did, what changed, the&nbsp;number.
           </p>
         </div>
         <p className="text-sm text-slate-500 tabular-nums">

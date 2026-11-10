@@ -153,7 +153,46 @@ To escape sterile, flat digital canvases without creating noisy **AI Slop**, app
 
 ---
 
-## 6. Token-Efficient Claude Prompts for FactFit (Copy-Paste Ready)
+## 6. GPU Shader Background Architecture (Andres The Designer Workflow)
+
+Reference Tutorial: **Shaders Tutorial: SICK Website Backgrounds** ([YouTube](https://www.youtube.com/watch?v=XVfUl8DB2D8)) & **Paper Shaders** ([shaders.paper.design](https://shaders.paper.design) / [shaders.com](https://shaders.com)).
+
+Unlike heavy MP4 videos or CPU-laggy CSS blurs, **WebGL/Canvas Fragment Shaders** compute textured motion directly on the GPU at 60 FPS with minimal bundle footprint.
+
+### 6.1 Implementation Paths in Next.js 16 + React 19
+* **Option A — `@paper-design/shaders-react` (Recommended):**
+  * Install `npm install @paper-design/shaders-react` and visually tune props (`colors`, `speed`, `scale`, `noise`, `distortion`) on [shaders.paper.design](https://shaders.paper.design).
+* **Option B — Zero-Dependency WebGL `<canvas>` Fragment Shader:**
+  * Write a lightweight `'use client'` GLSL fragment shader (`u_time`, `u_resolution`, `u_colors`) with `ResizeObserver` and clean GPU resource disposal (`gl.deleteProgram`) on unmount.
+
+### 6.2 Mandatory Next.js & Anti-AI-Slop Guardrails for Shaders
+1. **`'use client'` + Static CSS Fallback:** WebGL requires browser DOM/GPU APIs. Wrap shaders in a `'use client'` component (optionally `dynamic(..., { ssr: false })`) layered over `--canvas` (`#f8fafc`) so SSR renders instantly with zero CLS.
+2. **Battery & Accessibility (`prefers-reduced-motion` + Offscreen Pause):** Set `speed={0}` if `window.matchMedia('(prefers-reduced-motion: reduce)').matches` is true, and pause animation via `IntersectionObserver` when scrolled out of view.
+3. **Hero / Focal Regions Only:** Never place animated shaders behind dense Fact Bank tables or resume bullet forms. Restrict to the Hero backdrop (`src/app/page.tsx`) masked with `mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%)`.
+4. **Strict Brand Palette:** Never paste default purple/rainbow presets. Use FactFit's Slate & Emerald tokens only, with a soft contrast overlay ensuring Slate-800 typography remains ≥ 4.5:1.
+
+### 6.3 FactFit Shader Recipe
+```tsx
+// src/components/hero-shader.tsx ('use client')
+import { GrainGradient } from '@paper-design/shaders-react';
+
+// Slow, precision verification aura masked behind the Hero Split Proof card
+<GrainGradient
+  colorBack="#f8fafc"
+  colors={["#f8fafc", "#e2e8f0", "#d1fae5", "#047857"]}
+  softness={0.65}
+  intensity={0.18}
+  noise={0.22}
+  shape="corners"
+  speed={reducedMotion || !isVisible ? 0 : 0.25}
+  style={{ width: '100%', height: '100%' }}
+/>
+```
+*(Alternative minimalist precision choice: `<DotOrbit colors={["#cbd5e1", "#94a3b8", "#047857"]} colorBack="#f8fafc" scale={0.35} speed={0.2} />`.)*
+
+---
+
+## 7. Token-Efficient Claude Prompts for FactFit (Copy-Paste Ready)
 
 ### Prompt 1: Landing Page Hero & Interactive Verification Showcase
 ```text
@@ -214,4 +253,18 @@ Requirements:
 4. Guardrails:
    - Pure CSS + inline SVG data-URI only (no large image assets, no scroll lag, 60 FPS).
    - Strictly preserve WCAG AA contrast (>= 4.5:1) for all Slate-800 typography and do not alter Drizzle/Supabase/PDF logic.
+```
+
+### Prompt 4: Read Guide & Implement GPU Shader Background (FactFit)
+```text
+Task: First, read `CLAUDE_DESIGN_GUIDE.md` thoroughly (especially Section 3 Anti-AI-Slop Rules, Section 4 Design Tokens, and Section 6 GPU Shader Background Architecture). Then follow the guide to implement a GPU Shader background on FactFit's landing page (`src/app/page.tsx`).
+
+Steps to Follow:
+1. Create a reusable `'use client'` component `src/components/hero-shader.tsx` using `@paper-design/shaders-react` (`GrainGradient` or `DotOrbit` from Section 6.3) or a zero-dependency WebGL `<canvas>` fragment shader if avoiding new packages.
+2. Apply FactFit's exact palette (`#f8fafc` canvas, `#e2e8f0` slate hairline, `#d1fae5` soft emerald, `#047857` accent). Never use purple or rainbow AI gradients.
+3. Implement mandatory guardrails from Section 6.2:
+   - Respect `prefers-reduced-motion` (`speed = 0`).
+   - Use `IntersectionObserver` to pause rendering when scrolled out of viewport.
+   - Layer behind Hero only with `pointer-events-none`, `aria-hidden="true"`, radial fade mask, and instant `--canvas` CSS fallback for zero CLS.
+4. Verify WCAG AA contrast (>= 4.5:1) on all hero headlines and interactive proof cards, and run `npm run build` / TypeScript check without touching Supabase/Drizzle/PDF backend logic.
 ```

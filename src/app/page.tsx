@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { demoEmail } from "@/lib/supabase/admin";
+import { HeroShader } from "@/components/hero-shader";
 import { ProofDemo } from "@/components/proof-demo";
 import { AnimatedSteps } from "@/components/animated-steps";
 import { VerificationPipeline } from "@/components/verification-pipeline";
@@ -104,10 +105,13 @@ export default async function Home({ searchParams }: PageProps<"/">) {
       <main className="flex-1">
         {/* ================= HERO SECTION ================= */}
         <section className="relative overflow-hidden pt-16 pb-12 sm:pt-24 sm:pb-16">
-          {/* #7 Blueprint Grid + #18 Square-Dot Grid (--hairline at ~45% opacity, 24px spacing, radial fade) */}
-          <div aria-hidden="true" className="bg-blueprint-dots absolute inset-0" />
+          {/* GPU Fragment Shader over --canvas (#f8fafc) with radial fade + reduced-motion/offscreen guard */}
+          <HeroShader />
 
-          <div className="relative mx-auto max-w-5xl px-4 text-center sm:px-6">
+          {/* #7 Blueprint Grid + #18 Square-Dot Grid (--hairline at ~45% opacity, 24px spacing, radial fade) */}
+          <div aria-hidden="true" className="bg-blueprint-dots absolute inset-0 z-0" />
+
+          <div className="relative z-10 mx-auto max-w-5xl px-4 text-center sm:px-6">
             {/* Functional Status Badge (Strict Anti-AI-Slop: zero filler, pure engineering statement) */}
             <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3.5 py-1 text-xs font-medium text-slate-700 shadow-2xs">
               <span className="size-2 rounded-full bg-emerald-600 animate-pulse" />
@@ -118,14 +122,14 @@ export default async function Home({ searchParams }: PageProps<"/">) {
 
             {/* Main Headline: Stripe/Linear editorial typography with text-balance */}
             <h1 className="mx-auto mt-6 max-w-4xl text-4xl font-semibold tracking-tight text-slate-900 text-balance sm:text-6xl sm:leading-[1.1]">
-              Tailor your resume to each job without inventing a single fact.
+              Tailor your resume to each job without inventing a single&nbsp;fact.
             </h1>
 
-            {/* Subtitle with WCAG AA compliant contrast */}
-            <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-pretty text-slate-600 sm:text-xl">
+            {/* Subtitle: natural line flow without weird orphan breaks */}
+            <p className="mx-auto mt-6 max-w-[60ch] text-lg leading-relaxed text-slate-600 sm:text-xl">
               Generic AI resume tools fabricate numbers and exaggerate skills. FactFit maps your real
-              achievements to job descriptions and mathematically blocks any sentence that cannot be
-              traced back to your verified Fact Bank.
+              achievements to job descriptions and blocks any claim you cannot trace back to your
+              verified Fact&nbsp;Bank.
             </p>
 
             {/* Primary CTA Row: Requirement 4 "Tailor Resume with 0% Hallucination" */}
@@ -147,16 +151,16 @@ export default async function Home({ searchParams }: PageProps<"/">) {
             </div>
 
             {/* Trust Assurance Strip */}
-            <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs font-medium text-slate-500">
-              <span className="inline-flex items-center gap-1.5">
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs font-medium text-slate-600">
+              <span className="inline-flex items-center gap-1.5 whitespace-nowrap">
                 <span className="size-1 rounded-full bg-emerald-600" />
                 Deterministic AST Guard
               </span>
-              <span className="inline-flex items-center gap-1.5">
+              <span className="inline-flex items-center gap-1.5 whitespace-nowrap">
                 <span className="size-1 rounded-full bg-emerald-600" />
                 Zero Fabricated Metrics
               </span>
-              <span className="inline-flex items-center gap-1.5">
+              <span className="inline-flex items-center gap-1.5 whitespace-nowrap">
                 <span className="size-1 rounded-full bg-emerald-600" />
                 Single-Column ATS PDF
               </span>
@@ -164,10 +168,10 @@ export default async function Home({ searchParams }: PageProps<"/">) {
           </div>
 
           {/* ================= INTERACTIVE PROOF SHOWCASE ================= */}
-          <section id="demo" aria-label="Interactive proof showcase" className="mx-auto mt-12 max-w-5xl px-4 sm:px-6">
+          <section id="demo" aria-label="Interactive proof showcase" className="relative z-10 mx-auto mt-12 max-w-5xl px-4 sm:px-6">
             <ProofDemo />
-            <p className="mt-3 text-center text-xs text-slate-500">
-              Real client-side AST fabrication guard running on demo fact #f1. Zero scroll hijacking.
+            <p className="mt-3 text-center text-xs text-slate-600">
+              Real client-side AST fabrication guard running on demo&nbsp;fact&nbsp;#f1. Zero scroll&nbsp;hijacking.
             </p>
           </section>
         </section>
@@ -179,7 +183,7 @@ export default async function Home({ searchParams }: PageProps<"/">) {
               id="how-heading"
               eyebrow="Workflow"
               title="How FactFit works"
-              subtitle="Three deterministic steps from raw career facts to a single-column, ATS-compliant PDF you can defend in any interview."
+              subtitle={"Three deterministic steps from raw career facts to a single-column, ATS-compliant PDF you can defend in any\u00A0interview."}
             />
 
             <AnimatedSteps />
@@ -193,7 +197,7 @@ export default async function Home({ searchParams }: PageProps<"/">) {
               id="arch-heading"
               eyebrow="Under the Hood"
               title="Blocked by deterministic code, not prompt wishes"
-              subtitle="Even when an LLM tries to impress recruiters by inventing numbers, the 3-layer verification guard intercepts every token before it can be saved."
+              subtitle={"Even when an LLM tries to impress recruiters by inventing numbers, the 3-layer verification guard intercepts every token before it can be\u00A0saved."}
             />
 
             <div className="mt-12">
@@ -209,7 +213,7 @@ export default async function Home({ searchParams }: PageProps<"/">) {
               id="measured-heading"
               eyebrow="Empirical Benchmarks"
               title="Measured, not promised"
-              subtitle="Tested across 40 real-world job postings. The AST code guard checks numbers, units, and technical names deterministically."
+              subtitle={"Tested across 40 real-world job postings. The AST code guard checks numbers, units, and technical\u00A0names."}
             />
 
             <BenchmarkMetrics />
@@ -220,7 +224,7 @@ export default async function Home({ searchParams }: PageProps<"/">) {
               evaluates numerical quantities, measurement units, and technology terminology. It flags
               semantic drift (e.g. inventing Redis when not in facts), but does not parse semantic noun
               context (e.g. &ldquo;120 members&rdquo; rewritten as &ldquo;120 customers&rdquo;). The user
-              remains the ultimate reviewer of every generated bullet before PDF export.
+              remains the ultimate reviewer of every generated bullet before PDF&nbsp;export.
             </div>
           </div>
         </section>
@@ -232,7 +236,7 @@ export default async function Home({ searchParams }: PageProps<"/">) {
               id="comparison-heading"
               eyebrow="Architectural Advantage"
               title="FactFit vs Unconstrained AI Resume Builders"
-              subtitle="Why deterministic code checks and single-column PDF structure outperform decorative templates and prompt-only AI."
+              subtitle={"Why deterministic code checks and single-column PDF structure outperform decorative templates and prompt\u2011only\u00A0AI."}
             />
 
             <div className="mt-12">
@@ -252,7 +256,7 @@ export default async function Home({ searchParams }: PageProps<"/">) {
                   <tbody className="divide-y divide-slate-100">
                     {comparisonRows.map((row) => (
                       <tr key={row.feature} className="transition-colors hover:bg-slate-50/50">
-                        <td className="py-3.5 pl-6 pr-4 font-medium text-slate-900">{row.feature}</td>
+                        <td className="py-3.5 pl-6 pr-4 font-medium whitespace-nowrap text-slate-900">{row.feature}</td>
                         <td className="px-4 py-3.5 text-red-700">
                           <span className="inline-flex items-center gap-1.5">
                             <span className="size-1.5 rounded-full bg-red-500" />
@@ -280,12 +284,12 @@ export default async function Home({ searchParams }: PageProps<"/">) {
             <div className="relative overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 p-8 text-white shadow-xl sm:p-12">
               <div className="relative z-10 flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between">
                 <div className="max-w-xl">
-                  <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
-                    Start with one true sentence.
+                  <h2 className="text-2xl font-semibold tracking-tight text-balance sm:text-3xl">
+                    Start with one true&nbsp;sentence.
                   </h2>
                   <p className="mt-2 text-sm leading-relaxed text-slate-300 sm:text-base">
                     Log your achievements once, match against any job description, and export a clean
-                    single-column PDF you can defend with total confidence.
+                    single-column PDF you can defend with total&nbsp;confidence.
                   </p>
                 </div>
 
@@ -315,7 +319,7 @@ export default async function Home({ searchParams }: PageProps<"/">) {
             <span>Zero-hallucination career tailoring</span>
           </div>
           <p>
-            FactFit stores only what you enter. Fully PDPA compliant. Export or delete your data at any time.
+            FactFit stores only what you enter. Fully PDPA compliant. Export or delete your data at any&nbsp;time.
           </p>
         </div>
       </footer>
@@ -337,7 +341,7 @@ function SectionHeader({
   return (
     <div className="max-w-2xl">
       <p className="text-xs font-semibold uppercase tracking-wider text-emerald-800">{eyebrow}</p>
-      <h2 id={id} className="mt-1.5 text-2xl font-semibold tracking-tight text-slate-900 sm:text-3xl">
+      <h2 id={id} className="mt-1.5 text-2xl font-semibold tracking-tight text-slate-900 text-balance sm:text-3xl">
         {title}
       </h2>
       <p className="mt-2 text-sm leading-relaxed text-slate-600 sm:text-base">{subtitle}</p>

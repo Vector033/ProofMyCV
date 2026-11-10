@@ -17,6 +17,7 @@
     "eval:live": "tsx eval/run-live.mts"
   },
   "dependencies": {
+    "@paper-design/shaders-react": "^0.0.82",
     "@react-pdf/renderer": "^4.9.0",
     "@supabase/ssr": "^0.12.7",
     "@supabase/supabase-js": "^2.118.0",

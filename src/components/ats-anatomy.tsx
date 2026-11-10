@@ -15,10 +15,10 @@ export function AtsAnatomy() {
               Multi-Column AI Template
             </span>
             <p className="mt-0.5 text-xs text-slate-600">
-              Sidebars, tables, and icons scramble ATS line-by-line text extraction
+              Sidebars, tables, and icons scramble ATS line-by-line text&nbsp;extraction
             </p>
           </div>
-          <span className="shrink-0 rounded-full border border-red-200 bg-red-50 px-2.5 py-0.5 text-xs font-semibold text-red-800 tabular-nums">
+          <span className="shrink-0 rounded-full border border-red-200 bg-red-50 px-2.5 py-0.5 text-xs font-semibold whitespace-nowrap text-red-800 tabular-nums">
             Parser Collisions
           </span>
         </div>
@@ -83,10 +83,10 @@ export function AtsAnatomy() {
               FactFit Single-Column PDF
             </span>
             <p className="mt-0.5 text-xs text-slate-600">
-              Top-to-bottom linear flow with selectable text &amp; verified source metadata
+              Top-to-bottom linear flow with selectable text &amp; verified source&nbsp;metadata
             </p>
           </div>
-          <span className="shrink-0 rounded-full border border-emerald-600/20 bg-emerald-50 px-2.5 py-0.5 text-xs font-semibold text-emerald-800 tabular-nums">
+          <span className="shrink-0 rounded-full border border-emerald-600/20 bg-emerald-50 px-2.5 py-0.5 text-xs font-semibold whitespace-nowrap text-emerald-800 tabular-nums">
             100% Readable
           </span>
         </div>

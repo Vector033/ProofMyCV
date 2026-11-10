@@ -155,7 +155,7 @@ export function VerificationPipeline() {
                     <div className="flex flex-wrap items-center justify-between gap-1">
                       <span className="text-xs font-semibold text-slate-900">{layer.name}</span>
                       <span
-                        className={`text-[11px] font-medium tabular-nums ${
+                        className={`text-[11px] font-medium whitespace-nowrap tabular-nums ${
                           isVerified ? "text-emerald-800" : "text-red-800"
                         }`}
                       >
@@ -190,7 +190,7 @@ export function VerificationPipeline() {
                 <div className="flex items-center justify-between gap-2">
                   <span className="text-xs font-semibold text-slate-900">Single-Column ATS PDF</span>
                   <span
-                    className={`rounded-full px-2 py-0.5 text-[10px] font-semibold tabular-nums ${
+                    className={`rounded-full px-2 py-0.5 text-[10px] font-semibold whitespace-nowrap tabular-nums ${
                       isVerified
                         ? "bg-emerald-50 text-emerald-800 ring-1 ring-emerald-600/25"
                         : "bg-slate-200 text-slate-500"
@@ -201,8 +201,8 @@ export function VerificationPipeline() {
                 </div>
                 <p className="mt-1.5 text-[11px] leading-relaxed text-slate-600">
                   {isVerified
-                    ? "Verified bullet saved to version and rendered into selectable text PDF."
-                    : "Unreachable while any violation remains unresolved."}
+                    ? "Verified bullet saved to version and rendered into selectable text\u00A0PDF."
+                    : "Unreachable while any violation remains\u00A0unresolved."}
                 </p>
               </div>
             </div>
@@ -218,7 +218,7 @@ export function VerificationPipeline() {
               <div className="flex items-center justify-between gap-2">
                 <span className="text-xs font-semibold text-red-900">Guard Quarantine</span>
                 <span
-                  className={`rounded-full px-2 py-0.5 text-[10px] font-semibold tabular-nums ${
+                  className={`rounded-full px-2 py-0.5 text-[10px] font-semibold whitespace-nowrap tabular-nums ${
                     !isVerified
                       ? "bg-red-100 text-red-800 ring-1 ring-red-600/20"
                       : "bg-slate-200 text-slate-500"
@@ -229,8 +229,8 @@ export function VerificationPipeline() {
               </div>
               <p className="mt-1.5 text-[11px] leading-relaxed text-red-800">
                 {!isVerified
-                  ? "Save button locked. Candidate cannot accidentally export unverified claims."
-                  : "All tokens traced back to Fact #f1; zero quarantined lines."}
+                  ? "Save button locked. Candidate cannot accidentally export unverified\u00A0claims."
+                  : "All tokens traced back to Fact #f1; zero quarantined\u00A0lines."}
               </p>
             </div>
           </div>

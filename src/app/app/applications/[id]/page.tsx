@@ -85,7 +85,7 @@ export default async function ApplicationPage({ params }: PageProps<"/app/applic
                 </ul>
                 <p className="mt-3 text-xs text-slate-500">
                   If you really have done one of these, <Link href="/app/facts" className="font-medium text-slate-700 underline underline-offset-2">add it as a fact</Link>.
-                  Otherwise leave it out. FactFit will not write it for you.
+                  Otherwise leave it out. FactFit will not write it for&nbsp;you.
                 </p>
               </>
             )}

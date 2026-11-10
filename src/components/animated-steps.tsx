@@ -9,15 +9,15 @@ const DEMO_TECH = ["React", "TypeScript"];
 const STEPS = [
   {
     title: "Record what actually happened",
-    body: "Write short, bullet-level facts from your career: what you did, the measured result, and the tools you used. No fluff.",
+    body: "Write short, bullet-level facts from your career: what you did, the measured result, and the tools you used. No\u00A0fluff.",
   },
   {
     title: "Extract & match job requirements",
-    body: "Paste any job posting. FactFit extracts required skills and calculates your exact coverage score against your verified facts.",
+    body: "Paste any job posting. FactFit extracts required skills and calculates your exact coverage score against your verified\u00A0facts.",
   },
   {
     title: "Export verified, ATS-ready PDF",
-    body: "Every bullet cites its source facts. Any invented metric or unverified tool is blocked by code before the PDF is generated.",
+    body: "Every bullet cites its source facts. Any invented metric or unverified tool is blocked by code before the PDF is\u00A0generated.",
   },
 ] as const;
 
@@ -98,8 +98,8 @@ function StepOneSpecimen({ active }: { active: boolean }) {
           active ? "translate-x-0 opacity-100" : "-translate-x-2 opacity-0"
         }`}
       >
-        Page load went from <span className="font-semibold text-slate-900 tabular-nums">4.1 s</span> to{" "}
-        <span className="font-semibold text-emerald-800 tabular-nums">1.3 s</span>
+        Page load went from <span className="font-semibold whitespace-nowrap text-slate-900 tabular-nums">4.1 s</span> to{" "}
+        <span className="font-semibold whitespace-nowrap text-emerald-800 tabular-nums">1.3 s</span>
       </p>
       <div className="flex flex-wrap gap-1.5 pt-1">
         {DEMO_TECH.map((t, idx) => (
@@ -166,7 +166,7 @@ function StepThreeSpecimen({ active }: { active: boolean }) {
               active ? "opacity-100" : "opacity-0"
             }`}
           >
-            • Cut page load from <span className="tabular-nums font-medium">4.1 s to 1.3 s</span> in React &amp; TypeScript.
+            • Cut page load from <span className="font-medium whitespace-nowrap tabular-nums">4.1 s to 1.3 s</span> in React &amp;&nbsp;TypeScript.
           </div>
           <div
             style={{ transitionDelay: "320ms" }}

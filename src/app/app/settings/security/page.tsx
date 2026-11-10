@@ -89,7 +89,7 @@ export default async function SecurityPage() {
         <div id="devices" className="scroll-mt-8">
           <Section
             title="Signed-in devices"
-            description="Browsers where this account is signed in now. Sign out any you don't recognise, then change your password."
+            description={"Browsers where this account is signed in now. Sign out any you don't recognise, then change your\u00A0password."}
           >
             {sessions === null ? (
               <Row label="Devices">

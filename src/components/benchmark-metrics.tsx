@@ -8,21 +8,21 @@ const RESULTS = [
     den: 547,
     pct: 100,
     pctLabel: "100%",
-    label: "Invented numbers, tools and citations blocked on 30 tuning benchmark cases",
+    label: "Invented numbers, tools and citations blocked on 30 tuning benchmark\u00A0cases",
   },
   {
     num: 180,
     den: 186,
     pct: 96.8,
     pctLabel: "96.8%",
-    label: "Blocked on 10 held-out evaluation cases written after guard logic was frozen",
+    label: "Blocked on 10 held-out evaluation cases written after guard logic was\u00A0frozen",
   },
   {
     num: 26,
     den: 26,
     pct: 100,
     pctLabel: "100%",
-    label: "Fabricated claims blocked when LLM was instructed to 'add impressive metrics'",
+    label: "Fabricated claims blocked when LLM was instructed to \u2018add impressive\u00A0metrics\u2019",
   },
 ] as const;
 
