@@ -122,8 +122,8 @@ export default async function Home({ searchParams }: PageProps<"/">) {
 
   return (
     <div className="flex min-h-screen flex-col bg-slate-50 text-slate-900">
-      {/* ================= STICKY TOP NAV ================= */}
-      <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-slate-50/85 backdrop-blur-md">
+      {/* ================= STICKY TOP NAV (#2 Fluted Glass over --canvas) ================= */}
+      <header className="fluted-glass sticky top-0 z-50 border-b border-slate-200/80">
         <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-4 sm:px-6">
           <Link href="/" className="inline-flex items-center gap-2 font-semibold tracking-tight">
             <span
@@ -178,8 +178,8 @@ export default async function Home({ searchParams }: PageProps<"/">) {
       <main className="flex-1">
         {/* ================= HERO SECTION ================= */}
         <section className="relative overflow-hidden pt-16 pb-12 sm:pt-24 sm:pb-16">
-          {/* Subtle Hairline Grid Pattern */}
-          <div className="bg-grid-hairline pointer-events-none absolute inset-0 opacity-40 [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
+          {/* #7 Blueprint Grid + #18 Square-Dot Grid (--hairline at ~45% opacity, 24px spacing, radial fade) */}
+          <div aria-hidden="true" className="bg-blueprint-dots absolute inset-0" />
 
           <div className="relative mx-auto max-w-5xl px-4 text-center sm:px-6">
             {/* Functional Status Badge (Strict Anti-AI-Slop: zero filler, pure engineering statement) */}
@@ -274,12 +274,13 @@ export default async function Home({ searchParams }: PageProps<"/">) {
 
                   <p className="mt-2 text-sm leading-relaxed text-slate-600">{body}</p>
 
-                  {/* Specimen Box: rounded-xl (12px) [Outer card p-2.5 equivalent inner geometry] */}
+                  {/* Specimen Box: rounded-xl (12px) with #12 Paper Texture + #5 Speckled Graphite */}
                   <div
                     aria-hidden
-                    className="mt-6 flex-1 rounded-xl border border-slate-200/90 bg-white p-3.5 shadow-2xs"
+                    className="relative mt-6 flex-1 overflow-hidden rounded-xl border border-slate-200/90 bg-white p-3.5 shadow-2xs"
                   >
-                    {specimen}
+                    <span className="paper-texture absolute inset-0 rounded-[inherit]" />
+                    <div className="relative z-10">{specimen}</div>
                   </div>
                 </li>
               ))}

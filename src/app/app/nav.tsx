@@ -15,12 +15,13 @@ function isActive(path: string, href: string) {
   return path.startsWith(href);
 }
 
-/** The three app sections, centred in the top bar (a scrollable row on phones). */
+/** The three app sections, centred in the sticky #2 Fluted Glass top bar (scrollable on phones). */
 export function AppNav() {
   const path = usePathname();
   return (
     <nav aria-label="Main" className="overflow-x-auto overflow-y-hidden [scrollbar-width:none]">
-      <ul className="flex gap-1 md:rounded-xl md:bg-slate-100 md:p-1">
+      {/* Outer pill rail: md:rounded-xl (12px) + md:p-1 (4px) -> inner links rounded-lg (8px) [12 - 4 = 8] */}
+      <ul className="fluted-glass flex gap-1 md:rounded-xl md:border md:border-slate-200/80 md:p-1">
         {items.map(({ href, label, icon: Icon }) => {
           const active = isActive(path, href);
           return (
@@ -28,13 +29,13 @@ export function AppNav() {
               <Link
                 href={href}
                 aria-current={active ? "page" : undefined}
-                className={`flex min-h-10 items-center gap-2 rounded-lg px-3 text-sm transition-colors duration-150 ${
+                className={`press flex min-h-10 items-center gap-2 rounded-lg px-3 text-sm transition-colors duration-150 ${
                   active
-                    ? "bg-white font-medium text-slate-900 shadow-xs ring-1 ring-slate-200 md:ring-0"
+                    ? "bg-white font-medium text-slate-900 shadow-xs ring-1 ring-slate-200/90 md:ring-0"
                     : "text-slate-600 hover:bg-white/70 hover:text-slate-900"
                 }`}
               >
-                <Icon size={16} className={active ? "text-slate-900" : "text-slate-400"} />
+                <Icon size={16} className={active ? "text-slate-900" : "text-slate-500"} />
                 {label}
               </Link>
             </li>

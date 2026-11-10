@@ -11,7 +11,7 @@ export default async function AppLayout({ children }: LayoutProps<"/app">) {
     <div className="flex flex-1 flex-col">
       {/* One top bar: logo left, the three sections centred, account right. On phones the
           sections drop to their own row and the bar scrolls away to save height. */}
-      <header className="z-20 border-b border-slate-200 bg-white/95 backdrop-blur-sm md:sticky md:top-0">
+      <header className="fluted-glass z-20 border-b border-slate-200/80 md:sticky md:top-0">
         <div className="mx-auto grid h-16 max-w-6xl grid-cols-[1fr_auto] items-center gap-4 px-4 sm:px-6 md:grid-cols-[1fr_auto_1fr]">
           <Link href="/app" className="inline-flex items-center gap-2 justify-self-start rounded-md font-semibold tracking-tight text-slate-900">
             <span aria-hidden className="grid size-7 place-items-center rounded-md bg-slate-800 text-[13px] font-bold text-white">

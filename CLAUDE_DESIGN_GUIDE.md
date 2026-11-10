@@ -116,7 +116,44 @@ Add/verify in `src/app/globals.css`:
 
 ---
 
-## 5. Token-Efficient Claude Prompts for FactFit (Copy-Paste Ready)
+## 5. 22 Backgrounds to Make Designs Less Flat (Anti-Flatness Texture & Depth Guide)
+
+To escape sterile, flat digital canvases without creating noisy **AI Slop**, apply tactile textures, optical glass, or structured grids deliberately. Always maintain WCAG AA contrast (≥ 4.5:1), use `pointer-events: none`, and keep pattern opacities subtle (`0.02`–`0.08`) or masked at edges (`mask-image: radial-gradient(...)`):
+
+| # | Technique | Visual Style & Depth Effect | Pure CSS / SVG Implementation Hint |
+|---|---|---|---|
+| 1 | **Felt texture** | Soft matte textile fiber warmth | Inline SVG `<feTurbulence>` fine grain + soft warm tint overlay |
+| 2 | **Fluted glass** | Vertical ribbed optical refraction | Repeating linear-gradient strips + `backdrop-filter: blur(12px)` |
+| 3 | **Thermal gradients** | Infrared heat-map color transitions | Multi-stop smooth radial gradient (strictly for status/radar accents, never purple AI slop) |
+| 4 | **Water ripples** | Concentric liquid light refractions | Subtle SVG displacement map or layered radial ring highlights |
+| 5 | **Speckled graphite** | Fine charcoal/pencil grain on matte surfaces | Micro-dot radial pattern + SVG fractal noise (`opacity: 0.04`) |
+| 6 | **Single-hue landscapes** | Layered monochrome depth planes | Layered SVG silhouettes in stepped opacities of `--ink` / brand hue |
+| 7 | **Blueprint grids** | Precision engineering grid lines | CSS `linear-gradient` 1px grid (`background-size: 24px 24px`) with radial fade mask |
+| 8 | **Halftone** | Retro print dot matrix shading | CSS `radial-gradient(circle, currentColor 1px, transparent 1px)` staggered |
+| 9 | **Grainy gradients** | Tactile film-grain gradient without plastic smoothness | CSS radial gradient + SVG `feTurbulence` noise layer (`mix-blend-mode: overlay`) |
+| 10 | **Grass texture** | Organic natural directional fiber | Fine directional micro-stroke SVG pattern for organic/outdoor themes |
+| 11 | **Dithered images** | 1-bit retro ordered pixel dithering | Pre-dithered SVG/Canvas filter for crisp low-ink retro depth |
+| 12 | **Paper texture** | Authentic cotton, vellum, or receipt stock fiber | Subtle SVG paper fiber noise (`baseFrequency="0.8"`) over `--canvas` / card surfaces |
+| 13 | **Contour lines** | Topographic elevation/route curves | Clean ultra-thin 1px SVG bezier contour curves (`opacity: 0.06`) |
+| 14 | **Cloud sky** | Soft atmospheric depth with natural diffusion | Layered ultra-soft blurred radial ellipses at low opacity |
+| 15 | **Pixel mosaics** | Structured color-stepped pixel blocks | Crisp `image-rendering: pixelated` low-res gradient grid |
+| 16 | **Lens distortion** | Subtle optical edge vignette & light bending | Soft edge vignette + curved specular highlight arc |
+| 17 | **Stippled gradients** | Hand-drawn stipple dot density fade | Variable-density SVG dot scatter or masked halftone fade |
+| 18 | **Square-dot grids** | Crisp architectural dot matrix | CSS `radial-gradient` / `conic-gradient` 1.5px square dots (`20px × 20px`) |
+| 19 | **Blurred photos** | Ambient photographic color wash | Real photo with `filter: blur(48px) saturate(1.1)` + contrast scrim |
+| 20 | **Iridescent shapes** | Subtle holographic pearlescent sheen | Restrained `conic-gradient` specular border/surface highlight (very low opacity) |
+| 21 | **Impressionist paintings** | Rich textured brushwork warmth | Softly blurred painterly color dabs under a translucent matte scrim |
+| 22 | **ASCII and pixels** | Technical monospace character matrix & pixel art | Lightweight `<canvas>` or static `<pre aria-hidden>` ASCII telemetry pattern |
+
+### Best Background Picks for FactFit (Zero AI Slop)
+* **#7 Blueprint grids & #18 Square-dot grids:** Subtle faded dot/blueprint grid in the hero canvas (`mask-image: radial-gradient(...)`) reinforcing FactFit's mathematical 0% hallucination check.
+* **#12 Paper texture & #5 Speckled graphite:** Micro-paper cotton texture (`opacity: 0.03`) on the resume preview sheets in `src/app/page.tsx` and `src/app/app/applications/` so digital resumes feel tactile like fine resume stock.
+* **#2 Fluted glass:** Subtle ribbed fluted glass styling on sticky top bars (`src/app/app/nav.tsx`) and modal scrims.
+* **#9 Grainy gradients:** Ultra-restrained emerald radial grainy glow (`--accent`) strictly behind the FactFit Verified split comparison card.
+
+---
+
+## 6. Token-Efficient Claude Prompts for FactFit (Copy-Paste Ready)
 
 ### Prompt 1: Landing Page Hero & Interactive Verification Showcase
 ```text
@@ -159,4 +196,22 @@ Requirements:
    - Add clear loading skeleton states during Supabase queries (Rule #19).
    - Add keyboard focus rings (`focus-visible:ring-2 focus-visible:ring-emerald-700`) and WCAG AA contrast compliance (Rule #15).
    - Ensure all icons use consistent Lucide-react 1.5px stroke width (Rule #12).
+```
+
+### Prompt 3: Background & Surface Depth Polish (Anti-Flatness Without AI Slop)
+```text
+Role: Senior UI/UX Designer & Frontend Engineer
+Task: Eliminate visual flatness in FactFit (`src/app/globals.css`, `src/app/page.tsx`, and `src/app/app/nav.tsx`) using subtle, purposeful background textures from Section 5 ("22 Backgrounds to Make Designs Less Flat") with zero AI slop.
+
+Requirements:
+1. Hero Canvas (`src/app/page.tsx` & `globals.css`):
+   - Add an ultra-subtle #7 Blueprint Grid / #18 Square-Dot Grid (`--hairline` at ~45% opacity, 24px spacing) masked smoothly with `mask-image: radial-gradient(ellipse at center, black 35%, transparent 80%)`.
+   - Behind the "FactFit Verified" split preview card only, place a #9 Grainy Gradient aura tinted softly with Emerald (`--accent` at 6% opacity + inline SVG `<feTurbulence>` micro-noise, never purple/blue AI gradients).
+2. Resume Preview Sheets:
+   - Apply a crisp #12 Paper Texture / #5 Speckled Graphite overlay (`pointer-events: none`, `opacity: 0.03`) to the resume comparison documents so they feel like real high-grade cotton paper.
+3. Sticky Top Navigation (`src/app/app/nav.tsx`):
+   - Upgrade flat background to subtle #2 Fluted Glass (`backdrop-blur-md` + faint vertical linear-gradient ribbing at 2% opacity) over `--canvas`.
+4. Guardrails:
+   - Pure CSS + inline SVG data-URI only (no large image assets, no scroll lag, 60 FPS).
+   - Strictly preserve WCAG AA contrast (>= 4.5:1) for all Slate-800 typography and do not alter Drizzle/Supabase/PDF logic.
 ```

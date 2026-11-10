@@ -134,12 +134,78 @@ body {
   animation: verifyPulse 2.4s cubic-bezier(0.16, 1, 0.3, 1) infinite;
 }
 
-/* Subtle Linear hairline grid background */
-.bg-grid-hairline {
-  background-size: 32px 32px;
-  background-image: 
-    linear-gradient(to right, rgba(226, 232, 240, 0.6) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(226, 232, 240, 0.6) 1px, transparent 1px);
+/* Dark Slate-800 band (used on /login split showcase): preserves high WCAG AA/AAA contrast
+   for white typography, layered with a subtle 24px engineering grid. */
+.hero-band {
+  background-color: var(--ink);
+  background-image:
+    radial-gradient(ellipse 80% 60% at 20% 0%, rgb(4 120 87 / 0.14), transparent 70%),
+    linear-gradient(to right, rgb(255 255 255 / 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.03) 1px, transparent 1px);
+  background-size: 100% 100%, 24px 24px, 24px 24px;
+}
+
+/* #7 Blueprint Grid + #18 Square-Dot Grid: --hairline at ~45% opacity, 24px spacing,
+   masked smoothly at edges so it never creates visual clutter. */
+.bg-blueprint-dots {
+  pointer-events: none;
+  background-size: 24px 24px;
+  background-position: center top;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Crect x='0' y='0' width='1.5' height='1.5' fill='%2394a3b8' fill-opacity='0.32'/%3E%3C/svg%3E"),
+    linear-gradient(to right, color-mix(in srgb, var(--hairline) 45%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--hairline) 45%, transparent) 1px, transparent 1px);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 35%, transparent 80%);
+  mask-image: radial-gradient(ellipse at center, black 35%, transparent 80%);
+}
+
+/* #9 Grainy Gradient Aura: strictly Emerald (--accent) at 6% opacity + SVG feTurbulence micro-noise
+   placed solely behind the "FactFit Verified" split preview card. */
+.bg-grainy-emerald {
+  pointer-events: none;
+  background-image:
+    radial-gradient(
+      ellipse 75% 75% at 50% 50%,
+      color-mix(in srgb, var(--accent) 6%, transparent),
+      color-mix(in srgb, var(--accent) 2%, transparent) 55%,
+      transparent 80%
+    );
+  -webkit-mask-image: radial-gradient(ellipse at center, black 35%, transparent 80%);
+  mask-image: radial-gradient(ellipse at center, black 35%, transparent 80%);
+}
+.bg-grainy-emerald::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.35;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+
+/* #12 Paper Texture + #5 Speckled Graphite overlay: gives digital resume preview sheets
+   the tactile feel of high-grade cotton resume stock at 3% opacity. */
+.paper-texture {
+  pointer-events: none;
+  opacity: 0.03;
+  background-image:
+    radial-gradient(rgb(30 41 59 / 0.7) 0.5px, transparent 0.5px),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='paper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paper)'/%3E%3C/svg%3E");
+  background-size: 16px 16px, 180px 180px;
+}
+
+/* #2 Fluted Glass: vertical ribbed optical refraction at 2% opacity over --canvas */
+.fluted-glass {
+  background-color: rgb(248 250 252 / 0.85);
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgb(30 41 59 / 0.02) 0px,
+    rgb(30 41 59 / 0.02) 2px,
+    transparent 2px,
+    transparent 8px
+  );
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
 }
 
 /* Scroll reveal. Native scroll is untouched. */

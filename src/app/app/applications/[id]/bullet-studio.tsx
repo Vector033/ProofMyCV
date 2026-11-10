@@ -98,7 +98,7 @@ export function BulletStudio({ applicationId, experiences, facts, initialBullets
 
   return (
     <section aria-labelledby="bullets-heading" className="space-y-4">
-      <div className="z-[5] md:sticky md:top-16 -mx-4 flex flex-wrap items-center gap-3 border-b border-slate-200/80 bg-slate-50/95 px-4 py-3 backdrop-blur-sm sm:-mx-6 sm:px-6">
+      <div className="fluted-glass z-[5] md:sticky md:top-16 -mx-4 flex flex-wrap items-center gap-3 border-b border-slate-200/80 px-4 py-3 sm:-mx-6 sm:px-6">
         <div className="mr-auto min-w-0">
           <h2 id="bullets-heading" className="text-lg font-semibold tracking-tight">
             Bullets for this job
@@ -142,59 +142,62 @@ export function BulletStudio({ applicationId, experiences, facts, initialBullets
           {experiences.map((e) => {
             const rows = bullets.map((b, i) => ({ b, i })).filter(({ b }) => b.experienceId === e.id);
             return (
-              <div key={e.id} className="card p-4">
-                <p className="text-sm font-medium text-slate-900 [overflow-wrap:anywhere]">
-                  {e.title} {e.org && <span className="font-normal text-slate-500">· {e.org}</span>}
-                </p>
-                {rows.length === 0 && <p className="mt-2 text-xs text-slate-500">Not on this version.</p>}
-                <ul className="mt-3 space-y-2">
-                  {rows.map(({ b, i }, k) => {
-                    const check = checks[i];
-                    return (
-                      <li
-                        key={i}
-                        className={`rounded-lg border p-3 transition-colors duration-150 ${
-                          check.ok
-                            ? "border-slate-200 focus-within:border-emerald-700 focus-within:ring-2 focus-within:ring-emerald-700/15"
-                            : "border-red-300 bg-red-50/40 focus-within:ring-2 focus-within:ring-red-600/15"
-                        }`}
-                      >
-                        <textarea
-                          value={b.text}
-                          rows={2}
-                          onChange={(ev) => update(bullets.map((x, n) => (n === i ? { ...x, text: ev.target.value } : x)))}
-                          className="w-full resize-y bg-transparent text-base leading-relaxed text-slate-900 [field-sizing:content] focus:outline-none focus-visible:outline-none sm:text-sm"
-                          aria-label={`Bullet ${k + 1} for ${e.title}`}
-                          aria-invalid={!check.ok}
-                          aria-describedby={check.ok ? undefined : `bullet-${i}-problems`}
-                        />
-                        <div className="mt-1 flex flex-wrap items-center gap-2 text-xs">
-                          <GuardBadge ok={check.ok} />
-                          <span className="text-slate-500">
-                            cites {b.factIds.length} fact{b.factIds.length === 1 ? "" : "s"}
-                          </span>
-                          <span className="ml-auto flex gap-0.5">
-                            <button onClick={() => move(i, -1)} disabled={k === 0} className="btn-ghost" aria-label={`Move bullet ${k + 1} up`}>
-                              <Arrow up />
-                            </button>
-                            <button
-                              onClick={() => move(i, 1)}
-                              disabled={k === rows.length - 1}
-                              className="btn-ghost"
-                              aria-label={`Move bullet ${k + 1} down`}
-                            >
-                              <Arrow />
-                            </button>
-                            <button onClick={() => remove(i)} className="btn-danger" aria-label={`Remove bullet ${k + 1}`}>
-                              Remove
-                            </button>
-                          </span>
-                        </div>
-                        <Problems check={check} id={`bullet-${i}-problems`} />
-                      </li>
-                    );
-                  })}
-                </ul>
+              <div key={e.id} className="card relative overflow-hidden p-4">
+                <span aria-hidden="true" className="paper-texture absolute inset-0 rounded-[inherit]" />
+                <div className="relative z-10">
+                  <p className="text-sm font-medium text-slate-900 [overflow-wrap:anywhere]">
+                    {e.title} {e.org && <span className="font-normal text-slate-500">· {e.org}</span>}
+                  </p>
+                  {rows.length === 0 && <p className="mt-2 text-xs text-slate-500">Not on this version.</p>}
+                  <ul className="mt-3 space-y-2">
+                    {rows.map(({ b, i }, k) => {
+                      const check = checks[i];
+                      return (
+                        <li
+                          key={i}
+                          className={`rounded-lg border p-3 transition-colors duration-150 ${
+                            check.ok
+                              ? "border-slate-200 focus-within:border-emerald-700 focus-within:ring-2 focus-within:ring-emerald-700/15"
+                              : "border-red-300 bg-red-50/40 focus-within:ring-2 focus-within:ring-red-600/15"
+                          }`}
+                        >
+                          <textarea
+                            value={b.text}
+                            rows={2}
+                            onChange={(ev) => update(bullets.map((x, n) => (n === i ? { ...x, text: ev.target.value } : x)))}
+                            className="w-full resize-y bg-transparent text-base leading-relaxed text-slate-900 [field-sizing:content] focus:outline-none focus-visible:outline-none sm:text-sm"
+                            aria-label={`Bullet ${k + 1} for ${e.title}`}
+                            aria-invalid={!check.ok}
+                            aria-describedby={check.ok ? undefined : `bullet-${i}-problems`}
+                          />
+                          <div className="mt-1 flex flex-wrap items-center gap-2 text-xs">
+                            <GuardBadge ok={check.ok} />
+                            <span className="text-slate-500">
+                              cites {b.factIds.length} fact{b.factIds.length === 1 ? "" : "s"}
+                            </span>
+                            <span className="ml-auto flex gap-0.5">
+                              <button onClick={() => move(i, -1)} disabled={k === 0} className="btn-ghost" aria-label={`Move bullet ${k + 1} up`}>
+                                <Arrow up />
+                              </button>
+                              <button
+                                onClick={() => move(i, 1)}
+                                disabled={k === rows.length - 1}
+                                className="btn-ghost"
+                                aria-label={`Move bullet ${k + 1} down`}
+                              >
+                                <Arrow />
+                              </button>
+                              <button onClick={() => remove(i)} className="btn-danger" aria-label={`Remove bullet ${k + 1}`}>
+                                Remove
+                              </button>
+                            </span>
+                          </div>
+                          <Problems check={check} id={`bullet-${i}-problems`} />
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
               </div>
             );
           })}
