@@ -37,7 +37,7 @@ function getReducedMotionSnapshot() {
  * - Instant --canvas (#f8fafc) CSS fallback during SSR (zero CLS)
  * - Pauses via speed={0} when prefers-reduced-motion is enabled
  * - Pauses via IntersectionObserver when scrolled out of viewport
- * - Radial fade mask + soft contrast scrim preserving >= 4.5:1 WCAG AA text contrast
+ * - Radial fade mask + focused text scrim preserving >= 4.5:1 WCAG AA text contrast
  */
 export function HeroShader() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -68,21 +68,21 @@ export function HeroShader() {
       aria-hidden="true"
       className="pointer-events-none absolute inset-0 overflow-hidden bg-[var(--canvas)]"
     >
-      {/* Masked GPU Fragment Shader Layer */}
+      {/* Masked GPU Fragment Shader Layer: visible Slate & Emerald grain */}
       {webglReady && (
         <div
-          className="absolute inset-0 opacity-35"
+          className="absolute inset-0 opacity-75"
           style={{
-            WebkitMaskImage: "radial-gradient(ellipse at center, black 30%, transparent 80%)",
-            maskImage: "radial-gradient(ellipse at center, black 30%, transparent 80%)",
+            WebkitMaskImage: "radial-gradient(ellipse 90% 85% at 50% 45%, black 52%, transparent 96%)",
+            maskImage: "radial-gradient(ellipse 90% 85% at 50% 45%, black 52%, transparent 96%)",
           }}
         >
           <GrainGradient
             colorBack="#f8fafc"
-            colors={["#f8fafc", "#e2e8f0", "#d1fae5", "#047857"]}
-            softness={0.65}
-            intensity={0.18}
-            noise={0.22}
+            colors={["#e2e8f0", "#cbd5e1", "#a7f3d0", "#047857"]}
+            softness={0.55}
+            intensity={0.38}
+            noise={0.28}
             shape="corners"
             speed={activeSpeed}
             style={{ width: "100%", height: "100%" }}
@@ -90,12 +90,12 @@ export function HeroShader() {
         </div>
       )}
 
-      {/* Soft contrast scrim behind hero copy so Slate-800/600 typography stays >= 4.5:1 WCAG AA */}
+      {/* Focused contrast scrim behind hero headline/copy only so Slate-800/600 stays >= 4.5:1 WCAG AA */}
       <div
         className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse 68% 52% at 50% 24%, rgb(248 250 252 / 0.78), transparent 85%)",
+            "radial-gradient(ellipse 56% 34% at 50% 18%, rgb(248 250 252 / 0.68), transparent 82%)",
         }}
       />
     </div>
