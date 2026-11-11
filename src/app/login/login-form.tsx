@@ -1,7 +1,7 @@
 "use client";
 
 import { useActionState, useState } from "react";
-import { GoogleMark } from "@/components/icons";
+import { GoogleMark, IconAlert, IconCheck } from "@/components/icons";
 import { PasswordInput, PasswordRules } from "@/components/password-input";
 import { authAction, googleSignInAction, type AuthState } from "./actions";
 
@@ -16,6 +16,7 @@ export function LoginForm({ google, oauthError }: { google: boolean; oauthError?
 
   return (
     <div className="space-y-5">
+      {/* Container rounded-lg (8px) + p-1 (4px) -> inner tab buttons rounded (4px) */}
       <div role="group" aria-label="Account" className="grid grid-cols-2 rounded-lg bg-slate-100 p-1 text-sm">
         {(Object.keys(MODES) as (keyof typeof MODES)[]).map((m) => (
           <button
@@ -23,7 +24,7 @@ export function LoginForm({ google, oauthError }: { google: boolean; oauthError?
             type="button"
             aria-pressed={mode === m}
             onClick={() => setMode(m)}
-            className={`min-h-9 rounded-md transition-colors duration-150 ${
+            className={`min-h-9 rounded transition-colors duration-150 ${
               mode === m ? "bg-white font-medium text-slate-900 shadow-sm" : "text-slate-600 hover:text-slate-900"
             }`}
           >
@@ -79,13 +80,15 @@ export function LoginForm({ google, oauthError }: { google: boolean; oauthError?
           {mode === "signup" && <PasswordRules value={password} email={email} />}
         </div>
         {state.error && (
-          <p role="alert" className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-800">
-            {state.error}
+          <p role="alert" className="flex items-start gap-2 rounded-lg bg-red-50 px-3 py-2 text-sm text-red-800">
+            <IconAlert size={16} className="mt-0.5 shrink-0 text-red-700" />
+            <span>{state.error}</span>
           </p>
         )}
         {state.message && (
-          <p role="status" className="rounded-lg bg-emerald-50 px-3 py-2 text-sm text-emerald-800">
-            {state.message}
+          <p role="status" className="flex items-start gap-2 rounded-lg bg-emerald-50 px-3 py-2 text-sm text-emerald-800">
+            <IconCheck size={16} className="mt-0.5 shrink-0 text-emerald-700" />
+            <span>{state.message}</span>
           </p>
         )}
         <button disabled={pending} className="btn-primary w-full">
@@ -106,8 +109,9 @@ function GoogleButton({ error }: { error?: string }) {
         {pending ? "Opening Google…" : "Continue with Google"}
       </button>
       {message && (
-        <p role="alert" className="mt-2 text-sm text-red-700">
-          {message}
+        <p role="alert" className="mt-2 flex items-start gap-1.5 text-sm text-red-700">
+          <IconAlert size={15} className="mt-0.5 shrink-0" />
+          <span>{message}</span>
         </p>
       )}
     </form>
