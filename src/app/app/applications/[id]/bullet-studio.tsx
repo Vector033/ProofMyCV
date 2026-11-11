@@ -5,6 +5,7 @@ import { checkBullet, describeViolation } from "@/lib/core/guard";
 import { factAsBullet } from "@/lib/core/bullets";
 import type { BulletDraft, Experience, Fact } from "@/lib/core/types";
 import type { BulletCandidate } from "@/lib/llm/tasks";
+import { IconAlert, IconArrowDown, IconArrowUp, IconCheck, IconDownload, IconX } from "@/components/icons";
 import { generateBulletsAction, saveBulletsAction } from "../../actions";
 
 type Props = {
@@ -177,7 +178,7 @@ export function BulletStudio({ applicationId, experiences, facts, initialBullets
                             </span>
                             <span className="ml-auto flex gap-0.5">
                               <button onClick={() => move(i, -1)} disabled={k === 0} className="btn-ghost" aria-label={`Move bullet ${k + 1} up`}>
-                                <Arrow up />
+                                <IconArrowUp size={13} />
                               </button>
                               <button
                                 onClick={() => move(i, 1)}
@@ -185,7 +186,7 @@ export function BulletStudio({ applicationId, experiences, facts, initialBullets
                                 className="btn-ghost"
                                 aria-label={`Move bullet ${k + 1} down`}
                               >
-                                <Arrow />
+                                <IconArrowDown size={13} />
                               </button>
                               <button onClick={() => remove(i)} className="btn-danger" aria-label={`Remove bullet ${k + 1}`}>
                                 Remove
@@ -274,26 +275,32 @@ export function BulletStudio({ applicationId, experiences, facts, initialBullets
           </div>
         </div>
       </div>
-    </section>
-  );
-}
 
-function Arrow({ up = false }: { up?: boolean }) {
-  return (
-    <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden className={`fill-none stroke-current stroke-2 ${up ? "" : "rotate-180"}`}>
-      <path d="M6 10V2M2.5 5.5L6 2l3.5 3.5" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
+      {/* Sticky mobile action bar for 1-thumb Draft, Save & Export PDF access */}
+      <div className="fluted-glass sticky bottom-0 z-30 -mx-4 flex items-center gap-2 border-t border-slate-200/80 px-4 py-3 sm:-mx-6 sm:px-6 md:hidden">
+        <button onClick={generate} disabled={!canGenerate || generating} className="btn min-h-11 flex-1">
+          {generating ? "Drafting…" : "Draft AI"}
+        </button>
+        <button onClick={save} disabled={!dirty || blocked || saving} className="btn-primary min-h-11 flex-1">
+          {saving ? "Saving…" : dirty ? "Save" : "Saved"}
+        </button>
+        <a href={`/app/applications/${applicationId}/pdf`} className="btn min-h-11 shrink-0 px-3" aria-label="Export PDF" title="Export PDF">
+          <IconDownload size={16} />
+          <span>PDF</span>
+        </a>
+      </div>
+    </section>
   );
 }
 
 function GuardBadge({ ok }: { ok: boolean }) {
   return ok ? (
-    <span className="inline-flex items-center rounded-full bg-emerald-50 px-2 py-0.5 font-medium text-emerald-800 ring-1 ring-emerald-600/20">
-      ✓ Traceable
+    <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 font-medium text-emerald-800 ring-1 ring-emerald-600/20">
+      <IconCheck size={12} /> Traceable
     </span>
   ) : (
-    <span className="animate-shake inline-flex items-center rounded-full bg-red-50 px-2 py-0.5 font-medium text-red-800 ring-1 ring-red-600/20">
-      ✕ Blocked
+    <span className="animate-shake inline-flex items-center gap-1 rounded-full bg-red-50 px-2 py-0.5 font-medium text-red-800 ring-1 ring-red-600/20">
+      <IconX size={12} /> Blocked
     </span>
   );
 }
@@ -301,15 +308,19 @@ function GuardBadge({ ok }: { ok: boolean }) {
 function Problems({ check, id }: { check: ReturnType<typeof checkBullet>; id?: string }) {
   if (check.violations.length === 0 && check.warnings.length === 0) return null;
   return (
-    <ul id={id} className="mt-2 space-y-0.5 text-xs">
+    <ul id={id} className="mt-2 space-y-1 text-xs">
       {check.violations.map((v, i) => (
-        <li key={i} className="text-red-800">
-          {describeViolation(v)}
+        <li key={i} className="flex items-start gap-1.5 text-red-800">
+          <IconX size={12} className="mt-0.5 shrink-0 text-red-700" />
+          <span>{describeViolation(v)}</span>
         </li>
       ))}
       {check.warnings.map((w, i) => (
-        <li key={`w${i}`} className="text-amber-800">
-          {w.type === "too-long" ? `${w.words} words; aim for 30 or fewer` : `Starts with "${w.word}"; lead with what you did`}
+        <li key={`w${i}`} className="flex items-start gap-1.5 text-amber-800">
+          <IconAlert size={12} className="mt-0.5 shrink-0 text-amber-700" />
+          <span>
+            {w.type === "too-long" ? `${w.words} words; aim for 30 or fewer` : `Starts with "${w.word}"; lead with what you did`}
+          </span>
         </li>
       ))}
     </ul>

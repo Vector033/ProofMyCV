@@ -192,7 +192,64 @@ import { GrainGradient } from '@paper-design/shaders-react';
 
 ---
 
-## 7. Token-Efficient Claude Prompts for FactFit (Copy-Paste Ready)
+## 7. Synthesis of 6 UI/UX Masterclasses & 2026 Web Design Trends
+
+Synthesized directly from 6 masterclasses on high-converting UI/UX, typography, spacing, and 2026 web trends:
+
+### 7.1 Video-by-Video Technique Matrix (Apply Maximum Applicable Techniques)
+1. **50 Web Design Tips & Tricks ([youtu.be/rRFD6tENX2U](https://youtu.be/rRFD6tENX2U)):**
+   * **Layout & 3-Tier Hierarchy:** 12-column responsive grid (1–3 content columns max); 3 importance tiers (1. Headline/Primary focal -> 2. Supporting proof -> 3. Fine details).
+   * **60-30-10 Color Discipline:** 60% neutral canvas, 30% structural ink/borders, 10% accent color strictly reserved for CTAs and active verification so users instinctively know what is clickable.
+   * **Gaze & Directional Cueing:** Align visual focal points/arrows toward the primary headline and CTA.
+   * **80% Top-Fold Rule & Scroll-Backward Audit:** 80% of visitors decide before scrolling deep—make the first viewport crystal clear. Audit layouts by scrolling bottom-to-top to spot alignment/spacing flaws.
+   * **Action-Oriented CTA Copy & Accessibility:** Button text states exact outcome ("Tailor Resume Free", not "Let's Go"); semantic HTML (`h1`->`h2`->`p`, `nav`, `footer`); **never rely on color alone** (always pair red/green states with icons and explicit text).
+
+2. **Discovery & Transformation Messaging ([youtu.be/BfHuIgjLC5E](https://youtu.be/BfHuIgjLC5E)):**
+   * **Transformation > Features:** Features don't sell—transformation does. Lead with **Heart** (what pain disappears / background check safety) before **Head** (AST guard, Drizzle, PDF details).
+   * **Clarity & Trust Over Hype:** Never over-explain or exaggerate; transparent steps build instant credibility.
+
+3. **9 Web Design Hacks ([youtu.be/TeMtV8BaZt0](https://youtu.be/TeMtV8BaZt0)):**
+   * **Hack 1 — 50–75ch Text Chunking:** Limit reading copy to 50–75 characters (600–700px max); insert line breaks every 2–3 sentences.
+   * **Hack 2 — Icon Bullet Points:** Convert dense explanations into scannable icon bullet lists.
+   * **Hack 3 — 8pt Grid + Double-Rule Spacing:** Space elements in multiples of `8px` (`8, 16, 24, 32`). Use baseline (`16px`) *within* a group, at least **double (`32px`)** *between* different groups, and consistent rhythm (`64–96px`) between major sections.
+   * **Hack 4 — Line-Height Ratios:** Display headings = `1.05–1.15` (Latin) / `1.25–1.3` (Thai); Body prose = `1.5–1.65`.
+   * **Hack 5 — Letter Spacing by Role:** Display headings = tight negative tracking (`-0.02em` to `-0.03em`) for scanability; Body = `0` default for legibility; **Uppercase badges & CTAs = positive tracking (`+0.03em` to `+0.06em`)**.
+   * **Hack 6 — Font Super Families:** Pair fonts from the same super family (e.g. `Inter` + `Geist Mono` / `Source` / `DM`) so x-heights harmonize naturally.
+   * **Hack 7 — CSS Overview Audit:** Audit contrast, font sizes, and stray hex tokens via Chrome DevTools CSS Overview.
+   * **Hack 8 — Radial Text Scrim:** Whenever a background texture/dot-grid sits behind text, add a soft radial background scrim behind the text block so legibility never suffers.
+   * **Hack 9 — The Squint Test:** Blur/squint at the page—headline, primary interactive input/demo, and main CTA must pop unmistakably from the background.
+
+4. **15 UI/UX Product Mistakes Fixed ([youtu.be/GGg61sdEjeI](https://youtu.be/GGg61sdEjeI)):**
+   * **Contrast Protection Over Dynamic Surfaces:** Icons/badges over images or shaders need subtle backing pills and crisp contrast.
+   * **Alignment Rails & Uniform Cards:** Keep strict `16px`/`24px` left alignment rails; keep card previews uniform.
+   * **Trust Signals Next to Titles:** Put confidence/verification status directly beside the title ("What is it?" + "Can I trust it?").
+   * **Unified Icon Logic & Soft Dividers:** Same stroke width across all Lucide icons; soften harsh dark divider borders (`border-slate-200/80`).
+   * **Put Total/Outcome Inside CTA + 1-Tap Presets + Sticky Mobile Bar:** Eliminate friction with quick sample presets, clear action copy inside CTAs, and sticky mobile action bars in long editor views.
+
+5. **Top 3 Conversion & Trust Redesigns ([youtu.be/zr37ibqXl1U](https://youtu.be/zr37ibqXl1U)):**
+   * **Core Law:** *"Every UI element asks the user a question. Easier question = faster action."*
+   * **Safety Net > Sales Pitch (Transparency Bias):** Show a clear **3-step safety timeline** (*"1. Paste JD -> 2. Fact Bank cross-check blocks hallucinations -> 3. Export verified PDF"*) instead of hard-selling.
+   * **Ownership Microcopy + Specific Numbers:** Use **"Start my..."** instead of generic "Subscribe/Submit"; replace vague claims ("Fast") with concrete numbers (*"0% invented metrics"*, *"Verified in 1 click"*).
+   * **Eliminate Ranges -> Single Clear Numbers (Evaluative Ease):** Avoid ambiguous ranges (*"Takes 2–5 mins"*); state concrete metrics and place risk reversal (*"No fabricated claims · Free demo"*) right beneath the CTA.
+
+6. **Top 9 Web Design Trends of 2026 ([youtu.be/waHuVF3XuMA](https://youtu.be/waHuVF3XuMA)) & Workspace Background Rule:**
+   * **Hero vs Workspace Background Rule:** Animated GPU Shaders and bold blueprint grids belong **exclusively on Hero (`/`), Login (`/login`), and empty states**. Dense workspace views (`/app`, `/app/facts`, `/app/applications/*`) must stay **calm and quiet** (`--canvas` + subtle 1–2% static paper grain + `.fluted-glass` nav) so data and comparison tables remain effortless to read.
+
+| 2026 Trend | Use in FactFit? | Exact Application to FactFit |
+|---|---|---|
+| **1. "Barely There" AI Hyper-Minimalism + Graphs** | ✅ **Primary Fit** | Restrained Slate-50 canvas, 1 Emerald accent, and clear accuracy benchmark graphs (`benchmark-metrics.tsx`). |
+| **2. Maximalism with an Asterisk** | ⚠️ Lightly | Oversized crisp display headline in Hero only; keep inner workspace restrained. |
+| **3. Wabi-Sabi / Human Touch** | ⚠️ Subtle | Tactile cotton-paper resume card feel (`#12 Paper texture`), honest concrete microcopy. |
+| **4. Grade School Color Palettes** | ⚠️ Grounded | Stick to grounded Slate/Emerald/Amber/Red tokens—zero neon 2024 lime slop. |
+| **5. Spaceship Instruction Manual** | ✅ **Primary Fit** | Blueprint dot grids, monospace fact IDs, annotated callout lines in `ats-anatomy.tsx` & `verification-pipeline.tsx`. |
+| **6. Democratized WebGL Shaders** | ✅ **Hero Only** | Subtle `hero-shader.tsx` behind Hero proof card (`speed=0` on reduced motion / offscreen). |
+| **7. Internet Nostalgia** | ❌ Skip | FactFit requires modern career/ATS authority, not retro 2000s nostalgia. |
+| **8. Subtle Opt-In Micro-Sound** | ⚠️ Optional | Keep silent by default; subtle visual haptic compression (`press-scale`) is cleaner for resume work. |
+| **9. Custom Non-Slop Gradients** | ✅ **Accent Only** | Restrained Emerald grainy glow strictly behind the verified resume proof card (never purple/blue AI slop). |
+
+---
+
+## 8. Token-Efficient Claude Prompts for FactFit (Copy-Paste Ready)
 
 ### Prompt 1: Landing Page Hero & Interactive Verification Showcase
 ```text
@@ -267,4 +324,27 @@ Steps to Follow:
    - Use `IntersectionObserver` to pause rendering when scrolled out of viewport.
    - Layer behind Hero only with `pointer-events-none`, `aria-hidden="true"`, radial fade mask, and instant `--canvas` CSS fallback for zero CLS.
 4. Verify WCAG AA contrast (>= 4.5:1) on all hero headlines and interactive proof cards, and run `npm run build` / TypeScript check without touching Supabase/Drizzle/PDF backend logic.
+```
+
+### Prompt 5: Read Guide & Apply All 6 Masterclasses + 2026 Trends (FactFit)
+```text
+Task: First, read `CLAUDE_DESIGN_GUIDE.md` thoroughly (especially Section 3 Anti-AI-Slop Rules, Section 6 GPU Shader Architecture, and Section 7 Synthesis of 6 UI/UX Masterclasses & 2026 Web Design Trends). Then audit and elevate FactFit (`src/app/page.tsx`, `src/app/globals.css`, `src/components/proof-demo.tsx`, `src/components/ats-anatomy.tsx`, `src/components/verification-pipeline.tsx`, and `src/app/app/**`).
+
+Apply Maximum Applicable Techniques & Best-Fit 2026 Trends (Zero AI Slop):
+1. Trends to Emphasize:
+   - #1 "Barely There" AI Hyper-Minimalism + Graphs: crisp Slate-50 canvas, high whitespace, clear benchmark metrics (`benchmark-metrics.tsx`).
+   - #5 "Spaceship Instruction Manual": fine blueprint pointer lines, monospace fact citations, and clean exploded ATS/AST diagrams (`ats-anatomy.tsx`, `verification-pipeline.tsx`).
+   - Keep animated shaders strictly on Hero (`/`), while inner app routes (`/app`, `/app/facts`) keep a calm, quiet `--canvas` surface so dense Fact Bank tables stay effortless to scan.
+2. Typography & 8pt Double-Rule (`9 Web Design Hacks`):
+   - Enforce 50–75ch max paragraph width, `16px` intra-group spacing, `>= 32px` inter-group spacing, `64–96px` section rhythm.
+   - Display heading: tight tracking (`-0.025em`) & `1.08–1.15` line-height; Body: `1.6` line-height; Uppercase labels & CTAs: subtle positive tracking (`+0.04em`).
+   - Radial scrim behind Hero text so background dot grids never reduce legibility.
+   - Verify via the Squint Test: Headline, Proof Demo, and Primary CTA must clearly dominate.
+3. Conversion & Product UX (`uxpeak` + `$10k Transformation` principles):
+   - Lead with Transformation & Safety Net Timeline ("0% Hallucination — Never risk a background check: 1. Paste JD -> 2. AST Fact Guard -> 3. Clean ATS PDF").
+   - Place verification trust badge right beside resume titles; eliminate redundant labels; use single concrete numbers (never vague ranges).
+   - Add risk reversal microcopy directly under primary CTAs ("Traceable to your Fact Bank · 1-click PDF") and ensure sticky mobile action buttons in `/app/applications/*`.
+   - Never rely on color alone for guard alerts (pair Emerald/Red/Amber with Lucide icons of uniform stroke width).
+4. Verification:
+   - Run `npm run build` and TypeScript/test checks; do not break Supabase auth, Drizzle queries, AST guard math, or `@react-pdf/renderer`.
 ```

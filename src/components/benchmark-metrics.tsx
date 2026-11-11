@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { IconCheck } from "./icons";
 
 const RESULTS = [
   {
@@ -50,7 +51,7 @@ export function BenchmarkMetrics() {
   }, []);
 
   return (
-    <dl ref={ref} className="mt-12 grid gap-6 sm:grid-cols-3">
+    <dl ref={ref} className="mt-8 grid gap-8 sm:grid-cols-3">
       {RESULTS.map((r, i) => (
         <MetricCard key={r.label} item={r} active={visible} delayMs={i * 110} />
       ))}
@@ -78,26 +79,30 @@ function MetricCard({
     >
       <div className="flex items-center justify-between gap-2">
         <dt className="sr-only">{item.label}</dt>
-        <dd className="text-3xl font-semibold tracking-tight text-slate-900 tabular-nums sm:text-4xl">
+        <dd className="text-3xl font-semibold tracking-[-0.025em] text-slate-900 tabular-nums sm:text-4xl">
           {shown} <span className="text-slate-400">/</span> {item.den}
         </dd>
-        <span className="rounded-full border border-emerald-600/20 bg-emerald-50 px-2.5 py-0.5 text-xs font-semibold text-emerald-800 tabular-nums">
-          {item.pctLabel}
+        <span className="inline-flex items-center gap-1 rounded-full border border-emerald-600/20 bg-emerald-50 px-2.5 py-0.5 text-xs font-semibold text-emerald-800 tabular-nums">
+          <IconCheck size={12} /> {item.pctLabel}
         </span>
       </div>
 
-      {/* Animated Precision Bar */}
-      <div
-        aria-hidden="true"
-        className="mt-4 h-1.5 w-full overflow-hidden rounded-full bg-slate-100"
-      >
-        <div
-          className={`h-full rounded-full bg-emerald-600 ${active ? "animate-bar-grow" : "scale-x-0"}`}
-          style={{ width: `${item.pct}%`, animationDelay: `${delayMs + 120}ms` }}
-        />
+      {/* Minimalist Precision Bar Graph + Tick Axis */}
+      <div aria-hidden="true" className="mt-4">
+        <div className="h-1.5 w-full overflow-hidden rounded-full bg-slate-100">
+          <div
+            className={`h-full rounded-full bg-emerald-600 ${active ? "animate-bar-grow" : "scale-x-0"}`}
+            style={{ width: `${item.pct}%`, animationDelay: `${delayMs + 120}ms` }}
+          />
+        </div>
+        <div className="mt-1.5 flex justify-between font-mono text-[10px] text-slate-400 tabular-nums">
+          <span>0%</span>
+          <span>50%</span>
+          <span>100%</span>
+        </div>
       </div>
 
-      <dd className="mt-3 text-sm leading-relaxed text-slate-600">{item.label}</dd>
+      <dd className="mt-4 text-sm leading-[1.6] text-slate-600">{item.label}</dd>
     </div>
   );
 }

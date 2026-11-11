@@ -4,6 +4,7 @@ import { useId, useMemo, useState } from "react";
 import { checkBullet, describeViolation, extractNumbers } from "@/lib/core/guard";
 import { findTechTerms } from "@/lib/core/vocab";
 import type { Experience, Fact } from "@/lib/core/types";
+import { IconAlert, IconCheck, IconLink, IconShield, IconX } from "./icons";
 
 // Fictional verified fact from the demo account.
 const EXPERIENCE: Experience = {
@@ -58,8 +59,7 @@ export function ProofDemo() {
 
   return (
     <div className="relative">
-      {/* #9 Grainy Gradient Aura: strictly Emerald (--accent at 6% opacity + SVG feTurbulence noise)
-          positioned solely behind the "FactFit Verified" right split preview card. */}
+      {/* #9 Grainy Gradient Aura: strictly Emerald (--accent) placed solely behind the "FactFit Verified" card */}
       {mode === "showcase" && (
         <>
           <div
@@ -73,20 +73,20 @@ export function ProofDemo() {
         </>
       )}
 
-      {/* Outer Container: rounded-2xl (16px), 1px hairline border, subtle Linear precision shadow */}
+      {/* Outer Container: rounded-2xl (16px), 1px hairline border */}
       <div className="relative z-10 overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-[0_1px_3px_rgba(15,23,42,0.06),0_16px_36px_-12px_rgba(15,23,42,0.08)]">
         {/* Top Controller Bar */}
-        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200/80 bg-slate-50/75 px-4 py-3 sm:px-6">
+        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200/80 bg-slate-50/75 px-4 py-3 sm:px-6">
           <div className="flex items-center gap-2.5">
             <span className="flex size-2 items-center justify-center">
               <span className="size-2 rounded-full bg-emerald-600 ring-4 ring-emerald-600/15" />
             </span>
-            <span className="text-xs font-semibold tracking-wider text-slate-700 uppercase">
-              Interactive Verification Showcase
+            <span className="text-xs font-semibold tracking-[0.04em] text-slate-700 uppercase">
+              Interactive Proof Showcase
             </span>
-            <span className="hidden text-xs text-slate-400 sm:inline">·</span>
-            <span className="hidden text-xs text-slate-600 sm:inline">
-              Job: Backend Engineer (Fintech)
+            <span className="hidden text-xs text-slate-300 sm:inline">·</span>
+            <span className="hidden font-mono text-[11px] text-slate-600 sm:inline">
+              target_role: backend_eng
             </span>
           </div>
 
@@ -101,7 +101,7 @@ export function ProofDemo() {
               role="tab"
               aria-selected={mode === "showcase"}
               onClick={() => setMode("showcase")}
-              className={`rounded px-3 py-1 text-xs font-medium transition-all ${
+              className={`rounded px-3 py-1.5 text-xs font-medium transition-all ${
                 mode === "showcase"
                   ? "bg-slate-900 text-white shadow-2xs"
                   : "text-slate-600 hover:text-slate-900"
@@ -114,7 +114,7 @@ export function ProofDemo() {
               role="tab"
               aria-selected={mode === "sandbox"}
               onClick={() => setMode("sandbox")}
-              className={`rounded px-3 py-1 text-xs font-medium transition-all ${
+              className={`rounded px-3 py-1.5 text-xs font-medium transition-all ${
                 mode === "sandbox"
                   ? "bg-slate-900 text-white shadow-2xs"
                   : "text-slate-600 hover:text-slate-900"
@@ -126,35 +126,35 @@ export function ProofDemo() {
         </div>
 
         {mode === "showcase" ? (
-          /* Split Comparison: Stripe-inspired layout hierarchy + Linear-inspired hairline precision */
+          /* Split Comparison: Stripe layout hierarchy + Linear hairline precision */
           <div className="grid grid-cols-1 divide-y divide-slate-200/80 lg:grid-cols-2 lg:divide-y-0 lg:divide-x">
             {/* ================= LEFT: GENERIC AI RESUME ================= */}
             <div className="relative flex flex-col p-5 sm:p-6">
-              {/* Header: Status & Origin */}
-              <div className="flex items-center justify-between gap-2">
-                <span className="text-xs font-semibold tracking-wider text-slate-600 uppercase">
+              {/* Trust Signal Right Beside Title (Requirement 3: Never rely on color alone) */}
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <span className="text-xs font-semibold tracking-[0.04em] text-slate-800 uppercase">
                   Generic AI Resume
                 </span>
                 <span
                   role="status"
                   className="inline-flex items-center gap-1.5 rounded-full border border-red-200 bg-red-50 px-2.5 py-0.5 text-xs font-medium text-red-800"
                 >
-                  <CrossIcon />
-                  <span className="tabular-nums">3 Violations · Blocked</span>
+                  <IconX size={13} />
+                  <span className="tabular-nums">3 Unverified · Blocked</span>
                 </span>
               </div>
 
               <p className="mt-1 text-xs text-slate-600">
-                Generated by ChatGPT / Claude with zero ground-truth constraints
+                Generated by unconstrained LLM with zero source&nbsp;lock
               </p>
 
-              {/* Resume Preview Document Sheet (#12 Paper Texture + #5 Speckled Graphite + full-height 1px AST scan beam) */}
+              {/* Resume Preview Document Sheet (#12 Paper Texture + full-height 1px AST scan beam) */}
               <div className="relative mt-4 overflow-hidden rounded-xl border border-red-200/80 bg-[#fffdfc] p-4 shadow-2xs">
                 <span aria-hidden="true" className="paper-texture absolute inset-0 rounded-[inherit]" />
                 <div aria-hidden="true" className="animate-scan-sweep pointer-events-none absolute inset-0">
                   <div className="absolute inset-x-0 bottom-0 h-8 border-b border-red-400/35 bg-gradient-to-b from-transparent via-red-500/8 to-red-500/12" />
                 </div>
-                <p className="relative z-10 text-[15px] leading-relaxed text-slate-800">
+                <p className="relative z-10 text-[15px] leading-[1.6] text-slate-800">
                   Architected a PostgreSQL and{" "}
                   <span
                     onMouseEnter={() => setHoveredWarning("redis")}
@@ -195,30 +195,30 @@ export function ProofDemo() {
                 </p>
               </div>
 
-              {/* Warning Badges: Flagging fabricated claims with strict Anti-AI-Slop precision */}
-              <div className="mt-5 space-y-2">
-                <p className="text-[11px] font-semibold tracking-wider text-red-700 uppercase">
-                  Deterministic Guard Findings
+              {/* Guard Findings: 16px intra-group spacing, icon + text on every alert */}
+              <div className="mt-6 space-y-2.5">
+                <p className="text-[11px] font-semibold tracking-[0.04em] text-red-800 uppercase">
+                  Guard Findings
                 </p>
 
                 {/* Red warning badge on fabricated metric */}
                 <div
                   onMouseEnter={() => setHoveredWarning("metric")}
                   onMouseLeave={() => setHoveredWarning(null)}
-                  className={`flex items-start gap-2 rounded-lg border p-2.5 text-xs transition-colors ${
+                  className={`flex items-start gap-2.5 rounded-lg border p-2.5 text-xs transition-colors ${
                     hoveredWarning === "metric"
                       ? "border-red-300 bg-red-100/70 text-red-950 ring-1 ring-red-400/30"
                       : "border-red-200 bg-red-50/70 text-red-900"
                   }`}
                 >
-                  <span className="mt-0.5 inline-flex shrink-0 items-center rounded-sm bg-red-200 px-1.5 py-0.5 text-[10px] font-semibold text-red-800">
-                    FLAGGED
+                  <span className="mt-0.5 inline-flex shrink-0 items-center gap-1 rounded-sm bg-red-200 px-1.5 py-0.5 text-[10px] font-semibold tracking-[0.04em] text-red-900 uppercase">
+                    <IconAlert size={11} /> Flagged
                   </span>
                   <div className="min-w-0">
-                    <span className="font-semibold text-red-800">
+                    <span className="font-semibold text-red-900">
                       Invented +45% metric - UNVERIFIED
                     </span>
-                    <p className="mt-0.5 text-[11px] text-red-700">
+                    <p className="mt-0.5 text-[11px] leading-relaxed text-red-800">
                       Candidate wrote 25&nbsp;min&nbsp;→&nbsp;3&nbsp;min. Model hallucinated &ldquo;+45%&rdquo; with no source&nbsp;data.
                     </p>
                   </div>
@@ -228,20 +228,20 @@ export function ProofDemo() {
                 <div
                   onMouseEnter={() => setHoveredWarning("redis")}
                   onMouseLeave={() => setHoveredWarning(null)}
-                  className={`flex items-start gap-2 rounded-lg border p-2.5 text-xs transition-colors ${
+                  className={`flex items-start gap-2.5 rounded-lg border p-2.5 text-xs transition-colors ${
                     hoveredWarning === "redis"
                       ? "border-red-300 bg-red-100/70 text-red-950 ring-1 ring-red-400/30"
                       : "border-red-200/80 bg-red-50/50 text-red-900"
                   }`}
                 >
-                  <span className="mt-0.5 inline-flex shrink-0 items-center rounded-sm bg-red-200 px-1.5 py-0.5 text-[10px] font-semibold text-red-800">
-                    TOOL
+                  <span className="mt-0.5 inline-flex shrink-0 items-center gap-1 rounded-sm bg-red-200 px-1.5 py-0.5 text-[10px] font-semibold tracking-[0.04em] text-red-900 uppercase">
+                    <IconX size={11} /> Tool
                   </span>
                   <div className="min-w-0">
-                    <span className="font-semibold text-red-800">
+                    <span className="font-semibold text-red-900">
                       Unverified Technology: Redis
                     </span>
-                    <p className="mt-0.5 text-[11px] text-red-700">
+                    <p className="mt-0.5 text-[11px] leading-relaxed text-red-800">
                       &ldquo;Redis&rdquo; does not exist in candidate&rsquo;s verified skill&nbsp;inventory.
                     </p>
                   </div>
@@ -251,21 +251,21 @@ export function ProofDemo() {
                 <div
                   onMouseEnter={() => setHoveredWarning("cost")}
                   onMouseLeave={() => setHoveredWarning(null)}
-                  className={`flex items-start gap-2 rounded-lg border p-2.5 text-xs transition-colors ${
+                  className={`flex items-start gap-2.5 rounded-lg border p-2.5 text-xs transition-colors ${
                     hoveredWarning === "cost"
                       ? "border-red-300 bg-red-100/70 text-red-950 ring-1 ring-red-400/30"
                       : "border-red-200/80 bg-red-50/50 text-red-900"
                   }`}
                 >
-                  <span className="mt-0.5 inline-flex shrink-0 items-center rounded-sm bg-red-200 px-1.5 py-0.5 text-[10px] font-semibold text-red-800">
-                    CLAIM
+                  <span className="mt-0.5 inline-flex shrink-0 items-center gap-1 rounded-sm bg-red-200 px-1.5 py-0.5 text-[10px] font-semibold tracking-[0.04em] text-red-900 uppercase">
+                    <IconX size={11} /> Claim
                   </span>
                   <div className="min-w-0">
-                    <span className="font-semibold text-red-800">
+                    <span className="font-semibold text-red-900">
                       Fabricated Cost Saving: $40K
                     </span>
-                    <p className="mt-0.5 text-[11px] text-red-700">
-                      Unsubstantiated dollar ROI figure generated to impress&nbsp;reviewers.
+                    <p className="mt-0.5 text-[11px] leading-relaxed text-red-800">
+                      Unsubstantiated dollar ROI figure generated without source&nbsp;evidence.
                     </p>
                   </div>
                 </div>
@@ -273,9 +273,11 @@ export function ProofDemo() {
 
               {/* Interview Risk Callout */}
               <div className="mt-auto pt-4">
-                <p className="rounded-lg border border-red-200/70 bg-red-50/40 px-3 py-2 text-[11px] text-red-800">
-                  <span className="font-medium">Interview Defense Risk:</span> When the interviewer asks
-                  &ldquo;Walk me through your Redis caching architecture,&rdquo; the candidate has no factual&nbsp;answer.
+                <p className="flex items-start gap-2 rounded-lg border border-red-200/70 bg-red-50/40 px-3 py-2 text-[11px] leading-relaxed text-red-800">
+                  <IconAlert size={14} className="mt-0.5 shrink-0 text-red-700" />
+                  <span>
+                    <span className="font-semibold">Background &amp; Interview Risk:</span> Interviewers probe Redis caching details the candidate never&nbsp;built.
+                  </span>
                 </p>
               </div>
             </div>
@@ -286,22 +288,22 @@ export function ProofDemo() {
               <div aria-hidden="true" className="bg-grainy-emerald absolute inset-0 z-0 opacity-75" />
 
               <div className="relative z-10 flex flex-1 flex-col">
-                {/* Header: Verified Status & Ground Truth */}
-                <div className="flex items-center justify-between gap-2">
-                  <span className="text-xs font-semibold tracking-wider text-slate-600 uppercase">
+                {/* Trust Signal Right Beside Title */}
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <span className="text-xs font-semibold tracking-[0.04em] text-slate-800 uppercase">
                     FactFit Verified
                   </span>
                   <span
                     role="status"
                     className="inline-flex items-center gap-1.5 rounded-full border border-emerald-600/20 bg-emerald-50 px-2.5 py-0.5 text-xs font-medium whitespace-nowrap text-emerald-800"
                   >
-                    <CheckIcon />
-                    <span className="tabular-nums">100% Traceable · 0% Hallucination</span>
+                    <IconShield size={13} />
+                    <span className="tabular-nums">100% Verified · 0% Hallucination</span>
                   </span>
                 </div>
 
                 <p className="mt-1 text-xs text-slate-600">
-                  Anchored to candidate&rsquo;s verified career fact bank
+                  Every claim locked to candidate&rsquo;s verified Fact&nbsp;Bank
                 </p>
 
                 {/* Resume Preview Document Sheet (#12 Paper Texture + full-height 1px emerald AST scan beam) */}
@@ -310,7 +312,7 @@ export function ProofDemo() {
                   <div aria-hidden="true" className="animate-scan-sweep pointer-events-none absolute inset-0">
                     <div className="absolute inset-x-0 bottom-0 h-8 border-b border-emerald-600/35 bg-gradient-to-b from-transparent via-emerald-600/8 to-emerald-600/12" />
                   </div>
-                  <p className="relative z-10 text-[15px] leading-relaxed text-slate-900">
+                  <p className="relative z-10 text-[15px] leading-[1.6] text-slate-900">
                     Cut the daily report job from{" "}
                     <span className="rounded-sm bg-emerald-50 px-1 py-0.5 font-medium whitespace-nowrap text-emerald-900 underline decoration-emerald-600/70 underline-offset-4">
                       25 minutes to 3 minutes
@@ -319,10 +321,10 @@ export function ProofDemo() {
                       type="button"
                       onClick={triggerCitation}
                       onMouseEnter={triggerCitation}
-                      className="press inline-flex items-center gap-1 rounded bg-emerald-100/90 px-1.5 py-0.5 text-[11px] font-semibold whitespace-nowrap text-emerald-800 transition-colors hover:bg-emerald-200"
+                      className="press inline-flex items-center gap-1 rounded bg-emerald-100/90 px-1.5 py-0.5 font-mono text-[11px] font-semibold whitespace-nowrap text-emerald-800 transition-colors hover:bg-emerald-200"
                       title="Click to trace citation back to Fact Bank"
                     >
-                      <CitePinIcon /> Fact #1
+                      <IconLink size={11} /> cite:f1
                     </button>{" "}
                     by adding a{" "}
                     <span className="rounded-sm bg-emerald-50 px-1 py-0.5 font-medium text-emerald-900 underline decoration-emerald-600/70 underline-offset-4">
@@ -336,7 +338,7 @@ export function ProofDemo() {
                   </p>
                 </div>
 
-                {/* Stripe-style Animated SVG Citation Trace Connector centered cleanly between boxes */}
+                {/* Spaceship Manual / Stripe Animated SVG Citation Trace Connector centered cleanly */}
                 <div aria-hidden="true" className="relative flex h-9 items-center justify-center">
                   <svg
                     key={tracePulseKey}
@@ -371,7 +373,7 @@ export function ProofDemo() {
                     <circle cx="12" cy="33" r="3" fill="#047857" />
                   </svg>
                   <span className="absolute left-[calc(50%+14px)] rounded-full border border-emerald-600/20 bg-emerald-50 px-2 py-0.5 font-mono text-[10px] font-medium whitespace-nowrap text-emerald-800">
-                    provenance_link: f1
+                    fact_id: f1
                   </span>
                 </div>
 
@@ -388,11 +390,11 @@ export function ProofDemo() {
                     <div className="relative z-10">
                       <div className="flex flex-wrap items-center justify-between gap-2">
                         <div className="flex items-center gap-1.5 whitespace-nowrap">
-                          <span className="inline-grid size-5 shrink-0 place-items-center rounded-sm bg-emerald-600 text-[10px] font-bold text-white">
-                            ✓
+                          <span className="inline-grid size-5 shrink-0 place-items-center rounded-sm bg-emerald-700 text-white">
+                            <IconCheck size={12} />
                           </span>
                           <span className="text-xs font-semibold text-emerald-950">
-                            Verified Source: Fact&nbsp;#1
+                            Fact&nbsp;#1 Source Record
                           </span>
                         </div>
                         <span className="text-[11px] font-medium whitespace-nowrap text-slate-600">
@@ -427,10 +429,10 @@ export function ProofDemo() {
                       </div>
 
                       <div className="mt-3.5 flex items-center justify-between border-t border-emerald-600/15 pt-2.5 text-[11px]">
-                        <span className="text-slate-600">Deterministic Guard Result:</span>
-                        <span className="font-semibold text-emerald-800 tabular-nums">
-                          Passed (100% tokens matched)
+                        <span className="inline-flex items-center gap-1 font-semibold text-emerald-800 tabular-nums">
+                          <IconCheck size={12} /> 100% Tokens Matched
                         </span>
+                        <span className="font-mono text-[10px] text-slate-500">AST_GUARD: PASS</span>
                       </div>
                     </div>
                   </div>
@@ -438,10 +440,11 @@ export function ProofDemo() {
 
                 {/* Interview Defense Reassurance */}
                 <div className="mt-auto pt-4">
-                  <p className="rounded-lg border border-emerald-600/20 bg-emerald-50/75 px-3 py-2 text-[11px] text-emerald-900">
-                    <span className="font-semibold text-emerald-950">Interview Defense Ready:</span> When
-                    the interviewer asks how you cut report time from 25m to 3m, you have the exact queries
-                    and index details&nbsp;ready.
+                  <p className="flex items-start gap-2 rounded-lg border border-emerald-600/20 bg-emerald-50/75 px-3 py-2 text-[11px] leading-relaxed text-emerald-900">
+                    <IconShield size={14} className="mt-0.5 shrink-0 text-emerald-700" />
+                    <span>
+                      <span className="font-semibold text-emerald-950">Interview &amp; Audit Safe:</span> Every number and tool maps directly to queries you actually&nbsp;wrote.
+                    </span>
                   </p>
                 </div>
               </div>
@@ -457,7 +460,7 @@ export function ProofDemo() {
                     Test the fabrication guard in real time
                   </p>
                   <p className="text-xs text-slate-600">
-                    Type any sentence or pick a draft below. The guard verifies every number and tool on keystroke.
+                    Type any sentence or pick a preset below. The guard verifies every number and tool on&nbsp;keystroke.
                   </p>
                 </div>
 
@@ -509,7 +512,7 @@ export function ProofDemo() {
                   value={sandboxText}
                   onChange={(e) => setSandboxText(e.target.value)}
                   rows={3}
-                  className="input font-sans text-[15px] leading-relaxed"
+                  className="input font-sans text-[15px] leading-[1.6]"
                   placeholder="Type your resume bullet here..."
                 />
               </div>
@@ -517,20 +520,20 @@ export function ProofDemo() {
               {/* Live Visual Inspection & Guard Results */}
               <div className="rounded-xl border border-slate-200/90 bg-slate-50/50 p-4">
                 <div className="flex items-center justify-between gap-3">
-                  <p className="text-xs font-semibold tracking-wider text-slate-600 uppercase">
+                  <p className="text-xs font-semibold tracking-[0.04em] text-slate-600 uppercase">
                     Guard Analysis
                   </p>
                   {sandboxResult.ok ? (
                     <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-600/20 bg-emerald-50 px-2.5 py-0.5 text-xs font-medium text-emerald-800">
-                      <CheckIcon />
-                      <span className="tabular-nums">Traceable · Ready for Resume</span>
+                      <IconCheck size={13} />
+                      <span className="tabular-nums">Verified · Ready for Resume</span>
                     </span>
                   ) : (
                     <span
                       key={sandboxResult.violations.length}
                       className="animate-shake inline-flex items-center gap-1.5 rounded-full border border-red-200 bg-red-50 px-2.5 py-0.5 text-xs font-medium text-red-800"
                     >
-                      <CrossIcon />
+                      <IconX size={13} />
                       <span className="tabular-nums">
                         {sandboxResult.violations.length} Violation
                         {sandboxResult.violations.length === 1 ? "" : "s"} · Blocked
@@ -540,7 +543,7 @@ export function ProofDemo() {
                 </div>
 
                 {/* Highlighted text preview with subtle paper texture */}
-                <div className="relative mt-3 overflow-hidden rounded-lg border border-slate-200/80 bg-white p-3 text-sm leading-relaxed text-slate-900">
+                <div className="relative mt-3 overflow-hidden rounded-lg border border-slate-200/80 bg-white p-3 text-sm leading-[1.6] text-slate-900">
                   <span aria-hidden="true" className="paper-texture absolute inset-0 rounded-[inherit]" />
                   <div className="relative z-10">
                     <MarkedText text={sandboxText} bad={sandboxBad} good={sandboxGood} />
@@ -554,7 +557,7 @@ export function ProofDemo() {
                     <ul className="space-y-1 text-xs text-red-800">
                       {sandboxResult.violations.map((v, i) => (
                         <li key={i} className="flex items-center gap-1.5">
-                          <span className="size-1 rounded-full bg-red-600" />
+                          <IconX size={12} className="shrink-0 text-red-700" />
                           <span>{describeViolation(v)}</span>
                         </li>
                       ))}
@@ -562,12 +565,15 @@ export function ProofDemo() {
                   </div>
                 )}
 
-                {/* Warnings (length, weak verbs) */}
+                {/* Warnings (length, weak verbs) — color + icon always paired */}
                 {sandboxResult.warnings.length > 0 && (
                   <div className="mt-2 space-y-1">
                     {sandboxResult.warnings.map((w, i) => (
-                      <p key={i} className="text-xs text-amber-800">
-                        ⚠ {w.type === "too-long" ? `${w.words} words; aim for 30 or fewer` : `Weak opening: "${w.word}"; lead with action`}
+                      <p key={i} className="flex items-center gap-1.5 text-xs text-amber-800">
+                        <IconAlert size={13} className="shrink-0 text-amber-700" />
+                        <span>
+                          {w.type === "too-long" ? `${w.words} words; aim for 30 or fewer` : `Weak opening: "${w.word}"; lead with action`}
+                        </span>
                       </p>
                     ))}
                   </div>
@@ -619,47 +625,5 @@ function MarkedText({
         ),
       )}
     </>
-  );
-}
-
-function CheckIcon() {
-  return (
-    <svg
-      width="12"
-      height="12"
-      viewBox="0 0 12 12"
-      aria-hidden="true"
-      className="fill-none stroke-current stroke-2"
-    >
-      <path d="M2.5 6.5l2.2 2.2 4.8-5" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
-function CrossIcon() {
-  return (
-    <svg
-      width="12"
-      height="12"
-      viewBox="0 0 12 12"
-      aria-hidden="true"
-      className="fill-none stroke-current stroke-2"
-    >
-      <path d="M3 3l6 6M9 3l-6 6" strokeLinecap="round" />
-    </svg>
-  );
-}
-
-function CitePinIcon() {
-  return (
-    <svg
-      width="10"
-      height="10"
-      viewBox="0 0 12 12"
-      aria-hidden="true"
-      className="fill-none stroke-current stroke-2"
-    >
-      <path d="M6 1v7M3.5 3.5L6 1l2.5 2.5M2 11h8" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
   );
 }

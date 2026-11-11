@@ -29,8 +29,8 @@ export default async function FactsPage() {
     <div className="space-y-10">
       <header className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight">Fact bank</h1>
-          <p className="mt-1 max-w-2xl text-sm leading-relaxed text-slate-600">
+          <h1 className="text-2xl font-semibold tracking-[-0.025em]">Fact bank</h1>
+          <p className="body-prose mt-1 text-sm text-slate-600">
             Write what really happened, in plain words. Bullets may only use the numbers and technologies you put here,
             so be specific: what you did, what changed, the&nbsp;number.
           </p>
@@ -230,7 +230,7 @@ function Field({
 
 function Plus() {
   return (
-    <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden className="fill-none stroke-current stroke-2">
+    <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden className="fill-none stroke-current" strokeWidth={1.75}>
       <path d="M7 2.5v9M2.5 7h9" strokeLinecap="round" />
     </svg>
   );

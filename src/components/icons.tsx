@@ -110,6 +110,43 @@ export const IconArrowDown = (p: P) => (
     <path d="M12 5v14M6 13l6 6 6-6" />
   </Icon>
 );
+export const IconArrowUp = (p: P) => (
+  <Icon {...p}>
+    <path d="M12 19V5M6 11l6-6 6 6" />
+  </Icon>
+);
+export const IconArrowRight = (p: P) => (
+  <Icon {...p}>
+    <path d="M5 12h14M13 6l6 6-6 6" />
+  </Icon>
+);
+export const IconX = (p: P) => (
+  <Icon {...p}>
+    <path d="M18 6 6 18M6 6l12 12" />
+  </Icon>
+);
+export const IconAlert = (p: P) => (
+  <Icon {...p}>
+    <path d="m10.3 3.9-8 14a2 2 0 0 0 1.7 3h16a2 2 0 0 0 1.7-3l-8-14a2 2 0 0 0-3.4 0Z" />
+    <path d="M12 9v4M12 17h.01" />
+  </Icon>
+);
+export const IconMinus = (p: P) => (
+  <Icon {...p}>
+    <path d="M5 12h14" />
+  </Icon>
+);
+export const IconLink = (p: P) => (
+  <Icon {...p}>
+    <path d="M10 13a5 5 0 0 0 7.5.5l2.5-2.5a5 5 0 0 0-7-7l-1.5 1.5" />
+    <path d="M14 11a5 5 0 0 0-7.5-.5L4 13a5 5 0 0 0 7 7l1.5-1.5" />
+  </Icon>
+);
+export const IconDownload = (p: P) => (
+  <Icon {...p}>
+    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" />
+  </Icon>
+);
 
 /** Google's "G" mark, in its brand colours, for the sign-in button. */
 export function GoogleMark({ size = 18 }: { size?: number }) {

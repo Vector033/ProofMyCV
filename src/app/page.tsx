@@ -6,24 +6,24 @@ import { AnimatedSteps } from "@/components/animated-steps";
 import { VerificationPipeline } from "@/components/verification-pipeline";
 import { BenchmarkMetrics } from "@/components/benchmark-metrics";
 import { AtsAnatomy } from "@/components/ats-anatomy";
-import { IconArrowDown } from "@/components/icons";
+import { IconArrowRight, IconCheck, IconShield, IconX } from "@/components/icons";
 import { DemoButton } from "./login/demo-button";
 
 const comparisonRows = [
   {
     feature: "Metric Integrity",
-    ai: "Hallucinates +30% to +80% fabricated boosts",
+    ai: "Hallucinates +45% fabricated boosts",
     factfit: "0% hallucination — blocked by AST code guard",
   },
   {
     feature: "Tech Stack Accuracy",
-    ai: "Injects buzzwords absent from your background",
-    factfit: "Strictly cross-referenced with your Fact Bank",
+    ai: "Injects unverified tools absent from facts",
+    factfit: "100% cross-referenced with your Fact Bank",
   },
   {
     feature: "Interview Defense",
     ai: "Candidate stumbles when asked for proof",
-    factfit: "Every single claim links to a real, verifiable fact",
+    factfit: "Every claim links to 1 or more source facts",
   },
   {
     feature: "Background Checks",
@@ -32,10 +32,16 @@ const comparisonRows = [
   },
   {
     feature: "PDF Format",
-    ai: "Multi-column layout prone to ATS parsing errors",
-    factfit: "Single-column ATS-optimized clean text PDF",
+    ai: "Multi-column layout prone to ATS parser skips",
+    factfit: "Single-column selectable text PDF (< 2.5 MB)",
   },
 ];
+
+const safetyNetTimeline = [
+  { step: "1", label: "Paste JD" },
+  { step: "2", label: "AST Fact Guard" },
+  { step: "3", label: "Clean ATS PDF" },
+] as const;
 
 export default async function Home({ searchParams }: PageProps<"/">) {
   const { deleted } = await searchParams;
@@ -60,13 +66,13 @@ export default async function Home({ searchParams }: PageProps<"/">) {
 
           <nav className="hidden items-center gap-6 text-sm font-medium text-slate-600 md:flex">
             <a href="#demo" className="transition-colors hover:text-slate-900">
-              Interactive Demo
+              Proof Demo
             </a>
             <a href="#how" className="transition-colors hover:text-slate-900">
-              How It Works
+              Workflow
             </a>
             <a href="#architecture" className="transition-colors hover:text-slate-900">
-              Architecture
+              Guard Spec
             </a>
             <a href="#measured" className="transition-colors hover:text-slate-900">
               Benchmarks
@@ -85,9 +91,9 @@ export default async function Home({ searchParams }: PageProps<"/">) {
             </Link>
             <Link
               href="/login"
-              className="press inline-flex min-h-9 items-center justify-center rounded-lg bg-slate-900 px-3.5 text-sm font-medium text-white shadow-2xs hover:bg-slate-800 active:scale-[0.98]"
+              className="press inline-flex min-h-9 items-center justify-center rounded-lg bg-slate-900 px-3.5 text-sm font-medium tracking-[0.04em] text-white shadow-2xs hover:bg-slate-800 active:scale-[0.98]"
             >
-              Get Started
+              Tailor My Resume
             </Link>
           </div>
         </div>
@@ -103,81 +109,90 @@ export default async function Home({ searchParams }: PageProps<"/">) {
       )}
 
       <main className="flex-1">
-        {/* ================= HERO SECTION ================= */}
-        <section className="relative overflow-hidden pt-16 pb-12 sm:pt-24 sm:pb-16">
+        {/* ================= HERO SECTION (64–96px rhythm, 8pt double-rule) ================= */}
+        <section className="relative overflow-hidden pt-16 pb-16 sm:pt-20 sm:pb-24">
           {/* GPU Fragment Shader over --canvas (#f8fafc) with radial fade + reduced-motion/offscreen guard */}
           <HeroShader />
 
-          {/* #7 Blueprint Grid + #18 Square-Dot Grid (--hairline at ~45% opacity, 24px spacing, radial fade) */}
+          {/* #7 Blueprint Grid + #18 Square-Dot Grid (--hairline, 24px spacing, radial fade) */}
           <div aria-hidden="true" className="bg-blueprint-dots absolute inset-0 z-0" />
 
           <div className="relative z-10 mx-auto max-w-5xl px-4 text-center sm:px-6">
-            {/* Functional Status Badge (Strict Anti-AI-Slop: zero filler, pure engineering statement) */}
-            <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3.5 py-1 text-xs font-medium text-slate-700 shadow-2xs">
-              <span className="size-2 rounded-full bg-emerald-600 animate-pulse" />
-              <span>AST Code Verification Guard</span>
-              <span className="text-slate-300">·</span>
-              <span className="font-semibold text-emerald-800">0% Hallucination Guarantee</span>
+            {/* Transformation & Safety Net Pill (paired with uniform IconShield) */}
+            <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/95 px-3.5 py-1 text-xs font-medium text-slate-800 shadow-2xs">
+              <IconShield size={14} className="shrink-0 text-emerald-700" />
+              <span className="font-semibold text-emerald-800 tabular-nums">0% Hallucination</span>
+              <span className="text-slate-300">—</span>
+              <span>Never risk a background&nbsp;check</span>
             </div>
 
-            {/* Main Headline: Stripe/Linear editorial typography with text-balance */}
-            <h1 className="mx-auto mt-6 max-w-4xl text-4xl font-semibold tracking-tight text-slate-900 text-balance sm:text-6xl sm:leading-[1.1]">
+            {/* Display Headline (-0.025em tracking, 1.1 line-height, text-balance) */}
+            <h1 className="display-heading mx-auto mt-4 max-w-4xl text-4xl font-semibold text-slate-900 sm:text-6xl">
               Tailor your resume to each job without inventing a single&nbsp;fact.
             </h1>
 
-            {/* Subtitle: natural line flow without weird orphan breaks */}
-            <p className="mx-auto mt-6 max-w-[60ch] text-lg leading-relaxed text-slate-600 sm:text-xl">
+            {/* Subtitle (50–75ch width, 1.6 line-height, natural wrapping) */}
+            <p className="body-prose mx-auto mt-4 max-w-[60ch] text-lg text-slate-600 sm:text-xl">
               Generic AI resume tools fabricate numbers and exaggerate skills. FactFit maps your real
               achievements to job descriptions and blocks any claim you cannot trace back to your
               verified Fact&nbsp;Bank.
             </p>
 
-            {/* Primary CTA Row: Requirement 4 "Tailor Resume with 0% Hallucination" */}
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-3.5 sm:mt-10">
-              <Link
-                href="/login"
-                className="press inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-slate-900 px-6 text-[15px] font-semibold text-white shadow-xs shadow-slate-950/20 hover:bg-slate-800 active:scale-[0.98]"
-              >
-                Tailor Resume with 0% Hallucination
-                <IconArrowDown className="-rotate-90 text-slate-400" size={16} />
-              </Link>
+            {/* Primary CTA + Risk Reversal Microcopy (32px inter-group gap) */}
+            <div className="mt-8 flex flex-col items-center">
+              <div className="flex flex-wrap items-center justify-center gap-4">
+                <Link
+                  href="/login"
+                  className="press inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-slate-900 px-6 text-[15px] font-semibold tracking-[0.04em] text-white shadow-sm shadow-slate-950/20 hover:bg-slate-800 active:scale-[0.98]"
+                >
+                  Tailor Resume with 0% Hallucination
+                  <IconArrowRight size={16} className="text-slate-300" />
+                </Link>
 
-              {demo && (
-                <DemoButton
-                  className="press inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-5 text-[15px] font-medium text-slate-700 shadow-2xs hover:border-slate-400 hover:bg-slate-50 hover:text-slate-900 active:scale-[0.98]"
-                  label="Try Interactive Demo"
-                />
-              )}
+                {demo && (
+                  <DemoButton
+                    className="press inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-5 text-[15px] font-medium tracking-[0.04em] text-slate-700 shadow-2xs hover:border-slate-400 hover:bg-slate-50 hover:text-slate-900 active:scale-[0.98]"
+                    label="Try Live Demo"
+                  />
+                )}
+              </div>
+
+              {/* Risk Reversal Microcopy directly beneath primary CTAs */}
+              <p className="mt-3 text-xs font-medium text-slate-600">
+                Traceable to your Fact Bank · 1&#8209;click&nbsp;PDF
+              </p>
             </div>
 
-            {/* Trust Assurance Strip */}
-            <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs font-medium text-slate-600">
-              <span className="inline-flex items-center gap-1.5 whitespace-nowrap">
-                <span className="size-1 rounded-full bg-emerald-600" />
-                Deterministic AST Guard
-              </span>
-              <span className="inline-flex items-center gap-1.5 whitespace-nowrap">
-                <span className="size-1 rounded-full bg-emerald-600" />
-                Zero Fabricated Metrics
-              </span>
-              <span className="inline-flex items-center gap-1.5 whitespace-nowrap">
-                <span className="size-1 rounded-full bg-emerald-600" />
-                Single-Column ATS PDF
-              </span>
-            </div>
+            {/* 3-Step Safety Net Timeline */}
+            <ol
+              aria-label="3-step verification flow"
+              className="mx-auto mt-8 inline-flex flex-wrap items-center justify-center gap-2 rounded-xl border border-slate-200/90 bg-white/85 px-4 py-2 text-xs font-medium text-slate-700 shadow-2xs backdrop-blur-xs"
+            >
+              {safetyNetTimeline.map((item, idx) => (
+                <li key={item.step} className="inline-flex items-center gap-2 whitespace-nowrap">
+                  <span className="inline-grid size-5 place-items-center rounded bg-slate-100 font-mono text-[11px] font-semibold text-slate-800 tabular-nums">
+                    {item.step}
+                  </span>
+                  <span className="text-slate-800">{item.label}</span>
+                  {idx < safetyNetTimeline.length - 1 && (
+                    <IconArrowRight size={13} className="text-slate-400" />
+                  )}
+                </li>
+              ))}
+            </ol>
           </div>
 
-          {/* ================= INTERACTIVE PROOF SHOWCASE ================= */}
-          <section id="demo" aria-label="Interactive proof showcase" className="relative z-10 mx-auto mt-12 max-w-5xl px-4 sm:px-6">
+          {/* ================= INTERACTIVE PROOF SHOWCASE (32px+ inter-group spacing) ================= */}
+          <section id="demo" aria-label="Interactive proof showcase" className="relative z-10 mx-auto mt-10 max-w-5xl px-4 sm:mt-12 sm:px-6">
             <ProofDemo />
-            <p className="mt-3 text-center text-xs text-slate-600">
+            <p className="mt-4 text-center text-xs text-slate-600">
               Real client-side AST fabrication guard running on demo&nbsp;fact&nbsp;#f1. Zero scroll&nbsp;hijacking.
             </p>
           </section>
         </section>
 
         {/* ================= HOW IT WORKS (Animated Specimens) ================= */}
-        <section id="how" aria-labelledby="how-heading" className="border-t border-slate-200/80 bg-white py-20 sm:py-24">
+        <section id="how" aria-labelledby="how-heading" className="border-t border-slate-200/80 bg-white py-16 sm:py-24">
           <div className="mx-auto max-w-6xl px-4 sm:px-6">
             <SectionHeader
               id="how-heading"
@@ -191,7 +206,7 @@ export default async function Home({ searchParams }: PageProps<"/">) {
         </section>
 
         {/* ================= DETERMINISTIC PIPELINE & 3-LAYER GUARD ================= */}
-        <section id="architecture" aria-labelledby="arch-heading" className="border-t border-slate-200/80 bg-slate-50 py-20 sm:py-24">
+        <section id="architecture" aria-labelledby="arch-heading" className="border-t border-slate-200/80 bg-slate-50 py-16 sm:py-24">
           <div className="mx-auto max-w-6xl px-4 sm:px-6">
             <SectionHeader
               id="arch-heading"
@@ -200,14 +215,14 @@ export default async function Home({ searchParams }: PageProps<"/">) {
               subtitle={"Even when an LLM tries to impress recruiters by inventing numbers, the 3-layer verification guard intercepts every token before it can be\u00A0saved."}
             />
 
-            <div className="mt-12">
+            <div className="mt-8">
               <VerificationPipeline />
             </div>
           </div>
         </section>
 
         {/* ================= EMPIRICAL EVALUATION DATA ================= */}
-        <section id="measured" aria-labelledby="measured-heading" className="border-t border-slate-200/80 bg-white py-20 sm:py-24">
+        <section id="measured" aria-labelledby="measured-heading" className="border-t border-slate-200/80 bg-white py-16 sm:py-24">
           <div className="mx-auto max-w-6xl px-4 sm:px-6">
             <SectionHeader
               id="measured-heading"
@@ -219,7 +234,7 @@ export default async function Home({ searchParams }: PageProps<"/">) {
             <BenchmarkMetrics />
 
             {/* Technical Boundary Callout (Strict Engineering Honesty) */}
-            <div className="mt-8 rounded-xl border border-slate-200 bg-slate-50/70 p-4 text-xs leading-relaxed text-slate-600 shadow-2xs">
+            <div className="mt-8 rounded-xl border border-slate-200/90 bg-slate-50/70 p-4 text-xs leading-[1.6] text-slate-600 shadow-2xs">
               <span className="font-semibold text-slate-800">Known Technical Boundary:</span> The guard
               evaluates numerical quantities, measurement units, and technology terminology. It flags
               semantic drift (e.g. inventing Redis when not in facts), but does not parse semantic noun
@@ -230,7 +245,7 @@ export default async function Home({ searchParams }: PageProps<"/">) {
         </section>
 
         {/* ================= ATS ANATOMY & COMPARISON MATRIX ================= */}
-        <section id="comparison" aria-labelledby="comparison-heading" className="border-t border-slate-200/80 bg-slate-50 py-20 sm:py-24">
+        <section id="comparison" aria-labelledby="comparison-heading" className="border-t border-slate-200/80 bg-slate-50 py-16 sm:py-24">
           <div className="mx-auto max-w-6xl px-4 sm:px-6">
             <SectionHeader
               id="comparison-heading"
@@ -239,7 +254,7 @@ export default async function Home({ searchParams }: PageProps<"/">) {
               subtitle={"Why deterministic code checks and single-column PDF structure outperform decorative templates and prompt\u2011only\u00A0AI."}
             />
 
-            <div className="mt-12">
+            <div className="mt-8">
               <AtsAnatomy />
             </div>
 
@@ -247,7 +262,7 @@ export default async function Home({ searchParams }: PageProps<"/">) {
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-sm">
                   <thead>
-                    <tr className="border-b border-slate-200 bg-slate-50/80 text-xs font-semibold uppercase tracking-wider text-slate-600">
+                    <tr className="border-b border-slate-200 bg-slate-50/80 text-xs font-semibold tracking-[0.04em] text-slate-600 uppercase">
                       <th className="py-3.5 pl-6 pr-4">Evaluation Dimension</th>
                       <th className="px-4 py-3.5 text-red-800">Generic AI (ChatGPT / Claude)</th>
                       <th className="py-3.5 pr-6 pl-4 text-emerald-900">FactFit Verification Engine</th>
@@ -257,16 +272,16 @@ export default async function Home({ searchParams }: PageProps<"/">) {
                     {comparisonRows.map((row) => (
                       <tr key={row.feature} className="transition-colors hover:bg-slate-50/50">
                         <td className="py-3.5 pl-6 pr-4 font-medium whitespace-nowrap text-slate-900">{row.feature}</td>
-                        <td className="px-4 py-3.5 text-red-700">
-                          <span className="inline-flex items-center gap-1.5">
-                            <span className="size-1.5 rounded-full bg-red-500" />
-                            {row.ai}
+                        <td className="px-4 py-3.5 text-red-800">
+                          <span className="inline-flex items-center gap-2">
+                            <IconX size={14} className="shrink-0 text-red-700" />
+                            <span>{row.ai}</span>
                           </span>
                         </td>
                         <td className="py-3.5 pr-6 pl-4 font-medium text-emerald-900">
-                          <span className="inline-flex items-center gap-1.5">
-                            <span className="size-1.5 rounded-full bg-emerald-600" />
-                            {row.factfit}
+                          <span className="inline-flex items-center gap-2">
+                            <IconCheck size={14} className="shrink-0 text-emerald-700" />
+                            <span>{row.factfit}</span>
                           </span>
                         </td>
                       </tr>
@@ -279,28 +294,31 @@ export default async function Home({ searchParams }: PageProps<"/">) {
         </section>
 
         {/* ================= CLOSING CTA ================= */}
-        <section className="border-t border-slate-200/80 bg-white py-16 sm:py-20">
+        <section className="border-t border-slate-200/80 bg-white py-16 sm:py-24">
           <div className="mx-auto max-w-5xl px-4 sm:px-6">
             <div className="relative overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 p-8 text-white shadow-xl sm:p-12">
-              <div className="relative z-10 flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between">
+              <div className="relative z-10 flex flex-col items-start gap-8 md:flex-row md:items-center md:justify-between">
                 <div className="max-w-xl">
-                  <h2 className="text-2xl font-semibold tracking-tight text-balance sm:text-3xl">
+                  <h2 className="display-heading text-2xl font-semibold sm:text-3xl">
                     Start with one true&nbsp;sentence.
                   </h2>
-                  <p className="mt-2 text-sm leading-relaxed text-slate-300 sm:text-base">
+                  <p className="body-prose mt-4 text-sm text-slate-300 sm:text-base">
                     Log your achievements once, match against any job description, and export a clean
                     single-column PDF you can defend with total&nbsp;confidence.
                   </p>
                 </div>
 
-                <div className="shrink-0">
+                <div className="flex shrink-0 flex-col items-start md:items-end">
                   <Link
                     href="/login"
-                    className="press inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-white px-6 text-[15px] font-semibold text-slate-900 shadow-sm hover:bg-slate-100 active:scale-[0.98]"
+                    className="press inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-white px-6 text-[15px] font-semibold tracking-[0.04em] text-slate-900 shadow-sm hover:bg-slate-100 active:scale-[0.98]"
                   >
                     Tailor Resume with 0% Hallucination
-                    <IconArrowDown className="-rotate-90 text-slate-700" size={16} />
+                    <IconArrowRight size={16} className="text-slate-700" />
                   </Link>
+                  <p className="mt-2.5 text-xs text-slate-400">
+                    Traceable to your Fact Bank · 1&#8209;click&nbsp;PDF
+                  </p>
                 </div>
               </div>
             </div>
@@ -339,12 +357,12 @@ function SectionHeader({
   subtitle: string;
 }) {
   return (
-    <div className="max-w-2xl">
-      <p className="text-xs font-semibold uppercase tracking-wider text-emerald-800">{eyebrow}</p>
-      <h2 id={id} className="mt-1.5 text-2xl font-semibold tracking-tight text-slate-900 text-balance sm:text-3xl">
+    <div className="max-w-[65ch]">
+      <p className="text-xs font-semibold tracking-[0.04em] text-emerald-800 uppercase">{eyebrow}</p>
+      <h2 id={id} className="display-heading mt-2 text-2xl font-semibold text-slate-900 sm:text-3xl">
         {title}
       </h2>
-      <p className="mt-2 text-sm leading-relaxed text-slate-600 sm:text-base">{subtitle}</p>
+      <p className="body-prose mt-4 text-sm text-slate-600 sm:text-base">{subtitle}</p>
     </div>
   );
 }

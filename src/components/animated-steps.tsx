@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { ScoreBadge } from "./score-badge";
-import { IconCheck } from "./icons";
+import { IconCheck, IconMinus } from "./icons";
 
 const DEMO_TECH = ["React", "TypeScript"];
 
@@ -45,7 +45,7 @@ export function AnimatedSteps() {
   }, []);
 
   return (
-    <ol ref={ref} className="mt-12 grid gap-8 sm:grid-cols-3">
+    <ol ref={ref} className="mt-8 grid gap-8 sm:grid-cols-3">
       {STEPS.map((step, i) => (
         // Outer card: rounded-2xl (16px), p-5 (20px) -> inner specimen card rounded-xl (12px)
         <li
@@ -59,10 +59,10 @@ export function AnimatedSteps() {
             <span className="inline-grid size-6 place-items-center rounded-md bg-slate-900 text-xs font-semibold text-white tabular-nums">
               {i + 1}
             </span>
-            <h3 className="font-semibold tracking-tight text-slate-900">{step.title}</h3>
+            <h3 className="font-semibold tracking-[-0.015em] text-slate-900">{step.title}</h3>
           </div>
 
-          <p className="mt-2 text-sm leading-relaxed text-slate-600">{step.body}</p>
+          <p className="mt-2 text-sm leading-[1.6] text-slate-600">{step.body}</p>
 
           {/* Specimen Box: rounded-xl (12px) with #12 Paper Texture + #5 Speckled Graphite */}
           <div
@@ -138,12 +138,14 @@ function StepTwoSpecimen({ active }: { active: boolean }) {
         </li>
         <li
           style={{ transitionDelay: "340ms" }}
-          className={`flex items-center justify-between rounded-lg border border-dashed border-slate-300 bg-white px-2.5 py-1.5 text-slate-500 transition-all duration-400 ${
+          className={`flex items-center justify-between rounded-lg border border-dashed border-slate-300 bg-white px-2.5 py-1.5 text-slate-600 transition-all duration-400 ${
             active ? "translate-x-0 opacity-100" : "translate-x-2 opacity-0"
           }`}
         >
           <span>Kubernetes</span>
-          <span className="text-[11px] text-slate-400">Missing</span>
+          <span className="inline-flex items-center gap-1 text-[11px] text-slate-500">
+            <IconMinus size={11} /> Missing
+          </span>
         </li>
       </ul>
     </div>
@@ -184,9 +186,9 @@ function StepThreeSpecimen({ active }: { active: boolean }) {
         }`}
       >
         <span className="inline-flex items-center gap-1 rounded-full border border-emerald-600/20 bg-emerald-50 px-2 py-0.5 font-medium text-emerald-800">
-          ✓ 0% Hallucination
+          <IconCheck size={11} /> 0% Hallucination
         </span>
-        <span className="text-[11px] text-slate-500 tabular-nums">Cites 1 verified fact</span>
+        <span className="text-[11px] text-slate-600 tabular-nums">Cites 1 verified fact</span>
       </div>
     </div>
   );
