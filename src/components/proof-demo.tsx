@@ -298,7 +298,7 @@ export function ProofDemo() {
                     className="inline-flex items-center gap-1.5 rounded-full border border-emerald-600/20 bg-emerald-50 px-2.5 py-0.5 text-xs font-medium whitespace-nowrap text-emerald-800"
                   >
                     <IconShield size={13} />
-                    <span className="tabular-nums">100% Verified · 0% Hallucination</span>
+                    <span className="tabular-nums">4 / 4 claims traced</span>
                   </span>
                 </div>
 
@@ -430,9 +430,9 @@ export function ProofDemo() {
 
                       <div className="mt-3.5 flex items-center justify-between border-t border-emerald-600/15 pt-2.5 text-[11px]">
                         <span className="inline-flex items-center gap-1 font-semibold text-emerald-800 tabular-nums">
-                          <IconCheck size={12} /> 100% Tokens Matched
+                          <IconCheck size={12} /> 4 / 4 tokens matched
                         </span>
-                        <span className="font-mono text-[10px] text-slate-500">AST_GUARD: PASS</span>
+                        <span className="font-mono text-[10px] text-slate-500">GUARD: PASS</span>
                       </div>
                     </div>
                   </div>

@@ -51,7 +51,7 @@ export function AnimatedSteps() {
         <li
           key={step.title}
           style={{ transitionDelay: `${i * 90}ms` }}
-          className={`flex flex-col rounded-2xl border border-slate-200/90 bg-slate-50/50 p-5 shadow-2xs transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+          className={`flex flex-col rounded-2xl border border-slate-200/90 bg-slate-50/50 p-5 shadow-2xs transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none ${
             visible ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0"
           }`}
         >
@@ -186,7 +186,7 @@ function StepThreeSpecimen({ active }: { active: boolean }) {
         }`}
       >
         <span className="inline-flex items-center gap-1 rounded-full border border-emerald-600/20 bg-emerald-50 px-2 py-0.5 font-medium text-emerald-800">
-          <IconCheck size={11} /> 0% Hallucination
+          <IconCheck size={11} /> Traceable
         </span>
         <span className="text-[11px] text-slate-600 tabular-nums">Cites 1 verified fact</span>
       </div>

@@ -10,25 +10,26 @@ import { IconArrowRight, IconCheck, IconShield, IconX } from "@/components/icons
 import { DemoButton } from "./login/demo-button";
 
 const comparisonRows = [
+  // Numbers from eval/README.md (fictional cases). Update both together.
   {
     feature: "Metric Integrity",
-    ai: "Hallucinates +45% fabricated boosts",
-    factfit: "0% hallucination — blocked by AST code guard",
+    ai: "Invented 26 claims when told to “add impressive metrics” (Typhoon 2.5)",
+    factfit: "Blocked 26 / 26 of them; 547 / 547 on tuning cases",
   },
   {
     feature: "Tech Stack Accuracy",
-    ai: "Injects unverified tools absent from facts",
-    factfit: "100% cross-referenced with your Fact Bank",
+    ai: "Adds tools that are not in your facts",
+    factfit: "Every tool name checked against the cited facts (37 / 37 held-out)",
   },
   {
     feature: "Interview Defense",
-    ai: "Candidate stumbles when asked for proof",
+    ai: "No link from a sentence back to what you did",
     factfit: "Every claim links to 1 or more source facts",
   },
   {
-    feature: "Background Checks",
-    ai: "High risk of offer rescission on discrepancy",
-    factfit: "100% auditable career achievements",
+    feature: "Audit Trail",
+    ai: "No record of where a claim came from",
+    factfit: "Each bullet stores the IDs of the facts it cites",
   },
   {
     feature: "PDF Format",
@@ -39,7 +40,7 @@ const comparisonRows = [
 
 const safetyNetTimeline = [
   { step: "1", label: "Paste JD" },
-  { step: "2", label: "AST Fact Guard" },
+  { step: "2", label: "Fact Guard" },
   { step: "3", label: "Clean ATS PDF" },
 ] as const;
 
@@ -121,9 +122,9 @@ export default async function Home({ searchParams }: PageProps<"/">) {
             {/* Transformation & Safety Net Pill (paired with uniform IconShield) */}
             <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/95 px-3.5 py-1 text-xs font-medium text-slate-800 shadow-2xs">
               <IconShield size={14} className="shrink-0 text-emerald-700" />
-              <span className="font-semibold text-emerald-800 tabular-nums">0% Hallucination</span>
+              <span className="font-semibold text-emerald-800 tabular-nums">547 / 547 blocked</span>
               <span className="text-slate-300">—</span>
-              <span>Never risk a background&nbsp;check</span>
+              <span>invented numbers and tools in&nbsp;testing</span>
             </div>
 
             {/* Display Headline (-0.025em tracking, 1.1 line-height, text-balance) */}
@@ -145,7 +146,7 @@ export default async function Home({ searchParams }: PageProps<"/">) {
                   href="/login"
                   className="press inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-slate-900 px-6 text-[15px] font-semibold tracking-[0.04em] text-white shadow-sm shadow-slate-950/20 hover:bg-slate-800 active:scale-[0.98]"
                 >
-                  Tailor Resume with 0% Hallucination
+                  Tailor My Resume
                   <IconArrowRight size={16} className="text-slate-300" />
                 </Link>
 
@@ -186,7 +187,7 @@ export default async function Home({ searchParams }: PageProps<"/">) {
           <section id="demo" aria-label="Interactive proof showcase" className="relative z-10 mx-auto mt-10 max-w-5xl px-4 sm:mt-12 sm:px-6">
             <ProofDemo />
             <p className="mt-4 text-center text-xs text-slate-600">
-              Real client-side AST fabrication guard running on demo&nbsp;fact&nbsp;#f1. Zero scroll&nbsp;hijacking.
+              The real fabrication guard, running in your browser on a fictional&nbsp;fact.
             </p>
           </section>
         </section>
@@ -228,7 +229,7 @@ export default async function Home({ searchParams }: PageProps<"/">) {
               id="measured-heading"
               eyebrow="Empirical Benchmarks"
               title="Measured, not promised"
-              subtitle={"Tested across 40 real-world job postings. The AST code guard checks numbers, units, and technical\u00A0names."}
+              subtitle={"Tested on 40 fictional job postings. The code guard checks numbers, units, and technical\u00A0names."}
             />
 
             <BenchmarkMetrics />
@@ -264,7 +265,7 @@ export default async function Home({ searchParams }: PageProps<"/">) {
                   <thead>
                     <tr className="border-b border-slate-200 bg-slate-50/80 text-xs font-semibold tracking-[0.04em] text-slate-600 uppercase">
                       <th className="py-3.5 pl-6 pr-4">Evaluation Dimension</th>
-                      <th className="px-4 py-3.5 text-red-800">Generic AI (ChatGPT / Claude)</th>
+                      <th className="px-4 py-3.5 text-red-800">Unchecked LLM Output</th>
                       <th className="py-3.5 pr-6 pl-4 text-emerald-900">FactFit Verification Engine</th>
                     </tr>
                   </thead>
@@ -313,7 +314,7 @@ export default async function Home({ searchParams }: PageProps<"/">) {
                     href="/login"
                     className="press inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-white px-6 text-[15px] font-semibold tracking-[0.04em] text-slate-900 shadow-sm hover:bg-slate-100 active:scale-[0.98]"
                   >
-                    Tailor Resume with 0% Hallucination
+                    Tailor My Resume
                     <IconArrowRight size={16} className="text-slate-700" />
                   </Link>
                   <p className="mt-2.5 text-xs text-slate-400">
@@ -334,10 +335,10 @@ export default async function Home({ searchParams }: PageProps<"/">) {
               Fact<span className="text-emerald-700">Fit</span>
             </span>
             <span className="text-slate-300">·</span>
-            <span>Zero-hallucination career tailoring</span>
+            <span>Fact-checked resume tailoring</span>
           </div>
           <p>
-            FactFit stores only what you enter. Fully PDPA compliant. Export or delete your data at any&nbsp;time.
+            FactFit stores only what you enter. Export or delete your data at any&nbsp;time.
           </p>
         </div>
       </footer>

@@ -124,7 +124,7 @@ export function VerificationPipeline() {
           <div className="rounded-xl border border-slate-200 bg-slate-50/60 p-4 shadow-2xs">
             <div className="flex items-center justify-between border-b border-slate-200/80 pb-2.5">
               <span className="text-xs font-semibold tracking-[0.04em] text-slate-800 uppercase">
-                AST.02 // 3-Layer Code Guard
+                3-Layer Code Guard
               </span>
               <span className="font-mono text-[11px] text-slate-500">guard.ts</span>
             </div>
@@ -198,11 +198,11 @@ export function VerificationPipeline() {
                     className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-semibold whitespace-nowrap tabular-nums ${
                       isVerified
                         ? "bg-emerald-50 text-emerald-800 ring-1 ring-emerald-600/25"
-                        : "bg-slate-200 text-slate-500"
+                        : "bg-slate-200 text-slate-700"
                     }`}
                   >
                     {isVerified && <IconCheck size={11} />}
-                    {isVerified ? "0% Hallucination" : "Standby"}
+                    {isVerified ? "All traced" : "Standby"}
                   </span>
                 </div>
                 <p className="mt-1.5 text-[11px] leading-[1.6] text-slate-600">
@@ -227,7 +227,7 @@ export function VerificationPipeline() {
                   className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-semibold whitespace-nowrap tabular-nums ${
                     !isVerified
                       ? "bg-red-100 text-red-800 ring-1 ring-red-600/20"
-                      : "bg-slate-200 text-slate-500"
+                      : "bg-slate-200 text-slate-700"
                   }`}
                 >
                   {!isVerified && <IconX size={11} />}

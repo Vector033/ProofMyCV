@@ -34,7 +34,7 @@ export default async function LoginPage({ searchParams }: PageProps<"/login">) {
             </Link>
             <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/25 bg-emerald-950/50 px-3 py-1 text-xs font-medium text-emerald-200">
               <IconShield size={13} className="text-emerald-300" />
-              <span className="tabular-nums">0% Hallucination Guard</span>
+              <span className="tabular-nums">Fabrication Guard</span>
             </span>
           </div>
 
@@ -103,7 +103,7 @@ export default async function LoginPage({ searchParams }: PageProps<"/login">) {
                   <span className="inline-flex items-center gap-1 font-mono">
                     <IconLink size={11} /> cite:f1
                   </span>
-                  <span className="tabular-nums">100% Tokens Matched</span>
+                  <span className="tabular-nums">3 / 3 tokens matched</span>
                 </div>
               </div>
             </div>
@@ -111,12 +111,12 @@ export default async function LoginPage({ searchParams }: PageProps<"/login">) {
             {/* Empirical Proof Strip */}
             <dl className="grid grid-cols-3 gap-4 border-t border-slate-700/70 pt-5">
               <div>
-                <dt className="text-[11px] text-slate-400">Hallucinations blocked</dt>
+                <dt className="text-[11px] text-slate-400">Blocked, tuning set</dt>
                 <dd className="mt-0.5 text-lg font-semibold text-white tabular-nums">547 / 547</dd>
               </div>
               <div>
-                <dt className="text-[11px] text-slate-400">Invented metrics</dt>
-                <dd className="mt-0.5 text-lg font-semibold text-emerald-300 tabular-nums">0%</dd>
+                <dt className="text-[11px] text-slate-400">Blocked, held-out</dt>
+                <dd className="mt-0.5 text-lg font-semibold text-emerald-300 tabular-nums">180 / 186</dd>
               </div>
               <div>
                 <dt className="text-[11px] text-slate-400">ATS PDF size</dt>

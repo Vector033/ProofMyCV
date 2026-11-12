@@ -73,7 +73,7 @@ function MetricCard({
   return (
     <div
       style={{ transitionDelay: `${delayMs}ms` }}
-      className={`rounded-2xl border border-slate-200/90 bg-white p-6 shadow-2xs transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+      className={`rounded-2xl border border-slate-200/90 bg-white p-6 shadow-2xs transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none ${
         active ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0"
       }`}
     >

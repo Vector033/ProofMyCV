@@ -38,7 +38,7 @@ export default async function ApplicationPage({ params }: PageProps<"/app/applic
               </span>
             ) : (
               <span className="inline-flex items-center gap-1 rounded-full border border-emerald-600/20 bg-emerald-50 px-2.5 py-0.5 text-xs font-medium text-emerald-800 tabular-nums">
-                <IconShield size={12} /> {app.bullets.length > 0 ? `0% Hallucination · ${app.bullets.length} verified` : "Fact Guard Ready"}
+                <IconShield size={12} /> {app.bullets.length > 0 ? `${app.bullets.length} of ${app.bullets.length} traceable` : "Fact Guard Ready"}
               </span>
             )}
           </div>
