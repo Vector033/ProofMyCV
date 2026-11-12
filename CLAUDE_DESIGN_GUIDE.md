@@ -249,7 +249,91 @@ Synthesized directly from 6 masterclasses on high-converting UI/UX, typography, 
 
 ---
 
-## 8. Token-Efficient Claude Prompts for FactFit (Copy-Paste Ready)
+## 8. Claude Code Design Skills, 21st.dev & The $10,000 Website Workflow (Metics Media)
+
+> **Source:** [Build a $10,000 website with Claude Code (Ultimate Guide) — Metics Media](https://www.youtube.com/watch?v=VMvZuhcDdnw)  
+> **Key Insight:** Stop asking Claude to "make it modern and professional" (which triggers boilerplate purple/blue cards and generic centered AI slop). Instead, install specialized design skills, reference high-end platforms (Dribbble, Awwwards, Pinterest), inject pre-built design-engineer components from **21st.dev**, and execute through a disciplined 4-pass polish framework.
+
+### 8.1 The Claude Code Design Skills Stack
+
+| Tool / Skill | Repository / URL | Purpose & How Claude Uses It |
+|---|---|---|
+| **Frontend Design Skill** *(by Anthropic)* | [github.com/anthropics/skills/.../frontend-design](https://github.com/anthropics/skills/tree/main/skills/frontend-design) | Anthropic's official skill to prevent boilerplate AI UI. Commands Claude to think like an Art Director: creates intentional typographic scales, unexpected restrained palettes, expressive visual rhythm, and rejects standard template layouts. |
+| **UI/UX Pro Max Skill** *(by NextLevelBuilder)* | [github.com/nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) | Principal Product Designer skill ruleset: enforces mathematical radii formulas (`r_in = r_out - p`), strict 60-30-10 color balance, WCAG AA contrast (>=4.5:1), 8pt spacing rhythm, micro-haptic feedback (`active:scale-[0.98]`), and mobile touch ergonomics (>=44px). |
+| **21st.dev Component Library** | [21st.dev](https://21st.dev) | The curated "npm for design engineers" (shadcn/ui + Tailwind + Framer Motion). Provides copy-pasteable high-end UI primitives: interactive bento grids, glow cards, animated tab switchers, dynamic docks, and magnetic CTA buttons. |
+| **Curated Design References** | Dribbble, Awwwards, Pinterest | Concrete aesthetic anchors: layout hierarchy from Stripe, precision hairlines from Linear, fluid micro-interactions from Framer, typography from Pentagram. |
+| **The 8-Pillar $10,000 Checklist** | [Google Drive PDF Download](https://drive.google.com/file/d/1CCRCvSbJ1tNXmd2YDnUNr1XkTAguYG7v/view?usp=drive_link) | The definitive audit rubric that separates a $10,000 custom web application from a cheap $200 template. |
+
+---
+
+### 8.2 The 8-Pillar $10,000 Website Framework (Applied to FactFit)
+
+1. **Pillar 1: Distinctive Brand Identity & Aesthetic Tension:**
+   - Eliminate all generic SaaS purple/blue gradients and floating rounded pill slop.
+   - FactFit uses **Slate-50 (`#f8fafc`) canvas**, **Slate-900 typography**, and a surgical **Emerald-700 (`#047857`)** accent for verification trust.
+2. **Pillar 2: Intentional Hierarchy & Grid:**
+   - 8pt spacing rhythm: 16px intra-card gap, >=32px inter-section gap, 64–96px landing section blocks.
+   - Headline tracking `-0.025em`, uppercase badges `+0.04em`. Max line width 50–75ch for effortless reading.
+3. **Pillar 3: Micro-Interactions & Tactile Feedback:**
+   - Button press compression `active:scale-[0.98]` with spring physics `cubic-bezier(0.16, 1, 0.3, 1)`.
+   - Score badges and verification checks roll up smoothly with `tabular-nums` so numbers don't twitch.
+4. **Pillar 4: Rich Visual Texture Without AI Slop:**
+   - Hero canvas uses #7 Blueprint / #18 Square-Dot grid with radial scrim mask; verified resume preview uses #12 Paper texture (cotton-paper tactility).
+   - Sticky navbar uses #2 Fluted Glass (`backdrop-blur-md` + subtle linear ribbing).
+5. **Pillar 5: Trust Architecture & Verifiable Citations:**
+   - Concrete claim: "0% Hallucination — Every bullet point linked to your Fact Bank".
+   - Split proof demo: Unverified AI resume (red warning pills) vs FactFit Verified (emerald citations).
+6. **Pillar 6: Conversion & Frictionless Action:**
+   - Clear single-focus primary CTA with risk reversal: *"Tailor Resume with 0% Hallucination · Traceable to your Fact Bank · 1-click PDF"*.
+7. **Pillar 7: Mobile-First Thumb Ergonomics:**
+   - Sticky bottom action drawer on mobile screens; all interactive touch targets >= 44x44px. Zero scrolljacking.
+8. **Pillar 8: Disciplined 4-Pass Polish Workflow:**
+   - **Pass 1 (Structure):** Semantic HTML, AST citation logic, Supabase auth flow.
+   - **Pass 2 (Visual Polish):** Design tokens, strict contrast, hairline borders, paper texture.
+   - **Pass 3 (Motion & 21st.dev Components):** Framer Motion micro-springs, animated score counter, bento proof grid.
+   - **Pass 4 (Quality & Build Audit):** WCAG AA verification, mobile thumb test, `npm run build` verification.
+
+---
+
+### 8.3 How to Install & Use These Skills in Claude Code (วิธีติดตั้งและเรียกใช้)
+
+มี 3 วิธีหลักในการนำทักษะ (Design Skills) ไปใช้กับ Claude Code:
+
+1. **วิธีที่ 1: ติดตั้งเป็น Skill ในโปรเจกต์ (`.claude/skills/`):**
+   - สร้างโฟลเดอร์ `.claude/skills/` ใน root ของโฟลเดอร์โปรเจกต์
+   - โคลนหรือดาวน์โหลดไฟล์ `SKILL.md` จาก GitHub:
+     - **Frontend Design:** นำไฟล์จาก [anthropics/skills/tree/main/skills/frontend-design](https://github.com/anthropics/skills/tree/main/skills/frontend-design) ไปวางที่ `.claude/skills/frontend-design/SKILL.md`
+     - **UI/UX Pro Max:** นำไฟล์จาก [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) ไปวางที่ `.claude/skills/ui-ux-pro-max/SKILL.md`
+   - เมื่อเปิดรัน Claude Code ตัวระบบจะตรวจจับและโหลด Skill เหล่านี้เข้ามาใน Context ทันที (หรือเรียกใช้ผ่าน `/frontend-design` และ `/ui-ux-pro-max`)
+
+2. **วิธีที่ 2: ตั้งค่าให้อ่านอัตโนมัติผ่าน `CLAUDE.md` (Zero-Config Auto-Load):**
+   - Claude Code จะอ่านไฟล์ `CLAUDE.md` ใน root ของโปรเจกต์เสมอเมื่อเริ่มทำงาน
+   - เพิ่มคำสั่งลงใน `CLAUDE.md` ของโปรเจกต์:
+     ```markdown
+     ## Design Standards
+     - Before writing or modifying any UI/UX or styles, strictly follow `CLAUDE_DESIGN_GUIDE.md`.
+     - Adopt the Anthropic Frontend Design Skill rules (bespoke layouts, anti-AI-slop) and UI/UX Pro Max heuristics (60-30-10, r_in = r_out - p, tactile springs).
+     - Source component implementation patterns from 21st.dev (shadcn + Tailwind + Framer Motion).
+     ```
+
+3. **วิธีที่ 3: สั่งตรงผ่าน Prompt (Prompt Injection):**
+   - หากไม่ได้ติดตั้งโฟลเดอร์ skill สามารถใช้ **Prompt 6** ในคู่มือนี้ ซึ่งมีบล็อก `Step 0 — Load Skills & Reference Repositories` กำชับบทบาท กฎเกณฑ์ 20 ข้อ และพฤติกรรมของทั้ง 2 skills ให้ Claude ปฏิบัติตามทันที
+
+---
+
+### 8.4 The "Make It Feel Alive" Triad: Motion.dev, Anime.js & Shadcn Charts (Applied to FactFit)
+
+> *"Claude can build a website fast. Making it feel alive is harder. That part lives in the details: how things move, how charts look. Motion.dev handles the transitions. Anime.js handles the custom motion. Shadcn charts handle the data. Like giving Claude a better toolbox. Same builder, better finish. Keep all three open next build."*
+
+| Tool & Resource | Core Role | Exact Application to FactFit |
+|---|---|---|
+| **[Motion.dev](https://motion.dev)** *(formerly Framer Motion)* | **State & Layout Transitions** | • Page transitions between Landing (`/`) and Workspace (`/app`).<br>• `AnimatePresence` layout morphing for the interactive Split Proof Hero (Generic AI vs FactFit Verified).<br>• Fluid expandable accordion transitions for AST Fact Guard citation inspect drawers. |
+| **[Anime.js](https://animejs.com)** | **Custom Motion & Micro-Timelines** | • Circular SVG progress ring draw animation in `score-badge.tsx` (`stroke-dashoffset` timeline).<br>• Count-up numerical animation for ATS match percentage with zero layout jitter.<br>• Micro-timeline sequence for verified checkmark draw + emerald badge pulse upon fact confirmation. |
+| **[Shadcn Charts](https://ui.shadcn.com/docs/components/chart)** | **Accessible Data Visualization** | • Recharts-powered benchmark graphs in `benchmark-metrics.tsx` (comparing hallucination rates: 0% FactFit vs 42% standard LLMs).<br>• Skill keyword match distribution (Horizontal Bar / Radar Chart) styled with FactFit's `--accent` (`#047857`) and Slate design tokens.<br>• Clean accessible tooltips and theme-integrated labels. |
+
+---
+
+## 9. Token-Efficient Claude Prompts for FactFit (Copy-Paste Ready)
 
 ### Prompt 1: Landing Page Hero & Interactive Verification Showcase
 ```text
@@ -347,4 +431,42 @@ Apply Maximum Applicable Techniques & Best-Fit 2026 Trends (Zero AI Slop):
    - Never rely on color alone for guard alerts (pair Emerald/Red/Amber with Lucide icons of uniform stroke width).
 4. Verification:
    - Run `npm run build` and TypeScript/test checks; do not break Supabase auth, Drizzle queries, AST guard math, or `@react-pdf/renderer`.
+```
+
+### Prompt 6: Complete $10,000 Website Polish with Claude Skills & 21st.dev (FactFit)
+```text
+Task: Elevate FactFit (`src/app/page.tsx`, `src/app/globals.css`, and core UI components) to an executive $10,000 custom web application standard, following the Metics Media ultimate workflow.
+
+Step 0 — Load Skills & Reference Repositories:
+You MUST adopt the specialized persona, heuristics, and execution standards from:
+1. Anthropic Frontend Design Skill (github.com/anthropics/skills/tree/main/skills/frontend-design): Focus on high aesthetic intentionality, bespoke layout asymmetry, avoiding cliché AI templates, and crafting custom visual rhythm.
+2. UI/UX Pro Max Skill (github.com/nextlevelbuilder/ui-ux-pro-max-skill): Enforce strict mathematical radii (r_in = r_out - p), 60-30-10 color balance, WCAG AA contrast (>= 4.5:1), 8pt spacing rhythm, and tactile micro-interactions (active:scale-[0.98]).
+3. 21st.dev Component Patterns (21st.dev): Adapt design-engineer primitives (interactive bento grid, glowing proof card border, animated segmented tab switcher, dynamic dock nav) using Tailwind CSS and Framer Motion.
+4. Design Reference Anchors: Stripe (layout hierarchy & interactive live demo), Linear (hairline precision & keyboard feel), Pentagram (authoritative typography).
+
+Execute the 4-Pass $10,000 Polish Method:
+
+Pass 1: Information Architecture & Brand Authority (Anti-AI-Slop)
+- Replace generic SaaS headline with concrete transformation: "0% Hallucination Resume Builder — Every bullet point anchored to your verified career facts."
+- Eliminate all filler pill badges, unitalicize random words, and remove generic centered 3-card feature columns.
+- Structure Hero with high visual tension: Bold left proposition + interactive live proof demo on the right.
+
+Pass 2: Visual Style, Hierarchy & Non-Flat Depth
+- Apply 60-30-10 palette: 60% Slate-50 canvas (`--canvas`), 30% Slate-900 typography and hairline borders (`--hairline`), 10% Emerald-700 accent (`--accent`) strictly for verification states.
+- Hero depth: Add blueprint/square-dot grid with radial scrim mask (`mask-image: radial-gradient(ellipse at center, black 35%, transparent 80%)`).
+- Resume preview sheet: Apply #12 Paper texture (opacity 0.03) so resumes feel like physical high-grade cotton stock.
+- Sticky navigation: Apply #2 Fluted Glass (`backdrop-blur-md` + subtle linear ribbing).
+- Math check: Ensure all nested containers strictly satisfy `inner radius = outer radius - padding`.
+
+Pass 3: Micro-Interactions, Motion & 21st.dev Primitives
+- Integrate a 21st.dev-inspired Bento Grid for the feature showcase (`ats-anatomy.tsx`, `verification-pipeline.tsx`).
+- Live Proof Component: Interactive toggle between "Generic AI Resume" (flagged with red hallucination warnings) and "FactFit Verified" (smooth emerald badge roll-in with `tabular-nums`).
+- Button press physics: Apply `active:scale-[0.98] transition-transform duration-100 ease-out` on all interactive buttons.
+- Smooth spring curves: Use `cubic-bezier(0.16, 1, 0.3, 1)` for sheet drawers and modal entries.
+
+Pass 4: Mobile Ergonomics & Production QA
+- Mobile thumb zone: Sticky bottom action bar on screens < 768px for immediate resume customization.
+- Touch targets: All buttons, tags, and toggles must be >= 44x44px.
+- Accessibility: Guarantee WCAG AA contrast (>= 4.5:1) for all text and icons.
+- Production safety: Strictly preserve Supabase authentication, Drizzle schema, AST guard parsing, and `@react-pdf/renderer` pipeline. Run `npm run build` and ensure zero TypeScript errors.
 ```
