@@ -1,6 +1,6 @@
 # FactFit eval
 
-50 fictional job-posting + fact-bank cases, hand-labelled, used to measure the fabrication guard, skill extraction
+60 fictional job-posting + fact-bank cases, hand-labelled, used to measure the fabrication guard, skill extraction
 and the live drafting pipeline. No real person's data is used.
 
 | Set | Cases | Role families | Used for |
@@ -9,7 +9,8 @@ and the live drafting pipeline. No real person's data is used.
 | `cases/b-backend.json` | 10 | backend, data, DevOps, ML, LLM apps | tuning + CI |
 | `cases/c-other.json` | 10 | QA, game dev, IT support, embedded, security, BA, tech writing, UX, TA, Thai co-op | tuning + CI |
 | `holdout/holdout.json` | 10 | Rails, .NET, Android, data science, SRE, Salesforce, hardware test, e-commerce ops, Rust, design | reported only (2026-11-04; no longer blind) |
-| `holdout2/holdout2.json` | 10 | network, product analytics, GIS, bioinformatics, Kotlin, DBA, MLOps, robotics, credit risk, digital marketing | reported only (2026-11-14) |
+| `holdout2/holdout2.json` | 10 | network, product analytics, GIS, bioinformatics, Kotlin, DBA, MLOps, robotics, credit risk, digital marketing | reported only (2026-11-14 round 1; seen since) |
+| `holdout3/holdout3.json` | 10 | SAP, healthcare informatics, PLC, accessibility, supply chain, manufacturing vision, solar, localization, smart contracts, game QA | reported only (2026-11-14 round 2) |
 
 Each case has a posting, labelled required/preferred skills, the skills the candidate lacks (bait), a fact bank,
 2–3 **faithful** bullets a careful human would write, and 2–4 hand-written **fabrications** of five kinds:
@@ -22,7 +23,73 @@ Each held-out set was written by a separate author **after** the guard was tuned
 or the tuning cases, and the guard was not changed after seeing its score. Once a held-out score has been reported,
 that set is no longer blind; the next guard change gets a new one.
 
-## Results (2026-11-14): derived numbers, abbreviations, counted-noun warning
+## Results (2026-11-14, round 2): direction-aware percentages, acronyms from initials, `holdout3`
+
+### What changed in the guard
+
+- **Direction.** A before/after pair A → B backs only the change relative to A, plus the ratio: $5,200 → $3,100
+  backs a 40% cut, never 60% (the share that remains). "X of Y" and "X/Y" back only X / Y.
+- **Acronyms from initials.** An all-caps token the list does not know passes when consecutive words of the cited
+  fact spell its initials: PITR ← "point-in-time recovery", VLANs ← "virtual LANs", GA4 ← "Google Analytics 4".
+  Small words may be skipped (PD ← "probability of default"). Listed abbreviations still need their own expansion,
+  and tool names in the vocabulary (AWS, GCP) are judged by the vocabulary, never by initials. British and American
+  spellings compare equal ("optimisation").
+- **Units.** mm, cm, km, kg and pps, and a pair may repeat a unit phrase ("1,200 packets per second to 300
+  packets per second").
+- **Each use is checked.** A number used twice is checked in each context, so an honest "30% of sign-ups" no
+  longer lets a later "cutting costs by 30%" through.
+
+Tuned on the 30 tuning cases and their saved live drafts only. `holdout2` was already seen, so it is reported
+below as a re-run, not a blind score. The guard was frozen at commit `45fe46d`, then `holdout3` was written by a
+fresh author under the same rules as `holdout2` and scored once.
+
+### Fabrication guard (offline, deterministic)
+
+| | Tuning (30) | `holdout3` (10, blind) | `holdout2` (10, re-run, seen) | `holdout` (10, re-run, seen) |
+|---|---|---|---|---|
+| Fabrications blocked | **547 / 547** | **164 / 172 (95.3%)** | 174 / 184 (94.6%) | 178 / 186 (95.7%) |
+| Faithful bullets accepted | 90 / 90 | **24 / 30 (80.0%)** | 29 / 30 | 30 / 30 |
+| Counted-noun warnings on accepted faithful bullets | 0 / 90 | 1 / 24 | 0 / 29 | 1 / 30 |
+
+`holdout3` by kind: number 71/71 · multiplier 34/34 · citation 35/35 · tech 21/22 · unit 3/10. Its 10 role
+families are new (SAP consultant, healthcare informatics, PLC automation, accessibility, supply-chain planning,
+manufacturing vision, solar monitoring, localization, smart contracts, game QA), and it includes 24 faithful derived
+values in five forms, 24 spelled-out acronyms, 10 wrong derived percentages and 7 acronyms the facts never spell out.
+
+**What `holdout3` let through (8 of 172):**
+
+- 7 counted-noun swaps with the same number ("8,400 vendor master records" for material records, "1,320 duplicate lab
+  orders", "14 classes" for a class of 14, "1,450 student accounts" for test transactions …). The warning flagged 2.
+  Same-number meaning swaps remain the main limit.
+- **"Tracked OEE …"**: the author planted this coincidence. The cited fact logs "operator error events", whose
+  initials spell OEE, but OEE (overall equipment effectiveness) is something else. The initials rule cannot tell
+  them apart. This is a new kind of miss that round 1 would have blocked.
+
+All 10 wrong derived percentages were blocked, including the 4 that report the share that remains instead of the cut.
+
+**Honest bullets it blocked (6 of 30):**
+
+- 4 percentages whose numbers are in the fact but not as one adjacent pair: "138 issues, 41 of them blockers" (30%),
+  "96 of the 120 tickets" (80%; "of the" is not a pair joiner), "13 of the 16 clients" (81%), "386 bugs; 312 were
+  fixed" (81%).
+- "27 of 312 string inverters (9%)": the arithmetic is backed, but a percentage inside brackets has no nearby words
+  to tie it to the fact.
+- 2 acronyms of a single compound word: OPD ← "outpatient department", PV ← "photovoltaic".
+
+**`holdout2` re-run (seen, not blind):** faithful accepted rose from 16 / 30 to 29 / 30; the one left is "…, a 15%
+relative gain" (no shared word near the number). Blocked went from 173 to 174 / 184: the "60%" cost bug and the
+repeated "30%" are now blocked, but "from 2,100 to 3,400 per week" (fact: per month) now passes. Round 1 had only
+blocked it because "SEO" did not match "optimisation"; a period swap ("per month" → "per week") is not checked.
+
+**Old `holdout` re-run:** 178 / 186 blocked (round 1: 177), 30 / 30 accepted.
+
+### Saved live drafts, re-scored (tuning cases)
+
+Typhoon loose 45 → 32 blocked, Typhoon current 9 → 8, Flash-Lite loose 10 → 10. Compared with round 1, one more
+draft passes, "Utilized Linux and Git … in OS and networking labs", where the fact says "operating systems". No draft
+went from accepted to blocked; the 25 labelled inventions are all still blocked.
+
+## Results (2026-11-14, round 1): derived numbers, abbreviations, counted-noun warning
 
 ### What changed in the guard
 
@@ -202,12 +269,12 @@ Every blocked bullet was read by hand against the whole fact bank and labelled:
 ## Run it
 
 ```bash
-npm run eval                      # offline: guard + rule extractor, tuning and both held-out sets (also runs in npm test / CI)
+npm run eval                      # offline: guard + rule extractor, tuning and all held-out sets (also runs in npm test / CI)
 npm run eval -- -t "eval set"     # tuning set only: use this while changing the guard
 npm run eval:live                 # live: Gemini analysis + drafting on the tuning set; writes eval/results/*.json
 npm run eval:live -- --limit 5    # a quick sample
 npm run eval:live -- --rules-analysis --prompt v1   # compare an older drafting prompt (eval/prompts.ts)
 npm run eval:live -- --rules-analysis --prompt loose --provider freellmapi --model typhoon-2.5-30b-a3b-instruct
 npx tsx eval/style-report.mts [eval/results/<file>.json]   # XYZ style scores for a saved run
-npx tsx eval/validate.ts eval/cases/*.json eval/holdout/*.json eval/holdout2/*.json
+npx tsx eval/validate.ts eval/cases/*.json eval/holdout/*.json eval/holdout2/*.json eval/holdout3/*.json
 ```

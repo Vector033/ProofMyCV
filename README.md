@@ -50,13 +50,14 @@ that is deleted afterwards.
 
 ## Eval
 
-50 fictional cases (30 for tuning, 2 held-out sets of 10), details in [eval/README.md](eval/README.md):
+60 fictional cases (30 for tuning, 3 held-out sets of 10), details in [eval/README.md](eval/README.md):
 
-- The guard blocks **547 / 547** fabrications on the tuning set and accepts all 90 faithful bullets. On a new
-  held-out set (2026-11-14, scored once) it blocked **173 / 184 (94.0%)** but accepted only **16 / 30** faithful
-  bullets: most were blocked for domain acronyms it does not know (VLANs, PITR, GA4). 8 of its 11 misses are
-  same-number meaning swaps ("120 members" → "120 bookings"), which now get a soft warning when the counted noun
-  changes. The first held-out set (2026-11-04) scored 180 / 186 blocked and 30 / 30 accepted.
+- The guard blocks **547 / 547** fabrications on the tuning set and accepts all 90 faithful bullets. On the newest
+  held-out set (2026-11-14, written blind and scored once) it blocked **164 / 172 (95.3%)** and accepted
+  **24 / 30 (80%)** faithful bullets. 7 of its 8 misses are same-number meaning swaps ("120 members" →
+  "120 bookings"), which get a soft warning when the counted noun changes; the 8th is an acronym whose letters
+  happen to match unrelated words in the fact. Earlier held-out sets: 180 / 186 and 30 / 30 (2026-11-04);
+  173 / 184 and 16 / 30 (2026-11-14, before acronyms from initials).
 - Gemini Flash-Lite drafted 113 bullets on 28 cases with **0** fabrications found by the guard, an independent
   bait check, or a manual spot check.
 - A rewritten drafting prompt raised XYZ-style bullets from 31.6% to 75% (human-written: 86.7%) and cut
@@ -162,7 +163,7 @@ npm run typecheck
 - [x] Scaffold, Supabase auth, fact bank schema and CRUD
 - [x] JD extraction, mapping page, fit score
 - [x] Bullet drafting with the fabrication guard, saved versions, PDF export, data export and account deletion
-- [x] Eval set: 30 tuning + 2 × 10 held-out cases measuring guard catch rate, false blocks, keyword recall and bullet length
+- [x] Eval set: 30 tuning + 3 × 10 held-out cases measuring guard catch rate, false blocks, keyword recall and bullet length
 - [x] Import facts from an existing resume (.docx / .pdf) for review
 - [x] Deploy (Vercel + Supabase), demo account, daily AI limit
 - [x] Screenshots in this README

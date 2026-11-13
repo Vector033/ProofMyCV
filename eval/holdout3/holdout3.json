@@ -1,0 +1,342 @@
+[
+  {
+    "id": "h3-01",
+    "title": "SAP/ERP junior consultant intern, Bangkok consultancy",
+    "jd": "SAP Junior Consultant (Intern) - Siam Chakra Consulting, Bangkok\n\nWe implement SAP S/4HANA for mid-size Thai manufacturers. Join our logistics team for a 6-month internship and support live projects from data migration through go-live and hypercare.\n\nWhat you will do\n- Support configuration and testing in SAP MM (materials management) and SAP SD (sales and distribution)\n- Prepare and load master data during data migration (LSMW or Migration Cockpit)\n- Handle user tickets during hypercare\n- Build Excel tools for reconciliation and reporting\n\nRequirements\n- Studying Business Information Systems, Industrial Engineering, or a related field\n- Strong Excel skills\n- Interest in ERP and business processes\n- Basic ABAP is a plus but not required\n\nNice to have\n- SAP Fiori\n- Power BI\n- Thai and English communication",
+    "expected": {
+      "required": ["SAP S/4HANA", "SAP MM", "SAP SD", "Data migration", "Excel"],
+      "preferred": ["ABAP", "LSMW", "SAP Fiori", "Power BI"]
+    },
+    "missing": ["ABAP", "LSMW", "SAP Fiori", "Power BI"],
+    "experiences": [
+      { "id": "e1", "kind": "job", "title": "ERP Support Intern", "org": "Ratchada Paper Co.", "startDate": "2025-06", "endDate": "2025-10" },
+      { "id": "e2", "kind": "project", "title": "Bookstore stock reconciliation (class project)", "org": "Mekong Valley University", "startDate": "2024-08", "endDate": "2024-12" },
+      { "id": "e3", "kind": "education", "title": "B.B.A. Business Information Systems", "org": "Mekong Valley University", "startDate": "2022-08", "endDate": null }
+    ],
+    "facts": [
+      { "id": "f1", "experienceId": "e1", "did": "Cleaned and loaded material master records into the SAP S/4HANA test client before go-live", "result": "Migrated 8,400 material master records with 0 load errors in the final run", "tech": ["SAP S/4HANA", "Excel"] },
+      { "id": "f2", "experienceId": "e1", "did": "Built Excel VBA macros that match purchase orders against goods receipts in the materials management module", "result": "Month-end reconciliation time fell from 16 hours to 4 hours", "tech": ["Excel", "VBA", "SAP S/4HANA"] },
+      { "id": "f3", "experienceId": "e1", "did": "Answered user tickets for the sales and distribution module during hypercare", "result": "Closed 212 of 240 tickets within the 2-day service level target", "tech": ["SAP S/4HANA"] },
+      { "id": "f4", "experienceId": "e2", "did": "Built a stock-count reconciliation sheet for a campus bookstore with 3 teammates", "result": "Found a 37,500 baht inventory variance across 1,150 stock items", "tech": ["Excel", "Power Query"] },
+      { "id": "f5", "experienceId": "e2", "did": "Presented the stock-count findings to the bookstore manager", "result": "Monthly shrinkage dropped from 52,000 baht to 31,000 baht the next term", "tech": [] },
+      { "id": "f6", "experienceId": "e3", "did": "Completed ERP Systems and Business Process Management courses", "result": "GPA 3.51", "tech": [] }
+    ],
+    "gold": [
+      { "experienceId": "e1", "factIds": ["f2"], "text": "Sped up month-end PO reconciliation in the SAP MM module 4x, from 16 hours to 4 hours, by building Excel VBA macros that match purchase orders to goods receipts" },
+      { "experienceId": "e1", "factIds": ["f3"], "text": "Closed 88% of 240 SD module user tickets within the 2-day service level target during SAP S/4HANA hypercare" },
+      { "experienceId": "e2", "factIds": ["f4", "f5"], "text": "Cut monthly bookstore shrinkage by 40%, from 52,000 to 31,000 baht, after presenting stock-count reconciliation findings to the manager" }
+    ],
+    "fabricated": [
+      { "experienceId": "e2", "factIds": ["f5"], "text": "Cut monthly bookstore shrinkage by 60% after presenting stock-count findings to the bookstore manager", "kind": "number" },
+      { "experienceId": "e1", "factIds": ["f1"], "text": "Migrated 8,400 vendor master records into the SAP S/4HANA test client with 0 load errors in the final run", "kind": "unit" },
+      { "experienceId": "e1", "factIds": ["f1"], "text": "Migrated 8,400 material master records into SAP S/4HANA with LSMW, reaching 0 load errors in the final run before go-live", "kind": "tech" },
+      { "experienceId": "e2", "factIds": ["f5"], "text": "Found a 37,500 baht inventory variance across 1,150 stock items with an Excel and Power Query reconciliation sheet", "kind": "citation" }
+    ]
+  },
+  {
+    "id": "h3-02",
+    "title": "Healthcare informatics analyst, new grad, Chiang Mai hospital",
+    "jd": "Clinical Informatics Analyst - Doi Suthep Memorial Hospital, Chiang Mai\n\nOur informatics unit supports 1,200 staff across inpatient and outpatient services. We are hiring a new-graduate analyst to keep clinical data clean and useful.\n\nResponsibilities\n- Write SQL to audit data quality in the EHR\n- Maintain HL7 interfaces between the lab system and the EHR\n- Build Power BI reports for clinic and ward managers\n- Work with nurses and doctors to understand reporting needs\n\nRequirements\n- Degree in Health Information Technology, Computer Science, or similar\n- SQL\n- Experience with EHR data\n- HL7 v2 messaging\n- Power BI or a similar BI tool\n\nPreferred\n- FHIR\n- Python\n- ICD-10 coding knowledge",
+    "expected": {
+      "required": ["SQL", "EHR", "HL7", "Power BI", "Data quality"],
+      "preferred": ["FHIR", "Python", "ICD-10"]
+    },
+    "missing": ["HL7", "ICD-10"],
+    "experiences": [
+      { "id": "e1", "kind": "job", "title": "Health Informatics Intern", "org": "Nakhon Lanna General Hospital", "startDate": "2025-05", "endDate": "2025-08" },
+      { "id": "e2", "kind": "project", "title": "Clinic wait-time dashboard (capstone)", "org": "Ping River University", "startDate": "2024-08", "endDate": "2025-03" },
+      { "id": "e3", "kind": "education", "title": "B.Sc. Health Information Technology", "org": "Ping River University", "startDate": "2021-08", "endDate": "2025-05" }
+    ],
+    "facts": [
+      { "id": "f1", "experienceId": "e1", "did": "Wrote SQL checks for duplicate patient records in the electronic health record system", "result": "Flagged 1,320 duplicate records across 48,000 patient profiles", "tech": ["SQL", "SQL Server"] },
+      { "id": "f2", "experienceId": "e1", "did": "Built a Fast Healthcare Interoperability Resources API prototype that exposed lab results to the ward dashboard", "result": "Served 46 lab test types; daily API calls grew from 1,200 to 2,900 during the 6-week pilot", "tech": ["Python", "Flask"] },
+      { "id": "f3", "experienceId": "e1", "did": "Rebuilt the outpatient department's daily visit report in Power BI", "result": "Refresh time went from 45 minutes to 3 minutes", "tech": ["Power BI", "SQL"] },
+      { "id": "f4", "experienceId": "e2", "did": "Built a clinic wait-time dashboard from 3 months of queue logs", "result": "Median wait fell from 74 minutes to 52 minutes after the clinic moved 2 staff to triage", "tech": ["Python", "pandas", "Power BI"] },
+      { "id": "f5", "experienceId": "e2", "did": "Surveyed clinic nurses about the dashboard", "result": "32 of 40 nurses rated it useful", "tech": [] },
+      { "id": "f6", "experienceId": "e3", "did": "Completed courses in medical terminology and health data standards", "result": "GPA 3.38", "tech": [] }
+    ],
+    "gold": [
+      { "experienceId": "e1", "factIds": ["f3"], "text": "Made the OPD daily visit report 15x faster to refresh, from 45 minutes to 3 minutes, by rebuilding it in Power BI" },
+      { "experienceId": "e1", "factIds": ["f2"], "text": "Built a FHIR API prototype in Python and Flask that served 46 lab test types to the ward dashboard; daily calls grew 142% during the 6-week pilot" },
+      { "experienceId": "e2", "factIds": ["f4", "f5"], "text": "Built a Power BI wait-time dashboard from 3 months of queue logs that 80% of surveyed nurses rated useful; median wait fell 30%, from 74 to 52 minutes" }
+    ],
+    "fabricated": [
+      { "experienceId": "e2", "factIds": ["f4"], "text": "Cut median clinic wait time by 42% by building a Power BI wait-time dashboard from 3 months of queue logs", "kind": "number" },
+      { "experienceId": "e1", "factIds": ["f1"], "text": "Flagged 1,320 duplicate lab orders across 48,000 patient profiles by writing SQL checks on SQL Server", "kind": "unit" },
+      { "experienceId": "e1", "factIds": ["f2"], "text": "Built an HL7 interface prototype in Python and Flask that served 46 lab test types to the ward dashboard", "kind": "tech" },
+      { "experienceId": "e2", "factIds": ["f4"], "text": "Halved median clinic wait time with a wait-time dashboard built from 3 months of queue logs", "kind": "multiplier" }
+    ]
+  },
+  {
+    "id": "h3-03",
+    "title": "PLC / industrial automation engineer, new grad, Rayong packaging plant",
+    "jd": "Junior Automation Engineer - Eastern Seaboard Packaging, Rayong\n\nWe run 9 filling and packaging lines for beverage and personal care brands. You will join the automation team that keeps the lines running and makes them faster.\n\nResponsibilities\n- Write and modify PLC programs in ladder logic (Siemens TIA Portal; Mitsubishi is a plus)\n- Design and update HMI screens\n- Troubleshoot drives, sensors, and wiring on the shop floor\n- Track line performance and OEE and lead fixes for top losses\n\nRequirements\n- B.Eng. in Electrical, Mechatronics, or Control Engineering\n- PLC programming and ladder logic\n- Reading electrical drawings\n\nNice to have\n- SCADA\n- OPC UA\n- Python for data analysis",
+    "expected": {
+      "required": ["PLC programming", "Ladder logic", "Siemens TIA Portal", "HMI", "Electrical troubleshooting"],
+      "preferred": ["Mitsubishi PLC", "OEE tracking", "SCADA", "OPC UA", "Python"]
+    },
+    "missing": ["OEE tracking", "SCADA", "OPC UA", "Python"],
+    "experiences": [
+      { "id": "e1", "kind": "job", "title": "Automation Engineering Co-op", "org": "Chonburi Bottling Co.", "startDate": "2025-06", "endDate": "2025-10" },
+      { "id": "e2", "kind": "project", "title": "Senior project: parcel sorting conveyor", "org": "King Narai Institute of Technology", "startDate": "2024-08", "endDate": "2025-04" },
+      { "id": "e3", "kind": "activity", "title": "Robotics Club member", "org": "King Narai Institute of Technology", "startDate": "2022-06", "endDate": "2024-03" }
+    ],
+    "facts": [
+      { "id": "f1", "experienceId": "e1", "did": "Rewrote the ladder logic in a capping line's programmable logic controller using Siemens TIA Portal", "result": "Unplanned stops fell from 23 per week to 9 per week", "tech": ["Siemens S7-1200", "TIA Portal", "Ladder logic"] },
+      { "id": "f2", "experienceId": "e1", "did": "Designed 6 operator screens for the labeling line's human-machine interface", "result": "Changeover time dropped from 25 minutes to 15 minutes", "tech": ["Siemens WinCC", "TIA Portal"] },
+      { "id": "f3", "experienceId": "e1", "did": "Logged motor current on 4 conveyor drives to find a misaligned gearbox", "result": "Peak current fell from 7.8 A to 5.1 A after realignment", "tech": ["Fluke clamp meter"] },
+      { "id": "f4", "experienceId": "e1", "did": "Logged operator error events on the labeling line for 3 weeks and grouped them by cause", "result": "Traced 64% of 410 stoppages to 2 faulty photo-eye sensors", "tech": ["Excel"] },
+      { "id": "f5", "experienceId": "e2", "did": "Built a conveyor rig that sorts parcels by weight using a load cell and a Mitsubishi FX5U controller", "result": "Sorted 300 parcels per hour; 97 of 100 test parcels went to the right lane", "tech": ["Mitsubishi FX5U", "GX Works3", "Load cell"] },
+      { "id": "f6", "experienceId": "e2", "did": "Tuned the variable frequency drive ramp settings on the rig's belt motor", "result": "Package jams fell from 12 to 3 per 500-parcel run", "tech": ["Mitsubishi FR-E800"] },
+      { "id": "f7", "experienceId": "e3", "did": "Led a 5-member team in an inter-university line-following robot contest", "result": "Placed 3rd of 28 teams", "tech": ["Arduino", "C++"] }
+    ],
+    "gold": [
+      { "experienceId": "e1", "factIds": ["f1"], "text": "Cut unplanned capping-line stops by 61%, from 23 to 9 per week, by rewriting PLC ladder logic in Siemens TIA Portal" },
+      { "experienceId": "e1", "factIds": ["f2"], "text": "Designed 6 HMI screens in Siemens WinCC for the labeling line, cutting changeover time by 40%, from 25 to 15 minutes" },
+      { "experienceId": "e2", "factIds": ["f6"], "text": "Tuned VFD ramp settings on the sorting rig's belt motor, cutting package jams 4x, from 12 to 3 per 500-parcel run" }
+    ],
+    "fabricated": [
+      { "experienceId": "e1", "factIds": ["f1"], "text": "Cut unplanned capping-line stops by 39% by rewriting PLC ladder logic in Siemens TIA Portal", "kind": "number" },
+      { "experienceId": "e1", "factIds": ["f3"], "text": "Cut peak conveyor drive load from 7.8 kW to 5.1 kW by finding and realigning a misaligned gearbox", "kind": "unit" },
+      { "experienceId": "e1", "factIds": ["f4"], "text": "Tracked OEE on the labeling line for 3 weeks and traced 64% of 410 stoppages to 2 faulty photo-eye sensors", "kind": "tech" },
+      { "experienceId": "e2", "factIds": ["f5"], "text": "Doubled the sorting rig's throughput to 300 parcels per hour using a load cell and a Mitsubishi FX5U controller", "kind": "multiplier" }
+    ]
+  },
+  {
+    "id": "h3-04",
+    "title": "Digital accessibility specialist, career switcher from special education",
+    "jd": "Digital Accessibility Specialist - Kraisorn Bank Digital, Bangkok\n\nWe are making our mobile and web banking usable by everyone, including customers who rely on screen readers. You will audit products, write clear fixes, and coach our squads.\n\nWhat you will do\n- Run manual audits against WCAG 2.2 AA using NVDA, VoiceOver, and keyboard-only testing\n- Write remediation tickets in Jira with ARIA and HTML code examples\n- Run automated checks and triage the results\n- Prepare conformance documentation such as a VPAT\n\nMust have\n- Hands-on WCAG 2.2 audit experience\n- Screen reader fluency\n- Working knowledge of HTML and ARIA\n\nNice to have\n- axe DevTools, JAWS\n- Section 508\n- Reviewing designs in Figma",
+    "expected": {
+      "required": ["WCAG 2.2", "Screen readers", "NVDA", "VoiceOver", "ARIA", "HTML", "Manual accessibility audits", "Jira"],
+      "preferred": ["axe DevTools", "JAWS", "VPAT", "Section 508", "Figma"]
+    },
+    "missing": ["VPAT", "Section 508", "Figma"],
+    "experiences": [
+      { "id": "e1", "kind": "job", "title": "Accessibility Tester (contract)", "org": "Lotus Lane Digital", "startDate": "2025-03", "endDate": "2025-12" },
+      { "id": "e2", "kind": "job", "title": "Teacher, Visual Impairment Program", "org": "Saphan Khwai Inclusive School", "startDate": "2019-05", "endDate": "2024-12" },
+      { "id": "e3", "kind": "education", "title": "Web Accessibility Certificate", "org": "Open Learning Thailand", "startDate": "2024-06", "endDate": "2024-11" }
+    ],
+    "facts": [
+      { "id": "f1", "experienceId": "e1", "did": "Audited a bank's mobile web onboarding flow against the Web Content Accessibility Guidelines 2.2 at level AA with NVDA and VoiceOver", "result": "Logged 138 issues, 41 of them blockers", "tech": ["NVDA", "VoiceOver", "Chrome DevTools"] },
+      { "id": "f2", "experienceId": "e1", "did": "Wrote 120 remediation tickets with code fixes using Accessible Rich Internet Applications attributes for custom dropdowns and modals", "result": "Developers closed 96 of the 120 tickets within one sprint", "tech": ["HTML", "Jira"] },
+      { "id": "f3", "experienceId": "e1", "did": "Ran axe DevTools scans on 25 page templates before each manual review", "result": "Automated issue count fell from 640 to 170 over 3 releases", "tech": ["axe DevTools"] },
+      { "id": "f4", "experienceId": "e2", "did": "Taught braille and screen reader skills to students with visual impairments", "result": "Taught a class of 14 students for 5 years", "tech": ["JAWS", "NVDA"] },
+      { "id": "f5", "experienceId": "e2", "did": "Converted printed worksheets into accessible digital documents with tagged headings and alt text", "result": "Converted about 900 worksheets over 2 school years", "tech": ["Microsoft Word", "Adobe Acrobat"] },
+      { "id": "f6", "experienceId": "e3", "did": "Completed a 12-week web accessibility course with a capstone audit of a government form", "result": "Passed with distinction", "tech": ["HTML", "CSS"] }
+    ],
+    "gold": [
+      { "experienceId": "e1", "factIds": ["f1"], "text": "Audited a bank's mobile web onboarding flow against WCAG 2.2 AA with NVDA and VoiceOver, logging 138 issues, 30% of them blockers" },
+      { "experienceId": "e1", "factIds": ["f2"], "text": "Wrote 120 remediation tickets with ARIA fixes for custom dropdowns and modals; developers closed 80% of them within one sprint" },
+      { "experienceId": "e2", "factIds": ["f5"], "text": "Converted about 900 printed worksheets into accessible Word and Acrobat documents with tagged headings and alt text over 2 school years" }
+    ],
+    "fabricated": [
+      { "experienceId": "e1", "factIds": ["f3"], "text": "Cut automated accessibility issues by 27% across 25 page templates by running axe DevTools scans before each manual review", "kind": "number" },
+      { "experienceId": "e1", "factIds": ["f1"], "text": "Audited a bank's mobile web onboarding flow against WCAG 2.2 AA and wrote the VPAT, logging 138 issues with NVDA and VoiceOver", "kind": "tech" },
+      { "experienceId": "e2", "factIds": ["f4"], "text": "Taught braille and screen reader skills to 14 classes of students with visual impairments over 5 years", "kind": "unit" },
+      { "experienceId": "e2", "factIds": ["f4"], "text": "Converted about 900 printed worksheets into accessible digital documents with tagged headings and alt text", "kind": "citation" }
+    ]
+  },
+  {
+    "id": "h3-05",
+    "title": "Supply-chain planning analyst, new grad, Thai FMCG",
+    "jd": "Demand & Supply Planning Analyst - Chao Phraya Foods, Bangkok\n\nChao Phraya Foods makes snacks and drinks sold in 40,000 stores across Thailand. Our planning team balances demand and supply every week across plants and distribution centers.\n\nResponsibilities\n- Build and review statistical demand forecasts by SKU\n- Set inventory targets and safety stock\n- Prepare inputs for the monthly S&OP meeting\n- Pull and clean data with SQL and Excel\n\nRequirements\n- Degree in Industrial Engineering, Logistics, or a related field\n- Demand forecasting and inventory planning basics\n- Advanced Excel and working SQL\n\nNice to have\n- SAP IBP or APO\n- MRP experience\n- Python\n- Power BI",
+    "expected": {
+      "required": ["Demand forecasting", "Inventory planning", "Safety stock", "S&OP", "Excel", "SQL"],
+      "preferred": ["SAP IBP", "MRP", "Python", "Power BI"]
+    },
+    "missing": ["SAP IBP", "MRP"],
+    "experiences": [
+      { "id": "e1", "kind": "job", "title": "Supply Chain Planning Intern", "org": "Saeng Dao Beverages", "startDate": "2025-06", "endDate": "2025-09" },
+      { "id": "e2", "kind": "activity", "title": "Logistics case competition", "org": "Thai Supply Chain Student Challenge", "startDate": "2024-10", "endDate": "2024-11" },
+      { "id": "e3", "kind": "education", "title": "B.Eng. Industrial Engineering", "org": "Andaman University of Technology", "startDate": "2022-08", "endDate": null }
+    ],
+    "facts": [
+      { "id": "f1", "experienceId": "e1", "did": "Rebuilt the weekly demand forecast for 85 drink stock-keeping units in Excel using seasonal moving averages", "result": "Forecast accuracy score rose from 0.68 to 0.81", "tech": ["Excel"] },
+      { "id": "f2", "experienceId": "e1", "did": "Set warehouse-level safety stock for the top 20 products", "result": "Out-of-stock days fell from 34 to 12 per quarter while stock on hand rose from 18,000 to 21,000 cases", "tech": ["Excel"] },
+      { "id": "f3", "experienceId": "e1", "did": "Prepared the supply gap report for the monthly sales and operations planning meeting", "result": "Report covered 3 plants and 6 distribution centers", "tech": ["Excel", "Power BI"] },
+      { "id": "f4", "experienceId": "e1", "did": "Wrote SQL queries to pull shipment history from the warehouse database", "result": "Pulled 2 years of shipment history, about 1.2 million rows", "tech": ["SQL", "PostgreSQL"] },
+      { "id": "f5", "experienceId": "e2", "did": "Redesigned a weekly delivery route plan for a case client with 4 teammates", "result": "Planned truck distance fell from 1,840 km to 1,410 km per week; placed 2nd of 19 teams", "tech": ["Python", "OR-Tools"] },
+      { "id": "f6", "experienceId": "e3", "did": "Took Production Planning and Inventory Control", "result": "GPA 3.46", "tech": [] }
+    ],
+    "gold": [
+      { "experienceId": "e1", "factIds": ["f1"], "text": "Raised weekly forecast accuracy from 68% to 81% across 85 drink SKUs by rebuilding the Excel forecast with seasonal moving averages" },
+      { "experienceId": "e1", "factIds": ["f3"], "text": "Prepared the monthly S&OP supply gap report in Excel and Power BI, covering 3 plants and 6 DCs" },
+      { "experienceId": "e1", "factIds": ["f2"], "text": "Cut quarterly out-of-stock days by 65%, from 34 to 12, by setting warehouse-level safety stock for the top 20 products, with stock on hand up 17%" }
+    ],
+    "fabricated": [
+      { "experienceId": "e1", "factIds": ["f2"], "text": "Cut quarterly out-of-stock days by 65% with warehouse-level safety stock for the top 20 products while raising stock on hand by only 14%", "kind": "number" },
+      { "experienceId": "e1", "factIds": ["f4"], "text": "Pulled 2 years of shipment history covering about 1.2 million SKUs with SQL queries on PostgreSQL", "kind": "unit" },
+      { "experienceId": "e1", "factIds": ["f1"], "text": "Rebuilt the weekly demand forecast for 85 drink SKUs in SAP IBP using seasonal moving averages", "kind": "tech" },
+      { "experienceId": "e1", "factIds": ["f4"], "text": "Set warehouse-level safety stock for the top 20 products, cutting out-of-stock days from 34 to 12 per quarter", "kind": "citation" }
+    ]
+  },
+  {
+    "id": "h3-06",
+    "title": "Computer vision for manufacturing intern, electronics plant, Ayutthaya",
+    "jd": "Computer Vision Engineer Intern - Ayutthaya Precision Electronics\n\nWe assemble circuit boards for automotive and appliance customers. Our vision team builds inspection systems that catch defects before boards leave the line.\n\nYou will\n- Train image classification and object detection models in Python with PyTorch\n- Build OpenCV pipelines for camera-based defect inspection\n- Deploy models to edge devices on the line (NVIDIA Jetson with TensorRT)\n- Send inspection results to our MES\n\nRequirements\n- Final-year student or new graduate in Computer Engineering or similar\n- Python, OpenCV, PyTorch\n- Object detection experience\n\nPreferred\n- YOLO\n- TensorRT and Jetson\n- MES integration",
+    "expected": {
+      "required": ["Python", "OpenCV", "PyTorch", "Object detection", "Defect inspection"],
+      "preferred": ["YOLO", "TensorRT", "NVIDIA Jetson", "MES integration"]
+    },
+    "missing": ["TensorRT", "NVIDIA Jetson", "MES integration"],
+    "experiences": [
+      { "id": "e1", "kind": "job", "title": "Machine Vision Intern", "org": "Bang Pa-in Components", "startDate": "2025-05", "endDate": "2025-09" },
+      { "id": "e2", "kind": "project", "title": "Thesis: missing-component detection on circuit boards", "org": "Chaophraya Institute of Engineering", "startDate": "2024-09", "endDate": "2025-04" },
+      { "id": "e3", "kind": "education", "title": "B.Eng. Computer Engineering", "org": "Chaophraya Institute of Engineering", "startDate": "2021-08", "endDate": "2025-05" }
+    ],
+    "facts": [
+      { "id": "f1", "experienceId": "e1", "did": "Trained a defect classifier for solder joint images from the automated optical inspection line", "result": "Precision 0.93 and recall 0.88 on a 4,200-image test set", "tech": ["Python", "PyTorch", "OpenCV"] },
+      { "id": "f2", "experienceId": "e1", "did": "Replaced manual visual checks at the final inspection station with a camera rig", "result": "Inspection time per tray fell from 90 seconds to 18 seconds", "tech": ["OpenCV", "Basler camera"] },
+      { "id": "f3", "experienceId": "e1", "did": "Fed defect counts from the vision station into the line's statistical process control charts", "result": "Covered 6 production lines", "tech": ["Python", "FastAPI"] },
+      { "id": "f4", "experienceId": "e2", "did": "Built a YOLO-based detector for missing components on printed circuit boards", "result": "mAP@0.5 rose from 0.71 to 0.86 after adding 1,500 augmented images", "tech": ["Python", "YOLOv8", "Roboflow"] },
+      { "id": "f5", "experienceId": "e2", "did": "Ran the detector on a Raspberry Pi 5 for a lab demo", "result": "Inference took 420 ms per frame", "tech": ["Raspberry Pi 5", "ONNX Runtime"] },
+      { "id": "f6", "experienceId": "e3", "did": "Took Digital Image Processing and Machine Learning electives", "result": "GPA 3.55", "tech": [] }
+    ],
+    "gold": [
+      { "experienceId": "e1", "factIds": ["f1"], "text": "Trained a PyTorch solder-joint defect classifier for the AOI line that reached 93% precision and 88% recall on a 4,200-image test set" },
+      { "experienceId": "e1", "factIds": ["f2"], "text": "Made final-station inspection 5x faster, from 90 to 18 seconds per tray, by replacing manual visual checks with an OpenCV camera rig" },
+      { "experienceId": "e2", "factIds": ["f4"], "text": "Built a YOLOv8 detector for missing components on PCBs, raising mAP@0.5 from 0.71 to 0.86 by adding 1,500 augmented images" }
+    ],
+    "fabricated": [
+      { "experienceId": "e1", "factIds": ["f1"], "text": "Trained a PyTorch solder-joint defect classifier for the AOI line that reached 93% precision and 90% recall on 4,200 test images", "kind": "number" },
+      { "experienceId": "e1", "factIds": ["f2"], "text": "Cut final-station inspection time per tray by 20% by replacing manual visual checks with an OpenCV camera rig", "kind": "number" },
+      { "experienceId": "e2", "factIds": ["f5"], "text": "Deployed the circuit board detector on an NVIDIA Jetson with TensorRT, running inference at 420 ms per frame", "kind": "tech" },
+      { "experienceId": "e2", "factIds": ["f3"], "text": "Built a YOLOv8 detector for missing components on printed circuit boards, raising mAP@0.5 from 0.71 to 0.86", "kind": "citation" }
+    ]
+  },
+  {
+    "id": "h3-07",
+    "title": "Solar energy monitoring analyst, junior, Thai solar O&M",
+    "jd": "Solar Performance Analyst - Sunbelt Rooftop Energy, Bangkok\n\nWe operate 140 MW of rooftop and ground-mount solar across Thailand. The performance team finds lost energy and sends field crews to fix it.\n\nResponsibilities\n- Analyze PV plant performance and inverter data daily\n- Maintain SCADA dashboards and alarm rules\n- Write Python or SQL scripts to flag underperforming strings\n- Support inverter troubleshooting with field crews\n- Model expected yield for new sites\n\nRequirements\n- B.Eng. Electrical or Energy Engineering\n- PV system fundamentals\n- Python or SQL, and Excel\n\nPreferred\n- PVsyst\n- Modbus and MQTT data collection\n- Grafana",
+    "expected": {
+      "required": ["PV performance analysis", "SCADA", "Python", "Excel", "Inverter troubleshooting"],
+      "preferred": ["PVsyst", "Modbus", "MQTT", "Grafana"]
+    },
+    "missing": ["PVsyst", "Modbus", "MQTT"],
+    "experiences": [
+      { "id": "e1", "kind": "job", "title": "Operations and Maintenance Engineer", "org": "Lopburi Solar Farm Co.", "startDate": "2024-07", "endDate": null },
+      { "id": "e2", "kind": "project", "title": "Home energy logger", "org": "Personal project", "startDate": "2023-11", "endDate": "2024-08" },
+      { "id": "e3", "kind": "education", "title": "B.Eng. Electrical Engineering", "org": "Khorat Institute of Technology", "startDate": "2020-08", "endDate": "2024-05" }
+    ],
+    "facts": [
+      { "id": "f1", "experienceId": "e1", "did": "Wrote a Python script that compares each inverter's daily yield with its neighbours on the 8 MW photovoltaic plant", "result": "Flagged 27 of 312 string inverters for inspection in the first month", "tech": ["Python", "pandas"] },
+      { "id": "f2", "experienceId": "e1", "did": "Scheduled panel cleaning from soiling loss estimates instead of a fixed monthly cycle", "result": "Cleaning cost dropped from 186,000 baht to 112,000 baht per year", "tech": ["Excel"] },
+      { "id": "f3", "experienceId": "e1", "did": "Set up Grafana dashboards over the plant's supervisory control and data acquisition data", "result": "Average alarm response time fell from 50 minutes to 20 minutes", "tech": ["Grafana", "InfluxDB"] },
+      { "id": "f4", "experienceId": "e1", "did": "Replaced failed fuses and connectors during monthly site inspections", "result": "Restored 46 kW of lost capacity", "tech": [] },
+      { "id": "f5", "experienceId": "e2", "did": "Built a home energy logger with an ESP32 and a current clamp sensor that records readings every 10 seconds", "result": "Monthly electricity bill fell from 2,450 baht to 1,980 baht after shifting loads", "tech": ["ESP32", "MicroPython", "InfluxDB"] },
+      { "id": "f6", "experienceId": "e3", "did": "Completed an elective in renewable energy systems", "result": "GPA 3.12", "tech": [] }
+    ],
+    "gold": [
+      { "experienceId": "e1", "factIds": ["f1"], "text": "Flagged 27 of 312 string inverters (9%) for inspection on an 8 MW PV plant with a Python and pandas yield-comparison script" },
+      { "experienceId": "e1", "factIds": ["f2"], "text": "Cut yearly panel-cleaning cost by 40%, from 186,000 to 112,000 baht, by scheduling cleaning from soiling loss estimates instead of a fixed cycle" },
+      { "experienceId": "e1", "factIds": ["f3"], "text": "Cut average alarm response time by 60%, from 50 to 20 minutes, by setting up Grafana dashboards over the plant's SCADA data" }
+    ],
+    "fabricated": [
+      { "experienceId": "e1", "factIds": ["f2"], "text": "Cut yearly panel-cleaning cost by 66% by scheduling cleaning from soiling loss estimates instead of a fixed monthly cycle", "kind": "number" },
+      { "experienceId": "e1", "factIds": ["f4"], "text": "Restored 46 kWh of lost generation by replacing failed fuses and connectors during monthly site inspections", "kind": "unit" },
+      { "experienceId": "e2", "factIds": ["f5"], "text": "Built an ESP32 home energy logger that publishes current readings over MQTT every 10 seconds to InfluxDB", "kind": "tech" },
+      { "experienceId": "e1", "factIds": ["f3"], "text": "Made alarm response 3x faster by setting up Grafana dashboards over the plant's SCADA data", "kind": "multiplier" }
+    ]
+  },
+  {
+    "id": "h3-08",
+    "title": "Localization engineer, junior, Bangkok mobile game studio",
+    "jd": "Localization Engineer - Mango Tree Games, Bangkok\n\nOur mobile games ship in 9 languages. The localization engineer owns the pipeline that moves strings from code to translators and back without breaking the build.\n\nResponsibilities\n- Write Python tools to extract, convert, and validate string files (JSON, XLIFF)\n- Run pseudo-localization to catch truncation and hard-coded text\n- Manage translation memory in our CAT tools and work with vendors\n- Review Thai translations\n\nRequirements\n- Python scripting\n- Experience with localization file formats\n- Native or near-native Thai\n\nNice to have\n- ICU MessageFormat plurals\n- Crowdin\n- CI/CD pipelines\n- Japanese",
+    "expected": {
+      "required": ["Python", "XLIFF", "JSON", "Pseudo-localization", "CAT tools", "Translation memory", "Thai"],
+      "preferred": ["ICU MessageFormat", "Crowdin", "CI/CD", "Japanese"]
+    },
+    "missing": ["ICU MessageFormat", "Crowdin", "Japanese"],
+    "experiences": [
+      { "id": "e1", "kind": "job", "title": "Localization Engineering Intern", "org": "Kinnara Apps", "startDate": "2025-06", "endDate": "2025-11" },
+      { "id": "e2", "kind": "job", "title": "Freelance English-Thai Translator", "org": "Self-employed", "startDate": "2022-01", "endDate": "2025-05" },
+      { "id": "e3", "kind": "education", "title": "B.A. Linguistics", "org": "Sukhothai Heritage University", "startDate": "2021-08", "endDate": "2025-05" }
+    ],
+    "facts": [
+      { "id": "f1", "experienceId": "e1", "did": "Wrote a Python script that converts the app's JSON string files into XML Localization Interchange File Format for translators", "result": "Handled 11,600 strings across 7 languages", "tech": ["Python", "JSON"] },
+      { "id": "f2", "experienceId": "e1", "did": "Added a pseudo-localization step to the build that pads strings by 40% and adds accented characters", "result": "Caught 214 truncated or hard-coded strings before release", "tech": ["Python", "GitHub Actions"] },
+      { "id": "f3", "experienceId": "e1", "did": "Set up a shared translation memory in the computer-assisted translation tool for the Thai and Japanese vendor teams", "result": "Vendor cost per release fell from $3,800 to $2,300", "tech": ["memoQ"] },
+      { "id": "f4", "experienceId": "e2", "did": "Translated mobile game and app text from English to Thai for 16 clients", "result": "Delivered about 420,000 words over 3 years; 13 of the 16 clients hired me again", "tech": ["Trados", "Google Sheets"] },
+      { "id": "f5", "experienceId": "e3", "did": "Wrote a senior thesis on Thai word segmentation errors in machine translation", "result": "Annotated 3,000 sentences", "tech": ["Python", "PyThaiNLP"] }
+    ],
+    "gold": [
+      { "experienceId": "e1", "factIds": ["f1"], "text": "Wrote a Python script converting the app's JSON string files into XLIFF for translators, handling 11,600 strings across 7 languages" },
+      { "experienceId": "e1", "factIds": ["f3"], "text": "Set up a shared TM in the memoQ CAT tool for Thai and Japanese vendor teams, cutting vendor cost per release by 39%, from $3,800 to $2,300" },
+      { "experienceId": "e2", "factIds": ["f4"], "text": "Translated about 420,000 words of English game and app text into Thai for 16 clients over 3 years, with 81% of clients hiring again" }
+    ],
+    "fabricated": [
+      { "experienceId": "e1", "factIds": ["f3"], "text": "Cut vendor cost per release by 65% by setting up a shared translation memory in memoQ for the Thai and Japanese teams", "kind": "number" },
+      { "experienceId": "e1", "factIds": ["f2"], "text": "Added a pseudo-localization build step in GitHub Actions that caught 214 truncated screens before release", "kind": "unit" },
+      { "experienceId": "e2", "factIds": ["f4"], "text": "Translated about 420,000 strings of English game and app text into Thai for 16 clients over 3 years", "kind": "unit" },
+      { "experienceId": "e1", "factIds": ["f1"], "text": "Converted 11,600 JSON strings across 7 languages into XLIFF and ICU message files with a Python script", "kind": "tech" }
+    ]
+  },
+  {
+    "id": "h3-09",
+    "title": "Blockchain smart contract developer, junior, Bangkok fintech",
+    "jd": "Junior Smart Contract Developer - Kanok Chain Labs, Bangkok\n\nWe build escrow and payment contracts for licensed digital asset businesses in Thailand. You will write, test, and optimize Solidity contracts that hold real customer funds.\n\nResponsibilities\n- Write Solidity contracts for EVM chains\n- Test with Foundry or Hardhat, including fuzz tests\n- Optimize gas usage\n- Build indexers and back-office tools in TypeScript\n\nRequirements\n- Solidity and the EVM\n- Foundry or Hardhat\n- Familiarity with ERC-20 and ERC-721 standards\n\nNice to have\n- The Graph subgraphs\n- Layer 2 deployments\n- Security audit experience",
+    "expected": {
+      "required": ["Solidity", "EVM", "Foundry", "Hardhat", "Smart contract testing", "Gas optimization", "ERC-20"],
+      "preferred": ["The Graph", "Layer 2", "TypeScript", "Security audits"]
+    },
+    "missing": ["EVM", "The Graph", "Layer 2", "Security audits"],
+    "experiences": [
+      { "id": "e1", "kind": "activity", "title": "Hackathon participant", "org": "Bangkok Web3 Student Hackathon", "startDate": "2025-02", "endDate": "2025-02" },
+      { "id": "e2", "kind": "job", "title": "Blockchain Developer Intern", "org": "Ruby Lotus Fintech", "startDate": "2025-06", "endDate": "2025-10" },
+      { "id": "e3", "kind": "education", "title": "B.Sc. Computer Science", "org": "Rattanakosin University of Technology", "startDate": "2022-08", "endDate": null }
+    ],
+    "facts": [
+      { "id": "f1", "experienceId": "e2", "did": "Refactored storage packing in an escrow contract written in Solidity", "result": "Average gas per deposit dropped from 84,000 to 51,000", "tech": ["Solidity", "Foundry"] },
+      { "id": "f2", "experienceId": "e2", "did": "Wrote fuzz and unit tests for the escrow contract", "result": "Branch coverage went from 54% to 92%; found 3 reentrancy-related bugs", "tech": ["Foundry"] },
+      { "id": "f3", "experienceId": "e2", "did": "Deployed contracts to the Sepolia public test network and verified their source on the block explorer", "result": "Deployed 4 contracts", "tech": ["Hardhat", "Ethereum"] },
+      { "id": "f4", "experienceId": "e1", "did": "Built a loyalty points token following the Ethereum Request for Comments 20 standard with 3 teammates", "result": "Ran 1,450 test transactions on a local chain during the 36-hour hackathon; placed 4th of 31 teams", "tech": ["Solidity", "Hardhat", "React"] },
+      { "id": "f5", "experienceId": "e2", "did": "Indexed escrow contract events into a PostgreSQL table for the support dashboard", "result": "Event lookup time fell from 2.4 seconds to 0.3 seconds", "tech": ["TypeScript", "ethers.js", "PostgreSQL"] },
+      { "id": "f6", "experienceId": "e3", "did": "Took Cryptography and Distributed Systems courses", "result": "GPA 3.29", "tech": [] }
+    ],
+    "gold": [
+      { "experienceId": "e2", "factIds": ["f1"], "text": "Cut average gas per escrow deposit by 39%, from 84,000 to 51,000, by refactoring storage packing in the Solidity contract" },
+      { "experienceId": "e1", "factIds": ["f4"], "text": "Built an ERC-20 loyalty points token in Solidity and Hardhat with 3 teammates, running 1,450 test transactions in a 36-hour hackathon and placing 4th of 31 teams" },
+      { "experienceId": "e2", "factIds": ["f5"], "text": "Made escrow event lookups 8x faster, from 2.4 to 0.3 seconds, by indexing contract events into PostgreSQL with TypeScript and ethers.js" }
+    ],
+    "fabricated": [
+      { "experienceId": "e2", "factIds": ["f1"], "text": "Halved average gas per escrow deposit by refactoring storage packing in the Solidity contract", "kind": "multiplier" },
+      { "experienceId": "e2", "factIds": ["f5"], "text": "Indexed escrow contract events with The Graph for the support dashboard, cutting lookup time from 2.4 to 0.3 seconds", "kind": "tech" },
+      { "experienceId": "e2", "factIds": ["f2"], "text": "Raised escrow contract branch coverage from 54% to 92% with Foundry fuzz and unit tests, finding 5 reentrancy-related bugs", "kind": "number" },
+      { "experienceId": "e1", "factIds": ["f4"], "text": "Built an ERC-20 loyalty points token with 3 teammates and tested it with 1,450 student accounts during the 36-hour hackathon", "kind": "unit" }
+    ]
+  },
+  {
+    "id": "h3-10",
+    "title": "Game QA tester, career switcher from internet cafe supervisor",
+    "jd": "QA Tester (Games) - Sriracha Pixel Studio, Bangkok\n\nWe make racing and party games for mobile and console. Our QA team tests every weekly build and gets our console versions through platform certification.\n\nWhat you will do\n- Run manual and regression test passes on Android, iOS, and console builds\n- Write clear bug reports in Jira\n- Write and maintain test cases in TestRail\n- Check console builds against platform certification requirements (TRC)\n- Measure frame rate on low-end devices\n\nRequirements\n- Strong attention to detail and clear written English\n- Experience with Jira and test case design\n\nNice to have\n- Test automation with Appium or Python\n- Performance testing",
+    "expected": {
+      "required": ["Manual testing", "Regression testing", "Jira", "Test case design", "Mobile games"],
+      "preferred": ["TestRail", "TRC", "Performance testing", "Appium", "Test automation"]
+    },
+    "missing": ["Appium", "Test automation"],
+    "experiences": [
+      { "id": "e1", "kind": "job", "title": "Game Tester (contract)", "org": "Hanuman Interactive", "startDate": "2025-01", "endDate": "2025-09" },
+      { "id": "e2", "kind": "job", "title": "Shift Supervisor", "org": "Level Up Net Cafe", "startDate": "2021-06", "endDate": "2024-12" },
+      { "id": "e3", "kind": "activity", "title": "Community playtest coordinator", "org": "Moonlit Burrow (indie team)", "startDate": "2024-03", "endDate": "2024-10" }
+    ],
+    "facts": [
+      { "id": "f1", "experienceId": "e1", "did": "Ran regression passes on a mobile racing game before each weekly build", "result": "Filed 386 bugs in Jira; 312 were fixed before launch", "tech": ["Jira", "Android", "iOS"] },
+      { "id": "f2", "experienceId": "e1", "did": "Wrote and maintained test cases in TestRail for the multiplayer lobby", "result": "Grew the suite from 140 to 260 test cases", "tech": ["TestRail"] },
+      { "id": "f3", "experienceId": "e1", "did": "Checked console builds against the platform holder's technical requirements checklist before submission", "result": "Failed checklist items went from 9 on the first submission to 2 on the third", "tech": [] },
+      { "id": "f4", "experienceId": "e1", "did": "Measured frame rate on 5 low-end Android phones during race scenes", "result": "Reported drops to 24 fps on 2 phones; a patch brought them back to 30 fps", "tech": ["Android"] },
+      { "id": "f5", "experienceId": "e3", "did": "Ran 6 weekend community playtests on Discord for an indie platformer", "result": "Collected feedback forms from 230 players", "tech": ["Discord", "Google Forms"] },
+      { "id": "f6", "experienceId": "e2", "did": "Supervised night shifts at a 60-seat internet cafe and fixed PC hardware issues", "result": "Trained 5 new staff", "tech": ["Windows"] }
+    ],
+    "gold": [
+      { "experienceId": "e1", "factIds": ["f1"], "text": "Filed 386 bugs in Jira during weekly regression passes on a mobile racing game for Android and iOS; 81% were fixed before launch" },
+      { "experienceId": "e1", "factIds": ["f2"], "text": "Grew the multiplayer lobby test suite in TestRail by 86%, from 140 to 260 test cases" },
+      { "experienceId": "e1", "factIds": ["f3"], "text": "Checked console builds against the platform holder's TRC before submission, cutting failed checklist items from 9 on the first submission to 2 on the third" }
+    ],
+    "fabricated": [
+      { "experienceId": "e1", "factIds": ["f2"], "text": "Grew the multiplayer lobby test suite in TestRail by 46% by writing and maintaining new test cases", "kind": "number" },
+      { "experienceId": "e3", "factIds": ["f5"], "text": "Ran 6 weekend community playtests on Discord for an indie platformer and collected 230 bug reports", "kind": "unit" },
+      { "experienceId": "e3", "factIds": ["f5"], "text": "Filed 386 bugs in Jira during regression passes, 312 of which were fixed before launch", "kind": "citation" },
+      { "experienceId": "e1", "factIds": ["f1"], "text": "Filed 386 bugs in Jira during weekly regression passes on a mobile racing game and automated smoke tests with Appium", "kind": "tech" }
+    ]
+  }
+]

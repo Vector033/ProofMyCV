@@ -93,11 +93,11 @@ Supabase admin API (`npx supabase status -o env` gives the service key).
 ## Left to do (pick with the user)
 
 1. **Deploy resume import** (committed on main, not deployed): ask the user first. Then try a real resume on prod.
-2. **Guard false blocks, round 2.** Derived percentages, an abbreviation list and a counted-noun warning landed on
-   branch `guard-false-blocks` (2026-11-14), but `holdout2` showed they do not generalise: 16 / 30 faithful bullets
-   accepted (domain acronyms, unknown units such as "cm"), and a part-of-whole bug lets "60%" through for a 40% cut.
-   See `eval/README.md` (2026-11-14). Next: acronyms from the initials of a phrase in the fact, part-of-whole only
-   from "of" / "/" pairs, then a new blind `holdout3`. Tune on `eval/cases` only (`npm run eval -- -t "eval set"`).
+2. **Guard, round 3 (optional).** Branch `guard-false-blocks`: derived percentages (direction-aware), acronyms from
+   initials, counted-noun warning. Blind `holdout3`: 164 / 172 blocked, 24 / 30 honest accepted (`eval/README.md`,
+   2026-11-14 round 2). Left: same-number meaning swaps (warning only), coincidental initials ("OEE" from "operator
+   error events"), percentages from non-adjacent numbers ("41 of them", "of the 120"), one-word acronyms (PV from
+   "photovoltaic"). Any change needs a new blind `holdout4`; tune on `eval/cases` only (`npm run eval -- -t "eval set"`).
 3. Google sign-in works on prod (the user signed in with it on 2026-11-14, and the prod role can read
    `auth.sessions`, since the device check passes). Still untested: "Connect Google" from an email account.
 4. Turn on **Secure password change** in the Supabase dashboard (Authentication → Providers → Email). Without it,

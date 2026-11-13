@@ -9,10 +9,10 @@ const RESULTS = [
     label: "Invented numbers, tools and citations blocked on the 30 tuning\u00A0cases",
   },
   {
-    num: 173,
-    den: 184,
-    pct: "94.0%",
-    label: "Blocked on 10 new held-out cases, written after the guard was tuned. It also blocked 14 of their 30 honest\u00A0bullets",
+    num: 164,
+    den: 172,
+    pct: "95.3%",
+    label: "Blocked on 10 new held-out cases, written after the guard was tuned. It also blocked 6 of their 30 honest\u00A0bullets",
   },
   {
     num: 25,
