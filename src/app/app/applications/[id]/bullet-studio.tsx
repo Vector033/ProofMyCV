@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState, useTransition } from "react";
-import { checkBullet, describeViolation } from "@/lib/core/guard";
+import { checkBullet, describeViolation, describeWarning } from "@/lib/core/guard";
 import { factAsBullet } from "@/lib/core/bullets";
 import type { BulletDraft, Experience, Fact } from "@/lib/core/types";
 import type { BulletCandidate } from "@/lib/llm/tasks";
@@ -319,7 +319,7 @@ function Problems({ check, id }: { check: ReturnType<typeof checkBullet>; id?: s
         <li key={`w${i}`} className="flex items-start gap-1.5 text-amber-800">
           <IconAlert size={12} className="mt-0.5 shrink-0 text-amber-700" />
           <span>
-            {w.type === "too-long" ? `${w.words} words; aim for 30 or fewer` : `Starts with "${w.word}"; lead with what you did`}
+            {describeWarning(w)}
           </span>
         </li>
       ))}

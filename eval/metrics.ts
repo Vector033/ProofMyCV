@@ -63,21 +63,30 @@ export function autoFabrications(c: EvalCase): Fabrication[] {
 }
 
 export type GuardReport = {
-  gold: { total: number; accepted: number; rejected: { caseId: string; text: string; why: string[] }[] };
+  gold: {
+    total: number;
+    accepted: number;
+    rejected: { caseId: string; text: string; why: string[] }[];
+    /** Accepted faithful bullets that still got a counted-noun warning (false warnings). */
+    warned: { caseId: string; text: string }[];
+  };
   fabricated: {
     total: number;
     blocked: number;
     byKind: Record<string, { total: number; blocked: number }>;
-    missed: { caseId: string; kind: string; source: string; text: string }[];
+    /** `warned`: let through, but flagged with a counted-noun warning. */
+    missed: { caseId: string; kind: string; source: string; text: string; warned: boolean }[];
   };
 };
+
+const countedNoun = (r: GuardResult) => r.warnings.some((w) => w.type === "counted-noun");
 
 const reasons = (r: GuardResult) =>
   r.violations.map((v) => ("claim" in v ? `number ${v.claim}` : "term" in v ? `${v.type} ${v.term}` : v.type));
 
 export function evaluateGuard(cases: EvalCase[]): GuardReport {
   const report: GuardReport = {
-    gold: { total: 0, accepted: 0, rejected: [] },
+    gold: { total: 0, accepted: 0, rejected: [], warned: [] },
     fabricated: { total: 0, blocked: 0, byKind: {}, missed: [] },
   };
   for (const c of cases) {
@@ -86,6 +95,7 @@ export function evaluateGuard(cases: EvalCase[]): GuardReport {
       const r = checkBullet(g, c.facts, c.experiences);
       if (r.ok) report.gold.accepted++;
       else report.gold.rejected.push({ caseId: c.id, text: g.text, why: reasons(r) });
+      if (r.ok && countedNoun(r)) report.gold.warned.push({ caseId: c.id, text: g.text });
     }
     const fabs: Fabrication[] = [
       ...c.fabricated.map((f) => ({ ...f, source: "hand" as const })),
@@ -95,11 +105,12 @@ export function evaluateGuard(cases: EvalCase[]): GuardReport {
       const k = (report.fabricated.byKind[f.kind] ??= { total: 0, blocked: 0 });
       k.total++;
       report.fabricated.total++;
-      if (!checkBullet(f, c.facts, c.experiences).ok) {
+      const r = checkBullet(f, c.facts, c.experiences);
+      if (!r.ok) {
         k.blocked++;
         report.fabricated.blocked++;
       } else {
-        report.fabricated.missed.push({ caseId: c.id, kind: f.kind, source: f.source, text: f.text });
+        report.fabricated.missed.push({ caseId: c.id, kind: f.kind, source: f.source, text: f.text, warned: countedNoun(r) });
       }
     }
   }

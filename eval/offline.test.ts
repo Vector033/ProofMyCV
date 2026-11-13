@@ -24,8 +24,10 @@ describe("eval set", () => {
           `accepted ${r.gold.accepted}/${r.gold.total} faithful bullets (${pct(r.gold.accepted / r.gold.total)})`,
       );
       for (const [k, v] of Object.entries(r.fabricated.byKind)) console.log(`  ${k}: ${v.blocked}/${v.total}`);
-      for (const m of r.fabricated.missed) console.log(`  MISSED [${m.caseId} ${m.source} ${m.kind}] ${m.text}`);
+      for (const m of r.fabricated.missed) console.log(`  MISSED [${m.caseId} ${m.source} ${m.kind}]${m.warned ? " (warned)" : ""} ${m.text}`);
       for (const g of r.gold.rejected) console.log(`  REJECTED GOLD [${g.caseId}] ${g.text} <- ${g.why.join(", ")}`);
+      console.log(`  counted-noun warnings on faithful bullets: ${r.gold.warned.length}/${r.gold.accepted}`);
+      for (const g of r.gold.warned) console.log(`  WARNED GOLD [${g.caseId}] ${g.text}`);
     }
     expect(r.fabricated.missed).toEqual([]);
     expect(r.gold.accepted / r.gold.total).toBeGreaterThanOrEqual(GOLD_ACCEPTANCE_FLOOR);
@@ -40,29 +42,38 @@ describe("eval set", () => {
   });
 });
 
-// Held-out cases were written after the guard was tuned on eval/cases and were
-// never used to change it. Their score is reported, not tuned against.
-const holdoutDir = join(process.cwd(), "eval", "holdout");
-describe.runIf(existsSync(holdoutDir))("held-out set", () => {
-  it("reports guard and extractor scores", () => {
-    const held = loadCases(holdoutDir);
-    const r = evaluateGuard(held);
-    const s = sumExtraction(held.map((c) => scoreExtraction(c, extractJobRuleBased(c.jd))));
-    if (verbose) {
-      console.log(
-        `HOLDOUT (${held.length} cases) Guard: blocked ${r.fabricated.blocked}/${r.fabricated.total} (${pct(r.fabricated.blocked / r.fabricated.total)}), ` +
-          `accepted ${r.gold.accepted}/${r.gold.total} faithful (${pct(r.gold.accepted / r.gold.total)}); ` +
-          `rules required recall ${pct(s.requiredRecall)}`,
-      );
-      for (const [k, v] of Object.entries(r.fabricated.byKind)) console.log(`  holdout ${k}: ${v.blocked}/${v.total}`);
-      for (const m of r.fabricated.missed) console.log(`  HOLDOUT MISSED [${m.caseId} ${m.source} ${m.kind}] ${m.text}`);
-      for (const g of r.gold.rejected) console.log(`  HOLDOUT REJECTED GOLD [${g.caseId}] ${g.text} <- ${g.why.join(", ")}`);
-    }
-    expect(r.gold.accepted / r.gold.total).toBeGreaterThanOrEqual(GOLD_ACCEPTANCE_FLOOR);
+// Held-out sets were written by a separate author after the guard was tuned on
+// eval/cases and were never used to change it. Their score is reported, not tuned
+// against. holdout/ was scored on 2026-11-04 and is no longer blind; holdout2/ was
+// written blind on 2026-11-14 and scored once with the guard frozen.
+for (const name of ["holdout", "holdout2"]) {
+  const dir = join(process.cwd(), "eval", name);
+  describe.runIf(existsSync(dir))(`held-out set ${name}`, () => {
+    it("reports guard and extractor scores", () => {
+      const held = loadCases(dir);
+      const r = evaluateGuard(held);
+      const s = sumExtraction(held.map((c) => scoreExtraction(c, extractJobRuleBased(c.jd))));
+      const tag = name.toUpperCase();
+      if (verbose) {
+        console.log(
+          `${tag} (${held.length} cases) Guard: blocked ${r.fabricated.blocked}/${r.fabricated.total} (${pct(r.fabricated.blocked / r.fabricated.total)}), ` +
+            `accepted ${r.gold.accepted}/${r.gold.total} faithful (${pct(r.gold.accepted / r.gold.total)}); ` +
+            `rules required recall ${pct(s.requiredRecall)}`,
+        );
+        for (const [k, v] of Object.entries(r.fabricated.byKind)) console.log(`  ${name} ${k}: ${v.blocked}/${v.total}`);
+        for (const m of r.fabricated.missed) console.log(`  ${tag} MISSED [${m.caseId} ${m.source} ${m.kind}]${m.warned ? " (warned)" : ""} ${m.text}`);
+        for (const g of r.gold.rejected) console.log(`  ${tag} REJECTED GOLD [${g.caseId}] ${g.text} <- ${g.why.join(", ")}`);
+        console.log(`  ${name} counted-noun warnings on faithful bullets: ${r.gold.warned.length}/${r.gold.accepted}`);
+        for (const g of r.gold.warned) console.log(`  ${tag} WARNED GOLD [${g.caseId}] ${g.text}`);
+      }
+      expect(r.gold.accepted / r.gold.total).toBeGreaterThanOrEqual(HOLDOUT_GOLD_FLOOR);
+    });
   });
-});
+}
 
 // Floors are set from measured results so a regression fails CI; raise them as
 // the guard and extractor improve.
 const GOLD_ACCEPTANCE_FLOOR = 0.95;
+// Held-out sets are reported, not tuned, so their floor only catches a collapse.
+const HOLDOUT_GOLD_FLOOR = 0.8;
 const RULES_REQUIRED_RECALL_FLOOR = 0.7;

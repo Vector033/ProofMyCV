@@ -68,7 +68,7 @@ export const TECH_TERMS: TechTerm[] = [
   { name: "WebSocket", aliases: ["websocket", "websockets"] },
   { name: "Kafka", aliases: ["kafka"] },
   { name: "RabbitMQ", aliases: ["rabbitmq"] },
-  { name: "Docker", aliases: ["docker", "dockerfile"] },
+  { name: "Docker", aliases: ["docker", "dockerfile", "dockerized", "dockerised", "dockerizing", "dockerising"] },
   { name: "Kubernetes", aliases: ["kubernetes", "k8s"] },
   { name: "Terraform", aliases: ["terraform"] },
   { name: "AWS", aliases: ["aws", "amazon web services"] },
@@ -109,6 +109,64 @@ export const TECH_TERMS: TechTerm[] = [
   { name: "Roblox", aliases: ["roblox", "roblox studio"] },
   { name: "Blender", aliases: ["blender"] },
 ];
+
+/**
+ * Common abbreviations and the phrase they stand for. An all-caps token in a
+ * bullet ("VMs", "SSR") is backed when the facts spell the phrase out; the
+ * spelled-out phrase is plain English, so the guard does not check it.
+ */
+export const ABBREVIATIONS: Record<string, string> = {
+  VM: "virtual machine",
+  SSR: "server-side rendering",
+  SSG: "static site generation",
+  CSR: "client-side rendering",
+  SPA: "single-page application",
+  PWA: "progressive web app",
+  SSO: "single sign-on",
+  MFA: "multi-factor authentication",
+  RBAC: "role-based access control",
+  ORM: "object-relational mapping",
+  DB: "database",
+  ETL: "extract, transform, load",
+  OCR: "optical character recognition",
+  NLP: "natural language processing",
+  RAG: "retrieval-augmented generation",
+  CDN: "content delivery network",
+  DNS: "domain name system",
+  VPN: "virtual private network",
+  VPC: "virtual private cloud",
+  LAN: "local area network",
+  IaC: "infrastructure as code",
+  SLA: "service level agreement",
+  SLO: "service level objective",
+  RPS: "requests per second",
+  QPS: "queries per second",
+  MAU: "monthly active users",
+  DAU: "daily active users",
+  SEO: "search engine optimization",
+  CMS: "content management system",
+  CRM: "customer relationship management",
+  ERP: "enterprise resource planning",
+  POS: "point of sale",
+  IoT: "internet of things",
+  PCB: "printed circuit board",
+  GPU: "graphics processing unit",
+  CPU: "central processing unit",
+  SDK: "software development kit",
+  CLI: "command-line interface",
+  OOP: "object-oriented programming",
+  TDD: "test-driven development",
+  E2E: "end-to-end",
+  PII: "personally identifiable information",
+};
+
+const loosePhrase = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+
+/** Does the text spell out the abbreviation ("VMs" with "virtual machines")? */
+export function abbreviationBacked(token: string, text: string): boolean {
+  const phrase = ABBREVIATIONS[token] ?? ABBREVIATIONS[token.replace(/s$/, "")];
+  return Boolean(phrase) && ` ${loosePhrase(text)} `.includes(` ${loosePhrase(phrase)}`);
+}
 
 const escapeRegex = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
@@ -187,7 +245,8 @@ const STOPWORDS = new Set(
 
 const stem = (w: string) => w.replace(/(?:ing|ed|es|s)$/, "");
 
-const contentWords = (s: string) =>
+/** Lower-case, stemmed words that carry meaning ("the 120 members" -> ["120", "member"]). */
+export const contentWords = (s: string) =>
   s
     .toLowerCase()
     .split(/[^a-z0-9+#.]+/)

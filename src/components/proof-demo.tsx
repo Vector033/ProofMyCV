@@ -1,7 +1,7 @@
 "use client";
 
 import { useId, useState } from "react";
-import { describeViolation } from "@/lib/core/guard";
+import { describeViolation, describeWarning } from "@/lib/core/guard";
 import {
   DEMO_DRAFTS,
   DEMO_EXPERIENCE,
@@ -242,7 +242,7 @@ export function ProofDemo() {
                   <li key={`w${i}`} className="flex items-start gap-1.5 text-amber-800">
                     <IconAlert size={13} className="mt-0.5 shrink-0 text-amber-700" />
                     <span>
-                      {w.type === "too-long" ? `${w.words} words; aim for 30 or fewer` : `Starts with "${w.word}"; lead with what you did`}
+                      {describeWarning(w)}
                     </span>
                   </li>
                 ))}

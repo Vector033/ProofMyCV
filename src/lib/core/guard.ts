@@ -2,7 +2,7 @@
 // bullet must be traceable to the facts the bullet cites. This is plain code on
 // purpose: the LLM is asked to cite its facts, but we never take its word for it.
 
-import { findTechTerms, withImplied } from "./vocab";
+import { abbreviationBacked, contentWords, findTechTerms, withImplied } from "./vocab";
 import { factText, type BulletDraft, type Experience, type Fact } from "./types";
 
 /**
@@ -18,7 +18,11 @@ export type Violation =
   | { type: "tech"; term: string }
   | { type: "term"; term: string };
 
-export type Warning = { type: "too-long"; words: number } | { type: "weak-start"; word: string };
+export type Warning =
+  | { type: "too-long"; words: number }
+  | { type: "weak-start"; word: string }
+  /** Same number as the fact, but it seems to count something else ("120 bookings" vs "120 members"). */
+  | { type: "counted-noun"; claim: string; fact: string };
 
 export type GuardResult = {
   ok: boolean;
@@ -114,6 +118,137 @@ const sameClaim = (a: NumberClaim, b: NumberClaim) =>
     (a.unit === "plain" && !RATIOS.has(b.unit)) ||
     (b.unit === "plain" && !RATIOS.has(a.unit)));
 
+// Units that convert to one base, so "12 min to 40 s" can back "94% faster".
+const BASE_UNIT: Record<string, [family: string, factor: number]> = {
+  ms: ["time", 1e-3], s: ["time", 1], min: ["time", 60], h: ["time", 3600], day: ["time", 86400], week: ["time", 604800],
+  KB: ["size", 1], MB: ["size", 1e3], GB: ["size", 1e6], TB: ["size", 1e9],
+};
+
+/** Both values in one unit, or null when they measure different things. */
+function comparable(a: NumberClaim, b: NumberClaim): [number, number] | null {
+  if (a.unit === b.unit && a.unit !== "times") return [a.value, b.value];
+  if (a.unit === "plain" && !RATIOS.has(b.unit)) return [a.value, b.value];
+  if (b.unit === "plain" && !RATIOS.has(a.unit)) return [a.value, b.value];
+  const [fa, fb] = [BASE_UNIT[a.unit], BASE_UNIT[b.unit]];
+  return fa && fb && fa[0] === fb[0] ? [a.value * fa[1], b.value * fb[1]] : null;
+}
+
+// What may sit between two numbers that form a before/after or part/whole pair:
+// "from 410 to 260 KB", "78 of 100", "92/100", "0.62 -> 0.81".
+const PAIR_GAP = /^\s*(?:to|of|out of|down to|up to|vs\.?|versus|\/|->|→)\s*$/i;
+
+/**
+ * Percentages and multipliers a fact's own numbers support: the change from one
+ * number to the next ("410 to 260 KB" -> 36.6%), a part of a whole ("78 of
+ * 100" -> 78%), a ratio ("12 min to 3 min" -> 4x) and a decimal score ("0.91" -> 91%).
+ * Only neighbours joined by "to", "of" or "/" pair up, so "340 tickets over 8
+ * months" never yields "98%".
+ */
+function derivedValues(fact: string): { percent: number[]; times: number[] } {
+  // Digits only: "one", "single" and friends are not measurements.
+  const nums = extractNumbers(fact).filter((n) => /^[$\d]/.test(n.raw));
+  const percent: number[] = [];
+  const times: number[] = [];
+  for (const n of nums) if (n.unit === "plain" && n.value > 0 && n.value < 1) percent.push(n.value * 100);
+  let at = 0;
+  const ends: [number, number][] = nums.map((n) => {
+    const i = fact.indexOf(n.raw, at);
+    at = i + n.raw.length;
+    return [i, at];
+  });
+  for (let i = 0; i + 1 < nums.length; i++) {
+    if (!PAIR_GAP.test(fact.slice(ends[i][1], ends[i + 1][0]))) continue;
+    const pair = comparable(nums[i], nums[i + 1]);
+    if (!pair) continue;
+    const [a, b] = pair;
+    if (a <= 0 || b <= 0 || a === b) continue;
+    percent.push((Math.abs(b - a) / a) * 100, (Math.min(a, b) / Math.max(a, b)) * 100);
+    times.push(Math.max(a, b) / Math.min(a, b));
+  }
+  return { percent, times };
+}
+
+/** Content words within 4 words of the claim, not crossing a comma or bracket. */
+function claimContext(text: string, raw: string): string[] {
+  const i = text.toLowerCase().indexOf(raw.toLowerCase());
+  if (i < 0) return [];
+  const before = text.slice(0, i).split(/[,;()]/).at(-1)!.trim().split(/\s+/).slice(-4).join(" ");
+  const after = text.slice(i + raw.length).split(/[,;()]/)[0].trim().split(/\s+/).slice(0, 4).join(" ");
+  return contentWords(`${before} ${after}`).filter((w) => /^[a-z]/.test(w));
+}
+
+/**
+ * A percent or multiplier the cited facts compute, within rounding, about
+ * something that fact mentions: "cut page weight by 37%" from "page weight went
+ * from 410 KB to 260 KB", but not "cutting costs by 30%" from a hit rate that
+ * rose 30%. A percent may be rounded either way ("36%" or "37%" for 36.6%); a
+ * multiplier must be within 5% ("4x" needs 3.8 to 4.2), so "halved" never
+ * covers 410 -> 260.
+ */
+function derivable(claim: NumberClaim, text: string, facts: string[]): boolean {
+  if (!RATIOS.has(claim.unit)) return false;
+  const step = 10 ** -(claim.raw.match(/\.(\d+)/)?.[1].length ?? 0);
+  const context = claimContext(text, claim.raw);
+  return facts.some((f) => {
+    const d = derivedValues(f);
+    const close =
+      claim.unit === "percent"
+        ? d.percent.some((v) => Math.abs(v - claim.value) < step)
+        : d.times.some((v) => Math.abs(v - claim.value) <= Math.min(step / 2, 0.05 * claim.value));
+    if (!close) return false;
+    const factWords = new Set(contentWords(f));
+    return context.some((w) => factWords.has(w));
+  });
+}
+
+const escapeRe = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+// A number followed by one of these counts nothing itself: "from 15 to 4", "Vue 3 with Vite".
+const FUNCTION_WORDS = new Set(
+  "to of out in on at by for from with using via over per than and or across into within under up down plus more through after before during while when since".split(" "),
+);
+
+const words = (s: string) => contentWords(s).filter((w) => /^[a-z]/.test(w));
+
+/**
+ * Each place `raw` appears, as a whole number: the word right after it, up to 5
+ * content words after it and 3 before it, within one clause.
+ */
+function around(text: string, raw: string) {
+  const re = new RegExp(`(?<![\\w.,])${escapeRe(raw)}(?![\\w]|[.,]\\d)`, "g");
+  return [...text.matchAll(re)].map((m) => {
+    const before = text.slice(0, m.index).split(/[.;:,\n]/).at(-1)!;
+    const after = text.slice(m.index + raw.length).split(/[.;:,\n]/)[0];
+    const first = after.match(/^\s+([A-Za-z][A-Za-z-]*)/)?.[1] ?? "";
+    return { first, phrase: first ? `${raw} ${first}` : raw, after, near: [...words(before).slice(-3), ...words(after).slice(0, 5)] };
+  });
+}
+
+// Prefix match, so "image" and "imag" (from "images") count as one word.
+const sameWord = (a: string, b: string) => a.startsWith(b) || b.startsWith(a);
+
+/**
+ * Same whole number in bullet and fact, but the words after it in the bullet
+ * share nothing with the words around it in the fact: "120 bookings" from "120
+ * members". Only a warning, because honest rewording ("85 students" for "85
+ * classmates") looks the same to plain code.
+ */
+function countedNounWarning(claim: NumberClaim, text: string, evidence: string): Warning | null {
+  // Whole counts only: "0.84 macro F1" is a score, not a count of something.
+  if (claim.unit !== "plain" || !/^\d[\d,]*$/.test(claim.raw)) return null;
+  const mine = around(text, claim.raw)[0];
+  if (!mine?.first || FUNCTION_WORDS.has(mine.first.toLowerCase())) return null;
+  const counted = words(mine.after).slice(0, 5);
+  const theirs = around(evidence, claim.raw);
+  if (theirs.length === 0) return null;
+  for (const t of theirs) {
+    if (t.near.some((w) => counted.some((x) => sameWord(w, x)))) return null;
+    // "3 VMs" for "3 virtual machines".
+    if (abbreviationBacked(mine.first, t.after)) return null;
+  }
+  return { type: "counted-noun", claim: mine.phrase, fact: theirs[0].phrase };
+}
+
 // Tokens that look like a product or technology name: inner capitals
 // ("GraphQL"), digits mixed with letters ("EC2"), dots or symbols ("Socket.io",
 // "C#"), or all-caps acronyms ("SQS").
@@ -152,10 +287,14 @@ export function checkBullet(bullet: BulletDraft, facts: Fact[], experiences: Exp
   const evidence = cited.map(factText).join("\n");
   const evidenceNumbers = extractNumbers(evidence);
   const seen = new Set<string>();
+  const citedTexts = cited.map(factText);
   for (const claim of extractNumbers(bullet.text)) {
     if (seen.has(claim.raw)) continue;
     seen.add(claim.raw);
-    if (!evidenceNumbers.some((e) => sameClaim(claim, e))) {
+    if (evidenceNumbers.some((e) => sameClaim(claim, e))) {
+      const w = countedNounWarning(claim, bullet.text, evidence);
+      if (w) warnings.push(w);
+    } else if (!derivable(claim, bullet.text, citedTexts)) {
       violations.push({ type: "number", claim: claim.raw });
     }
   }
@@ -178,7 +317,8 @@ export function checkBullet(bullet: BulletDraft, facts: Fact[], experiences: Exp
     if (GENERIC_ACRONYMS.has(token)) continue;
     // Already judged by the vocabulary check above.
     if (findTechTerms(token).length > 0) continue;
-    if (!evidenceLower.includes(token.toLowerCase())) violations.push({ type: "term", term: token });
+    if (evidenceLower.includes(token.toLowerCase()) || abbreviationBacked(token, nameEvidence)) continue;
+    violations.push({ type: "term", term: token });
   }
 
   // A capitalised word in mid-sentence is almost always a name: a product
@@ -198,6 +338,17 @@ export function checkBullet(bullet: BulletDraft, facts: Fact[], experiences: Exp
   if (WEAK_STARTS.has(first)) warnings.push({ type: "weak-start", word: words[0] });
 
   return { ok: violations.length === 0, violations, warnings };
+}
+
+export function describeWarning(w: Warning): string {
+  switch (w.type) {
+    case "too-long":
+      return `${w.words} words; aim for 30 or fewer`;
+    case "weak-start":
+      return `Starts with "${w.word}"; lead with what you did`;
+    case "counted-noun":
+      return `"${w.claim}" may count something else; the fact says "${w.fact}"`;
+  }
 }
 
 export function describeViolation(v: Violation): string {

@@ -102,11 +102,11 @@ describe("checkBullet", () => {
 
   it("blocks invented numbers", () => {
     const r = checkBullet(
-      { experienceId: "e1", text: "Cut report generation time by 85% using FastAPI", factIds: ["f1"] },
+      { experienceId: "e1", text: "Cut report generation time by 60% using FastAPI", factIds: ["f1"] },
       facts,
     );
     expect(r.ok).toBe(false);
-    expect(r.violations).toContainEqual({ type: "number", claim: "85%" });
+    expect(r.violations).toContainEqual({ type: "number", claim: "60%" });
   });
 
   it("does not let a number from an uncited fact through", () => {
@@ -329,5 +329,60 @@ describe("guard with experience context", () => {
     expect(
       checkBullet({ experienceId: "club", text: `${text}, winning 2 cups`, factIds: ["p"] }, [fact], [club]).ok,
     ).toBe(false);
+  });
+});
+
+describe("guard: derived numbers, abbreviations, counted nouns", () => {
+  const f = (id: string, did: string, result: string | null, tech: string[] = []): Fact => ({
+    id,
+    experienceId: "e1",
+    did,
+    result,
+    tech,
+  });
+  const bank = [
+    f("w", "Lazy-loaded images on the landing page", "Page weight went from 410 KB to 260 KB"),
+    f("m", "Trained a CNN for leaf disease photos", "0.91 accuracy on a held-out test set"),
+    f("q", "Built a RAG chatbot over course PDFs", "Answered 78 of 100 test questions correctly"),
+    f("r", "Rewrote the report query with an index", "Report time went from 12 minutes to 40 seconds"),
+    f("t", "Logged 340 tickets over 8 months", null),
+    f("v", "Moved 6 virtual machines to a new host with server-side rendering tests", null, ["Docker"]),
+    f("c", "Ran a reading club", "Grew it to 120 members"),
+  ];
+  const check = (text: string, id: string) => checkBullet({ experienceId: "e1", text, factIds: [id] }, bank);
+
+  it("accepts percentages and ratios the cited fact computes", () => {
+    expect(check("Cut landing page weight by 36% by lazy-loading images", "w").ok).toBe(true);
+    expect(check("Cut landing page weight by 37% by lazy-loading images", "w").ok).toBe(true);
+    expect(check("Reached 91% accuracy on a held-out test set with a CNN", "m").ok).toBe(true);
+    expect(check("Built a RAG chatbot that answered 78% of test questions correctly", "q").ok).toBe(true);
+    expect(check("Cut report time by 94% by rewriting the query with an index", "r").ok).toBe(true);
+    expect(check("Made the report 18x faster by rewriting the query with an index", "r").ok).toBe(true);
+  });
+
+  it("blocks percentages and ratios the facts do not compute", () => {
+    expect(check("Cut landing page weight by 52% by lazy-loading images", "w").ok).toBe(false);
+    expect(check("Halved landing page weight by lazy-loading images", "w").ok).toBe(false);
+    expect(check("Reached 97% accuracy on a held-out test set with a CNN", "m").ok).toBe(false);
+    expect(check("Cut report time by 97% by rewriting the query with an index", "r").ok).toBe(false);
+    // Right arithmetic, wrong subject: the fact never mentions cost.
+    expect(check("Rewrote the report query with an index, cutting costs by 94%", "r").ok).toBe(false);
+    // 340 and 8 are not a before/after pair.
+    expect(check("Logged 340 tickets over 8 months with a 98% ticket resolution rate", "t").ok).toBe(false);
+  });
+
+  it("accepts common abbreviations and forms of what the fact says", () => {
+    expect(check("Moved 6 VMs to a new host", "v").ok).toBe(true);
+    expect(check("Added SSR tests while moving 6 virtual machines", "v").ok).toBe(true);
+    expect(check("Moved 6 Dockerized virtual machines to a new host", "v").ok).toBe(true);
+    expect(check("Moved 6 VMs to a new host behind a CDN", "v").violations).toContainEqual({ type: "term", term: "CDN" });
+    expect(check("Built a Dockerized RAG chatbot over course PDFs", "q").ok).toBe(false);
+  });
+
+  it("warns, without blocking, when a number counts something else", () => {
+    const r = check("Grew a reading club to 120 bookings", "c");
+    expect(r.ok).toBe(true);
+    expect(r.warnings).toEqual([{ type: "counted-noun", claim: "120 bookings", fact: "120 members" }]);
+    expect(check("Grew a reading club to 120 active members", "c").warnings).toEqual([]);
   });
 });
