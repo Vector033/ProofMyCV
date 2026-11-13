@@ -71,7 +71,7 @@ export function HeroShader() {
       {/* Masked GPU Fragment Shader Layer: visible Slate & Emerald grain */}
       {webglReady && (
         <div
-          className="absolute inset-0 opacity-75"
+          className="absolute inset-0 opacity-60 sm:opacity-75"
           style={{
             WebkitMaskImage: "radial-gradient(ellipse 90% 85% at 50% 45%, black 52%, transparent 96%)",
             maskImage: "radial-gradient(ellipse 90% 85% at 50% 45%, black 52%, transparent 96%)",

@@ -44,7 +44,7 @@ export function ScoreBadge({ score, size = "sm", animate = false }: { score: num
           fill="none"
           strokeWidth={stroke}
           strokeLinecap="round"
-          className={`${t.ring} ${animate ? "ring-animate" : ""}`}
+          className={`score-ring ${t.ring} ${animate ? "ring-animate" : ""}`}
           strokeDasharray={length}
           strokeDashoffset={length * (1 - value / 100)}
           style={{ "--ring-length": length } as React.CSSProperties}

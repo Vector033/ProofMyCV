@@ -2,39 +2,40 @@ import Link from "next/link";
 import { demoEmail } from "@/lib/supabase/admin";
 import { HeroShader } from "@/components/hero-shader";
 import { ProofDemo } from "@/components/proof-demo";
-import { AnimatedSteps } from "@/components/animated-steps";
+import { Steps } from "@/components/steps";
 import { VerificationPipeline } from "@/components/verification-pipeline";
 import { BenchmarkMetrics } from "@/components/benchmark-metrics";
 import { AtsAnatomy } from "@/components/ats-anatomy";
+import { InView } from "@/components/in-view";
 import { IconArrowRight, IconCheck, IconShield, IconX } from "@/components/icons";
 import { DemoButton } from "./login/demo-button";
 
+// Numbers from eval/README.md (fictional cases). Update both together.
 const comparisonRows = [
-  // Numbers from eval/README.md (fictional cases). Update both together.
   {
-    feature: "Metric Integrity",
-    ai: "Invented 26 claims when told to “add impressive metrics” (Typhoon 2.5)",
-    factfit: "Blocked 26 / 26 of them; 547 / 547 on tuning cases",
+    feature: "Numbers",
+    ai: "Told to “add impressive metrics”, Typhoon 2.5 invented or inflated 26 claims",
+    factfit: "Blocked 26 / 26 of them, and 547 / 547 on the tuning cases",
   },
   {
-    feature: "Tech Stack Accuracy",
-    ai: "Adds tools that are not in your facts",
-    factfit: "Every tool name checked against the cited facts (37 / 37 held-out)",
+    feature: "Tools",
+    ai: "A draft can name tools that are not in your facts",
+    factfit: "Every tool name is checked against the cited facts (37 / 37 held-out)",
   },
   {
-    feature: "Interview Defense",
+    feature: "In an interview",
     ai: "No link from a sentence back to what you did",
-    factfit: "Every claim links to 1 or more source facts",
+    factfit: "Every bullet cites 1 or more of your facts",
   },
   {
-    feature: "Audit Trail",
+    feature: "Record",
     ai: "No record of where a claim came from",
     factfit: "Each bullet stores the IDs of the facts it cites",
   },
   {
-    feature: "PDF Format",
-    ai: "Multi-column layout prone to ATS parser skips",
-    factfit: "Single-column selectable text PDF (< 2.5 MB)",
+    feature: "PDF layout",
+    ai: "Multi-column templates can be read out of order",
+    factfit: "Single column, selectable text, under 2.5 MB",
   },
 ];
 
@@ -50,10 +51,10 @@ export default async function Home({ searchParams }: PageProps<"/">) {
 
   return (
     <div className="flex min-h-screen flex-col bg-slate-50 text-slate-900">
-      {/* ================= STICKY TOP NAV (#2 Fluted Glass over --canvas) ================= */}
+      {/* Sticky top nav: fluted glass over --canvas */}
       <header className="fluted-glass sticky top-0 z-50 border-b border-slate-200/80">
         <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-4 sm:px-6">
-          <Link href="/" className="inline-flex items-center gap-2 font-semibold tracking-tight">
+          <Link href="/" className="inline-flex min-h-11 items-center gap-2 rounded-md font-semibold tracking-tight">
             <span
               aria-hidden
               className="grid size-7 place-items-center rounded-md bg-slate-900 text-[13px] font-bold text-white shadow-2xs"
@@ -67,32 +68,32 @@ export default async function Home({ searchParams }: PageProps<"/">) {
 
           <nav className="hidden items-center gap-6 text-sm font-medium text-slate-600 md:flex">
             <a href="#demo" className="transition-colors hover:text-slate-900">
-              Proof Demo
+              Demo
             </a>
             <a href="#how" className="transition-colors hover:text-slate-900">
-              Workflow
+              How it works
             </a>
             <a href="#architecture" className="transition-colors hover:text-slate-900">
-              Guard Spec
+              The guard
             </a>
             <a href="#measured" className="transition-colors hover:text-slate-900">
-              Benchmarks
+              Results
             </a>
             <a href="#comparison" className="transition-colors hover:text-slate-900">
               Comparison
             </a>
           </nav>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-1 sm:gap-3">
             <Link
               href="/login"
-              className="press inline-flex min-h-9 items-center justify-center rounded-lg px-3 text-sm font-medium text-slate-700 hover:bg-slate-100 hover:text-slate-900 active:scale-[0.98]"
+              className="press inline-flex min-h-11 items-center justify-center rounded-lg px-3 text-sm font-medium text-slate-700 hover:bg-slate-100 hover:text-slate-900 active:scale-[0.98]"
             >
               Sign in
             </Link>
             <Link
               href="/login"
-              className="press inline-flex min-h-9 items-center justify-center rounded-lg bg-slate-900 px-3.5 text-sm font-medium tracking-[0.04em] text-white shadow-2xs hover:bg-slate-800 active:scale-[0.98]"
+              className="press inline-flex min-h-11 items-center justify-center rounded-lg bg-slate-900 px-3.5 text-sm font-medium tracking-[0.04em] text-white shadow-2xs hover:bg-slate-800 active:scale-[0.98]"
             >
               Tailor My Resume
             </Link>
@@ -115,17 +116,18 @@ export default async function Home({ searchParams }: PageProps<"/">) {
           {/* GPU Fragment Shader over --canvas (#f8fafc) with radial fade + reduced-motion/offscreen guard */}
           <HeroShader />
 
-          {/* #7 Blueprint Grid + #18 Square-Dot Grid (--hairline, 24px spacing, radial fade) */}
+          {/* #18 Square-dot grid, faded at the edges */}
           <div aria-hidden="true" className="bg-blueprint-dots absolute inset-0 z-0" />
 
           <div className="relative z-10 mx-auto max-w-5xl px-4 text-center sm:px-6">
-            {/* Transformation & Safety Net Pill (paired with uniform IconShield) */}
-            <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/95 px-3.5 py-1 text-xs font-medium text-slate-800 shadow-2xs">
+            {/* The measured result, stated with its scope (eval/README.md) */}
+            <p className="inline-flex max-w-full items-center gap-2 rounded-full border border-slate-200 bg-white/95 px-3.5 py-1 text-left text-xs font-medium text-slate-700 shadow-2xs">
               <IconShield size={14} className="shrink-0 text-emerald-700" />
-              <span className="font-semibold text-emerald-800 tabular-nums">547 / 547 blocked</span>
-              <span className="text-slate-300">—</span>
-              <span>invented numbers and tools in&nbsp;testing</span>
-            </div>
+              <span>
+                <span className="font-semibold text-emerald-800 tabular-nums">547 / 547</span> fabrications blocked on the
+                tuning&nbsp;set
+              </span>
+            </p>
 
             {/* Display Headline (-0.025em tracking, 1.1 line-height, text-balance) */}
             <h1 className="display-heading mx-auto mt-4 max-w-4xl text-4xl font-semibold text-slate-900 sm:text-6xl">
@@ -134,9 +136,9 @@ export default async function Home({ searchParams }: PageProps<"/">) {
 
             {/* Subtitle (50–75ch width, 1.6 line-height, natural wrapping) */}
             <p className="body-prose mx-auto mt-4 max-w-[60ch] text-lg text-slate-600 sm:text-xl">
-              Generic AI resume tools fabricate numbers and exaggerate skills. FactFit maps your real
-              achievements to job descriptions and blocks any claim you cannot trace back to your
-              verified Fact&nbsp;Bank.
+              AI resume tools can invent numbers and add skills you never used. FactFit matches your
+              real achievements to each job and blocks any claim it cannot trace to your
+              Fact&nbsp;Bank.
             </p>
 
             {/* Primary CTA + Risk Reversal Microcopy (32px inter-group gap) */}
@@ -197,12 +199,11 @@ export default async function Home({ searchParams }: PageProps<"/">) {
           <div className="mx-auto max-w-6xl px-4 sm:px-6">
             <SectionHeader
               id="how-heading"
-              eyebrow="Workflow"
               title="How FactFit works"
-              subtitle={"Three deterministic steps from raw career facts to a single-column, ATS-compliant PDF you can defend in any\u00A0interview."}
+              subtitle={"Three steps from what you actually did to a single-column PDF you can explain line by\u00A0line."}
             />
 
-            <AnimatedSteps />
+            <Steps />
           </div>
         </section>
 
@@ -211,14 +212,13 @@ export default async function Home({ searchParams }: PageProps<"/">) {
           <div className="mx-auto max-w-6xl px-4 sm:px-6">
             <SectionHeader
               id="arch-heading"
-              eyebrow="Under the Hood"
-              title="Blocked by deterministic code, not prompt wishes"
-              subtitle={"Even when an LLM tries to impress recruiters by inventing numbers, the 3-layer verification guard intercepts every token before it can be\u00A0saved."}
+              title="Blocked by code, not by a prompt"
+              subtitle={"The model is asked to cite its facts, but FactFit never takes its word for it. Plain code checks every number, unit and tool name in a bullet before it can be\u00A0saved."}
             />
 
-            <div className="mt-8">
+            <InView className="mt-8">
               <VerificationPipeline />
-            </div>
+            </InView>
           </div>
         </section>
 
@@ -227,21 +227,20 @@ export default async function Home({ searchParams }: PageProps<"/">) {
           <div className="mx-auto max-w-6xl px-4 sm:px-6">
             <SectionHeader
               id="measured-heading"
-              eyebrow="Empirical Benchmarks"
               title="Measured, not promised"
-              subtitle={"Tested on 40 fictional job postings. The code guard checks numbers, units, and technical\u00A0names."}
+              subtitle={"The guard was tested on 40 fictional job postings with hand-written fabrications. 10 of them were held out until it was\u00A0tuned."}
             />
 
             <BenchmarkMetrics />
 
-            {/* Technical Boundary Callout (Strict Engineering Honesty) */}
-            <div className="mt-8 rounded-xl border border-slate-200/90 bg-slate-50/70 p-4 text-xs leading-[1.6] text-slate-600 shadow-2xs">
-              <span className="font-semibold text-slate-800">Known Technical Boundary:</span> The guard
-              evaluates numerical quantities, measurement units, and technology terminology. It flags
-              semantic drift (e.g. inventing Redis when not in facts), but does not parse semantic noun
-              context (e.g. &ldquo;120 members&rdquo; rewritten as &ldquo;120 customers&rdquo;). The user
-              remains the ultimate reviewer of every generated bullet before PDF&nbsp;export.
-            </div>
+            {/* Where the guard stops, in the words of eval/README.md */}
+            <p className="body-prose mt-10 text-sm text-slate-600">
+              <span className="font-semibold text-slate-900">Where it stops.</span> All 6 held-out misses kept the
+              number and unit but changed what it counts, such as &ldquo;120 members&rdquo; written as
+              &ldquo;120 bookings&rdquo;. The guard checks numbers, units and names; it does not understand meaning.
+              It also blocks some honest rewording, such as a percentage you worked out yourself. You review every
+              bullet before&nbsp;export.
+            </p>
           </div>
         </section>
 
@@ -250,46 +249,59 @@ export default async function Home({ searchParams }: PageProps<"/">) {
           <div className="mx-auto max-w-6xl px-4 sm:px-6">
             <SectionHeader
               id="comparison-heading"
-              eyebrow="Architectural Advantage"
-              title="FactFit vs Unconstrained AI Resume Builders"
-              subtitle={"Why deterministic code checks and single-column PDF structure outperform decorative templates and prompt\u2011only\u00A0AI."}
+              title="With and without a code check"
+              subtitle={"What an unchecked AI draft leaves you with, next to what FactFit checks before a bullet is\u00A0saved."}
             />
 
-            <div className="mt-8">
-              <AtsAnatomy />
-            </div>
-
-            <div className="mt-8 overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-2xs">
-              <div className="overflow-x-auto">
-                <table className="w-full text-left text-sm">
-                  <thead>
-                    <tr className="border-b border-slate-200 bg-slate-50/80 text-xs font-semibold tracking-[0.04em] text-slate-600 uppercase">
-                      <th className="py-3.5 pl-6 pr-4">Evaluation Dimension</th>
-                      <th className="px-4 py-3.5 text-red-800">Unchecked LLM Output</th>
-                      <th className="py-3.5 pr-6 pl-4 text-emerald-900">FactFit Verification Engine</th>
+            <InView className="mt-10">
+              <div className="overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-xs">
+              <table className="block w-full text-left text-sm md:table">
+                <thead className="sr-only md:not-sr-only md:table-header-group">
+                  <tr className="border-b border-slate-200 text-xs font-semibold text-slate-900">
+                    <th scope="col" className="py-3.5 pr-4 pl-6">
+                      <span className="sr-only">What is compared</span>
+                    </th>
+                    <th scope="col" className="px-4 py-3.5">
+                      Unchecked AI draft
+                    </th>
+                    <th scope="col" className="py-3.5 pr-6 pl-4">
+                      With FactFit
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="block divide-y divide-slate-100 md:table-row-group">
+                  {comparisonRows.map((row) => (
+                    <tr key={row.feature} className="block space-y-1.5 px-4 py-4 md:table-row md:space-y-0 md:p-0">
+                      <th scope="row" className="block font-semibold text-slate-900 md:table-cell md:py-3.5 md:pr-4 md:pl-6 md:font-medium md:whitespace-nowrap">
+                        {row.feature}
+                      </th>
+                      <td className="block text-slate-700 md:table-cell md:px-4 md:py-3.5">
+                        <span className="flex items-start gap-2">
+                          <IconX size={14} className="mt-1 shrink-0 text-red-700" />
+                          <span>
+                            <span className="sr-only">Unchecked AI draft: </span>
+                            {row.ai}
+                          </span>
+                        </span>
+                      </td>
+                      <td className="block font-medium text-emerald-900 tabular-nums md:table-cell md:py-3.5 md:pr-6 md:pl-4">
+                        <span className="flex items-start gap-2">
+                          <IconCheck size={14} className="mt-1 shrink-0 text-emerald-700" />
+                          <span>
+                            <span className="sr-only">With FactFit: </span>
+                            {row.factfit}
+                          </span>
+                        </span>
+                      </td>
                     </tr>
-                  </thead>
-                  <tbody className="divide-y divide-slate-100">
-                    {comparisonRows.map((row) => (
-                      <tr key={row.feature} className="transition-colors hover:bg-slate-50/50">
-                        <td className="py-3.5 pl-6 pr-4 font-medium whitespace-nowrap text-slate-900">{row.feature}</td>
-                        <td className="px-4 py-3.5 text-red-800">
-                          <span className="inline-flex items-center gap-2">
-                            <IconX size={14} className="shrink-0 text-red-700" />
-                            <span>{row.ai}</span>
-                          </span>
-                        </td>
-                        <td className="py-3.5 pr-6 pl-4 font-medium text-emerald-900">
-                          <span className="inline-flex items-center gap-2">
-                            <IconCheck size={14} className="shrink-0 text-emerald-700" />
-                            <span>{row.factfit}</span>
-                          </span>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+                  ))}
+                </tbody>
+              </table>
               </div>
+            </InView>
+
+            <div className="mt-12">
+              <AtsAnatomy />
             </div>
           </div>
         </section>
@@ -304,8 +316,8 @@ export default async function Home({ searchParams }: PageProps<"/">) {
                     Start with one true&nbsp;sentence.
                   </h2>
                   <p className="body-prose mt-4 text-sm text-slate-300 sm:text-base">
-                    Log your achievements once, match against any job description, and export a clean
-                    single-column PDF you can defend with total&nbsp;confidence.
+                    Log your achievements once, match them to any job description, and export a
+                    single-column PDF you can explain line by&nbsp;line.
                   </p>
                 </div>
 
@@ -334,7 +346,7 @@ export default async function Home({ searchParams }: PageProps<"/">) {
             <span className="font-semibold tracking-tight text-slate-900">
               Fact<span className="text-emerald-700">Fit</span>
             </span>
-            <span className="text-slate-300">·</span>
+            <span aria-hidden className="text-slate-500">·</span>
             <span>Fact-checked resume tailoring</span>
           </div>
           <p>
@@ -346,21 +358,10 @@ export default async function Home({ searchParams }: PageProps<"/">) {
   );
 }
 
-function SectionHeader({
-  id,
-  eyebrow,
-  title,
-  subtitle,
-}: {
-  id: string;
-  eyebrow: string;
-  title: string;
-  subtitle: string;
-}) {
+function SectionHeader({ id, title, subtitle }: { id: string; title: string; subtitle: string }) {
   return (
     <div className="max-w-[65ch]">
-      <p className="text-xs font-semibold tracking-[0.04em] text-emerald-800 uppercase">{eyebrow}</p>
-      <h2 id={id} className="display-heading mt-2 text-2xl font-semibold text-slate-900 sm:text-3xl">
+      <h2 id={id} className="display-heading text-2xl font-semibold text-slate-900 sm:text-3xl">
         {title}
       </h2>
       <p className="body-prose mt-4 text-sm text-slate-600 sm:text-base">{subtitle}</p>

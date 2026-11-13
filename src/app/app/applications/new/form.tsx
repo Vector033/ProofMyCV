@@ -25,7 +25,7 @@ export function NewApplicationForm() {
           required
           rows={16}
           defaultValue={v.jdText}
-          className="input font-mono text-sm leading-relaxed sm:text-xs"
+          className="input leading-relaxed"
         />
       </label>
       {state.error && (

@@ -24,7 +24,7 @@ export function LoginForm({ google, oauthError }: { google: boolean; oauthError?
             type="button"
             aria-pressed={mode === m}
             onClick={() => setMode(m)}
-            className={`min-h-9 rounded transition-colors duration-150 ${
+            className={`min-h-11 rounded transition-colors duration-150 ${
               mode === m ? "bg-white font-medium text-slate-900 shadow-sm" : "text-slate-600 hover:text-slate-900"
             }`}
           >

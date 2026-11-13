@@ -13,7 +13,7 @@ export default async function AppLayout({ children }: LayoutProps<"/app">) {
           sections drop to their own row and the bar scrolls away to save height. */}
       <header className="fluted-glass z-20 border-b border-slate-200/80 md:sticky md:top-0">
         <div className="mx-auto grid h-16 max-w-6xl grid-cols-[1fr_auto] items-center gap-4 px-4 sm:px-6 md:grid-cols-[1fr_auto_1fr]">
-          <Link href="/app" className="inline-flex items-center gap-2 justify-self-start rounded-md font-semibold tracking-tight text-slate-900">
+          <Link href="/app" className="inline-flex min-h-11 items-center gap-2 justify-self-start rounded-md font-semibold tracking-tight text-slate-900">
             <span aria-hidden className="grid size-7 place-items-center rounded-md bg-slate-800 text-[13px] font-bold text-white">
               F
             </span>
@@ -31,15 +31,15 @@ export default async function AppLayout({ children }: LayoutProps<"/app">) {
               href="/app/settings"
               aria-label={`Account settings for ${user.email}`}
               title={user.email}
-              className="flex min-h-10 items-center gap-2 rounded-lg px-2 hover:bg-slate-50"
+              className="flex min-h-11 items-center gap-2 rounded-lg px-2 hover:bg-slate-100"
             >
-              <span aria-hidden className="grid size-8 place-items-center rounded-full bg-sky-100 text-sm font-semibold text-sky-800">
+              <span aria-hidden className="grid size-8 place-items-center rounded-full bg-slate-200 text-sm font-semibold text-slate-800">
                 {initial}
               </span>
               <span className="hidden max-w-[14rem] truncate text-sm text-slate-700 lg:inline">{user.email}</span>
             </Link>
             <form action={signOutAction}>
-              <button className="btn-ghost size-10 text-slate-500" aria-label="Sign out" title="Sign out">
+              <button className="btn-ghost size-11 text-slate-600" aria-label="Sign out" title="Sign out">
                 <IconLogout />
               </button>
             </form>

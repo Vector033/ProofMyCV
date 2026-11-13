@@ -29,7 +29,7 @@ export function AppNav() {
               <Link
                 href={href}
                 aria-current={active ? "page" : undefined}
-                className={`press flex min-h-10 items-center gap-2 rounded-lg px-3 text-sm transition-colors duration-150 ${
+                className={`press flex min-h-11 items-center gap-2 rounded-lg px-3 text-sm transition-colors duration-150 ${
                   active
                     ? "bg-white font-medium text-slate-900 shadow-xs ring-1 ring-slate-200/90 md:ring-0"
                     : "text-slate-600 hover:bg-white/70 hover:text-slate-900"

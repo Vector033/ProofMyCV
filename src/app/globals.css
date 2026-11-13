@@ -9,7 +9,7 @@
    60% Slate-50 canvas (--canvas: #f8fafc)
    30% Slate-800 typography & hairlines (--ink: #1e293b, --hairline: #e2e8f0)
    10% Emerald accent (--accent: #047857) strictly for verified status and trust guarantees.
-   Red/danger tokens strictly for hallucination and guard rejections. */
+   Red/danger tokens strictly for guard rejections. */
 :root {
   --canvas: #f8fafc;
   --ink: #1e293b;
@@ -93,7 +93,7 @@ body {
     @apply rounded-xl border border-slate-200/90 bg-white shadow-xs;
   }
   .eyebrow {
-    @apply text-xs font-semibold tracking-[0.04em] text-slate-500 uppercase;
+    @apply text-xs font-medium text-slate-500;
   }
   .icon-tile {
     @apply inline-grid size-10 shrink-0 place-items-center rounded-lg bg-slate-100 text-slate-700;
@@ -141,7 +141,7 @@ body {
 }
 
 .animate-verify-pulse {
-  animation: verifyPulse 2.4s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  animation: verifyPulse 2.4s cubic-bezier(0.16, 1, 0.3, 1) 2;
 }
 
 /* Dark Slate-800 band (used on /login split showcase): preserves high WCAG AA/AAA contrast
@@ -155,42 +155,14 @@ body {
   background-size: 100% 100%, 24px 24px, 24px 24px;
 }
 
-/* #7 Blueprint Grid + #18 Square-Dot Grid: --hairline at ~55% opacity, 24px spacing,
-   masked smoothly at edges so it never creates visual clutter. */
+/* #18 Square-dot grid for the hero: one quiet texture under the shader, faded at the edges. */
 .bg-blueprint-dots {
   pointer-events: none;
   background-size: 24px 24px;
   background-position: center top;
-  background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Crect x='0' y='0' width='1.5' height='1.5' fill='%2394a3b8' fill-opacity='0.38'/%3E%3C/svg%3E"),
-    linear-gradient(to right, color-mix(in srgb, var(--hairline) 55%, transparent) 1px, transparent 1px),
-    linear-gradient(to bottom, color-mix(in srgb, var(--hairline) 55%, transparent) 1px, transparent 1px);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Crect x='0' y='0' width='1.5' height='1.5' fill='%2394a3b8' fill-opacity='0.38'/%3E%3C/svg%3E");
   -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 85%);
   mask-image: radial-gradient(ellipse at center, black 40%, transparent 85%);
-}
-
-/* #9 Grainy Gradient Aura: strictly Emerald (--accent) tint + SVG feTurbulence micro-noise
-   placed solely behind the "FactFit Verified" split preview card. */
-.bg-grainy-emerald {
-  pointer-events: none;
-  background-image:
-    radial-gradient(
-      ellipse 75% 75% at 50% 50%,
-      color-mix(in srgb, var(--accent) 10%, transparent),
-      color-mix(in srgb, var(--accent) 3%, transparent) 55%,
-      transparent 82%
-    );
-  -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 85%);
-  mask-image: radial-gradient(ellipse at center, black 40%, transparent 85%);
-}
-.bg-grainy-emerald::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  opacity: 0.35;
-  mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)'/%3E%3C/svg%3E");
-  background-size: 180px 180px;
 }
 
 /* #12 Paper Texture + #5 Speckled Graphite overlay: gives digital resume preview sheets
@@ -218,20 +190,6 @@ body {
   backdrop-filter: blur(12px);
 }
 
-/* Scroll reveal. Native scroll is untouched. */
-[data-reveal="pending"] > * {
-  opacity: 0;
-  transform: translateY(14px);
-}
-[data-reveal="shown"] > * {
-  opacity: 1;
-  transform: none;
-  transition:
-    opacity 400ms var(--ease-out),
-    transform 400ms var(--ease-out);
-  transition-delay: calc(var(--i, 0) * 70ms);
-}
-
 /* Score ring draws once from 0 to the score. */
 @keyframes ring-draw {
   from {
@@ -242,7 +200,7 @@ body {
   animation: ring-draw 900ms var(--ease-out) both;
 }
 
-/* 1px AST Guard laser sweep across 100% height of resume preview sheets */
+/* The guard's scan line passes over a resume sheet once, then rests. */
 @keyframes scan-sweep {
   0% {
     transform: translateY(-100%);
@@ -260,10 +218,10 @@ body {
   }
 }
 .animate-scan-sweep {
-  animation: scan-sweep 2.8s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  animation: scan-sweep 1.6s cubic-bezier(0.16, 1, 0.3, 1) 300ms both;
 }
 
-/* Stripe-style animated SVG packet pulse along hairline pipes */
+/* Dashes travel along a pipe three times after a state change, then rest as a dashed line. */
 @keyframes packet-flow {
   from {
     stroke-dashoffset: 36;
@@ -274,7 +232,7 @@ body {
 }
 .animate-packet-flow {
   stroke-dasharray: 6 12;
-  animation: packet-flow 1.4s linear infinite;
+  animation: packet-flow 1.2s linear 3;
 }
 
 /* SVG curved citation connector draw-in */
@@ -334,33 +292,64 @@ body {
   animation: shimmer-scan 1.6s var(--ease-out) infinite;
 }
 
-/* Empirical benchmark bar grow */
+/* Scroll entrance (see in-view.tsx). Content is visible by default; these only run
+   once [data-inview] is set, just before the block scrolls into view. */
+[data-inview] > * {
+  animation: fadeInUp 550ms var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 90ms);
+}
+[data-inview] .score-ring {
+  animation: ring-draw 900ms var(--ease-out) 200ms both;
+}
 @keyframes bar-grow {
   from {
     transform: scaleX(0);
   }
-  to {
-    transform: scaleX(1);
-  }
 }
-.animate-bar-grow {
+[data-inview] .bar-fill {
   transform-origin: left;
   animation: bar-grow 900ms var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 90ms + 150ms);
+}
+/* Same keyframes under a second name: switching the name replays the pipe flow on arrival. */
+@keyframes packet-flow-in {
+  from {
+    stroke-dashoffset: 36;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+[data-inview] .animate-packet-flow {
+  animation-name: packet-flow-in;
+}
+
+/* Touch targets: at least 44px on phones and touch screens. */
+@media (pointer: coarse), (max-width: 767px) {
+  .btn,
+  .btn-sm,
+  .btn-ghost,
+  .btn-danger,
+  .input,
+  summary {
+    min-height: 2.75rem;
+  }
+  .btn-ghost {
+    min-width: 2.75rem;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  [data-reveal="pending"] > *,
-  [data-reveal="shown"] > * {
-    transform: none;
-    transition-property: opacity;
-  }
   .ring-animate,
   .animate-verify-pulse,
   .animate-scan-sweep,
   .animate-packet-flow,
   .animate-trace-draw,
   .animate-shake,
-  .animate-bar-grow {
+  [data-inview] > *,
+  [data-inview] .score-ring,
+  [data-inview] .bar-fill,
+  [data-inview] .animate-packet-flow {
     animation: none;
   }
   .shimmer-bar::after {
