@@ -12,6 +12,9 @@ import {
   updateFactAction,
 } from "../actions";
 import { ConfirmButton } from "@/components/confirm-button";
+import { requireUser } from "@/lib/auth";
+import { isDemoUser } from "@/lib/supabase/admin";
+import { ImportResume } from "./import-resume";
 
 export const metadata: Metadata = { title: "Fact bank" };
 
@@ -23,7 +26,7 @@ const KIND_LABEL: Record<Experience["kind"], string> = {
 };
 
 export default async function FactsPage() {
-  const [profile, bank] = await Promise.all([getProfile(), getFactBank()]);
+  const [profile, bank, user] = await Promise.all([getProfile(), getFactBank(), requireUser()]);
 
   return (
     <div className="space-y-10">
@@ -41,6 +44,7 @@ export default async function FactsPage() {
         </p>
       </header>
 
+      <ImportResume demo={isDemoUser(user.email)} />
 
       <section className="space-y-4">
         <h2 className="font-medium">Experience, projects and education</h2>

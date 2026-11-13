@@ -70,6 +70,14 @@ commits and UI copy in English.
   `forms.tsx`. The demo account's settings are locked.
 - **Account data** `src/lib/account.ts`; `listSessions()` reads `auth.sessions` with raw SQL and falls back to null.
 - **LLM** `src/lib/llm/provider.ts`: Gemini, or `LLM_PROVIDER=freellmapi` (local only).
+- **Resume import** (Fact bank page, `src/app/app/facts/import-resume.tsx`): `importResumeAction` reads the upload in
+  memory (`src/lib/import/extract.ts`: magic-byte check, 2 MB cap, `fflate` for .docx with a zip-bomb cap, `unpdf`
+  for PDF, max 10 pages), then `parseResume` (Gemini, counted against the daily AI limit) or the rule-based
+  `parseResumeRuleBased` (`src/lib/core/resume.ts`) when there is no key, the limit is used up or the model fails.
+  `finishDraft` drops tech and months the file never names and flags numbers it does not contain. Nothing is saved
+  until the review screen calls `saveImportAction`, which reuses the manual-form zod schemas. Off for the demo
+  account. Gemini rejects nested `maxItems` in a response schema (400), so the resume schema has no `.max()`.
+  Server action body limit is raised to 3 MB in `next.config.ts`. Importing the same file twice makes duplicates.
 
 ## Screenshots
 
@@ -84,7 +92,7 @@ Supabase admin API (`npx supabase status -o env` gives the service key).
 
 ## Left to do (pick with the user)
 
-1. **Import resume (.docx/.pdf).** Extract facts; the user reviews and edits them. Still missing from the MVP.
+1. **Deploy resume import** (committed on main, not deployed): ask the user first. Then try a real resume on prod.
 2. **Guard false blocks.** Accept derived percentages and an abbreviation list. Tune on the 30 tuning cases only;
    never on holdout.
 3. Google sign-in works on prod (the user signed in with it on 2026-11-14, and the prod role can read

@@ -12,6 +12,8 @@ const nextConfig: NextConfig = {
     },
   },
   serverExternalPackages: ["@react-pdf/renderer"],
+  // Resume import posts a file of up to 2 MB (checked again in the action); the default cap is 1 MB.
+  experimental: { serverActions: { bodySizeLimit: "3mb" } },
 };
 
 export default nextConfig;

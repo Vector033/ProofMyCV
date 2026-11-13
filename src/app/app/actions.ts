@@ -12,7 +12,9 @@ import { canonicalTech } from "@/lib/core/vocab";
 import { checkBullet, describeViolation } from "@/lib/core/guard";
 import { matchRequirements } from "@/lib/core/match";
 import { getLlm, LlmError } from "@/lib/llm/provider";
-import { analyzeJob, draftBullets, type BulletCandidate } from "@/lib/llm/tasks";
+import { analyzeJob, draftBullets, parseResume, type BulletCandidate } from "@/lib/llm/tasks";
+import { MAX_DRAFT_EXPERIENCES, MAX_DRAFT_FACTS, parseResumeRuleBased, type DraftExperience } from "@/lib/core/resume";
+import { MAX_RESUME_BYTES, ResumeFileError, resumeText } from "@/lib/import/extract";
 
 const text = (max: number) => z.string().trim().max(max);
 const optional = (max: number) =>
@@ -101,6 +103,80 @@ export async function updateFactAction(factId: string, fd: FormData) {
 export async function deleteFactAction(factId: string) {
   await data.deleteFact(z.uuid().parse(factId));
   revalidatePath("/app/facts");
+}
+
+// ---------- resume import ----------
+
+export type ImportState = { draft?: DraftExperience[]; draftId?: string; parsedBy?: "ai" | "rules"; note?: string; error?: string };
+
+const DEMO_IMPORT_OFF = "Import is off on the shared demo account, because every visitor sees its data. Sign up to import your own resume.";
+
+/**
+ * Reads an uploaded resume in memory and returns proposed entries. Nothing is
+ * stored: not the file, not its text, not the draft. The user saves with saveImportAction.
+ */
+export async function importResumeAction(_prev: ImportState, fd: FormData): Promise<ImportState> {
+  const user = await requireUser();
+  if (isDemoUser(user.email)) return { error: DEMO_IMPORT_OFF };
+  const file = fd.get("resume");
+  if (!(file instanceof File) || file.size === 0) return { error: "Choose a .docx or .pdf file." };
+  if (file.size > MAX_RESUME_BYTES) return { error: "The file is larger than 2 MB." };
+
+  let text: string;
+  try {
+    text = await resumeText(new Uint8Array(await file.arrayBuffer()));
+  } catch (e) {
+    if (e instanceof ResumeFileError) return { error: e.message };
+    console.error("resume import: extraction failed", e instanceof Error ? e.name : e);
+    return { error: "This file could not be read. Try saving it again as .docx or .pdf." };
+  }
+
+  let llm = getLlm();
+  let note: string | undefined;
+  if (llm && !(await allowAi(user)).ok) {
+    llm = null;
+    note = "Today's AI limit is used up, so simple rules read your file instead.";
+  }
+  let draft: DraftExperience[];
+  try {
+    draft = await parseResume(llm, text);
+  } catch (e) {
+    // LlmError messages hold the HTTP status or schema error, never the resume text.
+    console.error("resume import: parseResume failed", e instanceof LlmError ? e.message.slice(0, 300) : e instanceof Error ? e.name : e);
+    llm = null;
+    note = "The AI could not read the file just now, so simple rules read it instead.";
+    draft = parseResumeRuleBased(text);
+  }
+  if (draft.length === 0) {
+    return { error: "No experiences or bullet points were found in this file. Add them by hand below." };
+  }
+  return { draft, draftId: crypto.randomUUID(), parsedBy: llm ? "ai" : "rules", note };
+}
+
+const importSchema = z
+  .array(experienceSchema.extend({ facts: z.array(factSchema).max(MAX_DRAFT_FACTS) }))
+  .min(1, "Tick at least one entry to save.")
+  .max(MAX_DRAFT_EXPERIENCES);
+
+/** Saves the entries the user ticked on the review screen, after the same checks as the manual forms. */
+export async function saveImportAction(entries: unknown): Promise<FormState & { saved?: number }> {
+  const user = await requireUser();
+  if (isDemoUser(user.email)) return { error: DEMO_IMPORT_OFF };
+  const parsed = importSchema.safeParse(entries);
+  if (!parsed.success) {
+    const issue = parsed.error.issues[0];
+    return { error: issue.code === "too_small" && issue.path.length === 0 ? issue.message : "Every entry needs a title, and every fact at least a few words." };
+  }
+  let saved = 0;
+  for (const { facts, ...experience } of parsed.data) {
+    const experienceId = await data.createExperience(experience);
+    for (const fact of facts) {
+      await data.createFact(experienceId, fact);
+      saved++;
+    }
+  }
+  revalidatePath("/app/facts");
+  return { saved };
 }
 
 // ---------- applications ----------

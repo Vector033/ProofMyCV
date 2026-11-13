@@ -31,6 +31,8 @@ that is deleted afterwards.
 ## How it works
 
 1. **Fact bank.** Per job, project or degree you write short facts: what you did, the result, the number, the tools.
+   Or upload your resume (.docx or .pdf, up to 2 MB): FactFit reads it in memory without storing the file, suggests
+   entries, marks any number or month the file does not contain, and saves only what you tick after editing.
 2. **Paste a job description.** FactFit extracts the skills, keywords and problems (Gemini with a JSON schema, or a
    built-in rule-based extractor when no API key is set).
 3. **Mapping and fit score.** Each requirement shows the facts that back it, or is listed as missing. The score is
@@ -159,7 +161,7 @@ npm run typecheck
 - [x] JD extraction, mapping page, fit score
 - [x] Bullet drafting with the fabrication guard, saved versions, PDF export, data export and account deletion
 - [x] Eval set: 30 tuning + 10 held-out cases measuring guard catch rate, false blocks, keyword recall and bullet length
-- [ ] Import facts from an existing resume (.docx / .pdf) for review
+- [x] Import facts from an existing resume (.docx / .pdf) for review
 - [x] Deploy (Vercel + Supabase), demo account, daily AI limit
 - [x] Screenshots in this README
 - [x] Second LLM provider (OpenAI-compatible, FreeLLMAPI for local evals) and a stress test with a model that fabricates
