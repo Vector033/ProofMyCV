@@ -61,9 +61,14 @@ const UNITS: [RegExp, string][] = [
   [/^(?:usd|dollars?)$/i, "USD"],
   [/^(?:thb|baht)$/i, "THB"],
   [/^(?:fps)$/i, "fps"],
+  [/^(?:pps)$/i, "pps"],
+  [/^(?:mm|millimet(?:er|re)s?)$/i, "mm"],
+  [/^(?:cm|centimet(?:er|re)s?)$/i, "cm"],
+  [/^(?:km|kilomet(?:er|re)s?)$/i, "km"],
+  [/^(?:kg|kilograms?)$/i, "kg"],
 ];
 const UNIT_WORDS =
-  "milliseconds?|msecs?|ms|seconds?|secs?|s|minutes?|mins?|hours?|hrs?|h|days?|weeks?|months?|years?|yrs?|kb|kilobytes?|mb|megabytes?|gb|gigabytes?|tb|terabytes?|mah|usd|dollars?|thb|baht|fps";
+  "milliseconds?|msecs?|ms|seconds?|secs?|s|minutes?|mins?|hours?|hrs?|h|days?|weeks?|months?|years?|yrs?|kb|kilobytes?|mb|megabytes?|gb|gigabytes?|tb|terabytes?|mah|usd|dollars?|thb|baht|fps|pps|mm|millimet(?:er|re)s?|cm|centimet(?:er|re)s?|km|kilomet(?:er|re)s?|kg|kilograms?";
 
 // Digits not glued to letters on the left (so "S3", "EC2", "Web3" are names, not
 // numbers), with optional thousands separators, decimals, a k/M/B scale, then
@@ -122,6 +127,7 @@ const sameClaim = (a: NumberClaim, b: NumberClaim) =>
 const BASE_UNIT: Record<string, [family: string, factor: number]> = {
   ms: ["time", 1e-3], s: ["time", 1], min: ["time", 60], h: ["time", 3600], day: ["time", 86400], week: ["time", 604800],
   KB: ["size", 1], MB: ["size", 1e3], GB: ["size", 1e6], TB: ["size", 1e9],
+  mm: ["length", 1e-3], cm: ["length", 1e-2], km: ["length", 1e3],
 };
 
 /** Both values in one unit, or null when they measure different things. */
@@ -133,16 +139,20 @@ function comparable(a: NumberClaim, b: NumberClaim): [number, number] | null {
   return fa && fb && fa[0] === fb[0] ? [a.value * fa[1], b.value * fb[1]] : null;
 }
 
-// What may sit between two numbers that form a before/after or part/whole pair:
-// "from 410 to 260 KB", "78 of 100", "92/100", "0.62 -> 0.81".
-const PAIR_GAP = /^\s*(?:to|of|out of|down to|up to|vs\.?|versus|\/|->|→)\s*$/i;
+// What may sit between two numbers that form a pair: a before/after ("from 410
+// to 260 KB", "0.62 -> 0.81") or a part of a whole ("78 of 100", "92/100"). Up to
+// 3 words may follow the first number if the second repeats them: "1,200 packets
+// per second to 300 packets per second".
+const PAIR_GAP = /^\s*((?:[A-Za-z]+\s+){0,3}?)(to|down to|up to|vs\.?|versus|->|→|of|out of|\/)\s*$/i;
+const PART_OF = /^(?:of|out of|\/)$/i;
 
 /**
- * Percentages and multipliers a fact's own numbers support: the change from one
- * number to the next ("410 to 260 KB" -> 36.6%), a part of a whole ("78 of
- * 100" -> 78%), a ratio ("12 min to 3 min" -> 4x) and a decimal score ("0.91" -> 91%).
- * Only neighbours joined by "to", "of" or "/" pair up, so "340 tickets over 8
- * months" never yields "98%".
+ * Percentages and multipliers a fact's own numbers support. A before/after pair
+ * A to B backs the change relative to A, (B - A) / A or (A - B) / A, and the
+ * ratio ("12 min to 3 min" -> 4x): "$5,200 to $3,100" backs a 40% cut, never
+ * 60%. A part of a whole, "X of Y" or "X/Y", backs only X / Y ("78 of 100" -> 78%).
+ * A decimal score backs its percent ("0.91" -> 91%). Only neighbours pair up, so
+ * "340 tickets over 8 months" never yields "98%".
  */
 function derivedValues(fact: string): { percent: number[]; times: number[] } {
   // Digits only: "one", "single" and friends are not measurements.
@@ -157,20 +167,28 @@ function derivedValues(fact: string): { percent: number[]; times: number[] } {
     return [i, at];
   });
   for (let i = 0; i + 1 < nums.length; i++) {
-    if (!PAIR_GAP.test(fact.slice(ends[i][1], ends[i + 1][0]))) continue;
+    const gap = fact.slice(ends[i][1], ends[i + 1][0]).match(PAIR_GAP);
+    if (!gap) continue;
+    const repeated = gap[1].trim().toLowerCase();
+    if (repeated && !fact.slice(ends[i + 1][1]).trimStart().toLowerCase().startsWith(repeated)) continue;
     const pair = comparable(nums[i], nums[i + 1]);
     if (!pair) continue;
     const [a, b] = pair;
     if (a <= 0 || b <= 0 || a === b) continue;
-    percent.push((Math.abs(b - a) / a) * 100, (Math.min(a, b) / Math.max(a, b)) * 100);
-    times.push(Math.max(a, b) / Math.min(a, b));
+    if (PART_OF.test(gap[2])) {
+      if (a < b) percent.push((a / b) * 100);
+    } else {
+      percent.push((Math.abs(b - a) / a) * 100);
+      times.push(Math.max(a, b) / Math.min(a, b));
+    }
   }
   return { percent, times };
 }
 
-/** Content words within 4 words of the claim, not crossing a comma or bracket. */
-function claimContext(text: string, raw: string): string[] {
-  const i = text.toLowerCase().indexOf(raw.toLowerCase());
+/** Content words within 4 words of the nth use of the claim, not crossing a comma or bracket. */
+function claimContext(text: string, raw: string, nth: number): string[] {
+  let i = -1;
+  for (let k = 0; k <= nth; k++) i = text.toLowerCase().indexOf(raw.toLowerCase(), i + 1);
   if (i < 0) return [];
   const before = text.slice(0, i).split(/[,;()]/).at(-1)!.trim().split(/\s+/).slice(-4).join(" ");
   const after = text.slice(i + raw.length).split(/[,;()]/)[0].trim().split(/\s+/).slice(0, 4).join(" ");
@@ -185,10 +203,10 @@ function claimContext(text: string, raw: string): string[] {
  * multiplier must be within 5% ("4x" needs 3.8 to 4.2), so "halved" never
  * covers 410 -> 260.
  */
-function derivable(claim: NumberClaim, text: string, facts: string[]): boolean {
+function derivable(claim: NumberClaim, text: string, facts: string[], nth = 0): boolean {
   if (!RATIOS.has(claim.unit)) return false;
   const step = 10 ** -(claim.raw.match(/\.(\d+)/)?.[1].length ?? 0);
-  const context = claimContext(text, claim.raw);
+  const context = claimContext(text, claim.raw, nth);
   return facts.some((f) => {
     const d = derivedValues(f);
     const close =
@@ -286,16 +304,20 @@ export function checkBullet(bullet: BulletDraft, facts: Fact[], experiences: Exp
 
   const evidence = cited.map(factText).join("\n");
   const evidenceNumbers = extractNumbers(evidence);
-  const seen = new Set<string>();
+  // Every use of a derived number is checked in its own context: "30% of sign-ups
+  // quit" may be derived, "cutting costs by 30%" later in the bullet is not.
+  const uses = new Map<string, number>();
   const citedTexts = cited.map(factText);
   for (const claim of extractNumbers(bullet.text)) {
-    if (seen.has(claim.raw)) continue;
-    seen.add(claim.raw);
+    const nth = uses.get(claim.raw) ?? 0;
+    uses.set(claim.raw, nth + 1);
     if (evidenceNumbers.some((e) => sameClaim(claim, e))) {
-      const w = countedNounWarning(claim, bullet.text, evidence);
+      const w = nth === 0 ? countedNounWarning(claim, bullet.text, evidence) : null;
       if (w) warnings.push(w);
-    } else if (!derivable(claim, bullet.text, citedTexts)) {
-      violations.push({ type: "number", claim: claim.raw });
+    } else if (!derivable(claim, bullet.text, citedTexts, nth)) {
+      if (!violations.some((v) => v.type === "number" && v.claim === claim.raw)) {
+        violations.push({ type: "number", claim: claim.raw });
+      }
     }
   }
 

@@ -386,3 +386,63 @@ describe("guard: derived numbers, abbreviations, counted nouns", () => {
     expect(check("Grew a reading club to 120 active members", "c").warnings).toEqual([]);
   });
 });
+
+describe("guard: derived direction, initials, more units", () => {
+  const f = (id: string, did: string, result: string | null, tech: string[] = []): Fact => ({
+    id,
+    experienceId: "e1",
+    did,
+    result,
+    tech,
+  });
+  const bank = [
+    f("cost", "Moved model serving to autoscaling pods", "Monthly inference cost dropped from $5,200 to $3,100"),
+    f("seo", "Rewrote page titles for search engine optimisation", "Organic search sessions rose from 2,100 to 3,400 per month"),
+    f("q", "Found where new users drop off during onboarding", "1,350 of 4,500 new sign-ups quit at the phone step"),
+    f("pos", "Wrote the localization node for Robot Operating System 2", "Position error fell from 25 cm to 8 cm"),
+    f("pps", "Reconfigured virtual LANs on 42 access switches", "Broadcast traffic fell from 1,200 packets per second to 300 packets per second"),
+    f("dr", "Wrote runbooks for point-in-time recovery", "Used in 2 disaster recovery drills"),
+    f("ga", "Set up Google Analytics 4 conversion tracking", "Tracked 1,180 online bookings"),
+    f("vm", "Moved 8 always-on virtual machines to pods", null),
+  ];
+  const check = (text: string, id: string) => checkBullet({ experienceId: "e1", text, factIds: [id] }, bank);
+
+  it("reads a before/after pair in its direction", () => {
+    expect(check("Cut monthly inference cost by 40% by moving to autoscaling pods", "cost").ok).toBe(true);
+    // 3,100 / 5,200 is 60%, but that is what is left, not the cut.
+    expect(check("Cut monthly inference cost by 60% by moving to autoscaling pods", "cost").ok).toBe(false);
+    // An increase is measured from the start value: (3,400 - 2,100) / 2,100 = 62%.
+    expect(check("Grew organic search sessions 62% by rewriting page titles", "seo").ok).toBe(true);
+    expect(check("Grew organic search sessions 38% by rewriting page titles", "seo").ok).toBe(false);
+  });
+
+  it("reads X of Y only as X / Y", () => {
+    expect(check("Found that 30% of new sign-ups quit at the phone step", "q").ok).toBe(true);
+    expect(check("Found that 70% of new sign-ups quit at the phone step", "q").ok).toBe(false);
+    // The same number again, about something the fact never mentions.
+    expect(check("Found that 30% of new sign-ups quit at the phone step, cutting costs by 30%", "q").ok).toBe(false);
+  });
+
+  it("derives percentages on more units and repeated unit phrases", () => {
+    expect(check("Cut position error by 68% in a Robot Operating System 2 node", "pos").ok).toBe(true);
+    expect(check("Cut broadcast traffic by 75% by reconfiguring virtual LANs", "pps").ok).toBe(true);
+    expect(check("Cut broadcast traffic by 25% by reconfiguring virtual LANs", "pps").ok).toBe(false);
+  });
+
+  it("accepts an acronym spelled out by the initials of a phrase in the fact", () => {
+    expect(check("Wrote PITR runbooks used in 2 DR drills", "dr").ok).toBe(true);
+    expect(check("Reconfigured VLANs on 42 access switches", "pps").ok).toBe(true);
+    expect(check("Wrote a ROS 2 localization node", "pos").ok).toBe(true);
+    expect(check("Set up GA4 conversion tracking for 1,180 online bookings", "ga").ok).toBe(true);
+    expect(check("Rewrote page titles for SEO", "seo").ok).toBe(true);
+  });
+
+  it("blocks an acronym the facts do not spell out, or that names something else", () => {
+    expect(check("Wrote PITR runbooks with RTO targets", "dr").violations).toContainEqual({ type: "term", term: "RTO" });
+    expect(check("Reconfigured VLANs over MPLS on 42 access switches", "pps").ok).toBe(false);
+    // Listed abbreviations need their own expansion: "VPC" is not "virtual private cloud" here.
+    expect(check("Moved 8 VPC hosts to pods", "vm").ok).toBe(false);
+    // Tool names stay with the vocabulary: initials never turn "AWS" into "always-on ... ".
+    expect(check("Moved 8 AWS virtual machines to pods", "vm").ok).toBe(false);
+  });
+});

@@ -160,12 +160,45 @@ export const ABBREVIATIONS: Record<string, string> = {
   PII: "personally identifiable information",
 };
 
-const loosePhrase = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+// British and American spellings compare equal ("optimisation", "optimization").
+const loosePhrase = (s: string) =>
+  s.toLowerCase().replace(/[^a-z0-9]+/g, " ").replace(/isation/g, "ization").trim();
 
-/** Does the text spell out the abbreviation ("VMs" with "virtual machines")? */
+// Small words an acronym may leave out: "PD" for "probability of default".
+const SKIPPABLE = new Set(["of", "and", "the", "for", "to", "a", "an", "in", "on"]);
+
+/**
+ * Do consecutive words of the text spell the acronym by their first letters?
+ * "PITR" from "point-in-time recovery", "VLANs" from "virtual LANs" (a word that
+ * is itself an acronym, or a number, gives all its characters), "GA4" from
+ * "Google Analytics 4".
+ */
+export function initialsMatch(acronym: string, text: string): boolean {
+  const target = acronym.toLowerCase();
+  const words = text.split(/[^A-Za-z0-9]+/).filter(Boolean);
+  const pieces = (w: string) =>
+    /^(?:[A-Z][A-Z0-9]+s?|\d+)$/.test(w) ? [w.replace(/s$/, "").toLowerCase(), w[0].toLowerCase()] : [w[0].toLowerCase()];
+  const match = (wi: number, ti: number): boolean => {
+    if (ti === target.length) return true;
+    if (wi >= words.length) return false;
+    if (SKIPPABLE.has(words[wi].toLowerCase()) && ti > 0 && match(wi + 1, ti)) return true;
+    return pieces(words[wi]).some((p) => target.startsWith(p, ti) && match(wi + 1, ti + p.length));
+  };
+  return words.some((_, start) => match(start, 0));
+}
+
+/**
+ * Does the text spell out the abbreviation? An abbreviation in the list must
+ * match its own expansion ("VMs" with "virtual machines"), so it can never stand
+ * for something else; any other mostly-capital token ("PITR", "VLANs", "GA4")
+ * must be the initials of a phrase in the text. Tool names in the vocabulary
+ * ("AWS", "GCP") never get here: the vocabulary check judges them.
+ */
 export function abbreviationBacked(token: string, text: string): boolean {
-  const phrase = ABBREVIATIONS[token] ?? ABBREVIATIONS[token.replace(/s$/, "")];
-  return Boolean(phrase) && ` ${loosePhrase(text)} `.includes(` ${loosePhrase(phrase)}`);
+  const bare = token.replace(/s$/, "");
+  const phrase = ABBREVIATIONS[token] ?? ABBREVIATIONS[bare];
+  if (phrase) return ` ${loosePhrase(text)} `.includes(` ${loosePhrase(phrase)}`);
+  return bare.length >= 2 && (bare.match(/[A-Z]/g)?.length ?? 0) >= 2 && initialsMatch(bare, text);
 }
 
 const escapeRegex = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
