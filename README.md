@@ -50,21 +50,23 @@ that is deleted afterwards.
 
 ## Eval
 
-40 fictional cases (30 for tuning, 10 held out), details in [eval/README.md](eval/README.md):
+50 fictional cases (30 for tuning, 2 held-out sets of 10), details in [eval/README.md](eval/README.md):
 
-- The guard blocked **100%** of 547 fabrications on the tuning set and **96.8%** of 186 on the held-out set,
-  while accepting every faithful bullet (120 / 120). Its misses are same-number meaning swaps ("120 members" →
-  "120 bookings").
+- The guard blocks **547 / 547** fabrications on the tuning set and accepts all 90 faithful bullets. On a new
+  held-out set (2026-11-14, scored once) it blocked **173 / 184 (94.0%)** but accepted only **16 / 30** faithful
+  bullets: most were blocked for domain acronyms it does not know (VLANs, PITR, GA4). 8 of its 11 misses are
+  same-number meaning swaps ("120 members" → "120 bookings"), which now get a soft warning when the counted noun
+  changes. The first held-out set (2026-11-04) scored 180 / 186 blocked and 30 / 30 accepted.
 - Gemini Flash-Lite drafted 113 bullets on 28 cases with **0** fabrications found by the guard, an independent
   bait check, or a manual spot check.
 - A rewritten drafting prompt raised XYZ-style bullets from 31.6% to 75% (human-written: 86.7%) and cut
   copy-the-fact bullets from 66% to 6%, still with no fabrications.
 - Gemini skill extraction recall on required skills: 82.8% (rule-based fallback: 70.5%).
 - **Against a model that does make things up:** Typhoon 2.5 (via FreeLLMAPI) given a typical "make it impressive,
-  add metrics" prompt wrote 26 bullets with invented or inflated numbers ("reduced rebuilds by 80%", "98% resolution
-  rate within SLA"). The guard blocked **all 26**; the independent bait check found 3 leaks before the guard and
-  **0** after. The cost: 10 of its 45 blocks were honest paraphrases it could not verify (410 KB → 260 KB written as
-  "36%", "0.91" as "91%", "VMs" for "virtual machines").
+  add metrics" prompt wrote 25 bullets with invented or inflated numbers ("98% resolution rate within SLA",
+  "97% faster" where the facts give 94%). The guard blocks **all 25**; the independent bait check found 3 leaks
+  before the guard and **0** after. Derived percentages ("36%" from 410 KB → 260 KB, "91%" from 0.91) and
+  abbreviations ("VMs", "SSR", "Dockerized") now pass, cutting its blocks from 45 to 33.
 
 **Account settings.** Sign in with email and password or with Google (when configured). Settings has three tabs:
 *Account* (email, sign-in methods, connect or disconnect Google), *Security* (a checklist of real account facts,
@@ -160,7 +162,7 @@ npm run typecheck
 - [x] Scaffold, Supabase auth, fact bank schema and CRUD
 - [x] JD extraction, mapping page, fit score
 - [x] Bullet drafting with the fabrication guard, saved versions, PDF export, data export and account deletion
-- [x] Eval set: 30 tuning + 10 held-out cases measuring guard catch rate, false blocks, keyword recall and bullet length
+- [x] Eval set: 30 tuning + 2 × 10 held-out cases measuring guard catch rate, false blocks, keyword recall and bullet length
 - [x] Import facts from an existing resume (.docx / .pdf) for review
 - [x] Deploy (Vercel + Supabase), demo account, daily AI limit
 - [x] Screenshots in this README

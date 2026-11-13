@@ -13,13 +13,13 @@ import { DemoButton } from "./login/demo-button";
 const comparisonRows = [
   {
     feature: "Numbers",
-    ai: "Told to “add impressive metrics”, Typhoon 2.5 invented or inflated 26 claims",
-    factfit: "Blocked 26 / 26 of them, and 547 / 547 on the tuning cases",
+    ai: "Told to “add impressive metrics”, Typhoon 2.5 invented or inflated 25 claims",
+    factfit: "Blocked 25 / 25 of them, and 547 / 547 on the tuning cases",
   },
   {
     feature: "Tools",
     ai: "A draft can name tools that are not in your facts",
-    factfit: "Every tool name is checked against the cited facts (37 / 37 held-out)",
+    factfit: "Every tool name is checked against the cited facts (32 / 33 held-out)",
   },
   {
     feature: "In an interview",
@@ -204,17 +204,17 @@ export default async function Home({ searchParams }: PageProps<"/">) {
             <SectionHeader
               id="measured-heading"
               title="Measured, not promised"
-              subtitle={"The guard was tested on 40 fictional job postings with hand-written fabrications. 10 of them were held out until it was\u00A0tuned."}
+              subtitle={"The guard was tested on 50 fictional job postings with hand-written fabrications. The 10 newest were held out until it was\u00A0tuned."}
             />
 
             <BenchmarkMetrics />
 
             {/* Where the guard stops, in the words of eval/README.md */}
             <p className="body-prose mt-10 text-sm text-slate-600">
-              <span className="font-semibold text-slate-900">Where it stops.</span> All 6 held-out misses kept the
+              <span className="font-semibold text-slate-900">Where it stops.</span> 8 of the 11 held-out misses kept the
               number and unit but changed what it counts, such as &ldquo;120 members&rdquo; written as
               &ldquo;120 bookings&rdquo;. The guard checks numbers, units and names; it does not understand meaning.
-              It also blocks some honest rewording, such as a percentage you worked out yourself. You review every
+              It also blocks some honest rewording, such as an abbreviation it does not know. You review every
               bullet before&nbsp;export.
             </p>
           </div>

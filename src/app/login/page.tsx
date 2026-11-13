@@ -102,7 +102,7 @@ export default async function LoginPage({ searchParams }: PageProps<"/login">) {
               </div>
               <div>
                 <dt className="text-[11px] text-slate-400">Blocked, held-out</dt>
-                <dd className="mt-0.5 text-lg font-semibold text-emerald-300 tabular-nums">180 / 186</dd>
+                <dd className="mt-0.5 text-lg font-semibold text-emerald-300 tabular-nums">173 / 184</dd>
               </div>
               <div>
                 <dt className="text-[11px] text-slate-400">Exported PDF</dt>

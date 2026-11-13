@@ -1,6 +1,6 @@
 # FactFit eval
 
-40 fictional job-posting + fact-bank cases, hand-labelled, used to measure the fabrication guard, skill extraction
+50 fictional job-posting + fact-bank cases, hand-labelled, used to measure the fabrication guard, skill extraction
 and the live drafting pipeline. No real person's data is used.
 
 | Set | Cases | Role families | Used for |
@@ -8,7 +8,8 @@ and the live drafting pipeline. No real person's data is used.
 | `cases/a-web.json` | 10 | frontend, full-stack, mobile | tuning + CI |
 | `cases/b-backend.json` | 10 | backend, data, DevOps, ML, LLM apps | tuning + CI |
 | `cases/c-other.json` | 10 | QA, game dev, IT support, embedded, security, BA, tech writing, UX, TA, Thai co-op | tuning + CI |
-| `holdout/holdout.json` | 10 | Rails, .NET, Android, data science, SRE, Salesforce, hardware test, e-commerce ops, Rust, design | reported only |
+| `holdout/holdout.json` | 10 | Rails, .NET, Android, data science, SRE, Salesforce, hardware test, e-commerce ops, Rust, design | reported only (2026-11-04; no longer blind) |
+| `holdout2/holdout2.json` | 10 | network, product analytics, GIS, bioinformatics, Kotlin, DBA, MLOps, robotics, credit risk, digital marketing | reported only (2026-11-14) |
 
 Each case has a posting, labelled required/preferred skills, the skills the candidate lacks (bait), a fact bank,
 2–3 **faithful** bullets a careful human would write, and 2–4 hand-written **fabrications** of five kinds:
@@ -17,8 +18,86 @@ never mention), `multiplier` ("doubled", "10x"), and `citation` (a real claim pi
 `metrics.ts` also generates fabrications from every faithful bullet (changed number, added percentage, added
 missing tool, added "doubling", wrong citation), so the guard is not only tested on mistakes someone hand-picked.
 
-The held-out set was written by a separate author **after** the guard was tuned, without access to the guard's code
-or the tuning cases, and the guard was not changed after seeing its score.
+Each held-out set was written by a separate author **after** the guard was tuned, without access to the guard's code
+or the tuning cases, and the guard was not changed after seeing its score. Once a held-out score has been reported,
+that set is no longer blind; the next guard change gets a new one.
+
+## Results (2026-11-14): derived numbers, abbreviations, counted-noun warning
+
+### What changed in the guard
+
+- **Derived percentages and ratios.** A percent or multiplier passes when one cited fact computes it from a
+  before/after or part/whole pair joined by "to", "of" or "/" (410 → 260 KB as "36%" or "37%", "78 of 100" as "78%",
+  "0.91" as "91%", 12 min → 40 s as "94%"), within rounding (a percent may round either way; a multiplier must be within
+  5%, so "halved" never covers 410 → 260). The words next to the number must share a word with that fact, so the
+  right arithmetic about the wrong thing ("cutting costs by 30%" from a hit rate that rose 30%) is still blocked.
+- **Abbreviations.** An all-caps token is backed when the facts spell it out (`ABBREVIATIONS` in `vocab.ts`:
+  VMs, SSR, SSO, CDN, RPS …), and "Dockerized" counts as Docker.
+- **Counted-noun warning.** The same whole number with a different counted noun ("120 bookings" from "120 members")
+  gets a soft warning in the bullet studio and the landing sandbox, not a block.
+
+All of this was tuned on the 30 tuning cases and the saved live drafts of those cases only. The guard was then
+frozen (commit `9931e73`) and run once on a new held-out set.
+
+### Fabrication guard (offline, deterministic)
+
+| | Tuning set (30) | New held-out set `holdout2` (10) |
+|---|---|---|
+| Fabrications blocked | **547 / 547** | **173 / 184 (94.0%)** |
+| Faithful bullets accepted | 90 / 90 | **16 / 30 (53.3%)** |
+| Counted-noun warnings on accepted faithful bullets | 0 / 90 | 0 / 16 |
+| By kind | | number 68/70 · multiplier 37/37 · tech 32/33 · citation 34/34 · unit 2/10 |
+
+`holdout2` was written by a separate author (a subagent) who could read only the case schema, the five fabrication
+kinds and one tuning case, not the guard, the other cases or this file's results. It covers 10 new role families
+(network, product analytics, GIS, bioinformatics, Kotlin backend, DBA, MLOps, robotics, credit risk, digital
+marketing) and deliberately includes faithful derived percentages and abbreviations, wrong derived percentages and
+counted-noun swaps. It was scored once; the guard was not changed afterwards.
+
+**The new rules did not generalise well to new domains.** 14 of 30 honest bullets were blocked:
+
+- 13 used a domain acronym the facts spell out but the fixed list does not know: VLANs, OSPF, APs, SNMP, GPS, HPC,
+  RPO, PITR, EKS, ROS, PD, DPD, GA4/GTM, and SEO, which is in the list, but the fact spells "optimisation".
+  A rule that accepts an acronym whose letters are the initials of a phrase in the cited fact ("PITR" from
+  "point-in-time recovery") would cover most of these, but needs a fresh blind set to measure.
+- 3 derived numbers were blocked (2 of them in bullets above): units the guard does not know ("packets per second",
+  "cm") break the before/after pairing, and "…, a 15% relative gain" shares no word with its fact.
+
+The 11 fabrications that got through:
+
+- 8 counted-noun swaps ("160 branch offices" for routers, "340 borrowers" for loans, "600 GB per database"…).
+  The warning flagged 2 of them ("14 provinces", "220 stores"). Same-number meaning swaps are still the main limit.
+- "cutting monthly inference cost by 60%": $5,200 → $3,100 is a 40% cut, but the part-of-whole ratio
+  (3,100 / 5,200 = 60%) is also derived from a "to" pair. This is a bug in the new rule: part-of-whole should come
+  only from "of" / "/" pairs.
+- "cutting costs by 30%" repeated a 30% the same bullet already used honestly; the guard checks each distinct
+  number once.
+- "Python and R": a one-letter tool name is not detected (existing gap).
+
+**Old held-out set, re-run (no longer blind):** 177 / 186 blocked (was 180 / 186), 30 / 30 faithful accepted.
+The 3 new passes are hand-labelled multiplier fabrications whose arithmetic the facts do support: "nearly doubled"
+coverage from 41% to 78% (1.9x), "tripled" board test throughput from 6 to 2 minutes per board, and "2.5x" task
+success from 2 of 5 to 5 of 5. The counted-noun warning fired on 1 of its 6 missed unit swaps, and on 1 faithful
+bullet ("7 Framer landing pages").
+
+### Saved live drafts, re-scored (tuning cases, 796 drafts)
+
+| Run | Blocked before → after |
+|---|---|
+| Typhoon 2.5 30B, current prompt | 9 → 8 |
+| Typhoon 2.5 30B, loose prompt | 45 → 33 |
+| Gemini Flash-Lite, loose prompt | 10 → 10 |
+
+No draft went from accepted to blocked. Each of the 13 Typhoon drafts that now pass was re-read against its cited
+facts: all are correct arithmetic or a spelled-out abbreviation ("36% from 410 KB to 260 KB", "3 VMs", "Nuxt SSR",
+"Dockerized Python services", "91% accuracy"). One of them, "reduced rebuilds by 80%", was listed as a caught
+invention on 2026-11-07, but the fact says rebuilds went from 30 to 6, which is exactly 80%. That label was wrong,
+so the loose-prompt count of invented claims is 25, and all 25 are still blocked. Flash-Lite's 5 false blocks were
+inferred terms ("iOS" for an App Store release, "WCAG" for a contrast fix) and are unchanged.
+
+The counted-noun warning fired on 5 of the 796 drafts: 2 real meaning swaps ("45 meals" for "45 orders",
+"1,000 RPS" for a "1,000-request" load test) and 3 honest rewordings ("85 students" for "85 classmates",
+"6 users" for "6 testers", "120 participants" for "120 volunteers").
 
 ## Results (2026-11-04)
 
@@ -123,11 +202,12 @@ Every blocked bullet was read by hand against the whole fact bank and labelled:
 ## Run it
 
 ```bash
-npm run eval                      # offline: guard + rule extractor, tuning and held-out sets (also runs in npm test / CI)
+npm run eval                      # offline: guard + rule extractor, tuning and both held-out sets (also runs in npm test / CI)
+npm run eval -- -t "eval set"     # tuning set only: use this while changing the guard
 npm run eval:live                 # live: Gemini analysis + drafting on the tuning set; writes eval/results/*.json
 npm run eval:live -- --limit 5    # a quick sample
 npm run eval:live -- --rules-analysis --prompt v1   # compare an older drafting prompt (eval/prompts.ts)
 npm run eval:live -- --rules-analysis --prompt loose --provider freellmapi --model typhoon-2.5-30b-a3b-instruct
 npx tsx eval/style-report.mts [eval/results/<file>.json]   # XYZ style scores for a saved run
-npx tsx eval/validate.ts eval/cases/*.json eval/holdout/*.json
+npx tsx eval/validate.ts eval/cases/*.json eval/holdout/*.json eval/holdout2/*.json
 ```

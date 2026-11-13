@@ -1,0 +1,336 @@
+[
+  {
+    "id": "h2-01",
+    "title": "Junior network engineer, new grad, Bangkok fibre ISP",
+    "jd": "Junior Network Engineer - Chaophraya Fiber, Bangkok\n\nChaophraya Fiber provides business broadband and leased lines to 9,000 SME customers in the Bangkok metro area. Our Network Operations team is hiring a junior engineer to support the access and core network.\n\nWhat you will do\n- Configure and troubleshoot Cisco routers and switches (Cisco IOS)\n- Maintain VLANs, OSPF and BGP on our access and core rings\n- Automate repetitive network tasks with Python\n- Monitor the network and respond to alarms\n\nRequired\n- Degree in Computer Engineering, IT or similar\n- Routing and switching fundamentals: VLANs, OSPF, BGP\n- Hands-on Cisco IOS\n- Python scripting\n- Comfortable on the Linux command line\n\nPreferred\n- CCNA certification\n- Ansible\n- MPLS\n- Wireshark packet analysis\n- SNMP monitoring tools",
+    "expected": {
+      "required": ["Cisco IOS", "VLAN", "OSPF", "BGP", "Python", "Linux"],
+      "preferred": ["CCNA", "Ansible", "MPLS", "Wireshark", "SNMP"]
+    },
+    "missing": ["BGP", "Linux", "CCNA", "Ansible", "MPLS", "Wireshark"],
+    "experiences": [
+      { "id": "e1", "kind": "job", "title": "Network Operations Intern", "org": "Siam Netlink", "startDate": "2025-06", "endDate": "2025-10" },
+      { "id": "e2", "kind": "project", "title": "Campus Wi-Fi monitoring (senior project)", "org": "Isan Institute of Technology", "startDate": "2025-11", "endDate": "2026-04" },
+      { "id": "e3", "kind": "education", "title": "B.Eng. Computer Engineering", "org": "Isan Institute of Technology", "startDate": "2022-08", "endDate": "2026-05" }
+    ],
+    "facts": [
+      { "id": "f1", "experienceId": "e1", "did": "Reconfigured virtual local area networks on 42 access switches across 3 office floors", "result": "Broadcast traffic per floor fell from 1,200 packets per second to 300 packets per second", "tech": ["Cisco IOS"] },
+      { "id": "f2", "experienceId": "e1", "did": "Wrote Python scripts that back up running configs from 160 routers and switches every night over SSH", "result": "Replaced a manual backup that took 6 hours a week", "tech": ["Python", "Netmiko"] },
+      { "id": "f3", "experienceId": "e1", "did": "Tuned Open Shortest Path First timers on the core ring with a senior engineer", "result": "Failover time on the core ring dropped from 40 seconds to 4 seconds", "tech": ["Cisco IOS"] },
+      { "id": "f4", "experienceId": "e2", "did": "Built a dashboard that polls 85 campus Wi-Fi access points with Simple Network Management Protocol", "result": "Flagged 23 faulty access points in the first month", "tech": ["Grafana", "Prometheus"] },
+      { "id": "f5", "experienceId": "e2", "did": "Wrote a runbook for the campus helpdesk on restarting access points", "result": "Used by 6 helpdesk staff", "tech": [] },
+      { "id": "f6", "experienceId": "e3", "did": "Took Computer Networks and Network Security courses", "result": "GPA 3.28", "tech": [] }
+    ],
+    "gold": [
+      { "experienceId": "e1", "factIds": ["f1"], "text": "Reconfigured VLANs on 42 Cisco access switches across 3 office floors, cutting per-floor broadcast traffic by 75%" },
+      { "experienceId": "e1", "factIds": ["f3"], "text": "Tuned OSPF timers on the core ring with a senior engineer, making failover 10x faster (40 seconds to 4 seconds)" },
+      { "experienceId": "e2", "factIds": ["f4"], "text": "Built a Grafana and Prometheus dashboard polling 85 campus Wi-Fi APs via SNMP, flagging 23 faulty APs in the first month" }
+    ],
+    "fabricated": [
+      { "experienceId": "e1", "factIds": ["f1"], "text": "Reconfigured VLANs on 42 access switches across 3 office floors, cutting per-floor broadcast traffic by 90%", "kind": "number" },
+      { "experienceId": "e1", "factIds": ["f2"], "text": "Automated nightly config backups for 160 branch offices with Python and Netmiko over SSH", "kind": "unit" },
+      { "experienceId": "e1", "factIds": ["f3"], "text": "Tuned OSPF timers on the MPLS core ring, cutting failover time from 40 seconds to 4 seconds", "kind": "tech" },
+      { "experienceId": "e2", "factIds": ["f5"], "text": "Built a dashboard polling 85 campus Wi-Fi access points that flagged 23 faulty access points in the first month", "kind": "citation" }
+    ]
+  },
+  {
+    "id": "h2-02",
+    "title": "Product analyst, new grad, Bangkok food delivery app",
+    "jd": "Product Analyst (New Graduate) - Pinto Delivery, Bangkok\n\nPinto Delivery connects 30,000 restaurants with diners in 12 Thai provinces. Our product analytics team helps squads decide what to build next using data.\n\nResponsibilities\n- Define and track product metrics such as conversion, retention and DAU\n- Design and analyse A/B tests with product managers\n- Write SQL against our BigQuery warehouse\n- Build dashboards in Looker Studio or Tableau\n- Present findings to product and engineering leads\n\nRequirements\n- Degree in Statistics, Computer Science, Economics or similar\n- Strong SQL\n- Python or R for analysis\n- Understanding of A/B testing and basic statistics\n- Dashboarding experience (Looker Studio or Tableau)\n\nNice to have\n- Amplitude or Mixpanel\n- Experience with causal inference\n- Tableau",
+    "expected": {
+      "required": ["SQL", "Python", "R", "A/B testing", "Statistics", "Looker Studio", "Product metrics"],
+      "preferred": ["BigQuery", "Amplitude", "Mixpanel", "Causal inference", "Tableau"]
+    },
+    "missing": ["R", "Amplitude", "Mixpanel", "Causal inference", "Tableau"],
+    "experiences": [
+      { "id": "e1", "kind": "job", "title": "Product Analytics Intern", "org": "Kluay Tech", "startDate": "2025-01", "endDate": "2025-06" },
+      { "id": "e2", "kind": "project", "title": "Campus second-hand marketplace app (senior thesis)", "org": "Mahanakorn Institute of Science", "startDate": "2025-08", "endDate": "2026-03" },
+      { "id": "e3", "kind": "education", "title": "B.Sc. Statistics", "org": "Mahanakorn Institute of Science", "startDate": "2022-08", "endDate": "2026-05" }
+    ],
+    "facts": [
+      { "id": "f1", "experienceId": "e1", "did": "Ran an A/B test on a shorter checkout flow with 18,000 users", "result": "Checkout conversion rose from 8.0% to 9.2%", "tech": ["SQL", "BigQuery"] },
+      { "id": "f2", "experienceId": "e1", "did": "Built a weekly retention dashboard in Looker Studio for the product team", "result": "Used by 12 product managers", "tech": ["Looker Studio", "SQL"] },
+      { "id": "f3", "experienceId": "e1", "did": "Wrote SQL queries to find where new users drop off during onboarding", "result": "Found that 1,350 of 4,500 new sign-ups quit at the phone verification step", "tech": ["SQL", "BigQuery"] },
+      { "id": "f4", "experienceId": "e2", "did": "Analysed survey responses for a campus second-hand marketplace app in Python with pandas", "result": "312 students answered the survey", "tech": ["Python", "pandas"] },
+      { "id": "f5", "experienceId": "e2", "did": "Defined daily active users and 7-day retention metrics for the marketplace app", "result": "7-day retention was 41% during the 3-week beta", "tech": [] },
+      { "id": "f6", "experienceId": "e3", "did": "Took Probability, Statistical Inference and Data Mining courses", "result": "GPA 3.61", "tech": [] }
+    ],
+    "gold": [
+      { "experienceId": "e1", "factIds": ["f1"], "text": "Ran an A/B test of a shorter checkout flow with 18,000 users, lifting checkout conversion from 8.0% to 9.2%, a 15% relative gain" },
+      { "experienceId": "e1", "factIds": ["f3"], "text": "Queried BigQuery with SQL to map onboarding drop-off, showing 30% of new sign-ups quit at the phone verification step" },
+      { "experienceId": "e2", "factIds": ["f5"], "text": "Defined DAU and 7-day retention metrics for a campus marketplace app, measuring 41% 7-day retention during a 3-week beta" }
+    ],
+    "fabricated": [
+      { "experienceId": "e1", "factIds": ["f3"], "text": "Queried BigQuery with SQL to map onboarding drop-off, showing 45% of new sign-ups quit at the phone verification step", "kind": "number" },
+      { "experienceId": "e1", "factIds": ["f2"], "text": "Built a weekly retention dashboard in Looker Studio used by 12 product teams", "kind": "unit" },
+      { "experienceId": "e2", "factIds": ["f4"], "text": "Analysed survey responses from 312 students in Python and R for a campus marketplace app", "kind": "tech" },
+      { "experienceId": "e1", "factIds": ["f1"], "text": "Doubled checkout conversion by A/B testing a shorter checkout flow with 18,000 users", "kind": "multiplier" }
+    ]
+  },
+  {
+    "id": "h2-03",
+    "title": "GIS analyst intern, Chiang Mai flood and urban mapping",
+    "jd": "GIS Analyst Intern - Doi Mapping Co., Chiang Mai\n\nDoi Mapping builds flood-risk and land-use maps for municipalities in Northern Thailand. We are looking for a 4-month intern to support our spatial analysis team.\n\nWhat you will do\n- Digitise and clean spatial layers in QGIS or ArcGIS\n- Run spatial analysis and remote sensing classification\n- Collect GPS field data with our survey team\n- Prepare maps for municipal reports\n\nMust have\n- QGIS or ArcGIS Pro\n- Basic Python for geoprocessing\n- Remote sensing fundamentals (Sentinel or Landsat imagery)\n- GPS field data collection\n\nNice to have\n- PostGIS\n- Google Earth Engine\n- LiDAR or drone (UAV) imagery\n- RTK GNSS surveying",
+    "expected": {
+      "required": ["QGIS", "ArcGIS Pro", "Python", "Remote sensing", "GPS"],
+      "preferred": ["PostGIS", "Google Earth Engine", "LiDAR", "Drone imagery", "RTK GNSS"]
+    },
+    "missing": ["PostGIS", "Google Earth Engine", "LiDAR", "Drone imagery", "RTK GNSS"],
+    "experiences": [
+      { "id": "e1", "kind": "activity", "title": "GIS Volunteer", "org": "Mae Ping Flood Watch", "startDate": "2024-10", "endDate": "2025-03" },
+      { "id": "e2", "kind": "project", "title": "Urban tree canopy mapping (thesis)", "org": "Ping River University", "startDate": "2025-06", "endDate": "2026-02" },
+      { "id": "e3", "kind": "job", "title": "Survey Assistant (part-time)", "org": "Sakda Survey & Mapping Ltd.", "startDate": "2024-04", "endDate": "2024-09" }
+    ],
+    "facts": [
+      { "id": "f1", "experienceId": "e1", "did": "Digitised flood extents from 2024 aerial photos for 14 subdistricts in QGIS", "result": "Mapped 37 square kilometres of flooded area", "tech": ["QGIS"] },
+      { "id": "f2", "experienceId": "e1", "did": "Collected Global Positioning System points for drainage outlets with a handheld receiver", "result": "Logged 410 drainage outlets", "tech": [] },
+      { "id": "f3", "experienceId": "e2", "did": "Classified tree canopy from Sentinel-2 satellite imagery with a random forest model in Python", "result": "Overall accuracy 0.87 on 600 hand-labelled check points", "tech": ["Python", "scikit-learn", "Sentinel-2"] },
+      { "id": "f4", "experienceId": "e2", "did": "Compared canopy cover across 9 city districts", "result": "Canopy cover ranged from 6% to 22% between districts", "tech": ["QGIS"] },
+      { "id": "f5", "experienceId": "e3", "did": "Converted 1,200 paper parcel maps into a shapefile layer", "result": "Cut parcel lookup time from 15 minutes to 3 minutes", "tech": ["ArcGIS Pro"] }
+    ],
+    "gold": [
+      { "experienceId": "e1", "factIds": ["f2"], "text": "Logged 410 drainage outlets with a handheld GPS receiver for Mae Ping Flood Watch" },
+      { "experienceId": "e2", "factIds": ["f3"], "text": "Classified tree canopy from Sentinel-2 imagery with a scikit-learn random forest, reaching 87% overall accuracy on 600 hand-labelled check points" },
+      { "experienceId": "e3", "factIds": ["f5"], "text": "Converted 1,200 paper parcel maps into an ArcGIS Pro shapefile layer, cutting parcel lookup time by 80%" }
+    ],
+    "fabricated": [
+      { "experienceId": "e2", "factIds": ["f3"], "text": "Classified tree canopy from Sentinel-2 imagery with a random forest in Python, reaching 93% overall accuracy on 600 check points", "kind": "number" },
+      { "experienceId": "e1", "factIds": ["f1"], "text": "Digitised flood extents in QGIS for 14 provinces, mapping 37 square kilometres of flooded area", "kind": "unit" },
+      { "experienceId": "e1", "factIds": ["f2"], "text": "Collected GPS points for 410 drainage outlets with an RTK receiver", "kind": "tech" },
+      { "experienceId": "e3", "factIds": ["f5"], "text": "Converted 1,200 paper parcel maps into a shapefile layer, making parcel lookup 10x faster", "kind": "multiplier" }
+    ]
+  },
+  {
+    "id": "h2-04",
+    "title": "Bioinformatics research assistant, new grad, marine genomics",
+    "jd": "Bioinformatics Research Assistant - Andaman Genomics Institute, Phuket\n\nOur lab studies how corals and seagrass respond to heat stress. We are hiring a research assistant to run and maintain our sequencing analysis pipelines.\n\nResponsibilities\n- Process RNA-seq and whole-genome data on our HPC cluster\n- Maintain Snakemake or Nextflow workflows\n- Run differential expression and variant analyses in R and Python\n- Keep code and documentation in Git\n\nRequired\n- B.Sc. in Bioinformatics, Biology, Computer Science or related\n- Python and R\n- Linux command line and Bash\n- Experience with NGS data (RNA-seq preferred)\n- Git\n\nPreferred\n- Nextflow\n- Docker or Singularity containers\n- Slurm or another HPC scheduler\n- Bioconductor packages\n- Cloud computing (AWS or GCP)",
+    "expected": {
+      "required": ["Python", "R", "Linux", "Bash", "RNA-seq", "Git"],
+      "preferred": ["Nextflow", "Snakemake", "Docker", "Singularity", "Slurm", "Bioconductor", "AWS"]
+    },
+    "missing": ["Git", "Nextflow", "Docker", "Singularity", "AWS"],
+    "experiences": [
+      { "id": "e1", "kind": "job", "title": "Undergraduate Research Assistant", "org": "Kraben Marine Genomics Lab, Southern Coast University", "startDate": "2025-01", "endDate": "2026-04" },
+      { "id": "e2", "kind": "project", "title": "Variant-calling pipeline (course project)", "org": "Southern Coast University", "startDate": "2024-08", "endDate": "2024-12" },
+      { "id": "e3", "kind": "education", "title": "B.Sc. Biology, minor in Computer Science", "org": "Southern Coast University", "startDate": "2022-06", "endDate": "2026-04" }
+    ],
+    "facts": [
+      { "id": "f1", "experienceId": "e1", "did": "Built a Snakemake workflow for RNA sequencing reads from 48 coral samples", "result": "Processing time per batch dropped from 30 hours to 6 hours", "tech": ["Snakemake", "Python", "STAR", "Salmon"] },
+      { "id": "f2", "experienceId": "e1", "did": "Ran jobs on the university's high-performance computing cluster with the Slurm scheduler", "result": "Submitted about 900 jobs over 5 months", "tech": ["Slurm", "Bash"] },
+      { "id": "f3", "experienceId": "e1", "did": "Ran differential expression analysis in R with DESeq2 comparing heat-stressed and control corals", "result": "Found 312 differentially expressed genes", "tech": ["R", "DESeq2"] },
+      { "id": "f4", "experienceId": "e2", "did": "Wrote a variant-calling pipeline with BWA and GATK on 12 human exome samples from public data", "result": "Pipeline recovered 1,880 of 2,000 known benchmark variants", "tech": ["BWA", "GATK", "Bash"] },
+      { "id": "f5", "experienceId": "e3", "did": "Completed Genetics, Molecular Biology and Data Structures courses", "result": "GPA 3.47", "tech": [] }
+    ],
+    "gold": [
+      { "experienceId": "e1", "factIds": ["f1"], "text": "Built a Snakemake RNA-seq workflow for 48 coral samples, cutting batch processing time from 30 hours to 6 hours" },
+      { "experienceId": "e1", "factIds": ["f2"], "text": "Ran about 900 Slurm jobs over 5 months on the university's HPC cluster" },
+      { "experienceId": "e2", "factIds": ["f4"], "text": "Wrote a BWA and GATK variant-calling pipeline on 12 public exome samples that recovered 94% of known benchmark variants" }
+    ],
+    "fabricated": [
+      { "experienceId": "e2", "factIds": ["f4"], "text": "Wrote a BWA and GATK variant-calling pipeline on 12 public exome samples that recovered 98% of known benchmark variants", "kind": "number" },
+      { "experienceId": "e1", "factIds": ["f3"], "text": "Ran DESeq2 differential expression analysis in R on heat-stressed corals, finding 312 differentially expressed pathways", "kind": "unit" },
+      { "experienceId": "e1", "factIds": ["f1"], "text": "Built a Snakemake RNA-seq workflow on AWS Batch for 48 coral samples, cutting batch processing from 30 hours to 6 hours", "kind": "tech" },
+      { "experienceId": "e1", "factIds": ["f1"], "text": "Built a Snakemake RNA-seq workflow for 48 coral samples that made batch processing 6x faster", "kind": "multiplier" }
+    ]
+  },
+  {
+    "id": "h2-05",
+    "title": "Kotlin backend engineer, mid-level, logistics platform",
+    "jd": "Backend Engineer (Kotlin) - Tuktuk Logistics, Bangkok\n\nTuktuk Logistics matches 40,000 drivers with same-day delivery jobs across Thailand. We are growing our platform team and need a backend engineer with 2+ years of experience.\n\nYou will\n- Build and run Kotlin services on Ktor and Spring Boot\n- Design REST and event-driven APIs with Kafka\n- Tune PostgreSQL queries and schemas\n- Deploy services to Kubernetes\n\nRequirements\n- 2+ years of backend development\n- Kotlin, including coroutines\n- Ktor or Spring Boot\n- PostgreSQL\n- Apache Kafka\n- Docker and Kubernetes\n\nNice to have\n- gRPC\n- Redis\n- OpenTelemetry tracing\n- Experience in logistics or ride-hailing",
+    "expected": {
+      "required": ["Kotlin", "Coroutines", "Ktor", "Spring Boot", "PostgreSQL", "Kafka", "Docker", "Kubernetes", "REST"],
+      "preferred": ["gRPC", "Redis", "OpenTelemetry", "Logistics domain"]
+    },
+    "missing": ["Spring Boot", "gRPC", "Redis", "OpenTelemetry"],
+    "experiences": [
+      { "id": "e1", "kind": "job", "title": "Backend Engineer", "org": "Saeng Mobility", "startDate": "2023-04", "endDate": null },
+      { "id": "e2", "kind": "job", "title": "Junior Android Developer", "org": "Pla Tong Apps", "startDate": "2021-06", "endDate": "2023-03" },
+      { "id": "e3", "kind": "education", "title": "B.Sc. Computer Science", "org": "Khon Kaen Polytechnic University", "startDate": "2017-06", "endDate": "2021-04" }
+    ],
+    "facts": [
+      { "id": "f1", "experienceId": "e1", "did": "Rewrote the trip-pricing service from blocking Java to Kotlin coroutines on Ktor", "result": "Throughput rose from 1,100 to 2,750 requests per second on the same 4 instances", "tech": ["Kotlin", "Ktor"] },
+      { "id": "f2", "experienceId": "e1", "did": "Moved driver location updates onto Apache Kafka topics consumed by 3 downstream services", "result": "Dropped location updates fell from 2.4% to 0.3%", "tech": ["Kafka", "Kotlin"] },
+      { "id": "f3", "experienceId": "e1", "did": "Containerized 5 Ktor services and deployed them to the company's Kubernetes cluster", "result": null, "tech": ["Docker", "Kubernetes", "Helm"] },
+      { "id": "f4", "experienceId": "e1", "did": "Added PostgreSQL indexes and rewrote 6 slow queries in the trip history API", "result": "p99 latency went from 1.6 seconds to 400 ms", "tech": ["PostgreSQL", "Exposed"] },
+      { "id": "f5", "experienceId": "e2", "did": "Built offline sync for a field-sales Android app in Kotlin", "result": "Used by 220 sales reps", "tech": ["Kotlin", "Android", "Room"] },
+      { "id": "f6", "experienceId": "e3", "did": "Senior project: built a city bus route planner with Dijkstra's algorithm", "result": "Covered 27 bus routes", "tech": ["Java"] }
+    ],
+    "gold": [
+      { "experienceId": "e1", "factIds": ["f1"], "text": "Rewrote the trip-pricing service from blocking Java to Kotlin coroutines on Ktor, raising throughput 2.5x on the same 4 instances" },
+      { "experienceId": "e1", "factIds": ["f4"], "text": "Cut p99 latency of the trip history API by 75% by adding PostgreSQL indexes and rewriting 6 slow queries" },
+      { "experienceId": "e1", "factIds": ["f3"], "text": "Containerized 5 Ktor services with Docker and deployed them to the company's K8s cluster using Helm" }
+    ],
+    "fabricated": [
+      { "experienceId": "e1", "factIds": ["f2"], "text": "Moved driver location updates onto Kafka topics for 3 downstream services, cutting dropped updates by 95%", "kind": "number" },
+      { "experienceId": "e2", "factIds": ["f5"], "text": "Built offline sync in Kotlin for a field-sales Android app used by 220 stores", "kind": "unit" },
+      { "experienceId": "e1", "factIds": ["f1"], "text": "Rewrote the trip-pricing service in Kotlin coroutines on Ktor with gRPC, raising throughput 2.5x on the same 4 instances", "kind": "tech" },
+      { "experienceId": "e2", "factIds": ["f5"], "text": "Moved driver location updates onto Kafka topics consumed by 3 downstream services", "kind": "citation" }
+    ]
+  },
+  {
+    "id": "h2-06",
+    "title": "Junior database administrator, new grad, Bangkok insurer",
+    "jd": "Junior Database Administrator - Ratchada Mutual Insurance, Bangkok\n\nRatchada Mutual runs policy and claims systems for 1.2 million customers. Our Data Platform team is hiring a junior DBA to help keep our databases fast, backed up and available.\n\nKey duties\n- Administer PostgreSQL and Microsoft SQL Server databases\n- Run and test backups and recovery\n- Tune slow queries and indexes\n- Support high availability setups and disaster recovery drills\n\nRequired\n- PostgreSQL and SQL Server administration\n- Backup and recovery\n- Query and index tuning\n- Replication / high availability\n- Linux basics\n\nPreferred\n- Oracle Database\n- PowerShell or Bash scripting\n- AWS RDS\n- Terraform",
+    "expected": {
+      "required": ["PostgreSQL", "SQL Server", "Backup and recovery", "Performance tuning", "Replication", "Linux"],
+      "preferred": ["Oracle", "PowerShell", "Bash", "AWS RDS", "Terraform"]
+    },
+    "missing": ["Linux", "Oracle", "AWS RDS", "Terraform"],
+    "experiences": [
+      { "id": "e1", "kind": "job", "title": "Database Intern", "org": "Nakhon Data Services", "startDate": "2025-06", "endDate": "2025-11" },
+      { "id": "e2", "kind": "project", "title": "Club membership system (class project)", "org": "Rattanakosin University of Technology", "startDate": "2024-08", "endDate": "2024-12" },
+      { "id": "e3", "kind": "education", "title": "B.Sc. Information Technology", "org": "Rattanakosin University of Technology", "startDate": "2022-08", "endDate": "2026-05" }
+    ],
+    "facts": [
+      { "id": "f1", "experienceId": "e1", "did": "Set up streaming replication from a primary PostgreSQL server to 2 standby servers", "result": "Recovery point objective went from 24 hours to under 1 minute", "tech": ["PostgreSQL", "Patroni"] },
+      { "id": "f2", "experienceId": "e1", "did": "Automated nightly backups for 18 SQL Server databases with PowerShell scripts", "result": "Total backup size fell from 1.5 TB to 600 GB after enabling compression", "tech": ["SQL Server", "PowerShell"] },
+      { "id": "f3", "experienceId": "e1", "did": "Tuned indexes on the claims reporting database", "result": "Monthly claims report runtime dropped from 45 minutes to 9 minutes", "tech": ["SQL Server"] },
+      { "id": "f4", "experienceId": "e2", "did": "Designed a normalised schema with 11 tables for a club membership system", "result": "Stored records for 540 members", "tech": ["MySQL"] },
+      { "id": "f5", "experienceId": "e1", "did": "Wrote runbooks for failover and point-in-time recovery", "result": "Used in 2 disaster recovery drills", "tech": ["PostgreSQL"] },
+      { "id": "f6", "experienceId": "e3", "did": "Took Database Systems and Operating Systems courses", "result": "GPA 3.15", "tech": [] }
+    ],
+    "gold": [
+      { "experienceId": "e1", "factIds": ["f1"], "text": "Set up PostgreSQL streaming replication to 2 standby servers with Patroni, cutting RPO from 24 hours to under 1 minute" },
+      { "experienceId": "e1", "factIds": ["f2"], "text": "Automated nightly PowerShell backups for 18 SQL Server databases and enabled compression, cutting total backup size by 60%" },
+      { "experienceId": "e1", "factIds": ["f5"], "text": "Wrote failover and PITR runbooks that were used in 2 DR drills at Nakhon Data Services" }
+    ],
+    "fabricated": [
+      { "experienceId": "e1", "factIds": ["f2"], "text": "Automated nightly PowerShell backups for 18 SQL Server databases and compressed them to 600 GB per database", "kind": "unit" },
+      { "experienceId": "e1", "factIds": ["f3"], "text": "Tuned indexes on the claims reporting database, making the monthly claims report 10x faster", "kind": "multiplier" },
+      { "experienceId": "e1", "factIds": ["f1"], "text": "Set up PostgreSQL streaming replication to 2 standby servers on AWS RDS, cutting recovery point objective to under 1 minute", "kind": "tech" },
+      { "experienceId": "e1", "factIds": ["f3"], "text": "Tuned indexes on the claims reporting database, cutting monthly claims report runtime by 90%", "kind": "number" }
+    ]
+  },
+  {
+    "id": "h2-07",
+    "title": "MLOps engineer, mid-level, digital lending",
+    "jd": "MLOps Engineer - Mekong Lending, Bangkok (hybrid)\n\nMekong Lending uses machine learning to approve small business loans in minutes. We have 20+ models in production and need an MLOps engineer to make training, deployment and monitoring reliable.\n\nResponsibilities\n- Own the model registry and release process (MLflow)\n- Build CI/CD for model training and serving\n- Run model serving on Kubernetes in AWS\n- Monitor data drift and model performance\n\nRequirements\n- 2+ years in ML engineering or MLOps\n- Python\n- MLflow or a similar registry\n- Docker and Kubernetes\n- CI/CD (GitHub Actions, GitLab CI or similar)\n- AWS or GCP\n\nNice to have\n- Kubeflow Pipelines\n- Apache Airflow\n- Terraform\n- Feature store experience",
+    "expected": {
+      "required": ["Python", "MLflow", "Docker", "Kubernetes", "CI/CD", "AWS", "Model monitoring"],
+      "preferred": ["Kubeflow", "Airflow", "Terraform", "Feature store"]
+    },
+    "missing": ["Kubeflow", "Airflow", "Terraform", "Feature store"],
+    "experiences": [
+      { "id": "e1", "kind": "job", "title": "Machine Learning Engineer", "org": "Baitong Insurtech", "startDate": "2023-02", "endDate": null },
+      { "id": "e2", "kind": "job", "title": "Data Analyst", "org": "Chanthaburi Fruit Exporters Co.", "startDate": "2021-07", "endDate": "2023-01" }
+    ],
+    "facts": [
+      { "id": "f1", "experienceId": "e1", "did": "Set up an MLflow model registry and moved 14 production models into it", "result": "Model release time fell from 10 days to 2 days", "tech": ["MLflow", "Python"] },
+      { "id": "f2", "experienceId": "e1", "did": "Built a continuous integration and continuous delivery pipeline in GitHub Actions that retrains and tests the claims-fraud model", "result": "Pipeline runs on every merge to main, about 40 runs a month", "tech": ["GitHub Actions", "Docker", "pytest"] },
+      { "id": "f3", "experienceId": "e1", "did": "Added data drift monitoring with Evidently for 6 models served on Amazon Elastic Kubernetes Service", "result": "Caught 3 drift incidents before customer impact", "tech": ["Evidently", "Kubernetes", "AWS"] },
+      { "id": "f4", "experienceId": "e1", "did": "Moved model serving from 8 always-on virtual machines to autoscaling pods", "result": "Monthly inference cost dropped from $5,200 to $3,100", "tech": ["Kubernetes", "FastAPI"] },
+      { "id": "f5", "experienceId": "e2", "did": "Built weekly export-volume forecasts in Python for 4 fruit lines", "result": "Forecast error (MAPE) went from 18% to 11%", "tech": ["Python", "Prophet"] }
+    ],
+    "gold": [
+      { "experienceId": "e1", "factIds": ["f2"], "text": "Built a CI/CD pipeline in GitHub Actions that retrains and tests the claims-fraud model on every merge to main, about 40 runs a month" },
+      { "experienceId": "e1", "factIds": ["f3"], "text": "Added Evidently drift monitoring for 6 models on Amazon EKS, catching 3 drift incidents before customer impact" },
+      { "experienceId": "e1", "factIds": ["f4"], "text": "Moved model serving from 8 always-on VMs to autoscaling Kubernetes pods, cutting monthly inference cost by 40%" }
+    ],
+    "fabricated": [
+      { "experienceId": "e1", "factIds": ["f4"], "text": "Moved model serving from 8 always-on VMs to autoscaling Kubernetes pods, cutting monthly inference cost by 60%", "kind": "number" },
+      { "experienceId": "e1", "factIds": ["f4"], "text": "Moved model serving from 8 always-on GPUs to autoscaling pods, cutting monthly inference cost from $5,200 to $3,100", "kind": "unit" },
+      { "experienceId": "e1", "factIds": ["f1"], "text": "Set up an MLflow model registry with Kubeflow Pipelines and moved 14 production models into it", "kind": "tech" },
+      { "experienceId": "e2", "factIds": ["f5"], "text": "Halved MAPE on weekly export-volume forecasts for 4 fruit lines using Python and Prophet", "kind": "multiplier" }
+    ]
+  },
+  {
+    "id": "h2-08",
+    "title": "Robotics software intern (ROS 2), warehouse robots",
+    "jd": "Robotics Software Intern - Siam Autonomy, Chonburi\n\nSiam Autonomy builds autonomous mobile robots that move pallets in Eastern Seaboard warehouses. Join our navigation team for a 6-month internship.\n\nWhat you will work on\n- ROS 2 nodes in C++ and Python\n- Localization, SLAM and path planning\n- Testing in Gazebo simulation before field trials\n- Code review through GitHub pull requests\n\nRequirements\n- Studying Robotics, Mechatronics, Computer Engineering or similar\n- C++ and Python\n- ROS or ROS 2\n- Linux\n- Git\n\nNice to have\n- SLAM experience\n- Nav2\n- OpenCV or PCL\n- CUDA",
+    "expected": {
+      "required": ["C++", "Python", "ROS 2", "Linux", "Git"],
+      "preferred": ["SLAM", "Nav2", "Gazebo", "OpenCV", "PCL", "CUDA"]
+    },
+    "missing": ["Linux", "SLAM", "PCL", "CUDA"],
+    "experiences": [
+      { "id": "e1", "kind": "activity", "title": "Software Lead, Robotics Team", "org": "Eastern Seaboard Robotics Club, Chonburi Tech University", "startDate": "2024-06", "endDate": "2025-12" },
+      { "id": "e2", "kind": "project", "title": "Line-following delivery robot (senior project)", "org": "Chonburi Tech University", "startDate": "2025-08", "endDate": "2026-03" },
+      { "id": "e3", "kind": "education", "title": "B.Eng. Robotics and Automation", "org": "Chonburi Tech University", "startDate": "2023-06", "endDate": null }
+    ],
+    "facts": [
+      { "id": "f1", "experienceId": "e1", "did": "Wrote the localization node in C++ for Robot Operating System 2 on the team's competition robot", "result": "Position error fell from 25 cm to 8 cm on the competition field", "tech": ["C++"] },
+      { "id": "f2", "experienceId": "e1", "did": "Tuned the navigation stack's path planner in simulation with Gazebo", "result": "Completed 19 of 20 autonomous runs in the final competition", "tech": ["Gazebo", "Nav2"] },
+      { "id": "f3", "experienceId": "e1", "did": "Led a software team of 5 students and ran weekly code reviews on GitHub pull requests", "result": null, "tech": ["Git", "GitHub"] },
+      { "id": "f4", "experienceId": "e2", "did": "Built a line-following delivery robot with a Raspberry Pi and a camera, detecting lines with OpenCV in Python", "result": "Delivered 150 test parcels across 2 floors of the engineering building", "tech": ["Python", "OpenCV", "Raspberry Pi"] },
+      { "id": "f5", "experienceId": "e2", "did": "Added an ultrasonic sensor stop rule to the delivery robot", "result": "Collisions in testing dropped from 12 to 1 over 80 test runs", "tech": ["Python"] },
+      { "id": "f6", "experienceId": "e3", "did": "Took Control Systems and Computer Vision courses", "result": "GPA 3.52", "tech": [] }
+    ],
+    "gold": [
+      { "experienceId": "e1", "factIds": ["f1"], "text": "Wrote a C++ ROS 2 localization node for the team's competition robot, cutting position error by 68% (25 cm to 8 cm)" },
+      { "experienceId": "e1", "factIds": ["f2"], "text": "Tuned the Nav2 path planner in Gazebo simulation, completing 95% of autonomous runs in the final competition" },
+      { "experienceId": "e1", "factIds": ["f3"], "text": "Led a 5-student software team and ran weekly code reviews on GitHub PRs" }
+    ],
+    "fabricated": [
+      { "experienceId": "e1", "factIds": ["f1"], "text": "Wrote a C++ ROS 2 localization node for the competition robot, cutting position error by 32% on the competition field", "kind": "number" },
+      { "experienceId": "e2", "factIds": ["f4"], "text": "Built a Raspberry Pi line-following robot with OpenCV that delivered 150 test parcels across 2 buildings", "kind": "unit" },
+      { "experienceId": "e1", "factIds": ["f2"], "text": "Tuned the Nav2 path planner on SLAM-built maps in Gazebo, completing 19 of 20 autonomous runs in the final competition", "kind": "tech" },
+      { "experienceId": "e1", "factIds": ["f3"], "text": "Built a line-following delivery robot with OpenCV in Python that delivered 150 test parcels", "kind": "citation" }
+    ]
+  },
+  {
+    "id": "h2-09",
+    "title": "Credit risk analyst, career switcher from audit, digital lender",
+    "jd": "Credit Risk Analyst - Lotus Leaf Lending, Bangkok\n\nLotus Leaf Lending offers nano and micro loans through a mobile app to 350,000 borrowers. Our Risk team builds the scorecards and monitoring that decide who we lend to.\n\nResponsibilities\n- Build and validate probability-of-default (PD) scorecards\n- Monitor delinquency and portfolio quality\n- Write SQL and Python for risk analysis\n- Prepare monthly risk reports for management\n\nRequirements\n- 1-3 years in credit risk, audit, finance or analytics\n- SQL\n- Python or R\n- Credit risk modelling (logistic regression scorecards)\n- Advanced Excel\n- Clear reporting to non-technical stakeholders\n\nPreferred\n- SAS\n- Power BI\n- IFRS 9 expected credit loss\n- Machine learning for credit scoring",
+    "expected": {
+      "required": ["SQL", "Python", "R", "Credit risk modelling", "Excel", "Stakeholder reporting"],
+      "preferred": ["SAS", "Power BI", "IFRS 9", "Machine learning"]
+    },
+    "missing": ["R", "SAS", "IFRS 9"],
+    "experiences": [
+      { "id": "e1", "kind": "job", "title": "Junior Risk Analyst", "org": "Kinnara Microfinance", "startDate": "2024-09", "endDate": null },
+      { "id": "e2", "kind": "job", "title": "Audit Associate", "org": "Wattana & Partners Accounting", "startDate": "2021-06", "endDate": "2024-08" },
+      { "id": "e3", "kind": "education", "title": "Data Analytics Bootcamp", "org": "Sukhumvit Code Academy", "startDate": "2024-03", "endDate": "2024-07" }
+    ],
+    "facts": [
+      { "id": "f1", "experienceId": "e1", "did": "Built a logistic regression probability-of-default scorecard for 26,000 nano-loan applications in Python", "result": "Gini coefficient 0.52 on the holdout set", "tech": ["Python", "scikit-learn"] },
+      { "id": "f2", "experienceId": "e1", "did": "Wrote SQL monitoring queries for early delinquency on the loan book", "result": "Flagged 340 loans 30+ days past due in the first quarter", "tech": ["SQL", "PostgreSQL"] },
+      { "id": "f3", "experienceId": "e1", "did": "Rebuilt the monthly risk report in Power BI", "result": "Report preparation went from 3 days to half a day", "tech": ["Power BI"] },
+      { "id": "f4", "experienceId": "e2", "did": "Audited accounts receivable for 15 mid-sized manufacturing clients", "result": "Found misstatements totalling 4.2 million baht across 3 clients", "tech": ["Excel", "IDEA"] },
+      { "id": "f5", "experienceId": "e3", "did": "Completed a 16-week data analytics bootcamp covering SQL, Python and statistics", "result": "Capstone churn model on a telco dataset reached 0.81 AUC", "tech": ["SQL", "Python"] }
+    ],
+    "gold": [
+      { "experienceId": "e1", "factIds": ["f1"], "text": "Built a Python logistic regression PD scorecard for 26,000 nano-loan applications, reaching a 52% Gini on the holdout set" },
+      { "experienceId": "e1", "factIds": ["f2"], "text": "Wrote PostgreSQL monitoring queries for early delinquency that flagged 340 loans 30+ DPD in the first quarter" },
+      { "experienceId": "e2", "factIds": ["f4"], "text": "Audited AR for 15 mid-sized manufacturing clients, finding 4.2 million baht in misstatements across 3 clients" }
+    ],
+    "fabricated": [
+      { "experienceId": "e1", "factIds": ["f1"], "text": "Built a Python logistic regression PD scorecard for 26,000 nano-loan applications, reaching a 62% Gini on the holdout set", "kind": "number" },
+      { "experienceId": "e1", "factIds": ["f2"], "text": "Wrote SQL monitoring queries for early delinquency that flagged 340 borrowers 30+ days past due in the first quarter", "kind": "unit" },
+      { "experienceId": "e1", "factIds": ["f3"], "text": "Rebuilt the monthly risk report in Power BI, making report preparation 10x faster", "kind": "multiplier" },
+      { "experienceId": "e1", "factIds": ["f1"], "text": "Built a PD scorecard in SAS for 26,000 nano-loan applications with a 0.52 Gini on the holdout set", "kind": "tech" }
+    ]
+  },
+  {
+    "id": "h2-10",
+    "title": "Digital marketing analyst, career switcher from hotel front office",
+    "jd": "Digital Marketing Analyst - Khao Soi Commerce, Chiang Mai (remote-friendly)\n\nKhao Soi Commerce sells Northern Thai food products online to customers across Thailand. We want an analyst who can measure our campaigns and help us spend our ad budget wisely.\n\nResponsibilities\n- Manage reporting for Google Ads and Meta Ads campaigns\n- Maintain GA4 and Google Tag Manager tracking\n- Improve SEO for product pages\n- Run A/B tests on landing pages\n- Build weekly reports in Looker Studio or Google Sheets\n\nMust have\n- Google Analytics 4\n- Google Ads\n- SEO fundamentals\n- Excel or Google Sheets\n- A/B testing\n\nNice to have\n- SQL\n- Looker Studio\n- Meta Ads Manager\n- Google Tag Manager",
+    "expected": {
+      "required": ["Google Analytics 4", "Google Ads", "SEO", "Excel", "Google Sheets", "A/B testing"],
+      "preferred": ["SQL", "Looker Studio", "Meta Ads", "Google Tag Manager"]
+    },
+    "missing": ["A/B testing", "SQL", "Looker Studio", "Meta Ads", "Excel"],
+    "experiences": [
+      { "id": "e1", "kind": "job", "title": "Marketing Coordinator", "org": "Baan Rim Nam Boutique Hotel", "startDate": "2023-01", "endDate": null },
+      { "id": "e2", "kind": "job", "title": "Front Office Agent", "org": "Baan Rim Nam Boutique Hotel", "startDate": "2020-03", "endDate": "2022-12" },
+      { "id": "e3", "kind": "project", "title": "Freelance social media for a family cafe", "org": "Self-employed", "startDate": "2022-06", "endDate": "2022-12" }
+    ],
+    "facts": [
+      { "id": "f1", "experienceId": "e1", "did": "Ran Google Ads search campaigns for direct room bookings with a 45,000 baht monthly budget", "result": "Cost per booking fell from 620 baht to 410 baht", "tech": ["Google Ads"] },
+      { "id": "f2", "experienceId": "e1", "did": "Rewrote page titles and meta descriptions for 32 room and package pages for search engine optimisation", "result": "Organic search sessions rose from 2,100 to 3,400 per month", "tech": ["Google Search Console"] },
+      { "id": "f3", "experienceId": "e1", "did": "Set up Google Analytics 4 conversion tracking for the booking engine", "result": "Tracked 1,180 online bookings in 2024", "tech": ["Google Analytics 4", "Google Tag Manager"] },
+      { "id": "f4", "experienceId": "e2", "did": "Handled guest check-ins and online travel agency reservations at the front desk", "result": "Kept a 4.7 out of 5 guest review score over 2 years", "tech": [] },
+      { "id": "f5", "experienceId": "e3", "did": "Ran the Instagram account for a family cafe and posted 3 times a week", "result": "Followers grew from 800 to 2,400 in 6 months", "tech": ["Instagram", "Canva"] }
+    ],
+    "gold": [
+      { "experienceId": "e1", "factIds": ["f1"], "text": "Ran Google Ads search campaigns for direct room bookings on a 45,000 baht monthly budget, cutting cost per booking by 34%" },
+      { "experienceId": "e1", "factIds": ["f2"], "text": "Rewrote titles and meta descriptions on 32 room and package pages for SEO, growing organic search sessions 62% to 3,400 per month" },
+      { "experienceId": "e1", "factIds": ["f3"], "text": "Set up GA4 conversion tracking with GTM for the hotel booking engine, tracking 1,180 online bookings in 2024" }
+    ],
+    "fabricated": [
+      { "experienceId": "e1", "factIds": ["f1"], "text": "Ran Google Ads search campaigns for direct room bookings on a 45,000 baht monthly budget, cutting cost per booking by 51%", "kind": "number" },
+      { "experienceId": "e1", "factIds": ["f2"], "text": "Rewrote titles and meta descriptions on 32 room and package pages for SEO, growing organic search sessions from 2,100 to 3,400 per week", "kind": "unit" },
+      { "experienceId": "e3", "factIds": ["f5"], "text": "Quadrupled Instagram followers for a family cafe in 6 months by posting 3 times a week", "kind": "multiplier" },
+      { "experienceId": "e1", "factIds": ["f3"], "text": "Kept a 4.7 out of 5 guest review score over 2 years at Baan Rim Nam Boutique Hotel", "kind": "citation" }
+    ]
+  }
+]
