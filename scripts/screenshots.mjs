@@ -6,6 +6,8 @@
 export async function shoot(page, base = "http://localhost:3000", dir = "docs/screenshots/") {
   const hideDevUi = () => page.addStyleTag({ content: "nextjs-portal{display:none!important}" });
   const at = async (w, h) => page.setViewportSize({ width: w, height: h });
+  // Still frames: the hero shader holds one frame and the scroll entrances are off.
+  await page.emulateMedia({ reducedMotion: "reduce" });
 
   await at(1440, 900);
   await page.goto(`${base}/`);
@@ -21,6 +23,8 @@ export async function shoot(page, base = "http://localhost:3000", dir = "docs/sc
 
   await at(1440, 900);
   await page.goto(`${base}/login`);
+  await hideDevUi();
+  await page.screenshot({ path: `${dir}login.png` });
   await page.getByRole("button", { name: "Try the demo account" }).click();
   await page.waitForURL("**/app");
   await page.goto(`${base}/app/facts`);
@@ -28,7 +32,7 @@ export async function shoot(page, base = "http://localhost:3000", dir = "docs/sc
   await page.screenshot({ path: `${dir}fact-bank.png` });
 
   await page.goto(`${base}/app`);
-  await page.locator('a[href^="/app/applications/"]').first().click();
+  await page.locator('a[href^="/app/applications/"]:not([href$="/new"])').first().click();
   await page.waitForURL("**/applications/**");
   await hideDevUi();
   await page.waitForTimeout(1400); // score ring finishes drawing
