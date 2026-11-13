@@ -14,6 +14,8 @@ fact bank, no sign-up needed.
 | ![FactFit landing page](docs/screenshots/landing.png) | ![Bullet studio with a blocked bullet](docs/screenshots/bullet-studio.png) |
 | **Job mapping and fit score** | **Fact bank** |
 | ![Application page with fit score](docs/screenshots/application.png) | ![Fact bank page](docs/screenshots/fact-bank.png) |
+| **Try the guard: type a draft, see what it blocks** | **The guard, step by step, on an invented draft** |
+| ![Guard sandbox on the landing page](docs/screenshots/guard-sandbox.png) | ![Pipeline diagram blocking an invented draft](docs/screenshots/pipeline.png) |
 | **Settings: security checklist, password with show/hide, signed-in devices** | **Settings: sign-in methods (email + Google)** |
 | ![Security settings](docs/screenshots/settings-security.png) | ![Account settings](docs/screenshots/settings-account.png) |
 
@@ -22,7 +24,9 @@ fact bank, no sign-up needed.
   <img src="docs/screenshots/application-mobile.png" alt="Application page on a phone" width="240">
 </p>
 
-Screenshots use the fictional demo account and are regenerated with `scripts/screenshots.mjs`.
+Screenshots use the fictional demo account and are regenerated with `scripts/screenshots.mjs` (still frames, reduced
+motion). The demo account's settings are locked, so the two settings shots come from a throwaway local test account
+that is deleted afterwards.
 
 ## How it works
 

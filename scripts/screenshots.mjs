@@ -15,6 +15,18 @@ export async function shoot(page, base = "http://localhost:3000", dir = "docs/sc
   await page.waitForTimeout(1200);
   await page.screenshot({ path: `${dir}landing.png` });
 
+  // The guard demo in use: a typed draft in the sandbox, then the pipeline blocking an invented one.
+  await page.getByRole("button", { name: "Try the guard" }).click();
+  await page
+    .getByRole("textbox", { name: "Draft bullet" })
+    .fill("Responsible for cutting the report job to 2 minutes using MongoDB.");
+  await page.waitForTimeout(400); // let the toggle colours settle
+  await page.locator("#demo").screenshot({ path: `${dir}guard-sandbox.png` });
+  await page.getByRole("button", { name: "Invented draft" }).click();
+  await page.waitForTimeout(400);
+  await page.locator("#architecture").screenshot({ path: `${dir}pipeline.png` });
+  await page.evaluate(() => window.scrollTo(0, 0));
+
   await at(390, 844);
   await page.reload();
   await hideDevUi();
