@@ -82,7 +82,13 @@ export default async function AccountPage({ searchParams }: PageProps<"/app/sett
             {account.google ? (
               <GoogleUnlinkButton
                 disabledReason={
-                  account.demo ? "Locked on the demo account." : !account.hasPassword ? "Set a password before disconnecting." : undefined
+                  account.demo
+                    ? "Locked on the demo account."
+                    : !account.hasPassword
+                      ? "Set a password before disconnecting."
+                      : account.identityCount < 2
+                        ? "Google is this account's only linked identity, so it stays connected. Your password works too."
+                        : undefined
                 }
               />
             ) : google && !account.demo ? (

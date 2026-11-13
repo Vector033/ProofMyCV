@@ -5,7 +5,6 @@ import { ProofDemo } from "@/components/proof-demo";
 import { Steps } from "@/components/steps";
 import { VerificationPipeline } from "@/components/verification-pipeline";
 import { BenchmarkMetrics } from "@/components/benchmark-metrics";
-import { AtsAnatomy } from "@/components/ats-anatomy";
 import { InView } from "@/components/in-view";
 import { IconArrowRight, IconCheck, IconShield, IconX } from "@/components/icons";
 import { DemoButton } from "./login/demo-button";
@@ -38,12 +37,6 @@ const comparisonRows = [
     factfit: "Single column, selectable text, under 2.5 MB",
   },
 ];
-
-const safetyNetTimeline = [
-  { step: "1", label: "Paste JD" },
-  { step: "2", label: "Fact Guard" },
-  { step: "3", label: "Clean ATS PDF" },
-] as const;
 
 export default async function Home({ searchParams }: PageProps<"/">) {
   const { deleted } = await searchParams;
@@ -166,23 +159,6 @@ export default async function Home({ searchParams }: PageProps<"/">) {
               </p>
             </div>
 
-            {/* 3-Step Safety Net Timeline */}
-            <ol
-              aria-label="3-step verification flow"
-              className="mx-auto mt-8 inline-flex flex-wrap items-center justify-center gap-2 rounded-xl border border-slate-200/90 bg-white/85 px-4 py-2 text-xs font-medium text-slate-700 shadow-2xs backdrop-blur-xs"
-            >
-              {safetyNetTimeline.map((item, idx) => (
-                <li key={item.step} className="inline-flex items-center gap-2 whitespace-nowrap">
-                  <span className="inline-grid size-5 place-items-center rounded bg-slate-100 font-mono text-[11px] font-semibold text-slate-800 tabular-nums">
-                    {item.step}
-                  </span>
-                  <span className="text-slate-800">{item.label}</span>
-                  {idx < safetyNetTimeline.length - 1 && (
-                    <IconArrowRight size={13} className="text-slate-400" />
-                  )}
-                </li>
-              ))}
-            </ol>
           </div>
 
           {/* ================= INTERACTIVE PROOF SHOWCASE (32px+ inter-group spacing) ================= */}
@@ -299,10 +275,6 @@ export default async function Home({ searchParams }: PageProps<"/">) {
               </table>
               </div>
             </InView>
-
-            <div className="mt-12">
-              <AtsAnatomy />
-            </div>
           </div>
         </section>
 

@@ -7,7 +7,7 @@ commits and UI copy in English.
 
 - **Token budget:** turn on `ponytail` (smallest complete change); `caveman` if the user wants short replies.
   Keep chat short; put detail in files.
-- **Design work:** `CLAUDE_DESIGN_GUIDE.md` is the spec. Its honesty rules at the top win over everything else.
+- **Design work:** `CLAUDE_DESIGN_GUIDE.md` is the spec (trimmed to rules on 2026-11-14; the long study notes are in git history). Its honesty rules come first.
   Useful skills: `no-ai-design-slop` / `audit-ai-design-slop`, `better-interface`, `break-ui`, `animate`.
   Run heavy review skills in a subagent and keep only the ranked findings.
 - **Rules (from CLAUDE.md):** ask before every push or deploy. Never invent resume or portfolio facts.
@@ -87,8 +87,11 @@ Supabase admin API (`npx supabase status -o env` gives the service key).
 1. **Import resume (.docx/.pdf).** Extract facts; the user reviews and edits them. Still missing from the MVP.
 2. **Guard false blocks.** Accept derived percentages and an abbreviation list. Tune on the 30 tuning cases only;
    never on holdout.
-3. Confirm a real Google login and "Connect Google" on prod (the user tests it).
-4. Confirm the prod DB role can read and delete `auth.sessions` (ask the user to run or allow the check).
+3. Google sign-in works on prod (the user signed in with it on 2026-11-14, and the prod role can read
+   `auth.sessions`, since the device check passes). Still untested: "Connect Google" from an email account.
+4. Turn on **Secure password change** in the Supabase dashboard (Authentication → Providers → Email). Without it,
+   anyone holding a session token can change the password through the Supabase API directly, skipping the
+   app's current-password check. It is project-wide (HarnKan and SlipJot share the project), so the user decides.
 5. Add FactFit to the résumé and the portfolio "Other projects" section, with real eval numbers only.
 
 ## Gotchas
@@ -98,5 +101,7 @@ Supabase admin API (`npx supabase status -o env` gives the service key).
 - Playwright: leaving a page with unsaved bullets fires a `beforeunload` dialog; add `page.on('dialog', d => d.accept())`.
   A headed Playwright window may fail to launch from this agent; use headless with the swiftshader flags above.
 - Hydration warnings about `caret-color` come from Playwright screenshots, not from the app.
-- `client_secret_FactFit.json` sits in the FactFit folder. It is ignored by git and Vercel; tell the user to move it out.
+- `client_secret_FactFit.json` was moved to `C:\Users\User\Documents\secrets\` on 2026-11-14. Keep secrets out of the project.
+- A Google user who sets a password gets no `email` identity, so `getAccount()` also asks `auth.users` whether a
+  password is stored (`passwordSet` in `src/lib/account.ts`). Supabase never unlinks a user's last identity.
 - Supabase prod is shared with HarnKan and SlipJot. Never change its Site URL. App data lives in schema `factfit`.

@@ -1,479 +1,86 @@
-# CLAUDE_DESIGN_GUIDE: Professional Web Design System & Anti-AI-Slop Framework (FactFit Edition)
+# FactFit design guide
 
-> Master UI/UX, Motion System & Anti-AI-Slop Engineering Guide for Claude Code / Claude Chat.
-> Incorporates the 10 World-Class Reference Websites, the 20 Rules to Unslop AI Designs, and FactFit's Precision Slate & Emerald Verification Design System.
+The rules for any UI change in FactFit. The longer study notes this grew from (reference sites, video summaries,
+prompt recipes) are in git history: `git show 3254a6b:CLAUDE_DESIGN_GUIDE.md`.
 
-> **Honesty rules (take precedence over every example below).** The copy examples in this guide were rewritten on 2026-11-13 to follow them; if one drifts, these rules win.
-> - Every number on the site comes from `eval/README.md`. Change both together.
-> - Do not ship "0% hallucination", "100% verified/accurate", "mathematical" guarantees or legal claims such as "PDPA compliant".
-> - The guard is regex plus a tech vocabulary (`src/lib/core/guard.ts`), not an "AST". The 40 eval cases are fictional.
-> - No invented stats about other products, testimonials, user counts or logos.
-> - Demo sentences must get the same verdict from the real guard; keep them in `src/lib/demo-drafts.ts` (pinned by its test).
+## 1. Honesty (wins over everything below)
 
----
+- Every number on the site comes from `eval/README.md`. Change both together.
+- Do not ship "0% hallucination", "100% verified/accurate", "mathematical" guarantees or legal claims such as
+  "PDPA compliant".
+- The guard is regex plus a tech vocabulary (`src/lib/core/guard.ts`), not an "AST". The 40 eval cases are fictional.
+- No invented stats about other products, testimonials, user counts or logos.
+- Demo sentences that show the guard working live in `src/lib/demo-drafts.ts`. Their verdicts are computed by
+  `checkBullet` and pinned by `demo-drafts.test.ts`; never hand-write a verdict label.
 
-## 1. Core Mandate: Professional Web Design Skills & Zero AI Slop
+## 2. Tokens
 
-When generating or refactoring UI for **FactFit**, Claude must strictly apply professional **Web Design Skills** and completely eliminate **AI Slop**:
+Defined in `src/app/globals.css`:
 
-* **Activate Real Web Design Skills:**
-  * **Design Tokens & System:** Respect established CSS variables and design tokens (`--canvas`, `--ink`, `--hairline`, `--accent`).
-  * **Visual Hierarchy:** Guide the user's eye deliberately (Hero proposition -> Interactive Proof -> Supporting Features).
-  * **Mathematical Whitespace:** Group elements using generous negative space rather than boxing everything in nested containers.
-  * **WCAG AA Compliance:** Text contrast ratio must be ≥ 4.5:1. Touch targets must be ≥ 44×44px.
-  * **Tactile Physics:** Micro-interactions must feel physical (`active:scale-[0.98]`, spring easings `cubic-bezier(0.16, 1, 0.3, 1)`).
-
-* **Strict "Zero AI Slop" Prohibition:**
-  * ❌ NO generic purple-to-blue linear gradients.
-  * ❌ NO useless decorative badges (e.g. "✨ AI-Powered Magic", "Next-Gen Intelligence").
-  * ❌ NO random italicized words in body text.
-  * ❌ NO unstyled, generic 3-card feature columns.
-  * ❌ NO mismatched corner radii (must follow `inner = outer - padding`).
-  * ❌ NO unformatted shifting numbers (must use `tabular-nums`).
-  * ❌ NO scrolljacking (never hijack native browser scrolling).
-
----
-
-## 2. The 10 Masterclass Reference Websites (Study & Emulate)
-
-Study these 10 industry-standard websites. Prompt Claude to take inspiration from their specific design principles and adapt them to FactFit:
-
-| # | Reference Domain | Real URL | Core Principle to Study & Emulate | Application to FactFit |
-|---|---|---|---|---|
-| 1 | **Animations** | [apple.com](https://www.apple.com) | Hardware-accelerated narrative scroll, spring easing curves, seamless product reveals. | Smooth reveal of resume bullet verification states without scroll hijacking. |
-| 2 | **Onboarding** | [duolingo.com](https://duolingo.com) | Frictionless step-by-step progress, gamification, minimal initial friction. | Fact Bank setup onboarding: "Add your first 3 career achievements". |
-| 3 | **UI Design** | [linear.app](https://linear.app) | World-class dark/light precision, 1px hairlines, keyboard shortcuts, dense elegance. | The FactFit application dashboard, bullet list inspection, and keyboard review. |
-| 4 | **Typography** | [pentagram.com](https://www.pentagram.com) | Editorial typography, disciplined font scales, deliberate line-heights and kerning. | Clear typographic hierarchy between Job Descriptions, Resume Bullets, and Fact citations. |
-| 5 | **Minimalism** | [muji.com](https://www.muji.com) | Japanese functional calm, unadorned utility, generous negative space. | Clean, distraction-free resume tailoring interface without decorative noise. |
-| 6 | **Search & Filters** | [airbnb.com](https://airbnb.com) | Clean pill filter bars, instant feedback, interactive search states. | Filtering resume versions, job application archives, and fact categories. |
-| 7 | **Art Direction** | [aesop.com](https://aesop.com) | Muted sophisticated palette, high-trust editorial mood, luxurious texture. | The high-trust, authoritative tone of FactFit's landing page (every claim traceable to a fact the user wrote). |
-| 8 | **Dashboards** | [notion.com](https://notion.com) | Modular block layouts, drag-and-drop flexibility, distraction-free workspaces. | Fact Bank management drawer and side-by-side JD vs. Resume comparison view. |
-| 9 | **Landing Page Layouts** | [stripe.com](https://stripe.com) | Gold-standard sectioning, interactive product demos, fluid responsive transitions. | FactFit landing hero featuring a live interactive split comparison demo. |
-| 10 | **Micro-interactions** | [framer.com](https://framer.com) | Tactile spring physics, button compression, magnetic hover feedback. | Score badge count-up, verified tick pops, and copy-to-clipboard feedback. |
-
----
-
-## 3. The 20 Rules to Unslop AI Designs (Complete Checklist & Rules)
-
-Every UI component generated by Claude must pass this 20-rule checklist:
-
-1. **Delete filler badges:** Remove meaningless pill badges (e.g., "AI Supercharged", "Smart Match"). Only keep functional status badges (e.g., "Traceable", "Blocked", "Missing Metric").
-2. **Drop redundant labels:** Eliminate obvious labels (e.g., instead of "Match Score: 85%", show a prominent "85%" badge with clear context).
-3. **Unitalicize random words:** Claude often italicizes random adjectives for emphasis. Remove all random italics—use font weight or hierarchy instead.
-4. **Mono only where needed:** Restrict monospace fonts (`font-mono`) strictly to code snippets, fact UUIDs, or raw text hashes. Never use mono for body paragraphs.
-5. **Use a design system:** Always bind colors, radii, and fonts to the design system tokens (`var(--canvas)`, `var(--ink)`, `var(--accent)`). Never hardcode random hex codes in classes.
-6. **Show the actual product:** In hero sections, display the actual interactive FactFit tailoring workflow (Resume Bullet vs Fact Bank Source), not abstract 3D cubes.
-7. **Enlarge the main feature:** The fabrication guard (every number and tool traced to a cited fact) is FactFit's main feature—make it visibly larger and distinct from secondary features.
-8. **Group with spacing:** Group related elements using whitespace (`gap-6`, `space-y-4`) instead of nesting cards inside cards inside borders.
-9. **Make headlines specific:** Replace generic AI copy ("Transform Your Career with AI Synergy") with concrete value ("Tailor your resume to each job without inventing a single fact").
-10. **Emphasize the CTA:** Make the primary button ("Tailor My Resume") stand out with high contrast, elevated shadow, and tactile compression (`active:scale-[0.98]`).
-11. **Add an accent colour:** Use Emerald (`#047857`) strictly as the single 10% accent color for verified status, active toggles, and primary CTAs.
-12. **Keep icons consistent:** Use Lucide icons exclusively, maintaining a consistent stroke width of 1.5px or 2px across all components.
-13. **Remove embellishments:** Strip away decorative background squiggles, floating shapes, and blurry gradient blobs.
-14. **Inner radius = outer – padding:** Enforce the nested radius formula: `rounded_inner = rounded_outer - padding`. (e.g. outer card `rounded-2xl` (16px) with `p-3` (12px) requires inner item `rounded-sm` (4px)).
-15. **Improve text contrast:** Muted text must maintain at least 4.5:1 contrast against the background. Never use low-contrast washed-out light gray (`text-stone-300` on white).
-16. **Wrap headlines properly:** Apply `text-wrap: balance` to headings and prevent awkward line breaks or single-word orphan lines.
-17. **Align by eye, not pixels:** Visually center asymmetrical icons (e.g. chevron arrows, checkmarks) rather than blindly relying on container bounding boxes.
-18. **Use tabular nums:** Apply `tabular-nums` / `font-feature-settings: "tnum"` to all percentage scores, dates, and metric comparisons to avoid jumping layouts.
-19. **Add loading states:** Always implement skeleton loaders (`animate-pulse`) or a scanning shimmer while the LLM verifies resume bullet points.
-20. **Animate useful feedback:** Animate only state transitions and user feedback (e.g. emerald pulse on verification success, slight shake on guard failure).
-
----
-
-## 4. FactFit Design Tokens & Motion Recipes
-
-Add/verify in `src/app/globals.css`:
-
-```css
-:root {
-  --canvas: #f8fafc;        /* Slate-50 clean surface */
-  --ink: #1e293b;           /* Slate-800 text */
-  --hairline: #e2e8f0;      /* Slate-200 border */
-  --accent: #047857;        /* Emerald-700 verification accent */
-  --accent-soft: #d1fae5;   /* Emerald-100 badge tint */
-  --danger: #b91c1c;        /* Red-700 guard rejection */
-  --danger-soft: #fee2e2;   /* Red-100 badge tint */
-}
-
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(12px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes verifyPulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(4, 120, 87, 0.3); }
-  50% { box-shadow: 0 0 0 6px rgba(4, 120, 87, 0); }
-}
-
-.animate-fade-in-up {
-  animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-.animate-verify-pulse {
-  animation: verifyPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-
-.press-scale {
-  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.press-scale:active {
-  transform: scale(0.98);
-}
-```
-
----
-
-## 5. 22 Backgrounds to Make Designs Less Flat (Anti-Flatness Texture & Depth Guide)
-
-To escape sterile, flat digital canvases without creating noisy **AI Slop**, apply tactile textures, optical glass, or structured grids deliberately. Always maintain WCAG AA contrast (≥ 4.5:1), use `pointer-events: none`, and keep pattern opacities subtle (`0.02`–`0.08`) or masked at edges (`mask-image: radial-gradient(...)`):
-
-| # | Technique | Visual Style & Depth Effect | Pure CSS / SVG Implementation Hint |
-|---|---|---|---|
-| 1 | **Felt texture** | Soft matte textile fiber warmth | Inline SVG `<feTurbulence>` fine grain + soft warm tint overlay |
-| 2 | **Fluted glass** | Vertical ribbed optical refraction | Repeating linear-gradient strips + `backdrop-filter: blur(12px)` |
-| 3 | **Thermal gradients** | Infrared heat-map color transitions | Multi-stop smooth radial gradient (strictly for status/radar accents, never purple AI slop) |
-| 4 | **Water ripples** | Concentric liquid light refractions | Subtle SVG displacement map or layered radial ring highlights |
-| 5 | **Speckled graphite** | Fine charcoal/pencil grain on matte surfaces | Micro-dot radial pattern + SVG fractal noise (`opacity: 0.04`) |
-| 6 | **Single-hue landscapes** | Layered monochrome depth planes | Layered SVG silhouettes in stepped opacities of `--ink` / brand hue |
-| 7 | **Blueprint grids** | Precision engineering grid lines | CSS `linear-gradient` 1px grid (`background-size: 24px 24px`) with radial fade mask |
-| 8 | **Halftone** | Retro print dot matrix shading | CSS `radial-gradient(circle, currentColor 1px, transparent 1px)` staggered |
-| 9 | **Grainy gradients** | Tactile film-grain gradient without plastic smoothness | CSS radial gradient + SVG `feTurbulence` noise layer (`mix-blend-mode: overlay`) |
-| 10 | **Grass texture** | Organic natural directional fiber | Fine directional micro-stroke SVG pattern for organic/outdoor themes |
-| 11 | **Dithered images** | 1-bit retro ordered pixel dithering | Pre-dithered SVG/Canvas filter for crisp low-ink retro depth |
-| 12 | **Paper texture** | Authentic cotton, vellum, or receipt stock fiber | Subtle SVG paper fiber noise (`baseFrequency="0.8"`) over `--canvas` / card surfaces |
-| 13 | **Contour lines** | Topographic elevation/route curves | Clean ultra-thin 1px SVG bezier contour curves (`opacity: 0.06`) |
-| 14 | **Cloud sky** | Soft atmospheric depth with natural diffusion | Layered ultra-soft blurred radial ellipses at low opacity |
-| 15 | **Pixel mosaics** | Structured color-stepped pixel blocks | Crisp `image-rendering: pixelated` low-res gradient grid |
-| 16 | **Lens distortion** | Subtle optical edge vignette & light bending | Soft edge vignette + curved specular highlight arc |
-| 17 | **Stippled gradients** | Hand-drawn stipple dot density fade | Variable-density SVG dot scatter or masked halftone fade |
-| 18 | **Square-dot grids** | Crisp architectural dot matrix | CSS `radial-gradient` / `conic-gradient` 1.5px square dots (`20px × 20px`) |
-| 19 | **Blurred photos** | Ambient photographic color wash | Real photo with `filter: blur(48px) saturate(1.1)` + contrast scrim |
-| 20 | **Iridescent shapes** | Subtle holographic pearlescent sheen | Restrained `conic-gradient` specular border/surface highlight (very low opacity) |
-| 21 | **Impressionist paintings** | Rich textured brushwork warmth | Softly blurred painterly color dabs under a translucent matte scrim |
-| 22 | **ASCII and pixels** | Technical monospace character matrix & pixel art | Lightweight `<canvas>` or static `<pre aria-hidden>` ASCII telemetry pattern |
-
-### Best Background Picks for FactFit (Zero AI Slop)
-* **#7 Blueprint grids & #18 Square-dot grids:** Subtle faded dot/blueprint grid in the hero canvas (`mask-image: radial-gradient(...)`) reinforcing the precise, checked-by-code feel of the guard.
-* **#12 Paper texture & #5 Speckled graphite:** Micro-paper cotton texture (`opacity: 0.03`) on the resume preview sheets in `src/app/page.tsx` and `src/app/app/applications/` so digital resumes feel tactile like fine resume stock.
-* **#2 Fluted glass:** Subtle ribbed fluted glass styling on sticky top bars (`src/app/app/nav.tsx`) and modal scrims.
-* **#9 Grainy gradients:** Ultra-restrained emerald radial grainy glow (`--accent`) strictly behind the FactFit Verified split comparison card.
-
----
-
-## 6. GPU Shader Background Architecture (Andres The Designer Workflow)
-
-Reference Tutorial: **Shaders Tutorial: SICK Website Backgrounds** ([YouTube](https://www.youtube.com/watch?v=XVfUl8DB2D8)) & **Paper Shaders** ([shaders.paper.design](https://shaders.paper.design) / [shaders.com](https://shaders.com)).
-
-Unlike heavy MP4 videos or CPU-laggy CSS blurs, **WebGL/Canvas Fragment Shaders** compute textured motion directly on the GPU at 60 FPS with minimal bundle footprint.
-
-### 6.1 Implementation Paths in Next.js 16 + React 19
-* **Option A — `@paper-design/shaders-react` (Recommended):**
-  * Install `npm install @paper-design/shaders-react` and visually tune props (`colors`, `speed`, `scale`, `noise`, `distortion`) on [shaders.paper.design](https://shaders.paper.design).
-* **Option B — Zero-Dependency WebGL `<canvas>` Fragment Shader:**
-  * Write a lightweight `'use client'` GLSL fragment shader (`u_time`, `u_resolution`, `u_colors`) with `ResizeObserver` and clean GPU resource disposal (`gl.deleteProgram`) on unmount.
-
-### 6.2 Mandatory Next.js & Anti-AI-Slop Guardrails for Shaders
-1. **`'use client'` + Static CSS Fallback:** WebGL requires browser DOM/GPU APIs. Wrap shaders in a `'use client'` component (optionally `dynamic(..., { ssr: false })`) layered over `--canvas` (`#f8fafc`) so SSR renders instantly with zero CLS.
-2. **Battery & Accessibility (`prefers-reduced-motion` + Offscreen Pause):** Set `speed={0}` if `window.matchMedia('(prefers-reduced-motion: reduce)').matches` is true, and pause animation via `IntersectionObserver` when scrolled out of view.
-3. **Hero / Focal Regions Only:** Never place animated shaders behind dense Fact Bank tables or resume bullet forms. Restrict to the Hero backdrop (`src/app/page.tsx`) masked with `mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%)`.
-4. **Strict Brand Palette:** Never paste default purple/rainbow presets. Use FactFit's Slate & Emerald tokens only, with a soft contrast overlay ensuring Slate-800 typography remains ≥ 4.5:1.
-
-### 6.3 FactFit Shader Recipe
-```tsx
-// src/components/hero-shader.tsx ('use client')
-import { GrainGradient } from '@paper-design/shaders-react';
-
-// Slow, precision verification aura masked behind the Hero Split Proof card
-<GrainGradient
-  colorBack="#f8fafc"
-  colors={["#f8fafc", "#e2e8f0", "#d1fae5", "#047857"]}
-  softness={0.65}
-  intensity={0.18}
-  noise={0.22}
-  shape="corners"
-  speed={reducedMotion || !isVisible ? 0 : 0.25}
-  style={{ width: '100%', height: '100%' }}
-/>
-```
-*(Alternative minimalist precision choice: `<DotOrbit colors={["#cbd5e1", "#94a3b8", "#047857"]} colorBack="#f8fafc" scale={0.35} speed={0.2} />`.)*
-
----
-
-## 7. Synthesis of 6 UI/UX Masterclasses & 2026 Web Design Trends
-
-Synthesized directly from 6 masterclasses on high-converting UI/UX, typography, spacing, and 2026 web trends:
-
-### 7.1 Video-by-Video Technique Matrix (Apply Maximum Applicable Techniques)
-1. **50 Web Design Tips & Tricks ([youtu.be/rRFD6tENX2U](https://youtu.be/rRFD6tENX2U)):**
-   * **Layout & 3-Tier Hierarchy:** 12-column responsive grid (1–3 content columns max); 3 importance tiers (1. Headline/Primary focal -> 2. Supporting proof -> 3. Fine details).
-   * **60-30-10 Color Discipline:** 60% neutral canvas, 30% structural ink/borders, 10% accent color strictly reserved for CTAs and active verification so users instinctively know what is clickable.
-   * **Gaze & Directional Cueing:** Align visual focal points/arrows toward the primary headline and CTA.
-   * **80% Top-Fold Rule & Scroll-Backward Audit:** 80% of visitors decide before scrolling deep—make the first viewport crystal clear. Audit layouts by scrolling bottom-to-top to spot alignment/spacing flaws.
-   * **Action-Oriented CTA Copy & Accessibility:** Button text states exact outcome ("Tailor My Resume", not "Let's Go"); semantic HTML (`h1`->`h2`->`p`, `nav`, `footer`); **never rely on color alone** (always pair red/green states with icons and explicit text).
-
-2. **Discovery & Transformation Messaging ([youtu.be/BfHuIgjLC5E](https://youtu.be/BfHuIgjLC5E)):**
-   * **Transformation > Features:** Features don't sell—transformation does. Lead with **Heart** (what pain disappears / background check safety) before **Head** (code guard, Drizzle, PDF details).
-   * **Clarity & Trust Over Hype:** Never over-explain or exaggerate; transparent steps build instant credibility.
-
-3. **9 Web Design Hacks ([youtu.be/TeMtV8BaZt0](https://youtu.be/TeMtV8BaZt0)):**
-   * **Hack 1 — 50–75ch Text Chunking:** Limit reading copy to 50–75 characters (600–700px max); insert line breaks every 2–3 sentences.
-   * **Hack 2 — Icon Bullet Points:** Convert dense explanations into scannable icon bullet lists.
-   * **Hack 3 — 8pt Grid + Double-Rule Spacing:** Space elements in multiples of `8px` (`8, 16, 24, 32`). Use baseline (`16px`) *within* a group, at least **double (`32px`)** *between* different groups, and consistent rhythm (`64–96px`) between major sections.
-   * **Hack 4 — Line-Height Ratios:** Display headings = `1.05–1.15` (Latin) / `1.25–1.3` (Thai); Body prose = `1.5–1.65`.
-   * **Hack 5 — Letter Spacing by Role:** Display headings = tight negative tracking (`-0.02em` to `-0.03em`) for scanability; Body = `0` default for legibility; **Uppercase badges & CTAs = positive tracking (`+0.03em` to `+0.06em`)**.
-   * **Hack 6 — Font Super Families:** Pair fonts from the same super family (e.g. `Inter` + `Geist Mono` / `Source` / `DM`) so x-heights harmonize naturally.
-   * **Hack 7 — CSS Overview Audit:** Audit contrast, font sizes, and stray hex tokens via Chrome DevTools CSS Overview.
-   * **Hack 8 — Radial Text Scrim:** Whenever a background texture/dot-grid sits behind text, add a soft radial background scrim behind the text block so legibility never suffers.
-   * **Hack 9 — The Squint Test:** Blur/squint at the page—headline, primary interactive input/demo, and main CTA must pop unmistakably from the background.
-
-4. **15 UI/UX Product Mistakes Fixed ([youtu.be/GGg61sdEjeI](https://youtu.be/GGg61sdEjeI)):**
-   * **Contrast Protection Over Dynamic Surfaces:** Icons/badges over images or shaders need subtle backing pills and crisp contrast.
-   * **Alignment Rails & Uniform Cards:** Keep strict `16px`/`24px` left alignment rails; keep card previews uniform.
-   * **Trust Signals Next to Titles:** Put confidence/verification status directly beside the title ("What is it?" + "Can I trust it?").
-   * **Unified Icon Logic & Soft Dividers:** Same stroke width across all Lucide icons; soften harsh dark divider borders (`border-slate-200/80`).
-   * **Put Total/Outcome Inside CTA + 1-Tap Presets + Sticky Mobile Bar:** Eliminate friction with quick sample presets, clear action copy inside CTAs, and sticky mobile action bars in long editor views.
-
-5. **Top 3 Conversion & Trust Redesigns ([youtu.be/zr37ibqXl1U](https://youtu.be/zr37ibqXl1U)):**
-   * **Core Law:** *"Every UI element asks the user a question. Easier question = faster action."*
-   * **Safety Net > Sales Pitch (Transparency Bias):** Show a clear **3-step safety timeline** (*"1. Paste JD -> 2. The guard checks each bullet against your Fact Bank -> 3. Export the PDF"*) instead of hard-selling.
-   * **Ownership Microcopy + Specific Numbers:** Use **"Start my..."** instead of generic "Subscribe/Submit"; replace vague claims ("Fast") with concrete numbers (*"547 / 547 fabrications blocked on the tuning set"*), always taken from `eval/README.md`.
-   * **Eliminate Ranges -> Single Clear Numbers (Evaluative Ease):** Avoid ambiguous ranges (*"Takes 2–5 mins"*); state concrete metrics and place risk reversal (*"No fabricated claims · Free demo"*) right beneath the CTA.
-
-6. **Top 9 Web Design Trends of 2026 ([youtu.be/waHuVF3XuMA](https://youtu.be/waHuVF3XuMA)) & Workspace Background Rule:**
-   * **Hero vs Workspace Background Rule:** Animated GPU Shaders and bold blueprint grids belong **exclusively on Hero (`/`), Login (`/login`), and empty states**. Dense workspace views (`/app`, `/app/facts`, `/app/applications/*`) must stay **calm and quiet** (`--canvas` + subtle 1–2% static paper grain + `.fluted-glass` nav) so data and comparison tables remain effortless to read.
-
-| 2026 Trend | Use in FactFit? | Exact Application to FactFit |
+| Token | Value | Use |
 |---|---|---|
-| **1. "Barely There" AI Hyper-Minimalism + Graphs** | ✅ **Primary Fit** | Restrained Slate-50 canvas, 1 Emerald accent, and clear accuracy benchmark graphs (`benchmark-metrics.tsx`). |
-| **2. Maximalism with an Asterisk** | ⚠️ Lightly | Oversized crisp display headline in Hero only; keep inner workspace restrained. |
-| **3. Wabi-Sabi / Human Touch** | ⚠️ Subtle | Tactile cotton-paper resume card feel (`#12 Paper texture`), honest concrete microcopy. |
-| **4. Grade School Color Palettes** | ⚠️ Grounded | Stick to grounded Slate/Emerald/Amber/Red tokens—zero neon 2024 lime slop. |
-| **5. Spaceship Instruction Manual** | ✅ **Primary Fit** | Blueprint dot grids, monospace fact IDs, annotated callout lines in `ats-anatomy.tsx` & `verification-pipeline.tsx`. |
-| **6. Democratized WebGL Shaders** | ✅ **Hero Only** | Subtle `hero-shader.tsx` behind Hero proof card (`speed=0` on reduced motion / offscreen). |
-| **7. Internet Nostalgia** | ❌ Skip | FactFit requires modern career/ATS authority, not retro 2000s nostalgia. |
-| **8. Subtle Opt-In Micro-Sound** | ⚠️ Optional | Keep silent by default; subtle visual haptic compression (`press-scale`) is cleaner for resume work. |
-| **9. Custom Non-Slop Gradients** | ✅ **Accent Only** | Restrained Emerald grainy glow strictly behind the verified resume proof card (never purple/blue AI slop). |
+| `--canvas` | `#f8fafc` (slate-50) | page background (about 60% of the surface) |
+| `--ink` | `#1e293b` (slate-800) | text; slate-900 for headings |
+| `--hairline` | `#e2e8f0` (slate-200) | borders and dividers |
+| `--accent` | `#047857` (emerald-700) | only "traceable / verified" states and the focus ring |
+| `--danger` | `#b91c1c` (red-700) | only guard rejections |
+| `--ease-out` | `cubic-bezier(0.16, 1, 0.3, 1)` | every transition and entrance |
 
----
+Components: `.btn-primary`, `.btn`, `.btn-ghost`, `.btn-danger`, `.input`, `.label`, `.card`, `.eyebrow`
+(sentence case), `.paper-texture`, `.fluted-glass`, `.hero-band`. Type is Inter; Geist Mono only for fact IDs,
+file names and code.
 
-## 8. Claude Code Design Skills, 21st.dev & The $10,000 Website Workflow (Metics Media)
+## 3. Anti-slop rules
 
-> **Source:** [Build a $10,000 website with Claude Code (Ultimate Guide) — Metics Media](https://www.youtube.com/watch?v=VMvZuhcDdnw)  
-> **Key Insight:** Stop asking Claude to "make it modern and professional" (which triggers boilerplate purple/blue cards and generic centered AI slop). Instead, install specialized design skills, reference high-end platforms (Dribbble, Awwwards, Pinterest), inject pre-built design-engineer components from **21st.dev**, and execute through a disciplined 4-pass polish framework.
+1. No filler badges ("AI-Powered", "Smart Match"). Keep only status badges with a real state: Traceable, Blocked,
+   Missing.
+2. Drop labels the layout already says. No uppercase tracked eyebrows over every heading.
+3. No random italics; use weight and size for emphasis.
+4. Mono only for IDs, file names and code. No fake system codes (`SYS.01`, `ERR_01`).
+5. Bind colours, radii and fonts to the tokens; no stray hex values in classes.
+6. Show the actual product: the real guard on a fictional fact, not abstract shapes.
+7. The fabrication guard is the main feature; give it the most space.
+8. Group with spacing before borders. No card inside a card inside a card.
+9. Specific headlines ("Tailor your resume to each job without inventing a single fact"), not generic AI copy.
+10. One primary CTA per view: high contrast, `press` compression on tap.
+11. Emerald is about 10% of the surface and only means verified, active or primary.
+12. Icons from `src/components/icons.tsx` only, one stroke width.
+13. No decorative blobs, squiggles or floating shapes.
+14. Nested radius: inner = outer − padding (`rounded-lg` + `p-1` gives buttons `rounded`).
+15. Text contrast at least 4.5:1 (3:1 for large text). No slate-300 text on white.
+16. `text-wrap: balance` on headings (`.display-heading`); avoid one-word last lines.
+17. Align icons optically, not by bounding box.
+18. `tabular-nums` on scores, counts, dates and metrics.
+19. Every async action has a loading state (skeleton or shimmer) and a result message.
+20. Animate state changes and feedback only (draw, pulse, shake), never for decoration.
 
-### 8.1 The Claude Code Design Skills Stack
+## 4. Motion
 
-| Tool / Skill | Repository / URL | Purpose & How Claude Uses It |
-|---|---|---|
-| **Frontend Design Skill** *(by Anthropic)* | [github.com/anthropics/skills/.../frontend-design](https://github.com/anthropics/skills/tree/main/skills/frontend-design) | Anthropic's official skill to prevent boilerplate AI UI. Commands Claude to think like an Art Director: creates intentional typographic scales, unexpected restrained palettes, expressive visual rhythm, and rejects standard template layouts. |
-| **UI/UX Pro Max Skill** *(by NextLevelBuilder)* | [github.com/nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) | Principal Product Designer skill ruleset: enforces mathematical radii formulas (`r_in = r_out - p`), strict 60-30-10 color balance, WCAG AA contrast (>=4.5:1), 8pt spacing rhythm, micro-haptic feedback (`active:scale-[0.98]`), and mobile touch ergonomics (>=44px). |
-| **21st.dev Component Library** | [21st.dev](https://21st.dev) | The curated "npm for design engineers" (shadcn/ui + Tailwind + Framer Motion). Provides copy-pasteable high-end UI primitives: interactive bento grids, glow cards, animated tab switchers, dynamic docks, and magnetic CTA buttons. |
-| **Curated Design References** | Dribbble, Awwwards, Pinterest | Concrete aesthetic anchors: layout hierarchy from Stripe, precision hairlines from Linear, fluid micro-interactions from Framer, typography from Pentagram. |
-| **The 8-Pillar $10,000 Checklist** | [Google Drive PDF Download](https://drive.google.com/file/d/1CCRCvSbJ1tNXmd2YDnUNr1XkTAguYG7v/view?usp=drive_link) | The definitive audit rubric that separates a $10,000 custom web application from a cheap $200 template. |
+- Nothing loops forever. The scan sweep plays once, the pipe flow three times, the score pulse twice.
+- Scroll entrances use `src/components/in-view.tsx`. It never hides content: no-JS, reduced motion and blocks already
+  on screen stay as rendered.
+- `prefers-reduced-motion: reduce` gives the static final state everywhere (see the block at the end of
+  `globals.css`).
+- Transitions 150–550 ms with `--ease-out`; press feedback `scale(0.98)`.
 
----
+## 5. Surfaces and backgrounds
 
-### 8.2 The 8-Pillar $10,000 Website Framework (Applied to FactFit)
+- **Hero (`/`) and `/login` only:** the GPU shader (`hero-shader.tsx`), the square-dot grid, the dark `.hero-band`.
+  The shader stops under reduced motion and off-screen, and caps its drawn pixels (`maxPixelCount`).
+- **Workspace (`/app/**`):** calm `--canvas`, `.card` surfaces, `.paper-texture` on resume-like sheets, the
+  `.fluted-glass` top bar. No shaders or grids behind tables and forms.
+- A texture behind text needs a scrim so the text still meets contrast.
 
-1. **Pillar 1: Distinctive Brand Identity & Aesthetic Tension:**
-   - Eliminate all generic SaaS purple/blue gradients and floating rounded pill slop.
-   - FactFit uses **Slate-50 (`#f8fafc`) canvas**, **Slate-900 typography**, and a surgical **Emerald-700 (`#047857`)** accent for verification trust.
-2. **Pillar 2: Intentional Hierarchy & Grid:**
-   - 8pt spacing rhythm: 16px intra-card gap, >=32px inter-section gap, 64–96px landing section blocks.
-   - Headline tracking `-0.025em`, uppercase badges `+0.04em`. Max line width 50–75ch for effortless reading.
-3. **Pillar 3: Micro-Interactions & Tactile Feedback:**
-   - Button press compression `active:scale-[0.98]` with spring physics `cubic-bezier(0.16, 1, 0.3, 1)`.
-   - Score badges and verification checks roll up smoothly with `tabular-nums` so numbers don't twitch.
-4. **Pillar 4: Rich Visual Texture Without AI Slop:**
-   - Hero canvas uses #7 Blueprint / #18 Square-Dot grid with radial scrim mask; verified resume preview uses #12 Paper texture (cotton-paper tactility).
-   - Sticky navbar uses #2 Fluted Glass (`backdrop-blur-md` + subtle linear ribbing).
-5. **Pillar 5: Trust Architecture & Verifiable Citations:**
-   - Concrete claim: "Every bullet cites the facts it came from", backed by the measured eval numbers.
-   - Split proof demo: Unverified AI resume (red warning pills) vs FactFit Verified (emerald citations).
-6. **Pillar 6: Conversion & Frictionless Action:**
-   - Clear single-focus primary CTA with risk reversal: *"Tailor My Resume · Traceable to your Fact Bank · 1-click PDF"*.
-7. **Pillar 7: Mobile-First Thumb Ergonomics:**
-   - Sticky bottom action drawer on mobile screens; all interactive touch targets >= 44x44px. Zero scrolljacking.
-8. **Pillar 8: Disciplined 4-Pass Polish Workflow:**
-   - **Pass 1 (Structure):** Semantic HTML, citation logic, Supabase auth flow.
-   - **Pass 2 (Visual Polish):** Design tokens, strict contrast, hairline borders, paper texture.
-   - **Pass 3 (Motion & 21st.dev Components):** Framer Motion micro-springs, animated score counter, bento proof grid.
-   - **Pass 4 (Quality & Build Audit):** WCAG AA verification, mobile thumb test, `npm run build` verification.
+## 6. Layout and accessibility
 
----
+- 8-point spacing: 16px inside a group, at least 32px between groups, 64–96px between landing sections.
+- Reading width 50–75 characters (`.body-prose`). Headings line-height 1.1, body 1.6.
+- Touch targets at least 44×44px on phones (the rule near the end of `globals.css` covers `.btn`, `.input`, `summary`).
+- Visible keyboard focus everywhere (one `:focus-visible` outline in `globals.css`).
+- Never rely on colour alone: red and green states always carry an icon and words.
+- Check 375px and 1280px: no horizontal scroll; tables stack on phones.
 
-### 8.3 How to Install & Use These Skills in Claude Code (วิธีติดตั้งและเรียกใช้)
+## 7. Before you finish a UI change
 
-มี 3 วิธีหลักในการนำทักษะ (Design Skills) ไปใช้กับ Claude Code:
-
-1. **วิธีที่ 1: ติดตั้งเป็น Skill ในโปรเจกต์ (`.claude/skills/`):**
-   - สร้างโฟลเดอร์ `.claude/skills/` ใน root ของโฟลเดอร์โปรเจกต์
-   - โคลนหรือดาวน์โหลดไฟล์ `SKILL.md` จาก GitHub:
-     - **Frontend Design:** นำไฟล์จาก [anthropics/skills/tree/main/skills/frontend-design](https://github.com/anthropics/skills/tree/main/skills/frontend-design) ไปวางที่ `.claude/skills/frontend-design/SKILL.md`
-     - **UI/UX Pro Max:** นำไฟล์จาก [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) ไปวางที่ `.claude/skills/ui-ux-pro-max/SKILL.md`
-   - เมื่อเปิดรัน Claude Code ตัวระบบจะตรวจจับและโหลด Skill เหล่านี้เข้ามาใน Context ทันที (หรือเรียกใช้ผ่าน `/frontend-design` และ `/ui-ux-pro-max`)
-
-2. **วิธีที่ 2: ตั้งค่าให้อ่านอัตโนมัติผ่าน `CLAUDE.md` (Zero-Config Auto-Load):**
-   - Claude Code จะอ่านไฟล์ `CLAUDE.md` ใน root ของโปรเจกต์เสมอเมื่อเริ่มทำงาน
-   - เพิ่มคำสั่งลงใน `CLAUDE.md` ของโปรเจกต์:
-     ```markdown
-     ## Design Standards
-     - Before writing or modifying any UI/UX or styles, strictly follow `CLAUDE_DESIGN_GUIDE.md`.
-     - Adopt the Anthropic Frontend Design Skill rules (bespoke layouts, anti-AI-slop) and UI/UX Pro Max heuristics (60-30-10, r_in = r_out - p, tactile springs).
-     - Source component implementation patterns from 21st.dev (shadcn + Tailwind + Framer Motion).
-     ```
-
-3. **วิธีที่ 3: สั่งตรงผ่าน Prompt (Prompt Injection):**
-   - หากไม่ได้ติดตั้งโฟลเดอร์ skill สามารถใช้ **Prompt 6** ในคู่มือนี้ ซึ่งมีบล็อก `Step 0 — Load Skills & Reference Repositories` กำชับบทบาท กฎเกณฑ์ 20 ข้อ และพฤติกรรมของทั้ง 2 skills ให้ Claude ปฏิบัติตามทันที
-
----
-
-### 8.4 The "Make It Feel Alive" Triad: Motion.dev, Anime.js & Shadcn Charts (Applied to FactFit)
-
-> *"Claude can build a website fast. Making it feel alive is harder. That part lives in the details: how things move, how charts look. Motion.dev handles the transitions. Anime.js handles the custom motion. Shadcn charts handle the data. Like giving Claude a better toolbox. Same builder, better finish. Keep all three open next build."*
-
-| Tool & Resource | Core Role | Exact Application to FactFit |
-|---|---|---|
-| **[Motion.dev](https://motion.dev)** *(formerly Framer Motion)* | **State & Layout Transitions** | • Page transitions between Landing (`/`) and Workspace (`/app`).<br>• `AnimatePresence` layout morphing for the interactive Split Proof Hero (Generic AI vs FactFit Verified).<br>• Fluid expandable accordion transitions for Fact Guard citation inspect drawers. |
-| **[Anime.js](https://animejs.com)** | **Custom Motion & Micro-Timelines** | • Circular SVG progress ring draw animation in `score-badge.tsx` (`stroke-dashoffset` timeline).<br>• Count-up numerical animation for ATS match percentage with zero layout jitter.<br>• Micro-timeline sequence for verified checkmark draw + emerald badge pulse upon fact confirmation. |
-| **[Shadcn Charts](https://ui.shadcn.com/docs/components/chart)** | **Accessible Data Visualization** | • Benchmark figures in `benchmark-metrics.tsx`, using only the measured numbers in `eval/README.md` (547/547 tuning, 180/186 held-out, 26/26 under the "loose" prompt). No comparison against other products: none was measured.<br>• Skill keyword match distribution (Horizontal Bar / Radar Chart) styled with FactFit's `--accent` (`#047857`) and Slate design tokens.<br>• Clean accessible tooltips and theme-integrated labels. |
-
----
-
-## 9. Token-Efficient Claude Prompts for FactFit (Copy-Paste Ready)
-
-### Prompt 1: Landing Page Hero & Interactive Verification Showcase
-```text
-Role: Senior UI/UX Designer & Frontend Engineer
-Task: Elevate FactFit's landing page (`src/app/page.tsx` and `src/app/globals.css`) using professional web design skills and strict anti-AI-slop principles.
-
-Reference Websites:
-- Stripe (stripe.com) for layout hierarchy and interactive product demo.
-- Linear (linear.app) for hairline borders and high-density precision.
-- Framer (framer.com) for micro-interactions and tactile button compression.
-
-Anti-AI-Slop Rules to Enforce:
-1. Delete filler badges; drop redundant labels; unitalicize random words.
-2. Palette: 60% Slate-50 canvas (`--canvas`), 30% Slate-800 typography & hairlines (`--hairline`), 10% Emerald accent (`--accent`) strictly for verification.
-3. Show the actual product: build an interactive split comparison in the hero:
-   - Left: "Generic AI Resume" flagged with red warning pills on fabricated numbers ("Invented +45% metric - UNVERIFIED").
-   - Right: "FactFit Verified" highlighted with emerald badges linked directly to verified Fact Bank citations.
-4. Formula check: nested containers must obey `inner radius = outer - padding`.
-5. Tabular numbers: apply `tabular-nums` on all match percentage badges.
-6. Primary CTA: "Tailor My Resume" with high contrast and tactile active compression (`active:scale-[0.98]`).
-7. Preserve existing backend routes, auth callbacks, and Supabase integration. Do not scrolljack.
-```
-
-### Prompt 2: Fact Bank Management & Score Badge Motion Polish
-```text
-Role: Senior Frontend Engineer
-Task: Polish the Fact Bank manager (`src/app/app/facts/page.tsx`) and the Score Badge component (`src/components/score-badge.tsx`).
-
-Reference Websites:
-- Notion (notion.com) for structured card layouts and quick inline editing.
-- Duolingo (duolingo.com) for celebratory progress feedback.
-
-Requirements:
-1. `src/components/score-badge.tsx`:
-   - Animate the SVG circular progress ring smoothly on mount using `cubic-bezier(0.16, 1, 0.3, 1)`.
-   - Numeric counter with smooth roll-up and `tabular-nums` to prevent layout jitter.
-   - For scores >= 85%, trigger an ambient emerald pulse (`animate-verify-pulse`).
-2. `src/app/app/facts/page.tsx`:
-   - Replace cluttered nested cards with clean whitespace grouping (Rule #8).
-   - Add clear loading skeleton states during Supabase queries (Rule #19).
-   - Add keyboard focus rings (`focus-visible:ring-2 focus-visible:ring-emerald-700`) and WCAG AA contrast compliance (Rule #15).
-   - Ensure all icons use consistent Lucide-react 1.5px stroke width (Rule #12).
-```
-
-### Prompt 3: Background & Surface Depth Polish (Anti-Flatness Without AI Slop)
-```text
-Role: Senior UI/UX Designer & Frontend Engineer
-Task: Eliminate visual flatness in FactFit (`src/app/globals.css`, `src/app/page.tsx`, and `src/app/app/nav.tsx`) using subtle, purposeful background textures from Section 5 ("22 Backgrounds to Make Designs Less Flat") with zero AI slop.
-
-Requirements:
-1. Hero Canvas (`src/app/page.tsx` & `globals.css`):
-   - Add an ultra-subtle #7 Blueprint Grid / #18 Square-Dot Grid (`--hairline` at ~45% opacity, 24px spacing) masked smoothly with `mask-image: radial-gradient(ellipse at center, black 35%, transparent 80%)`.
-   - Behind the "FactFit Verified" split preview card only, place a #9 Grainy Gradient aura tinted softly with Emerald (`--accent` at 6% opacity + inline SVG `<feTurbulence>` micro-noise, never purple/blue AI gradients).
-2. Resume Preview Sheets:
-   - Apply a crisp #12 Paper Texture / #5 Speckled Graphite overlay (`pointer-events: none`, `opacity: 0.03`) to the resume comparison documents so they feel like real high-grade cotton paper.
-3. Sticky Top Navigation (`src/app/app/nav.tsx`):
-   - Upgrade flat background to subtle #2 Fluted Glass (`backdrop-blur-md` + faint vertical linear-gradient ribbing at 2% opacity) over `--canvas`.
-4. Guardrails:
-   - Pure CSS + inline SVG data-URI only (no large image assets, no scroll lag, 60 FPS).
-   - Strictly preserve WCAG AA contrast (>= 4.5:1) for all Slate-800 typography and do not alter Drizzle/Supabase/PDF logic.
-```
-
-### Prompt 4: Read Guide & Implement GPU Shader Background (FactFit)
-```text
-Task: First, read `CLAUDE_DESIGN_GUIDE.md` thoroughly (especially Section 3 Anti-AI-Slop Rules, Section 4 Design Tokens, and Section 6 GPU Shader Background Architecture). Then follow the guide to implement a GPU Shader background on FactFit's landing page (`src/app/page.tsx`).
-
-Steps to Follow:
-1. Create a reusable `'use client'` component `src/components/hero-shader.tsx` using `@paper-design/shaders-react` (`GrainGradient` or `DotOrbit` from Section 6.3) or a zero-dependency WebGL `<canvas>` fragment shader if avoiding new packages.
-2. Apply FactFit's exact palette (`#f8fafc` canvas, `#e2e8f0` slate hairline, `#d1fae5` soft emerald, `#047857` accent). Never use purple or rainbow AI gradients.
-3. Implement mandatory guardrails from Section 6.2:
-   - Respect `prefers-reduced-motion` (`speed = 0`).
-   - Use `IntersectionObserver` to pause rendering when scrolled out of viewport.
-   - Layer behind Hero only with `pointer-events-none`, `aria-hidden="true"`, radial fade mask, and instant `--canvas` CSS fallback for zero CLS.
-4. Verify WCAG AA contrast (>= 4.5:1) on all hero headlines and interactive proof cards, and run `npm run build` / TypeScript check without touching Supabase/Drizzle/PDF backend logic.
-```
-
-### Prompt 5: Read Guide & Apply All 6 Masterclasses + 2026 Trends (FactFit)
-```text
-Task: First, read `CLAUDE_DESIGN_GUIDE.md` thoroughly (especially Section 3 Anti-AI-Slop Rules, Section 6 GPU Shader Architecture, and Section 7 Synthesis of 6 UI/UX Masterclasses & 2026 Web Design Trends). Then audit and elevate FactFit (`src/app/page.tsx`, `src/app/globals.css`, `src/components/proof-demo.tsx`, `src/components/ats-anatomy.tsx`, `src/components/verification-pipeline.tsx`, and `src/app/app/**`).
-
-Apply Maximum Applicable Techniques & Best-Fit 2026 Trends (Zero AI Slop):
-1. Trends to Emphasize:
-   - #1 "Barely There" AI Hyper-Minimalism + Graphs: crisp Slate-50 canvas, high whitespace, clear benchmark metrics (`benchmark-metrics.tsx`).
-   - #5 "Spaceship Instruction Manual": fine blueprint pointer lines, monospace fact citations, and clean ATS and guard diagrams (`ats-anatomy.tsx`, `verification-pipeline.tsx`).
-   - Keep animated shaders strictly on Hero (`/`), while inner app routes (`/app`, `/app/facts`) keep a calm, quiet `--canvas` surface so dense Fact Bank tables stay effortless to scan.
-2. Typography & 8pt Double-Rule (`9 Web Design Hacks`):
-   - Enforce 50–75ch max paragraph width, `16px` intra-group spacing, `>= 32px` inter-group spacing, `64–96px` section rhythm.
-   - Display heading: tight tracking (`-0.025em`) & `1.08–1.15` line-height; Body: `1.6` line-height; Uppercase labels & CTAs: subtle positive tracking (`+0.04em`).
-   - Radial scrim behind Hero text so background dot grids never reduce legibility.
-   - Verify via the Squint Test: Headline, Proof Demo, and Primary CTA must clearly dominate.
-3. Conversion & Product UX (`uxpeak` + `$10k Transformation` principles):
-   - Lead with Transformation & Safety Net Timeline ("Every claim traceable to your facts: 1. Paste JD -> 2. Fact Guard -> 3. Clean ATS PDF").
-   - Place verification trust badge right beside resume titles; eliminate redundant labels; use single concrete numbers (never vague ranges).
-   - Add risk reversal microcopy directly under primary CTAs ("Traceable to your Fact Bank · 1-click PDF") and ensure sticky mobile action buttons in `/app/applications/*`.
-   - Never rely on color alone for guard alerts (pair Emerald/Red/Amber with Lucide icons of uniform stroke width).
-4. Verification:
-   - Run `npm run build` and TypeScript/test checks; do not break Supabase auth, Drizzle queries, guard logic, or `@react-pdf/renderer`.
-```
-
-### Prompt 6: Complete $10,000 Website Polish with Claude Skills & 21st.dev (FactFit)
-```text
-Task: Elevate FactFit (`src/app/page.tsx`, `src/app/globals.css`, and core UI components) to an executive $10,000 custom web application standard, following the Metics Media ultimate workflow.
-
-Step 0 — Load Skills & Reference Repositories:
-You MUST adopt the specialized persona, heuristics, and execution standards from:
-1. Anthropic Frontend Design Skill (github.com/anthropics/skills/tree/main/skills/frontend-design): Focus on high aesthetic intentionality, bespoke layout asymmetry, avoiding cliché AI templates, and crafting custom visual rhythm.
-2. UI/UX Pro Max Skill (github.com/nextlevelbuilder/ui-ux-pro-max-skill): Enforce strict mathematical radii (r_in = r_out - p), 60-30-10 color balance, WCAG AA contrast (>= 4.5:1), 8pt spacing rhythm, and tactile micro-interactions (active:scale-[0.98]).
-3. 21st.dev Component Patterns (21st.dev): Adapt design-engineer primitives (interactive bento grid, glowing proof card border, animated segmented tab switcher, dynamic dock nav) using Tailwind CSS and Framer Motion.
-4. Design Reference Anchors: Stripe (layout hierarchy & interactive live demo), Linear (hairline precision & keyboard feel), Pentagram (authoritative typography).
-
-Execute the 4-Pass $10,000 Polish Method:
-
-Pass 1: Information Architecture & Brand Authority (Anti-AI-Slop)
-- Replace generic SaaS headline with concrete transformation: "Tailor your resume to each job without inventing a single fact."
-- Eliminate all filler pill badges, unitalicize random words, and remove generic centered 3-card feature columns.
-- Structure Hero with high visual tension: Bold left proposition + interactive live proof demo on the right.
-
-Pass 2: Visual Style, Hierarchy & Non-Flat Depth
-- Apply 60-30-10 palette: 60% Slate-50 canvas (`--canvas`), 30% Slate-900 typography and hairline borders (`--hairline`), 10% Emerald-700 accent (`--accent`) strictly for verification states.
-- Hero depth: Add blueprint/square-dot grid with radial scrim mask (`mask-image: radial-gradient(ellipse at center, black 35%, transparent 80%)`).
-- Resume preview sheet: Apply #12 Paper texture (opacity 0.03) so resumes feel like physical high-grade cotton stock.
-- Sticky navigation: Apply #2 Fluted Glass (`backdrop-blur-md` + subtle linear ribbing).
-- Math check: Ensure all nested containers strictly satisfy `inner radius = outer radius - padding`.
-
-Pass 3: Micro-Interactions, Motion & 21st.dev Primitives
-- Integrate a 21st.dev-inspired Bento Grid for the feature showcase (`ats-anatomy.tsx`, `verification-pipeline.tsx`).
-- Live Proof Component: Interactive toggle between "Generic AI Resume" (flagged with red guard findings) and "FactFit Verified" (smooth emerald badge roll-in with `tabular-nums`).
-- Button press physics: Apply `active:scale-[0.98] transition-transform duration-100 ease-out` on all interactive buttons.
-- Smooth spring curves: Use `cubic-bezier(0.16, 1, 0.3, 1)` for sheet drawers and modal entries.
-
-Pass 4: Mobile Ergonomics & Production QA
-- Mobile thumb zone: Sticky bottom action bar on screens < 768px for immediate resume customization.
-- Touch targets: All buttons, tags, and toggles must be >= 44x44px.
-- Accessibility: Guarantee WCAG AA contrast (>= 4.5:1) for all text and icons.
-- Production safety: Strictly preserve Supabase authentication, Drizzle schema, guard logic, and `@react-pdf/renderer` pipeline. Run `npm run build` and ensure zero TypeScript errors.
-```
+Run `npx tsc --noEmit`, `npx eslint .`, `npx vitest run` and `npx next build`. Check the changed pages at 375px and
+1280px, with reduced motion on and off, and with the keyboard.

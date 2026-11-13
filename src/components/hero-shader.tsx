@@ -85,6 +85,8 @@ export function HeroShader() {
             noise={0.28}
             shape="corners"
             speed={activeSpeed}
+            // A soft backdrop does not need retina resolution; cap the drawn pixels for phones and laptops.
+            maxPixelCount={1600 * 1000}
             style={{ width: "100%", height: "100%" }}
           />
         </div>
