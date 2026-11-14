@@ -16,7 +16,9 @@ commits and UI copy in English.
 ## Where things stand
 
 - **Live:** https://factfit-five.vercel.app. Repo github.com/Vector033/FactFit (private).
-  `main` is pushed, and the UI polish (`79a26f0`) was deployed to production on 2026-11-13.
+  `main` = `ec2315d`, pushed and deployed to production on 2026-11-14 (CI green). It contains the UI polish,
+  the Google-user password fix (`1c4c75b`), resume import (`69f45c1`) and guard round 2 (`45fe46d`, `ec2315d`).
+  The résumé v3 and vector033.github.io quote the round-2 numbers (164/172 blind held-out, 25/25 loose prompt).
   Checked on prod: landing, /login, demo login and PDF export (200, `application/pdf`); no console errors; no
   horizontal scroll at 375px.
 - **Google sign-in** is on in prod (`GOOGLE_AUTH_ENABLED=true` on Vercel). **Not yet confirmed:** that a real
@@ -37,7 +39,10 @@ commits and UI copy in English.
 | 481b499 | Landing claims replaced with measured eval numbers (bug-checked) |
 | bdb5e20 | UI polish against the guide (below) and demo verdicts tied to the real guard |
 | 79a26f0 | README screenshots refreshed |
-| (this commit) | Usage screenshots (guard sandbox, pipeline), new settings shots, this handoff |
+| 3254a6b | Usage screenshots (guard sandbox, pipeline), settings shots, handoff |
+| 1c4c75b | Password status for Google users; landing trims (ATS figure, steps pill); design guide trimmed |
+| 69f45c1 | Import facts from a .docx/.pdf resume with a review screen |
+| cce93f8 … ec2315d | Guard rounds 1–2 (derived %, acronyms, units, counted-noun warning) + blind holdout2/holdout3 |
 
 ### What the 2026-11-13 polish changed
 
