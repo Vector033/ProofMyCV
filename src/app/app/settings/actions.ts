@@ -51,8 +51,13 @@ export async function changePasswordAction(_prev: SettingsState, fd: FormData): 
   }
 
   const supabase = await createClient();
-  const { error } = await supabase.auth.updateUser({ password: next });
-  if (error) return { error: "Could not save the new password. Try again in a minute." };
+  // Send the current password too: Supabase demands it (when the project setting "Require current
+  // password" is on) for accounts that already have one, and ignores it otherwise.
+  const { error } = await supabase.auth.updateUser({ password: next, ...(current && { current_password: current }) });
+  if (error) {
+    if (error.code?.startsWith("current_password")) return { error: "Your current password is wrong." };
+    return { error: "Could not save the new password. Try again in a minute." };
+  }
   if (fd.get("signOutOthers") === "on") await supabase.auth.signOut({ scope: "others" });
   revalidatePath("/app/settings", "layout");
   return {
