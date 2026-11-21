@@ -16,6 +16,12 @@ fact bank, no sign-up needed.
 | ![Application page with fit score](docs/screenshots/application.png) | ![Fact bank page](docs/screenshots/fact-bank.png) |
 | **Try the guard: type a draft, see what it blocks** | **The guard, step by step, on an invented draft** |
 | ![Guard sandbox on the landing page](docs/screenshots/guard-sandbox.png) | ![Pipeline diagram blocking an invented draft](docs/screenshots/pipeline.png) |
+| **New application: paste text, a link or a poster; pick your track** | **Applications with status and deadline** |
+| ![New application with three sources and career tracks](docs/screenshots/new-application.png) | ![Applications list filtered by status](docs/screenshots/applications.png) |
+| **Status, re-analyse, preview, and add a missing skill as a fact** | **Import review: header, stack on every fact, GPAX** |
+| ![Application status form and quick-add fact](docs/screenshots/application-status.png) | ![Resume import review screen](docs/screenshots/import-review.png) |
+| **Date presets and click-to-add tech chips** | |
+| ![Experience date presets and fact tech chips](docs/screenshots/fact-editing.png) | |
 | **Settings: security checklist, password with show/hide, signed-in devices** | **Settings: sign-in methods (email + Google)** |
 | ![Security settings](docs/screenshots/settings-security.png) | ![Account settings](docs/screenshots/settings-account.png) |
 
@@ -26,7 +32,7 @@ fact bank, no sign-up needed.
 
 Screenshots use the fictional demo account and are regenerated with `scripts/screenshots.mjs` (still frames, reduced
 motion). The demo account's settings are locked, so the two settings shots come from a throwaway local test account
-that is deleted afterwards.
+that is deleted afterwards, and so does the import review (a fictional resume).
 
 ## How it works
 

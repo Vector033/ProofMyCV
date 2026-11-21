@@ -43,12 +43,37 @@ export async function shoot(page, base = "http://localhost:3000", dir = "docs/sc
   await hideDevUi();
   await page.screenshot({ path: `${dir}fact-bank.png` });
 
+  // Editing: date presets on an experience, click-to-add tech chips on a fact.
+  const card = page.locator("article").first();
+  await card.locator("summary").first().click();
+  await card.locator("li details summary").first().click();
+  await page.waitForTimeout(300);
+  // The sticky top bar would cover part of an element screenshot.
+  const unstick = await page.addStyleTag({ content: "header{position:static!important}" });
+  await card.screenshot({ path: `${dir}fact-editing.png` });
+  await unstick.evaluate((el) => el.remove());
+
+  // New application: three sources and the career-track pills.
+  await page.goto(`${base}/app/applications/new`);
+  await hideDevUi();
+  await page.getByRole("button", { name: "Full-Stack", exact: true }).click();
+  await page.screenshot({ path: `${dir}new-application.png` });
+
   await page.goto(`${base}/app`);
+  await hideDevUi();
+  await page.screenshot({ path: `${dir}applications.png` });
   await page.locator('a[href^="/app/applications/"]:not([href$="/new"])').first().click();
   await page.waitForURL("**/applications/**");
   await hideDevUi();
   await page.waitForTimeout(1400); // score ring finishes drawing
   await page.screenshot({ path: `${dir}application.png` });
+
+  // Status tracker and quick-add from a missing skill (nothing is saved).
+  await page.getByText("+ Add a fact you really have").click();
+  await page.locator('form:has(select[name="status"])').scrollIntoViewIfNeeded();
+  await page.evaluate(() => window.scrollBy(0, -80));
+  await page.waitForTimeout(300);
+  await page.screenshot({ path: `${dir}application-status.png` });
 
   // Bullet studio with one honest bullet and one the guard blocks (not saved).
   const add = page.getByRole("button", { name: "Add", exact: true });
