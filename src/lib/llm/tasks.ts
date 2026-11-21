@@ -167,7 +167,7 @@ const resumeSchema = z.object({
 const RESUME_SYSTEM = `You turn the text of a resume into a fact bank for a resume tool. You never invent anything.
 profile: copy the header at the top (name, the one-line title under it, contact details, links) exactly as written. Leave a field empty if it is not there.
 Return every job, internship, project, degree and activity in the order it appears. Skip the summary, the general skills list, languages and references.
-For each experience: kind, title, org, and startDate/endDate as "YYYY-MM", or "YYYY" when only the year is written. endDate is null for "Present".
+For each experience: kind, title, org, and startDate/endDate as "YYYY-MM", or "YYYY" when only the year is written. endDate is null for "Present". A semester or term ("Sem 1/2026") is not a month: give its year only.
 tech: the experience's own stack line if it has one ("Tech: Next.js, Supabase"); it applies to every fact of that experience.
 For a degree, its GPA/GPAX and its relevant coursework are facts of that degree, written as in the file.
 For each achievement bullet or sentence, one fact:

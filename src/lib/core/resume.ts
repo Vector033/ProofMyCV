@@ -34,7 +34,8 @@ export const MAX_DRAFT_EXPERIENCES = 30;
 export const MAX_DRAFT_FACTS = 20;
 
 const MONTHS = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"];
-const MONTH = String.raw`(?<![\w/])(?:(?:jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\.?\s+(?:19|20)\d{2}|\d{1,2}\/(?:19|20)\d{2}|(?:19|20)\d{2}-\d{2}|(?:19|20)\d{2})(?![\w/])`;
+// A term ("Sem 1/2026") comes first so its "1/2026" is not read as January.
+const MONTH = String.raw`(?<![\w/])(?:(?:sem(?:ester)?|term)\.?\s*\d\/(?:19|20)\d{2}|(?:jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\.?\s+(?:19|20)\d{2}|\d{1,2}\/(?:19|20)\d{2}|(?:19|20)\d{2}-\d{2}|(?:19|20)\d{2})(?![\w/])`;
 const RANGE_RE = new RegExp(
   String.raw`\(?\s*(${MONTH})\s*(?:–|—|-|to)\s*(${MONTH}|present|current|now|ongoing)\s*\)?|\(?\s*(${MONTH})\s*\)?`,
   "i",
@@ -44,6 +45,8 @@ const RANGE_RE = new RegExp(
 function toMonth(s: string): string | null {
   const t = s.trim().toLowerCase();
   if (/^(19|20)\d{2}$/.test(t)) return t;
+  const term = t.match(/^(?:sem|term)\D*\d\/(\d{4})$/);
+  if (term) return term[1];
   const named = t.match(/^([a-z]{3})[a-z]*\.?\s+(\d{4})$/);
   const numeric = t.match(/^(\d{1,2})\/(\d{4})$/);
   const iso = t.match(/^(\d{4})-(\d{2})$/);

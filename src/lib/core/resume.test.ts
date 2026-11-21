@@ -188,3 +188,19 @@ describe("import fixes from a real-resume trial", () => {
     );
   });
 });
+
+describe("semester dates", () => {
+  it("reads a semester as its year, never as January", () => {
+    expect(parseDates("Project Z | Sem 1/2026")).toMatchObject({ start: "2026", end: "2026", rest: "Project Z" });
+    expect(parseDates("Semester 2/2025 - Present")).toMatchObject({ start: "2025", end: null });
+    expect(parseDates("Intern | 06/2025 - 10/2025")).toMatchObject({ start: "2025-06", end: "2025-10" });
+  });
+
+  it("drops a model's January for a semester the file writes", () => {
+    const [e] = finishDraft(
+      [{ kind: "project", title: "Project Z", org: "", startDate: "2026-01", endDate: "2026", facts: [] }],
+      "Project Z | Sem 1/2026",
+    );
+    expect([e.startDate, e.endDate]).toEqual([null, "2026"]);
+  });
+});
