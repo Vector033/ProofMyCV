@@ -33,6 +33,14 @@ describe("resume PDF", () => {
     if (process.env.PDF_OUT) writeFileSync(process.env.PDF_OUT, pdf);
   });
 
+  it("cleans and de-duplicates tags before the skills cut", () => {
+    const facts = [
+      { id: "x", experienceId: "e1", did: "a", result: null, tech: ["Next.js 16", "3 FastAPI services", "Supabase (Postgres)"] },
+      { id: "y", experienceId: "e1", did: "b", result: null, tech: ["supabase", "FastAPI", "Python 3.12"] },
+    ];
+    expect(orderedSkills(facts, { ...data.analysis, requirements: [] })).toEqual(["Next.js", "FastAPI", "PostgreSQL", "Supabase", "Python"]);
+  });
+
   it("lists skills the job requires first", () => {
     expect(orderedSkills(data.facts, data.analysis)).toEqual(["React", "Docker", "Lua"]);
   });

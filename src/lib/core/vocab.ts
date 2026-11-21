@@ -237,6 +237,18 @@ const matchesCompiled = (c: CompiledTerm, text: string) =>
   Boolean(c.ci?.test(text) || c.cs?.test(text));
 
 /** Canonical names of every vocabulary term mentioned in the text. */
+/**
+ * A tag as typed or imported, cleaned for display and import: known tools by their
+ * canonical names ("Supabase (Postgres)" -> Supabase, PostgreSQL; "3 FastAPI services"
+ * -> FastAPI), anything else without a count or version ("Python 3.12" -> Python).
+ */
+export function normalizeTag(tag: string): string[] {
+  const known = findTechTerms(tag);
+  if (known.length) return known;
+  const t = tag.trim().replace(/^\d+\s+/, "").replace(/\s+v?\d+(\.\d+)*$/i, "").trim();
+  return t ? [t] : [];
+}
+
 export function findTechTerms(text: string): string[] {
   const found = COMPILED.filter((c) => matchesCompiled(c, text)).map((c) => c.term.name);
   // "React Native" also matches "React"; keep both only if React appears on its own.

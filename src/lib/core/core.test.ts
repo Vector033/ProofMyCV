@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { canonicalTech, findTechTerms, mentions } from "./vocab";
+import { canonicalTech, findTechTerms, mentions, normalizeTag } from "./vocab";
 import { checkBullet, extractNumbers } from "./guard";
 import { extractJobRuleBased } from "./jd";
-import { matchRequirements } from "./match";
+import { backs, matchRequirements } from "./match";
 import type { Fact } from "./types";
 
 const facts: Fact[] = [
@@ -444,5 +444,55 @@ describe("guard: derived direction, initials, more units", () => {
     expect(check("Moved 8 VPC hosts to pods", "vm").ok).toBe(false);
     // Tool names stay with the vocabulary: initials never turn "AWS" into "always-on ... ".
     expect(check("Moved 8 AWS virtual machines to pods", "vm").ok).toBe(false);
+  });
+});
+
+describe("normalizeTag", () => {
+  it("keeps known tools by canonical name and drops counts and versions", () => {
+    expect(normalizeTag("3 FastAPI services")).toEqual(["FastAPI"]);
+    expect(normalizeTag("Next.js 16")).toEqual(["Next.js"]);
+    expect(normalizeTag("Python 3.12")).toEqual(["Python"]);
+    expect(normalizeTag("Supabase (Postgres)").sort()).toEqual(["PostgreSQL", "Supabase"]);
+    expect(normalizeTag("PromptPay QR v2")).toEqual(["PromptPay QR"]);
+    expect(normalizeTag("  ")).toEqual([]);
+  });
+});
+
+describe("matching v2 (requirement matching only)", () => {
+  // Fictional facts shaped like a real multi-project profile.
+  const profile: Fact[] = [
+    { id: "a", experienceId: "e1", did: "Built a RAG study assistant", result: null, tech: ["Gemini", "FastAPI", "Python"] },
+    { id: "b", experienceId: "e2", did: "Read bank slips in the browser", result: null, tech: ["tesseract.js", "Next.js"] },
+    { id: "c", experienceId: "e3", did: "Containerised the API", result: null, tech: ["Docker"] },
+  ];
+
+  it("matches any part of a slash compound and broader words a tool proves", () => {
+    const report = matchRequirements(
+      {
+        role: "Software Development & AI/ML Intern",
+        requirements: [
+          { name: "AI/RAG/OCR systems", kind: "keyword", importance: "required" },
+          { name: "Backend APIs", kind: "keyword", importance: "required" },
+          { name: "Web applications", kind: "keyword", importance: "required" },
+          { name: "Software development", kind: "keyword", importance: "required" },
+          { name: "Artificial intelligence", kind: "keyword", importance: "preferred" },
+          { name: "Docker", kind: "skill", importance: "required" },
+          { name: "Kubernetes", kind: "skill", importance: "required" },
+        ],
+        problems: [],
+      },
+      profile,
+    );
+    expect(report.matches.map((m) => m.factIds)).toEqual([["a", "b"], ["a"], ["b"], ["a", "b"], ["a"], ["c"], []]);
+  });
+
+  it("still needs real evidence", () => {
+    expect(backs("Wrote the team newsletter", "AI/RAG/OCR systems")).toBe(false);
+    expect(backs("Built a landing page in plain HTML", "Backend APIs")).toBe(false);
+    expect(backs("Rebuilt the parcel tracking page in React", "Data pipelines")).toBe(false);
+  });
+
+  it("does not change mentions(), which the guard-side eval uses", () => {
+    expect(mentions("Built a RAG study assistant with Gemini", "AI/RAG/OCR systems")).toBe(false);
   });
 });

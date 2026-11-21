@@ -78,7 +78,7 @@ describe("resumeText", () => {
     const fromDocx = parseResumeRuleBased(await resumeText(docx(LINES)));
     const fromPdf = parseResumeRuleBased(await resumeText(await pdf(LINES)));
     expect(fromPdf).toEqual(fromDocx);
-    expect(fromDocx).toEqual([
+    expect(fromDocx.experiences).toEqual([
       {
         kind: "job",
         title: "Backend Intern",

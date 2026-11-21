@@ -17,9 +17,14 @@ import { requireUser } from "@/lib/auth";
 import { isDemoUser } from "@/lib/supabase/admin";
 import { ImportResume } from "./import-resume";
 import { DateFields } from "./date-fields";
+import { TechChips } from "./tech-chips";
+import { normalizeTag } from "@/lib/core/vocab";
 import { IconAlert } from "@/components/icons";
 
 export const metadata: Metadata = { title: "Fact bank" };
+
+// Offered as one-click chips when the user has few tags of their own yet.
+const COMMON_TECH = ["Python", "TypeScript", "JavaScript", "React", "Next.js", "Node.js", "FastAPI", "PostgreSQL", "Docker", "Git"];
 
 const KIND_LABEL: Record<Experience["kind"], string> = {
   job: "Work",
@@ -33,6 +38,12 @@ export default async function FactsPage() {
   const header = { "Full name": profile.fullName, Headline: profile.headline, "Contact line": profile.contact, Links: profile.links };
   const headerFilled = Object.values(header).filter((v) => v.trim()).length;
   const unprintable = Object.entries(header).filter(([, v]) => v.match(PDF_UNSAFE)).map(([k]) => k);
+  // The user's own tags, most used first, then common ones: the chips in every fact form.
+  const used = new Map<string, number>();
+  for (const t of bank.facts.flatMap((f) => f.tech.flatMap(normalizeTag))) used.set(t, (used.get(t) ?? 0) + 1);
+  const suggestions = [...[...used].sort((a, b) => b[1] - a[1]).map(([t]) => t), ...COMMON_TECH]
+    .filter((t, i, all) => all.findIndex((x) => x.toLowerCase() === t.toLowerCase()) === i)
+    .slice(0, 14);
 
   return (
     <div className="space-y-10">
@@ -80,7 +91,11 @@ export default async function FactsPage() {
         </form>
       </section>
 
-      <ImportResume demo={isDemoUser(user.email)} />
+      <ImportResume
+        demo={isDemoUser(user.email)}
+        profile={{ fullName: profile.fullName, headline: profile.headline, contact: profile.contact, links: profile.links }}
+        existing={bank.experiences.map(({ title, org }) => ({ title, org }))}
+      />
 
       <section className="space-y-4">
         <h2 className="font-medium">Experience, projects and education</h2>
@@ -88,7 +103,7 @@ export default async function FactsPage() {
           <p className="text-sm text-slate-600">Nothing here yet. Add your first job, project or degree below.</p>
         )}
         {bank.experiences.map((e) => (
-          <ExperienceCard key={e.id} experience={e} facts={bank.facts.filter((f) => f.experienceId === e.id)} />
+          <ExperienceCard key={e.id} experience={e} facts={bank.facts.filter((f) => f.experienceId === e.id)} suggestions={suggestions} />
         ))}
 
         <details className="group rounded-xl border border-dashed border-slate-300 bg-white/60 p-5 open:border-solid open:border-slate-200/80 open:bg-white" open={bank.experiences.length === 0}>
@@ -103,7 +118,7 @@ export default async function FactsPage() {
   );
 }
 
-function ExperienceCard({ experience: e, facts }: { experience: Experience; facts: Fact[] }) {
+function ExperienceCard({ experience: e, facts, suggestions }: { experience: Experience; facts: Fact[]; suggestions: string[] }) {
   return (
     <article className="card">
       <div className="flex flex-wrap items-start gap-3 border-b border-slate-100 p-5">
@@ -158,7 +173,7 @@ function ExperienceCard({ experience: e, facts }: { experience: Experience; fact
                 <span className="shrink-0 pt-0.5 text-xs text-slate-500 group-open:hidden">Edit</span>
                 <span className="hidden shrink-0 pt-0.5 text-xs text-slate-500 group-open:inline">Close</span>
               </summary>
-              <FactForm action={updateFactAction.bind(null, f.id)} submit="Save fact" initial={f} />
+              <FactForm action={updateFactAction.bind(null, f.id)} submit="Save fact" initial={f} suggestions={suggestions} />
               <form action={deleteFactAction.bind(null, f.id)} className="mt-2">
                 <ConfirmButton confirm="Delete this fact? Bullets that cite it will be blocked." className="btn-danger">
                   Delete fact
@@ -173,7 +188,7 @@ function ExperienceCard({ experience: e, facts }: { experience: Experience; fact
         <summary className="flex min-h-8 cursor-pointer list-none items-center gap-1.5 text-sm font-medium text-emerald-800 [&::-webkit-details-marker]:hidden">
           <Plus /> Add fact
         </summary>
-        <FactForm action={createFactAction.bind(null, e.id)} submit="Add fact" />
+        <FactForm action={createFactAction.bind(null, e.id)} submit="Add fact" suggestions={suggestions} />
       </details>
     </article>
   );
@@ -215,10 +230,12 @@ function FactForm({
   action,
   submit,
   initial,
+  suggestions,
 }: {
   action: (fd: FormData) => Promise<void>;
   submit: string;
   initial?: Fact;
+  suggestions: string[];
 }) {
   return (
     <form action={action} className="mt-3 grid gap-3">
@@ -234,10 +251,8 @@ function FactForm({
           className="input"
         />
       </label>
-      <div className="grid gap-3 sm:grid-cols-2">
-        <Field name="result" label="Result (with the number, if there is one)" defaultValue={initial?.result ?? ""} placeholder="Report generation went from 40 s to 6 s" />
-        <Field name="tech" label="Technologies (comma separated)" defaultValue={initial?.tech.join(", ")} placeholder="FastAPI, Vue, Firestore" />
-      </div>
+      <Field name="result" label="Result (with the number, if there is one)" defaultValue={initial?.result ?? ""} placeholder="Report generation went from 40 s to 6 s" />
+      <TechChips initial={initial?.tech} suggestions={suggestions} />
       <div>
         <button className="btn">{submit}</button>
       </div>

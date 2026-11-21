@@ -14,7 +14,7 @@ import { checkBullet, describeViolation } from "@/lib/core/guard";
 import { matchRequirements } from "@/lib/core/match";
 import { getLlm, LlmError } from "@/lib/llm/provider";
 import { analyzeJob, draftBullets, parseResume, type BulletCandidate } from "@/lib/llm/tasks";
-import { MAX_DRAFT_EXPERIENCES, MAX_DRAFT_FACTS, parseResumeRuleBased, type DraftExperience } from "@/lib/core/resume";
+import { MAX_DRAFT_EXPERIENCES, MAX_DRAFT_FACTS, parseResumeRuleBased, type DraftResume } from "@/lib/core/resume";
 import { MAX_RESUME_BYTES, ResumeFileError, resumeText } from "@/lib/import/extract";
 
 const text = (max: number) => z.string().trim().max(max);
@@ -116,7 +116,7 @@ export async function deleteFactAction(factId: string) {
 
 // ---------- resume import ----------
 
-export type ImportState = { draft?: DraftExperience[]; draftId?: string; parsedBy?: "ai" | "rules"; note?: string; error?: string };
+export type ImportState = { draft?: DraftResume; draftId?: string; parsedBy?: "ai" | "rules"; note?: string; error?: string };
 
 const DEMO_IMPORT_OFF = "Import is off on the shared demo account, because every visitor sees its data. Sign up to import your own resume.";
 
@@ -146,7 +146,7 @@ export async function importResumeAction(_prev: ImportState, fd: FormData): Prom
     llm = null;
     note = "Today's AI limit is used up, so simple rules read your file instead.";
   }
-  let draft: DraftExperience[];
+  let draft: DraftResume;
   try {
     draft = await parseResume(llm, text);
   } catch (e) {
@@ -156,7 +156,7 @@ export async function importResumeAction(_prev: ImportState, fd: FormData): Prom
     note = "The AI could not read the file just now, so simple rules read it instead.";
     draft = parseResumeRuleBased(text);
   }
-  if (draft.length === 0) {
+  if (draft.experiences.length === 0 && !Object.values(draft.profile).some(Boolean)) {
     return { error: "No experiences or bullet points were found in this file. Add them by hand below." };
   }
   return { draft, draftId: crypto.randomUUID(), parsedBy: llm ? "ai" : "rules", note };
@@ -164,17 +164,22 @@ export async function importResumeAction(_prev: ImportState, fd: FormData): Prom
 
 const importSchema = z
   .array(experienceSchema.extend({ facts: z.array(factSchema).max(MAX_DRAFT_FACTS) }))
-  .min(1, "Tick at least one entry to save.")
   .max(MAX_DRAFT_EXPERIENCES);
 
 /** Saves the entries the user ticked on the review screen, after the same checks as the manual forms. */
-export async function saveImportAction(entries: unknown): Promise<FormState & { saved?: number }> {
+export async function saveImportAction(entries: unknown, header: unknown = {}): Promise<FormState & { saved?: number }> {
   const user = await requireUser();
   if (isDemoUser(user.email)) return { error: DEMO_IMPORT_OFF };
   const parsed = importSchema.safeParse(entries);
+  // Only the header fields the user kept ticked; the rest of the saved header stays as it is.
+  const headerPatch = profileSchema.partial().safeParse(header);
+  const patch = headerPatch.success ? headerPatch.data : {};
+  if (parsed.success && parsed.data.length === 0 && Object.keys(patch).length === 0) {
+    return { error: "Tick at least one entry to save." };
+  }
   if (!parsed.success) {
     const issue = parsed.error.issues[0];
-    return { error: issue.code === "too_small" && issue.path.length === 0 ? issue.message : "Every entry needs a title, and every fact at least a few words." };
+    return { error: issue.path.length === 0 ? "Too many entries to save at once." : "Every entry needs a title, and every fact at least a few words." };
   }
   let saved = 0;
   for (const { facts, ...experience } of parsed.data) {
@@ -183,6 +188,10 @@ export async function saveImportAction(entries: unknown): Promise<FormState & { 
       await data.createFact(experienceId, fact);
       saved++;
     }
+  }
+  if (Object.keys(patch).length) {
+    const p = await data.getProfile();
+    await data.saveProfile({ fullName: p.fullName, headline: p.headline, contact: p.contact, links: p.links, ...patch });
   }
   revalidatePath("/app/facts");
   return { saved };

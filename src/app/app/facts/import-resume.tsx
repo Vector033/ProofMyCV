@@ -1,7 +1,7 @@
 "use client";
 
 import { useActionState, useState, useTransition } from "react";
-import type { DraftExperience } from "@/lib/core/resume";
+import type { DraftExperience, DraftProfile, DraftResume } from "@/lib/core/resume";
 import type { ExperienceKind } from "@/lib/core/types";
 import { importResumeAction, saveImportAction, type ImportState } from "../actions";
 
@@ -16,6 +16,7 @@ type EditFact = { key: number; on: boolean; did: string; result: string; tech: s
 type EditExperience = {
   key: number;
   on: boolean;
+  duplicate: boolean;
   kind: ExperienceKind;
   title: string;
   org: string;
@@ -24,11 +25,23 @@ type EditExperience = {
   facts: EditFact[];
 };
 
+type Existing = { title: string; org: string };
+const sameEntry = (a: Existing, b: Existing) =>
+  a.title.trim().toLowerCase() === b.title.trim().toLowerCase() && a.org.trim().toLowerCase() === b.org.trim().toLowerCase();
+
+const HEADER_FIELDS: [keyof DraftProfile, string][] = [
+  ["fullName", "Full name"],
+  ["headline", "Headline"],
+  ["contact", "Contact line"],
+  ["links", "Links"],
+];
+
 let nextKey = 0;
-const toEditable = (draft: DraftExperience[]): EditExperience[] =>
+const toEditable = (draft: DraftExperience[], existing: Existing[]): EditExperience[] =>
   draft.map((e) => ({
     key: nextKey++,
-    on: true,
+    on: !existing.some((x) => sameEntry(x, e)), // already in the fact bank: unticked, so it is not saved twice
+    duplicate: existing.some((x) => sameEntry(x, e)),
     kind: e.kind,
     title: e.title,
     org: e.org,
@@ -46,7 +59,7 @@ const toEditable = (draft: DraftExperience[]): EditExperience[] =>
 
 const plural = (n: number, one: string, many = `${one}s`) => `${n} ${n === 1 ? one : many}`;
 
-export function ImportResume({ demo }: { demo: boolean }) {
+export function ImportResume({ demo, profile, existing }: { demo: boolean; profile: DraftProfile; existing: Existing[] }) {
   const [state, action, pending] = useActionState<ImportState, FormData>(importResumeAction, {});
   const [closed, setClosed] = useState<string | undefined>();
   const [saved, setSaved] = useState<number | null>(null);
@@ -66,6 +79,8 @@ export function ImportResume({ demo }: { demo: boolean }) {
         <Review
           key={state.draftId}
           draft={state.draft!}
+          profile={profile}
+          existing={existing}
           parsedBy={state.parsedBy}
           note={state.note}
           onDone={(n) => {
@@ -114,16 +129,25 @@ export function ImportResume({ demo }: { demo: boolean }) {
 
 function Review({
   draft,
+  profile,
+  existing,
   parsedBy,
   note,
   onDone,
 }: {
-  draft: DraftExperience[];
+  draft: DraftResume;
+  profile: DraftProfile;
+  existing: Existing[];
   parsedBy?: "ai" | "rules";
   note?: string;
   onDone: (saved: number | null) => void;
 }) {
-  const [items, setItems] = useState(() => toEditable(draft));
+  const [items, setItems] = useState(() => toEditable(draft.experiences, existing));
+  // Header fields found in the file. Ticked by default only where the saved header is empty.
+  const [header, setHeader] = useState(() =>
+    HEADER_FIELDS.filter(([k]) => draft.profile[k]).map(([k, label]) => ({ k, label, value: draft.profile[k], on: !profile[k].trim() })),
+  );
+  const headerOn = header.filter((h) => h.on && h.value.trim());
   const [error, setError] = useState<string>();
   const [saving, startSaving] = useTransition();
 
@@ -157,7 +181,7 @@ function Review({
       facts: e.facts.filter((f) => f.on).map((f) => ({ did: f.did, result: f.result, tech: f.tech })),
     }));
     startSaving(async () => {
-      const r = await saveImportAction(entries);
+      const r = await saveImportAction(entries, Object.fromEntries(headerOn.map((h) => [h.k, h.value])));
       if (r.error) setError(r.error);
       else onDone(r.saved ?? 0);
     });
@@ -170,6 +194,39 @@ function Review({
         {note} Untick anything that is wrong, fix the wording, then save. Nothing is in your fact bank yet.
       </p>
 
+      {header.length > 0 && (
+        <fieldset className="mt-5 rounded-lg border border-slate-200 p-4">
+          <legend className="px-1 text-sm font-medium text-slate-900">Resume header</legend>
+          <p className="text-xs text-slate-600">Ticked fields replace the header at the top of this page.</p>
+          <div className="mt-3 grid gap-3 sm:grid-cols-2">
+            {header.map((h, i) => (
+              <div key={h.k}>
+                <label className="flex min-h-11 cursor-pointer items-center gap-2.5 text-xs font-medium text-slate-700 md:min-h-8">
+                  <input
+                    type="checkbox"
+                    checked={h.on}
+                    onChange={(x) => setHeader((hs) => hs.map((y, j) => (j === i ? { ...y, on: x.target.checked } : y)))}
+                    className="size-4 accent-slate-900"
+                  />
+                  Use {h.label.toLowerCase()}
+                </label>
+                <input
+                  aria-label={h.label}
+                  value={h.value}
+                  disabled={!h.on}
+                  maxLength={h.k === "fullName" ? 120 : h.k === "headline" ? 160 : 240}
+                  onChange={(x) => setHeader((hs) => hs.map((y, j) => (j === i ? { ...y, value: x.target.value } : y)))}
+                  className="input disabled:opacity-60"
+                />
+                {profile[h.k].trim() && (
+                  <p className="hint [overflow-wrap:anywhere]">Saved now: {profile[h.k]}</p>
+                )}
+              </div>
+            ))}
+          </div>
+        </fieldset>
+      )}
+
       <ol className="mt-5 space-y-4">
         {items.map((e) => (
           <li key={e.key} className={`rounded-lg border p-4 ${e.on ? "border-slate-200" : "border-dashed border-slate-300 bg-slate-50"}`}>
@@ -180,6 +237,9 @@ function Review({
                 {e.org.trim() && <span className="font-normal text-slate-600"> · {e.org}</span>}
               </span>
             </label>
+            {e.duplicate && (
+              <p className="mt-1 text-xs text-amber-800">Already in your fact bank, so it starts unticked. Tick it to add it again.</p>
+            )}
 
             <fieldset disabled={!e.on} className="mt-3 space-y-4 disabled:opacity-60">
               <legend className="sr-only">Details of {e.title.trim() || "this entry"}</legend>
@@ -197,8 +257,9 @@ function Review({
                 <TextField label="Title" required maxLength={160} value={e.title} onChange={(v) => setExp(e.key, { title: v })} />
                 <TextField label="Organisation" maxLength={160} value={e.org} onChange={(v) => setExp(e.key, { org: v })} />
                 <div className="grid gap-3 sm:grid-cols-2">
-                  <TextField label="Start" type="month" value={e.startDate} onChange={(v) => setExp(e.key, { startDate: v })} />
-                  <TextField label="End (empty = present)" type="month" value={e.endDate} onChange={(v) => setExp(e.key, { endDate: v })} />
+                  {/* Text, not a month picker: a year-only date ("2024") must survive the review. */}
+                  <TextField label="Start" placeholder="2024-06 or 2024" pattern="\d{4}(-\d{2})?" value={e.startDate} onChange={(v) => setExp(e.key, { startDate: v })} />
+                  <TextField label="End (empty = present)" placeholder="2024-10 or 2024" pattern="\d{4}(-\d{2})?" value={e.endDate} onChange={(v) => setExp(e.key, { endDate: v })} />
                 </div>
               </div>
 
@@ -257,8 +318,10 @@ function Review({
       </ol>
 
       <div className="mt-5 flex flex-wrap items-center gap-3" aria-live="polite">
-        <button className="btn-primary" disabled={saving || chosen.length === 0}>
-          {saving ? "Saving…" : `Save ${plural(chosen.length, "entry", "entries")} and ${plural(factCount, "fact")}`}
+        <button className="btn-primary" disabled={saving || (chosen.length === 0 && headerOn.length === 0)}>
+          {saving
+            ? "Saving…"
+            : `Save ${plural(chosen.length, "entry", "entries")} and ${plural(factCount, "fact")}${headerOn.length ? ` + ${plural(headerOn.length, "header field")}` : ""}`}
         </button>
         <button type="button" className="btn" disabled={saving} onClick={() => onDone(null)}>
           Discard

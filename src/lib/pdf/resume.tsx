@@ -1,6 +1,6 @@
 import { Document, Link, Page, StyleSheet, Text, View } from "@react-pdf/renderer";
 import type { BulletDraft, Experience, ExperienceKind, Fact, JobAnalysis } from "../core/types";
-import { mentions } from "../core/vocab";
+import { mentions, normalizeTag } from "../core/vocab";
 import { formatRange } from "../format";
 
 // Single-column, text-only layout with a standard PDF font: every character is
@@ -48,7 +48,10 @@ const SECTIONS: { kind: ExperienceKind; title: string }[] = [
 
 /** Skills from the fact bank, with the ones the job asks for first. */
 export function orderedSkills(facts: Fact[], analysis: JobAnalysis) {
-  const all = [...new Set(facts.flatMap((f) => f.tech))];
+  const seen = new Set<string>();
+  const all = facts
+    .flatMap((f) => f.tech.flatMap(normalizeTag))
+    .filter((t) => !seen.has(t.toLowerCase()) && seen.add(t.toLowerCase()));
   const rank = (t: string) => {
     const i = analysis.requirements.findIndex((r) => mentions(t, r.name));
     if (i === -1) return 1000;
