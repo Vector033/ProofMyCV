@@ -115,7 +115,7 @@ Supabase admin API (`npx supabase status -o env` gives the service key).
 
 Trial notes (owner's own account, 2026-11-21): applications for Gosoft, Agoda co-op and summer
 (Greenhouse links read fine), P&G (Workday needs scripts, so text was pasted) and KPMG. Re-analyse takes ~40 s
-on Gemini Flash-Lite and the button shows no pending state yet. Known guard limit: a draft can invent a cause
+on Gemini Flash-Lite; since 17d5703 the button shows "Analysing…" and blocks a second submit. Known guard limit: a draft can invent a cause
 ("reached 90-100% mutation score by building JWT auth") because the guard checks numbers and tools only.
 
 Rules kept: the guard, `mentions()` and the eval are unchanged (eval numbers identical after every phase).
