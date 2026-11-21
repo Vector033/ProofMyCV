@@ -9,6 +9,7 @@ import { isDemoUser } from "@/lib/supabase/admin";
 import { LIMITS, clientIp, hit, retryText } from "@/lib/rate-limit";
 import { createClient } from "@/lib/supabase/server";
 import { canonicalTech } from "@/lib/core/vocab";
+import { PDF_UNSAFE } from "@/lib/format";
 import { checkBullet, describeViolation } from "@/lib/core/guard";
 import { matchRequirements } from "@/lib/core/match";
 import { getLlm, LlmError } from "@/lib/llm/provider";
@@ -26,7 +27,7 @@ const optional = (max: number) =>
 const month = z
   .string()
   .trim()
-  .regex(/^(\d{4}-\d{2})?$/)
+  .regex(/^(\d{4}(-\d{2})?)?$/) // "2024-06", or "2024" when only the year is known
   .transform((s) => s || null);
 
 const form = (fd: FormData) => Object.fromEntries(fd) as Record<string, string>;
@@ -51,6 +52,14 @@ const profileSchema = z.object({
 
 export async function saveProfileAction(fd: FormData) {
   await data.saveProfile(profileSchema.parse(form(fd)));
+  revalidatePath("/app/facts");
+}
+
+/** Removes characters the PDF font cannot print (e.g. a stray Thai mark) from the resume header. */
+export async function cleanProfileAction() {
+  const p = await data.getProfile();
+  const clean = (v: string) => v.replace(PDF_UNSAFE, "").replace(/\s{2,}/g, " ").trim();
+  await data.saveProfile({ fullName: clean(p.fullName), headline: clean(p.headline), contact: clean(p.contact), links: clean(p.links) });
   revalidatePath("/app/facts");
 }
 

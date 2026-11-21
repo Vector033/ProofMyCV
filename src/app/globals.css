@@ -178,7 +178,7 @@ body {
 
 /* #2 Fluted Glass: vertical ribbed optical refraction at 2% opacity over --canvas */
 .fluted-glass {
-  background-color: rgb(248 250 252 / 0.85);
+  background-color: rgb(248 250 252 / 0.95); /* opaque enough that content scrolling under a sticky bar never shows through */
   background-image: repeating-linear-gradient(
     90deg,
     rgb(30 41 59 / 0.02) 0px,

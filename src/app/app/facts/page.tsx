@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { getFactBank, getProfile } from "@/lib/data";
 import type { Experience, Fact } from "@/lib/core/types";
-import { formatRange } from "@/lib/format";
+import { PDF_UNSAFE, formatRange } from "@/lib/format";
 import {
+  cleanProfileAction,
   createExperienceAction,
   createFactAction,
   deleteExperienceAction,
@@ -15,6 +16,8 @@ import { ConfirmButton } from "@/components/confirm-button";
 import { requireUser } from "@/lib/auth";
 import { isDemoUser } from "@/lib/supabase/admin";
 import { ImportResume } from "./import-resume";
+import { DateFields } from "./date-fields";
+import { IconAlert } from "@/components/icons";
 
 export const metadata: Metadata = { title: "Fact bank" };
 
@@ -27,6 +30,9 @@ const KIND_LABEL: Record<Experience["kind"], string> = {
 
 export default async function FactsPage() {
   const [profile, bank, user] = await Promise.all([getProfile(), getFactBank(), requireUser()]);
+  const header = { "Full name": profile.fullName, Headline: profile.headline, "Contact line": profile.contact, Links: profile.links };
+  const headerFilled = Object.values(header).filter((v) => v.trim()).length;
+  const unprintable = Object.entries(header).filter(([, v]) => v.match(PDF_UNSAFE)).map(([k]) => k);
 
   return (
     <div className="space-y-10">
@@ -43,6 +49,36 @@ export default async function FactsPage() {
           {bank.experiences.length === 1 ? "entry" : "entries"}
         </p>
       </header>
+
+      <section id="resume-header" className="card scroll-mt-8 p-5">
+        <div className="flex flex-wrap items-baseline justify-between gap-2">
+          <h2 className="font-medium">Resume header</h2>
+          <p className="text-sm text-slate-500 tabular-nums">
+            {headerFilled} of 4 filled
+          </p>
+        </div>
+        <p className="mt-1 text-sm text-slate-600">The top of your exported PDF.</p>
+        {unprintable.length > 0 && (
+          <div className="mt-4 flex flex-wrap items-center gap-3 rounded-lg bg-amber-50 px-3 py-2 text-sm text-amber-950">
+            <IconAlert size={16} className="shrink-0 text-amber-700" />
+            <p className="min-w-0 flex-1">
+              The PDF font can&rsquo;t print some characters in {unprintable.join(", ")} (for example Thai marks). They show up as stray symbols.
+            </p>
+            <form action={cleanProfileAction}>
+              <button className="btn btn-sm">Remove them</button>
+            </form>
+          </div>
+        )}
+        <form action={saveProfileAction} className="mt-4 grid gap-4 sm:grid-cols-2">
+          <Field name="fullName" label="Full name" defaultValue={profile.fullName} placeholder="Your name as it should print" />
+          <Field name="headline" label="Headline" defaultValue={profile.headline} placeholder="Computer Science student, Chiang Mai University" />
+          <Field name="contact" label="Contact line" defaultValue={profile.contact} placeholder="you@example.com · Bangkok" />
+          <Field name="links" label="Links" defaultValue={profile.links} placeholder="github.com/you · you.dev" />
+          <div className="sm:col-span-2">
+            <button className="btn">Save header</button>
+          </div>
+        </form>
+      </section>
 
       <ImportResume demo={isDemoUser(user.email)} />
 
@@ -63,19 +99,6 @@ export default async function FactsPage() {
         </details>
       </section>
 
-      <section id="resume-header" className="card scroll-mt-8 p-5">
-        <h2 className="font-medium">Resume header</h2>
-        <p className="mt-1 text-sm text-slate-600">The top of your exported PDF.</p>
-        <form action={saveProfileAction} className="mt-4 grid gap-4 sm:grid-cols-2">
-          <Field name="fullName" label="Full name" defaultValue={profile.fullName} />
-          <Field name="headline" label="Headline" defaultValue={profile.headline} placeholder="Computer Science student, Chiang Mai University" />
-          <Field name="contact" label="Contact line" defaultValue={profile.contact} placeholder="you@example.com · Bangkok" />
-          <Field name="links" label="Links" defaultValue={profile.links} placeholder="github.com/you · you.dev" />
-          <div className="sm:col-span-2">
-            <button className="btn">Save header</button>
-          </div>
-        </form>
-      </section>
     </div>
   );
 }
@@ -93,8 +116,11 @@ function ExperienceCard({ experience: e, facts }: { experience: Experience; fact
             {e.org && <span className="font-normal text-slate-600"> · {e.org}</span>}
           </h3>
         </div>
-        <details className="w-full text-sm sm:w-auto [&[open]]:w-full">
-          <summary className="btn btn-sm cursor-pointer list-none [&::-webkit-details-marker]:hidden">Edit details</summary>
+        <details className="group/edit w-full text-sm sm:w-auto [&[open]]:w-full">
+          <summary className="btn btn-sm cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+            <span className="group-open/edit:hidden">Edit details</span>
+            <span className="hidden group-open/edit:inline">Close</span>
+          </summary>
           <div className="mt-3 w-full">
             <ExperienceForm action={updateExperienceAction.bind(null, e.id)} submit="Save" initial={e} />
             <form action={deleteExperienceAction.bind(null, e.id)} className="mt-3">
@@ -177,8 +203,7 @@ function ExperienceForm({
       <Field name="title" label="Title" required defaultValue={initial?.title} placeholder="Software Architect / B.Sc. Computer Science" />
       <Field name="org" label="Organisation" defaultValue={initial?.org} placeholder="Company, team or university" />
       <Field name="location" label="Location" defaultValue={initial?.location ?? ""} />
-      <Field name="startDate" label="Start" type="month" defaultValue={initial?.startDate ?? ""} />
-      <Field name="endDate" label="End (empty = present)" type="month" defaultValue={initial?.endDate ?? ""} />
+      <DateFields start={initial?.startDate} end={initial?.endDate} />
       <div className="sm:col-span-2">
         <button className="btn-primary">{submit}</button>
       </div>

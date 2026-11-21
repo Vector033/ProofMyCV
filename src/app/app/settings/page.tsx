@@ -87,7 +87,7 @@ export default async function AccountPage({ searchParams }: PageProps<"/app/sett
                     : !account.hasPassword
                       ? "Set a password before disconnecting."
                       : account.identityCount < 2
-                        ? "Google is this account's only linked identity, so it stays connected. Your password works too."
+                        ? "You signed up with Google, so it stays connected. Your email and password work too."
                         : undefined
                 }
               />

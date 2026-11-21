@@ -111,7 +111,7 @@ export async function unlinkGoogleAction(): Promise<SettingsState> {
   // Never remove the last way in.
   if (!account.hasPassword) return { error: "Set a password first, so you can still sign in without Google." };
   // Supabase refuses to unlink a user's last identity; a password alone adds none.
-  if (account.identityCount < 2) return { error: "Google is this account's only linked identity, so it stays connected." };
+  if (account.identityCount < 2) return { error: "You signed up with Google, so it can't be disconnected. Your email and password work too." };
   const supabase = await createClient();
   const { data } = await supabase.auth.getUserIdentities();
   const identity = data?.identities.find((i) => i.provider === "google");

@@ -18,7 +18,9 @@ export async function GET(_req: Request, ctx: RouteContext<"/app/applications/[i
     .filter(Boolean)
     .join("_")
     .replace(/[^A-Za-z0-9]+/g, "_")
-    .replace(/^_|_$/g, "");
+    .replace(/^_|_$/g, "")
+    .slice(0, 56) // with ".pdf", at most 60 characters
+    .replace(/_+$/, "");
   return new Response(new Uint8Array(pdf), {
     headers: {
       "content-type": "application/pdf",

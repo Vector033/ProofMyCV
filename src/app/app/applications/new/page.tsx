@@ -13,7 +13,7 @@ export default function NewApplicationPage() {
         <p className="mt-1 text-sm text-slate-600">
           Paste the full job description. FactFit lists the skills and problems it asks for and checks them against your
           fact&nbsp;bank.{" "}
-          {llm ? `Analysis uses ${llm.name}.` : "No LLM key is set, so the built-in skill extractor is\u00A0used."}
+          {!llm && "AI analysis is off on this server, so a built-in skill extractor is\u00A0used."}
         </p>
       </header>
       <NewApplicationForm />

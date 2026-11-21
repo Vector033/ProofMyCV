@@ -99,7 +99,7 @@ export function BulletStudio({ applicationId, experiences, facts, initialBullets
 
   return (
     <section aria-labelledby="bullets-heading" className="space-y-4">
-      <div className="fluted-glass z-[5] md:sticky md:top-16 -mx-4 flex flex-wrap items-center gap-3 border-b border-slate-200/80 px-4 py-3 sm:-mx-6 sm:px-6">
+      <div className="fluted-glass z-[15] shadow-xs md:sticky md:top-16 -mx-4 flex flex-wrap items-center gap-3 border-b border-slate-200/80 px-4 py-3 sm:-mx-6 sm:px-6">
         <div className="mr-auto min-w-0">
           <h2 id="bullets-heading" className="text-lg font-semibold tracking-tight">
             Bullets for this job
@@ -143,7 +143,7 @@ export function BulletStudio({ applicationId, experiences, facts, initialBullets
           {experiences.map((e) => {
             const rows = bullets.map((b, i) => ({ b, i })).filter(({ b }) => b.experienceId === e.id);
             return (
-              <div key={e.id} className="card relative overflow-hidden p-4">
+              <div key={e.id} className="card relative isolate overflow-hidden p-4">
                 <span aria-hidden="true" className="paper-texture absolute inset-0 rounded-[inherit]" />
                 <div className="relative z-10">
                   <p className="text-sm font-medium text-slate-900 [overflow-wrap:anywhere]">
