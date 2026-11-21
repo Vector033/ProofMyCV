@@ -13,6 +13,7 @@ import { CAREER_TRACKS } from "@/lib/core/jd";
 import { canonicalTech } from "@/lib/core/vocab";
 import { TechChips } from "../../facts/tech-chips";
 import { PdfPreview } from "./pdf-preview";
+import { ReanalyseButton } from "./reanalyse-button";
 import { ConfirmButton } from "@/components/confirm-button";
 import { BulletStudio } from "./bullet-studio";
 
@@ -62,7 +63,7 @@ export default async function ApplicationPage({ params, searchParams }: PageProp
                 </option>
               ))}
             </select>
-            <button className="btn btn-sm">Re-analyse</button>
+            <ReanalyseButton />
           </form>
           {reanalysed === "1" && (
             <p role="status" className="mt-2 text-xs text-emerald-800">
