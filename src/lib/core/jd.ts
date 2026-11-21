@@ -55,6 +55,10 @@ export function extractJobRuleBased(jd: string): JobAnalysis {
 }
 
 /** Canonicalise names and merge duplicates, keeping the strongest importance. */
+/** One-click career tracks: a hint for postings that cover several tracks at once. */
+export const CAREER_TRACKS = ["Full-Stack", "Backend", "Frontend", "Applied AI", "Data Engineer", "DevOps", "QA"] as const;
+export type CareerTrack = (typeof CAREER_TRACKS)[number];
+
 export function normaliseAnalysis(a: JobAnalysis): JobAnalysis {
   const merged = new Map<string, Requirement>();
   for (const r of a.requirements) {

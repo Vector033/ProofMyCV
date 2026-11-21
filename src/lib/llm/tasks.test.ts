@@ -1,10 +1,27 @@
 import { describe, expect, it } from "vitest";
 import type { LlmProvider } from "./provider";
-import { parseResume } from "./tasks";
+import { analyzeJob, parseResume } from "./tasks";
 
 const fake = (reply: unknown): LlmProvider => ({
   name: "fake",
   json: async ({ schema }) => schema.parse(reply),
+});
+
+describe("analyzeJob with a career track", () => {
+  it("tells the model to treat other tracks' skills as preferred", async () => {
+    const systems: string[] = [];
+    const llm: LlmProvider = {
+      name: "fake",
+      json: async ({ system, schema }) => {
+        systems.push(system);
+        return schema.parse({ role: "Intern", company: null, requirements: [], problems: [] });
+      },
+    };
+    await analyzeJob(llm, "posting", "Backend");
+    await analyzeJob(llm, "posting");
+    expect(systems[0]).toContain("applies for the Backend track");
+    expect(systems[1]).not.toContain("track");
+  });
 });
 
 describe("parseResume", () => {

@@ -5,8 +5,11 @@ import { z } from "zod";
 export interface LlmProvider {
   /** Provider and model; after a call, the model that actually answered. */
   readonly name: string;
-  json<T>(req: { system: string; prompt: string; schema: z.ZodType<T> }): Promise<T>;
+  json<T>(req: { system: string; prompt: string; schema: z.ZodType<T>; images?: LlmImage[] }): Promise<T>;
 }
+
+/** An image sent with the prompt (e.g. a job poster), base64-encoded, never stored. */
+export type LlmImage = { mimeType: "image/png" | "image/jpeg" | "image/webp"; data: string };
 
 export class LlmError extends Error {}
 
@@ -31,10 +34,10 @@ export class GeminiProvider implements LlmProvider {
     return `gemini:${this.used ?? this.models[0]}`;
   }
 
-  async json<T>({ system, prompt, schema }: { system: string; prompt: string; schema: z.ZodType<T> }) {
+  async json<T>({ system, prompt, schema, images = [] }: { system: string; prompt: string; schema: z.ZodType<T>; images?: LlmImage[] }) {
     const body = JSON.stringify({
       systemInstruction: { parts: [{ text: system }] },
-      contents: [{ role: "user", parts: [{ text: prompt }] }],
+      contents: [{ role: "user", parts: [{ text: prompt }, ...images.map((i) => ({ inlineData: i }))] }],
       generationConfig: {
         temperature: 0.2,
         responseMimeType: "application/json",
@@ -111,7 +114,7 @@ export class OpenAICompatibleProvider implements LlmProvider {
     return `${this.label}:${this.used ?? this.model}`;
   }
 
-  async json<T>({ system, prompt, schema }: { system: string; prompt: string; schema: z.ZodType<T> }) {
+  async json<T>({ system, prompt, schema, images = [] }: { system: string; prompt: string; schema: z.ZodType<T>; images?: LlmImage[] }) {
     // Not every upstream honours json_schema, so the schema also goes in the prompt
     // and the reply is validated with zod either way.
     const jsonSchema = z.toJSONSchema(schema, { target: "draft-7" });
@@ -120,7 +123,12 @@ export class OpenAICompatibleProvider implements LlmProvider {
         role: "system",
         content: `${system}\n\nReply with one JSON object only, no prose and no code fences, matching this JSON schema:\n${JSON.stringify(jsonSchema)}`,
       },
-      { role: "user", content: prompt },
+      {
+        role: "user",
+        content: images.length
+          ? [{ type: "text", text: prompt }, ...images.map((i) => ({ type: "image_url", image_url: { url: `data:${i.mimeType};base64,${i.data}` } }))]
+          : prompt,
+      },
     ];
     let lastError = "no attempt made";
     for (let attempt = 0; attempt <= RETRIES_PER_MODEL; attempt++) {

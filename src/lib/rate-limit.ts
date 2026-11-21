@@ -27,6 +27,8 @@ export const LIMITS = {
   /** All visitors of the shared demo account together. */
   llmDemoDay: { name: "llm-demo-d", max: Number(process.env.LLM_DEMO_DAILY_LIMIT ?? 40), windowSec: DAY },
   demoResetIp: { name: "demo-reset-ip", max: 10, windowSec: 3600 },
+  /** Job links fetched by the server, per user per hour. */
+  jobLink: { name: "job-link", max: 30, windowSec: 3600 },
 } satisfies Record<string, Limit>;
 
 function secret() {

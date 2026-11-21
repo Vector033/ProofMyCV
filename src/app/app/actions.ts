@@ -13,9 +13,11 @@ import { PDF_UNSAFE } from "@/lib/format";
 import { checkBullet, describeViolation } from "@/lib/core/guard";
 import { matchRequirements } from "@/lib/core/match";
 import { getLlm, LlmError } from "@/lib/llm/provider";
-import { analyzeJob, draftBullets, parseResume, type BulletCandidate } from "@/lib/llm/tasks";
+import { analyzeJob, draftBullets, parseResume, readJobPoster, type BulletCandidate } from "@/lib/llm/tasks";
 import { MAX_DRAFT_EXPERIENCES, MAX_DRAFT_FACTS, parseResumeRuleBased, type DraftResume } from "@/lib/core/resume";
 import { MAX_RESUME_BYTES, ResumeFileError, resumeText } from "@/lib/import/extract";
+import { JobLinkError, MAX_POSTER_BYTES, fetchJobText, sniffImage } from "@/lib/import/job-source";
+import { CAREER_TRACKS } from "@/lib/core/jd";
 
 const text = (max: number) => z.string().trim().max(max);
 const optional = (max: number) =>
@@ -197,6 +199,46 @@ export async function saveImportAction(entries: unknown, header: unknown = {}): 
   return { saved };
 }
 
+// ---------- job intake: a link or a poster becomes text the user reviews ----------
+
+export type JobSourceState = { text?: string; company?: string; role?: string; error?: string; nonce?: string };
+
+/** Reads the posting at a link (SSRF-guarded); nothing is analysed until the user checks the text. */
+export async function fetchJobLinkAction(_prev: JobSourceState, fd: FormData): Promise<JobSourceState> {
+  const user = await requireUser();
+  if (!(await hit(LIMITS.jobLink, user.id)).ok) return { error: "Too many links read in the last hour. Paste the text instead." };
+  try {
+    return { text: await fetchJobText(String(fd.get("url") ?? "")), nonce: crypto.randomUUID() };
+  } catch (e) {
+    if (e instanceof JobLinkError) return { error: e.message };
+    console.error("job link failed", e instanceof Error ? e.name : e);
+    return { error: "The page could not be read. Paste the text instead." };
+  }
+}
+
+/** Transcribes a job poster or screenshot with the AI, in memory only; the user checks the text. */
+export async function readPosterAction(_prev: JobSourceState, fd: FormData): Promise<JobSourceState> {
+  const user = await requireUser();
+  const llm = getLlm();
+  if (!llm) return { error: "Reading images needs AI, which is off on this server. Paste the text instead." };
+  const file = fd.get("poster");
+  if (!(file instanceof File) || file.size === 0) return { error: "Choose or paste an image." };
+  if (file.size > MAX_POSTER_BYTES) return { error: "The image is larger than 2.5 MB. Crop it or take a smaller screenshot." };
+  const bytes = new Uint8Array(await file.arrayBuffer());
+  const mimeType = sniffImage(bytes);
+  if (!mimeType) return { error: "Use a PNG, JPEG or WebP image." };
+  if (!(await allowAi(user)).ok) return { error: "Today's AI limit is used up. Paste the text instead." };
+  try {
+    const r = await readJobPoster(llm, { mimeType, data: Buffer.from(bytes).toString("base64") });
+    if (r.text.length < 80) return { error: "Hardly any text could be read from this image. Try a sharper screenshot, or paste the text." };
+    return { ...r, nonce: crypto.randomUUID() };
+  } catch (e) {
+    // LlmError messages hold the HTTP status, never the image.
+    console.error("readJobPoster failed", e instanceof LlmError ? e.message.slice(0, 300) : e instanceof Error ? e.name : e);
+    return { error: "The AI could not read this image just now. Try again, or paste the text." };
+  }
+}
+
 // ---------- applications ----------
 
 export type FormState = { error?: string; values?: Record<string, string> };
@@ -213,6 +255,7 @@ export async function createApplicationAction(_prev: FormState, fd: FormData): P
   // Hand the typed values back on error: React resets the form after an action.
   if (!parsed.success) return { error: parsed.error.issues[0].message, values };
   const { company, role, jdText } = parsed.data;
+  const track = CAREER_TRACKS.find((t) => t === values.track);
 
   let llm = getLlm();
   let analyzedBy = llm ? "" : "rules";
@@ -222,7 +265,7 @@ export async function createApplicationAction(_prev: FormState, fd: FormData): P
   }
   let analysis;
   try {
-    analysis = await analyzeJob(llm, jdText);
+    analysis = await analyzeJob(llm, jdText, track);
   } catch (e) {
     console.error("analyzeJob failed", e instanceof LlmError ? e.message : e);
     return { error: "The AI could not analyse this posting just now. Your text is still here; try again in a minute.", values };
