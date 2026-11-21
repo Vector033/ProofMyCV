@@ -52,7 +52,7 @@ export default async function Home({ searchParams }: PageProps<"/">) {
               aria-hidden
               className="grid size-7 place-items-center rounded-md bg-slate-900 text-[13px] font-bold text-white shadow-2xs"
             >
-              F
+              <IconCheck size={16} strokeWidth={2.75} className="text-emerald-400" />
             </span>
             <span className="text-base text-slate-900">
               ProofMy<span className="text-emerald-700">CV</span>

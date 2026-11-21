@@ -30,7 +30,7 @@ export default async function LoginPage({ searchParams }: PageProps<"/login">) {
         <div className="mx-auto flex w-full max-w-xl flex-1 flex-col justify-between gap-8">
           <Link href="/" className="inline-flex items-center gap-2 self-start rounded-md font-semibold tracking-tight">
             <span aria-hidden className="grid size-7 place-items-center rounded-md bg-white text-[13px] font-bold text-slate-900">
-              F
+              <IconCheck size={16} strokeWidth={2.75} className="text-emerald-600" />
             </span>
             <span className="text-base">
               ProofMy<span className="text-emerald-300">CV</span>
@@ -126,7 +126,7 @@ export default async function LoginPage({ searchParams }: PageProps<"/login">) {
         <div className="mx-auto w-full max-w-md rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs sm:p-8">
           <Link href="/" className="inline-flex min-h-11 items-center gap-2 rounded-md font-semibold tracking-tight text-slate-900 lg:hidden">
             <span aria-hidden className="grid size-6 place-items-center rounded bg-slate-900 text-xs font-bold text-white">
-              F
+              <IconCheck size={14} strokeWidth={2.75} className="text-emerald-400" />
             </span>
             <span>
               ProofMy<span className="text-emerald-700">CV</span>

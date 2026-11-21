@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { requireUser } from "@/lib/auth";
-import { IconLogout } from "@/components/icons";
+import { IconCheck, IconLogout } from "@/components/icons";
 import { signOutAction } from "./actions";
 import { AppNav } from "./nav";
 
@@ -15,7 +15,7 @@ export default async function AppLayout({ children }: LayoutProps<"/app">) {
         <div className="mx-auto grid h-16 max-w-6xl grid-cols-[1fr_auto] items-center gap-4 px-4 sm:px-6 md:grid-cols-[1fr_auto_1fr]">
           <Link href="/app" className="inline-flex min-h-11 items-center gap-2 justify-self-start rounded-md font-semibold tracking-tight text-slate-900">
             <span aria-hidden className="grid size-7 place-items-center rounded-md bg-slate-800 text-[13px] font-bold text-white">
-              F
+              <IconCheck size={16} strokeWidth={2.75} className="text-emerald-400" />
             </span>
             <span>
               ProofMy<span className="text-emerald-700">CV</span>
