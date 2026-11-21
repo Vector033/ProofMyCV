@@ -16,7 +16,11 @@ commits and UI copy in English.
 ## Where things stand
 
 - **Live:** https://factfit-five.vercel.app. Repo github.com/Vector033/FactFit (private).
-  `main` = `ec2315d`, pushed and deployed to production on 2026-11-14 (CI green). It contains the UI polish,
+  `main` = `7ea2e30`, pushed and deployed on 2026-11-21, with **migration 0001 applied on prod** (applications:
+  `status`, `deadline`, `status_note`). It adds the 2026-11-21 redesign phases below. Checked on prod with the
+  demo account: status filter/pill, status form, re-analyse, preview, quick-add, PDF `?education=first`, link
+  intake from Vercel (and 169.254.169.254 refused), poster read by Gemini, no overflow at 375px, no errors.
+  Before that, `ec2315d` (2026-11-14) brought the UI polish,
   the Google-user password fix (`1c4c75b`), resume import (`69f45c1`) and guard round 2 (`45fe46d`, `ec2315d`).
   The résumé v3 and vector033.github.io quote the round-2 numbers (164/172 blind held-out, 25/25 loose prompt).
   Checked on prod: landing, /login, demo login and PDF export (200, `application/pdf`); no console errors; no
@@ -95,9 +99,26 @@ The two settings shots are not in the script: sign up a throwaway local account 
 `/app/settings` and `/app/settings/security` with `factfit-google` running, then delete the user with the local
 Supabase admin API (`npx supabase status -o env` gives the service key).
 
+## 2026-11-21 redesign (from the user's local `UX_AUDIT_AND_REDESIGN_PLAN.md`, never committed: it has their email)
+
+| Commit | What |
+|---|---|
+| 0548655 | Phase 1: sticky toolbar fix (z-15, `isolate`, 95% glass), `formatRange` single month + year-only, date presets + Ongoing (`facts/date-fields.tsx`), header first with PDF-unsafe character warning + "Remove them", Edit/Close, no model name, PDF filename <= 60 |
+| 943cf97 | Phase 2: import reads the header (`finishProfile` keeps only text in the file) and degree GPAX/coursework; stack line to every fact; `normalizeTag`; duplicate entries start unticked; tech chips (`facts/tech-chips.tsx`); Matching v2 `backs()` in `match.ts` only |
+| 6bf3872 | Phase 3: job intake from a link (`lib/import/job-source.ts`, SSRF-guarded at socket lookup and per redirect), a poster/screenshot (Gemini `inlineData`), or text; career-track pills |
+| 647919f | Phase 4: re-analyse (keeps old analysis on AI failure), quick-add fact from missing skills, PDF preview + Education first, GitHub repo import (`lib/import/github.ts`) |
+| 7ea2e30 | Status tracker + migration 0001 |
+
+Rules kept: the guard, `mentions()` and the eval are unchanged (eval numbers identical after every phase).
+Matching v2 lives in `match.ts` only because `mentions()` also feeds the eval's extraction recall.
+Manually typed tags are never rewritten (they are guard evidence); tags are cleaned only on import and in the PDF.
+
 ## Left to do (pick with the user)
 
-1. **Deploy resume import** (committed on main, not deployed): ask the user first. Then try a real resume on prod.
+1. **Job discovery was skipped on purpose.** Adzuna needs the user to register for keys and its docs do not
+   confirm Thailand; PingKhana's feed is Thai education news (its "รับสมัครงาน" posts are mostly teaching and
+   government jobs), with no tech-internship sources. "Paste a link" covers company career pages.
+   Optional: add `GITHUB_TOKEN` (read-only) on Vercel; without it GitHub allows 60 repo imports an hour per IP.
 2. **Guard, round 3 (optional).** Branch `guard-false-blocks`: derived percentages (direction-aware), acronyms from
    initials, counted-noun warning. Blind `holdout3`: 164 / 172 blocked, 24 / 30 honest accepted (`eval/README.md`,
    2026-11-14 round 2). Left: same-number meaning swaps (warning only), coincidental initials ("OEE" from "operator
@@ -121,3 +142,9 @@ Supabase admin API (`npx supabase status -o env` gives the service key).
 - A Google user who sets a password gets no `email` identity, so `getAccount()` also asks `auth.users` whether a
   password is stored (`passwordSet` in `src/lib/account.ts`). Supabase never unlinks a user's last identity.
 - Supabase prod is shared with HarnKan and SlipJot. Never change its Site URL. App data lives in schema `factfit`.
+- Prod migrations: `DATABASE_URL=<MIGRATE_DATABASE_URL from .env.vercel-production> npm run db:migrate` (the
+  env var wins over `.env.local`). Migrate first, then deploy code that reads the new columns.
+- `vercel deploy` uploads the whole folder: move `UX_AUDIT_AND_REDESIGN_PLAN.md` (untracked, has the user's
+  email) out of the folder while deploying, or add it to `.vercelignore`.
+- Local e2e tests that sign up throwaway accounts hit the app's 5 sign-ups/IP/hour limit; clear
+  `factfit.rate_limits` in the local DB only. Next's route announcer also has `role="alert"` (empty).
