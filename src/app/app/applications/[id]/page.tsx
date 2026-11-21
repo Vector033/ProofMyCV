@@ -7,14 +7,19 @@ import { matchRequirements } from "@/lib/core/match";
 import { getLlm } from "@/lib/llm/provider";
 import { IconAlert, IconCheck, IconDownload, IconMinus, IconShield } from "@/components/icons";
 import { ScoreBadge } from "@/components/score-badge";
-import { deleteApplicationAction } from "../../actions";
+import { deleteApplicationAction, quickAddFactAction, reanalyseApplicationAction } from "../../actions";
+import { CAREER_TRACKS } from "@/lib/core/jd";
+import { canonicalTech } from "@/lib/core/vocab";
+import { TechChips } from "../../facts/tech-chips";
+import { PdfPreview } from "./pdf-preview";
 import { ConfirmButton } from "@/components/confirm-button";
 import { BulletStudio } from "./bullet-studio";
 
 export const metadata: Metadata = { title: "Application" };
 
-export default async function ApplicationPage({ params }: PageProps<"/app/applications/[id]">) {
+export default async function ApplicationPage({ params, searchParams }: PageProps<"/app/applications/[id]">) {
   const { id } = await params;
+  const { reanalysed } = await searchParams;
   if (!/^[0-9a-f-]{36}$/i.test(id)) notFound();
   const [app, bank] = await Promise.all([getApplication(id), getFactBank()]);
   if (!app) notFound();
@@ -46,12 +51,35 @@ export default async function ApplicationPage({ params }: PageProps<"/app/applic
           <p className="mt-1 text-xs text-slate-500 tabular-nums">
             {report.covered} of {report.total} requirements backed by your facts · analysed by {app.analyzedBy}
           </p>
+          <form action={reanalyseApplicationAction.bind(null, app.id)} className="mt-2 flex flex-wrap items-center gap-2 text-xs text-slate-600">
+            <label htmlFor="reanalyse-track">Analyse again for</label>
+            <select id="reanalyse-track" name="track" defaultValue="" className="input w-auto py-1 text-xs sm:text-xs">
+              <option value="">any track</option>
+              {CAREER_TRACKS.map((t) => (
+                <option key={t} value={t}>
+                  {t}
+                </option>
+              ))}
+            </select>
+            <button className="btn btn-sm">Re-analyse</button>
+          </form>
+          {reanalysed === "1" && (
+            <p role="status" className="mt-2 text-xs text-emerald-800">
+              Analysed again. Your bullets are unchanged.
+            </p>
+          )}
+          {reanalysed === "failed" && (
+            <p role="alert" className="mt-2 text-xs text-red-800">
+              The AI could not analyse the posting just now, so the earlier analysis is kept. Try again in a minute.
+            </p>
+          )}
         </div>
         <div className="flex w-full gap-2 sm:w-auto">
           <a href={`/app/applications/${app.id}/pdf`} className="btn-primary flex-1 sm:flex-initial">
             <IconDownload size={16} />
             Export PDF
           </a>
+          <PdfPreview href={`/app/applications/${app.id}/pdf`} />
           <form action={deleteApplicationAction.bind(null, app.id)}>
             <ConfirmButton
               confirm={`Delete the application for ${app.role || "this role"}? Its saved bullets cannot be recovered.`}
@@ -99,9 +127,43 @@ export default async function ApplicationPage({ params }: PageProps<"/app/applic
                   ))}
                 </ul>
                 <p className="mt-3 text-xs text-slate-500">
-                  If you really have done one of these, <Link href="/app/facts" className="font-medium text-slate-700 underline underline-offset-2">add it as a fact</Link>.
-                  Otherwise leave it out. FactFit will not write it for&nbsp;you.
+                  If you really have done one of these, add it as a fact below or in your{" "}
+                  <Link href="/app/facts" className="font-medium text-slate-700 underline underline-offset-2">fact bank</Link>. Otherwise leave it out.
+                  FactFit will not write it for&nbsp;you.
                 </p>
+                {bank.experiences.length > 0 && (
+                  <details className="group/quick mt-4 rounded-lg border border-slate-200 p-3">
+                    <summary className="flex min-h-8 cursor-pointer list-none items-center text-sm font-medium text-slate-800 [&::-webkit-details-marker]:hidden">
+                      <span className="group-open/quick:hidden">+ Add a fact you really have</span>
+                      <span className="hidden group-open/quick:inline">Close</span>
+                    </summary>
+                    <form action={quickAddFactAction.bind(null, app.id)} className="mt-3 grid gap-3">
+                      <label className="block">
+                        <span className="label">Where you did it</span>
+                        <select name="experienceId" required className="input">
+                          {bank.experiences.map((e) => (
+                            <option key={e.id} value={e.id}>
+                              {e.title}
+                              {e.org ? ` · ${e.org}` : ""}
+                            </option>
+                          ))}
+                        </select>
+                      </label>
+                      <label className="block">
+                        <span className="label">What you did</span>
+                        <textarea name="did" required minLength={3} rows={2} placeholder="In your own words, only what really happened" className="input" />
+                      </label>
+                      <label className="block">
+                        <span className="label">Result (with the number, if there is one)</span>
+                        <input name="result" className="input" />
+                      </label>
+                      <TechChips suggestions={missing.map((m) => canonicalTech(m.requirement.name) ?? m.requirement.name).slice(0, 12)} />
+                      <div>
+                        <button className="btn">Add fact</button>
+                      </div>
+                    </form>
+                  </details>
+                )}
               </>
             )}
           </div>

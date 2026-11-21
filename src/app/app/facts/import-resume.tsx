@@ -3,7 +3,7 @@
 import { useActionState, useState, useTransition } from "react";
 import type { DraftExperience, DraftProfile, DraftResume } from "@/lib/core/resume";
 import type { ExperienceKind } from "@/lib/core/types";
-import { importResumeAction, saveImportAction, type ImportState } from "../actions";
+import { importRepoAction, importResumeAction, saveImportAction, type ImportState } from "../actions";
 
 const KINDS: [ExperienceKind, string][] = [
   ["job", "Work"],
@@ -60,7 +60,11 @@ const toEditable = (draft: DraftExperience[], existing: Existing[]): EditExperie
 const plural = (n: number, one: string, many = `${one}s`) => `${n} ${n === 1 ? one : many}`;
 
 export function ImportResume({ demo, profile, existing }: { demo: boolean; profile: DraftProfile; existing: Existing[] }) {
-  const [state, action, pending] = useActionState<ImportState, FormData>(importResumeAction, {});
+  const [fileState, action, filePending] = useActionState<ImportState, FormData>(importResumeAction, {});
+  const [repoState, repoAction, repoPending] = useActionState<ImportState, FormData>(importRepoAction, {});
+  const [active, setActive] = useState<"file" | "repo">("file"); // the source the user used last
+  const state = active === "repo" ? repoState : fileState;
+  const pending = active === "repo" ? repoPending : filePending;
   const [closed, setClosed] = useState<string | undefined>();
   const [saved, setSaved] = useState<number | null>(null);
   const reviewing = state.draft && state.draftId !== closed;
@@ -94,7 +98,14 @@ export function ImportResume({ demo, profile, existing }: { demo: boolean; profi
             Upload a .docx or .pdf of up to 2 MB. FactFit reads the text and suggests entries for you to check. The file
             is read in memory and not stored, and nothing is saved until you choose to save it.
           </p>
-          <form action={action} className="mt-4 flex flex-wrap items-end gap-3" onSubmit={() => setSaved(null)}>
+          <form
+            action={action}
+            className="mt-4 flex flex-wrap items-end gap-3"
+            onSubmit={() => {
+              setSaved(null);
+              setActive("file");
+            }}
+          >
             <label className="block min-w-0 flex-1 basis-64">
               <span className="label">Resume file (.docx or .pdf)</span>
               <input
@@ -105,8 +116,24 @@ export function ImportResume({ demo, profile, existing }: { demo: boolean; profi
                 className="input file:mr-3 file:rounded file:border-0 file:bg-slate-100 file:px-2 file:py-1 file:text-sm file:text-slate-700"
               />
             </label>
-            <button className="btn" disabled={pending}>
-              {pending ? "Reading…" : "Read file"}
+            <button className="btn" disabled={filePending}>
+              {filePending ? "Reading…" : "Read file"}
+            </button>
+          </form>
+          <form
+            action={repoAction}
+            className="mt-4 flex flex-wrap items-end gap-3"
+            onSubmit={() => {
+              setSaved(null);
+              setActive("repo");
+            }}
+          >
+            <label className="block min-w-0 flex-1 basis-64">
+              <span className="label">Or a project on GitHub (public repository)</span>
+              <input name="repo" required placeholder="github.com/you/project" className="input" />
+            </label>
+            <button className="btn" disabled={repoPending}>
+              {repoPending ? "Reading…" : "Read repository"}
             </button>
           </form>
           <div aria-live="polite">
@@ -190,7 +217,7 @@ function Review({
   return (
     <form onSubmit={save} className="mt-1">
       <p className="body-prose text-sm text-slate-600">
-        {parsedBy === "ai" ? "The AI read your file." : "Simple rules read your file, so check the titles and dates closely."}{" "}
+        {parsedBy === "ai" ? "The AI read it." : "Simple rules read it, so check the titles and dates closely."}{" "}
         {note} Untick anything that is wrong, fix the wording, then save. Nothing is in your fact bank yet.
       </p>
 

@@ -146,7 +146,7 @@ export async function createApplication(input: {
 
 export async function updateApplication(
   applicationId: string,
-  patch: Partial<{ bullets: SavedBullet[]; score: number; analysis: JobAnalysis; company: string; role: string }>,
+  patch: Partial<{ bullets: SavedBullet[]; score: number; analysis: JobAnalysis; analyzedBy: string; company: string; role: string }>,
 ) {
   const { id } = await requireUser();
   await db

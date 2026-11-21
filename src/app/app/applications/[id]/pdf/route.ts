@@ -3,13 +3,14 @@ import { renderToBuffer, type DocumentProps } from "@react-pdf/renderer";
 import { getApplication, getFactBank, getProfile } from "@/lib/data";
 import { ResumeDocument } from "@/lib/pdf/resume";
 
-export async function GET(_req: Request, ctx: RouteContext<"/app/applications/[id]/pdf">) {
+export async function GET(req: Request, ctx: RouteContext<"/app/applications/[id]/pdf">) {
   const { id } = await ctx.params;
   if (!/^[0-9a-f-]{36}$/i.test(id)) return new Response("Not found", { status: 404 });
   const [app, bank, profile] = await Promise.all([getApplication(id), getFactBank(), getProfile()]);
   if (!app) return new Response("Not found", { status: 404 });
 
   const doc = createElement(ResumeDocument, {
+    educationFirst: new URL(req.url).searchParams.get("education") === "first",
     data: { profile, experiences: bank.experiences, facts: bank.facts, bullets: app.bullets, analysis: app.analysis },
   }) as unknown as ReactElement<DocumentProps>;
   const pdf = await renderToBuffer(doc);

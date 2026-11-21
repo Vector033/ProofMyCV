@@ -13,10 +13,11 @@ import { PDF_UNSAFE } from "@/lib/format";
 import { checkBullet, describeViolation } from "@/lib/core/guard";
 import { matchRequirements } from "@/lib/core/match";
 import { getLlm, LlmError } from "@/lib/llm/provider";
-import { analyzeJob, draftBullets, parseResume, readJobPoster, type BulletCandidate } from "@/lib/llm/tasks";
+import { analyzeJob, draftBullets, draftFromRepo, parseResume, readJobPoster, type BulletCandidate } from "@/lib/llm/tasks";
 import { MAX_DRAFT_EXPERIENCES, MAX_DRAFT_FACTS, parseResumeRuleBased, type DraftResume } from "@/lib/core/resume";
 import { MAX_RESUME_BYTES, ResumeFileError, resumeText } from "@/lib/import/extract";
 import { JobLinkError, MAX_POSTER_BYTES, fetchJobText, sniffImage } from "@/lib/import/job-source";
+import { RepoError, fetchRepo, parseRepo } from "@/lib/import/github";
 import { CAREER_TRACKS } from "@/lib/core/jd";
 
 const text = (max: number) => z.string().trim().max(max);
@@ -164,6 +165,41 @@ export async function importResumeAction(_prev: ImportState, fd: FormData): Prom
   return { draft, draftId: crypto.randomUUID(), parsedBy: llm ? "ai" : "rules", note };
 }
 
+/** Proposes a project from a public GitHub repository's README; nothing is saved until the user reviews it. */
+export async function importRepoAction(_prev: ImportState, fd: FormData): Promise<ImportState> {
+  const user = await requireUser();
+  if (isDemoUser(user.email)) return { error: DEMO_IMPORT_OFF };
+  const ref = parseRepo(String(fd.get("repo") ?? ""));
+  if (!ref) return { error: "Paste a GitHub repository link, like github.com/you/project." };
+  if (!(await hit(LIMITS.jobLink, user.id)).ok) return { error: "Too many imports in the last hour. Try again later." };
+  let repo;
+  try {
+    repo = await fetchRepo(ref);
+  } catch (e) {
+    if (e instanceof RepoError) return { error: e.message };
+    console.error("repo import failed", e instanceof Error ? e.name : e);
+    return { error: "The repository could not be read. Try again in a minute." };
+  }
+  if (!repo.readme.trim() && !repo.description.trim()) return { error: "This repository has no README to read." };
+  let llm = getLlm();
+  let note: string | undefined;
+  if (llm && !(await allowAi(user)).ok) {
+    llm = null;
+    note = "Today's AI limit is used up, so simple rules read the README instead.";
+  }
+  let draft;
+  try {
+    draft = await draftFromRepo(llm, repo);
+  } catch (e) {
+    console.error("draftFromRepo failed", e instanceof LlmError ? e.message.slice(0, 300) : e instanceof Error ? e.name : e);
+    llm = null;
+    note = "The AI could not read the README just now, so simple rules read it instead.";
+    draft = await draftFromRepo(null, repo);
+  }
+  if (!draft.experiences[0]?.facts.length) return { error: "No features could be read from the README. Add the project by hand below." };
+  return { draft, draftId: crypto.randomUUID(), parsedBy: llm ? "ai" : "rules", note };
+}
+
 const importSchema = z
   .array(experienceSchema.extend({ facts: z.array(factSchema).max(MAX_DRAFT_FACTS) }))
   .max(MAX_DRAFT_EXPERIENCES);
@@ -240,6 +276,45 @@ export async function readPosterAction(_prev: JobSourceState, fd: FormData): Pro
 }
 
 // ---------- applications ----------
+
+/** Runs the analysis again on the saved posting, e.g. with a career track. Bullets are kept. */
+export async function reanalyseApplicationAction(applicationId: string, fd: FormData) {
+  const id = z.uuid().parse(applicationId);
+  const user = await requireUser();
+  const app = await data.getApplication(id);
+  if (!app) return;
+  const track = CAREER_TRACKS.find((t) => t === fd.get("track"));
+  let llm = getLlm();
+  let analyzedBy = llm ? "" : "rules";
+  if (llm && !(await allowAi(user)).ok) {
+    llm = null;
+    analyzedBy = "rules (daily AI limit reached)";
+  }
+  let analysis;
+  try {
+    analysis = await analyzeJob(llm, app.jdText, track);
+  } catch (e) {
+    // Keep the earlier analysis rather than replace it with a weaker one.
+    console.error("re-analyse failed", e instanceof LlmError ? e.message.slice(0, 300) : e instanceof Error ? e.name : e);
+    redirect(`/app/applications/${id}?reanalysed=failed`);
+  }
+  const bank = await data.getFactBank();
+  await data.updateApplication(id, {
+    analysis,
+    analyzedBy: llm?.name ?? analyzedBy,
+    score: matchRequirements(analysis, bank.facts, bank.experiences).score,
+  });
+  revalidatePath("/app");
+  redirect(`/app/applications/${id}?reanalysed=1`);
+}
+
+/** A fact added straight from a missing requirement on an application page. */
+export async function quickAddFactAction(applicationId: string, fd: FormData) {
+  const id = z.uuid().parse(applicationId);
+  await data.createFact(z.uuid().parse(fd.get("experienceId")), factSchema.parse(form(fd)));
+  revalidatePath(`/app/applications/${id}`);
+  revalidatePath("/app/facts");
+}
 
 export type FormState = { error?: string; values?: Record<string, string> };
 

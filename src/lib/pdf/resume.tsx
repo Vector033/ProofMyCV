@@ -60,7 +60,9 @@ export function orderedSkills(facts: Fact[], analysis: JobAnalysis) {
   return all.sort((a, b) => rank(a) - rank(b)).slice(0, 24);
 }
 
-export function ResumeDocument({ data }: { data: ResumeData }) {
+export function ResumeDocument({ data, educationFirst = false }: { data: ResumeData; educationFirst?: boolean }) {
+  // Students often lead with their degree; everything else keeps its order.
+  const sections = educationFirst ? [...SECTIONS.filter((x) => x.kind === "education"), ...SECTIONS.filter((x) => x.kind !== "education")] : SECTIONS;
   const { profile, experiences, bullets, facts, analysis } = data;
   const skills = orderedSkills(facts, analysis);
   const links = profile.links
@@ -89,7 +91,7 @@ export function ResumeDocument({ data }: { data: ResumeData }) {
           ))}
         </Text>
 
-        {SECTIONS.map(({ kind, title }) => {
+        {sections.map(({ kind, title }) => {
           const entries = experiences.filter(
             (e) => e.kind === kind && (kind === "education" || bullets.some((b) => b.experienceId === e.id)),
           );
