@@ -54,11 +54,33 @@ export function extractJobRuleBased(jd: string): JobAnalysis {
   });
 }
 
-/** Canonicalise names and merge duplicates, keeping the strongest importance. */
 /** One-click career tracks: a hint for postings that cover several tracks at once. */
 export const CAREER_TRACKS = ["Full-Stack", "Backend", "Frontend", "Applied AI", "Data Engineer", "DevOps", "QA"] as const;
 export type CareerTrack = (typeof CAREER_TRACKS)[number];
 
+// Area names a multi-track posting lists, each owned by one track. Tools (AWS, Docker) are never areas.
+const AREAS: [RegExp, CareerTrack][] = [
+  [/^(cloud|cloud (engineering|computing|infrastructure)|devops|sre|site reliability( engineering)?|infrastructure)$/, "DevOps"],
+  [/^(ai|ml|ai\/ml|ml\/ai|artificial intelligence|machine learning|deep learning|data science)$/, "Applied AI"],
+  [/^(data engineering|big data|data pipelines?|etl)$/, "Data Engineer"],
+  [/^(qa|quality assurance)$/, "QA"],
+];
+
+/** With a track picked, another track's area stops being required (a rule, since models ignore the hint). */
+export function applyTrack(a: JobAnalysis, track?: CareerTrack): JobAnalysis {
+  if (!track) return a;
+  const otherTrack = (name: string) => {
+    const n = name.toLowerCase().replace(/\s+(skills?|experience|knowledge)$/, "").trim();
+    const owner = AREAS.find(([re]) => re.test(n))?.[1];
+    return owner !== undefined && owner !== track;
+  };
+  return {
+    ...a,
+    requirements: a.requirements.map((r) => (r.importance === "required" && otherTrack(r.name) ? { ...r, importance: "preferred" } : r)),
+  };
+}
+
+/** Canonicalise names and merge duplicates, keeping the strongest importance. */
 export function normaliseAnalysis(a: JobAnalysis): JobAnalysis {
   const merged = new Map<string, Requirement>();
   for (const r of a.requirements) {

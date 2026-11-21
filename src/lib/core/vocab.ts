@@ -245,7 +245,8 @@ const matchesCompiled = (c: CompiledTerm, text: string) =>
 export function normalizeTag(tag: string): string[] {
   const known = findTechTerms(tag);
   if (known.length) return known;
-  const t = tag.trim().replace(/^\d+\s+/, "").replace(/\s+v?\d+(\.\d+)*$/i, "").trim();
+  // "SQLAlchemy 2 (async)" -> SQLAlchemy: notes in brackets and version numbers anywhere go.
+  const t = tag.replace(/\([^)]*\)/g, " ").replace(/(^|\s)v?\d+(\.\d+)*(?=\s|$)/gi, " ").replace(/\s+/g, " ").trim();
   return t ? [t] : [];
 }
 

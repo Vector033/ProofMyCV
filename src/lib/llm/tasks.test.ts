@@ -22,6 +22,19 @@ describe("analyzeJob with a career track", () => {
     expect(systems[0]).toContain("applies for the Backend track");
     expect(systems[1]).not.toContain("track");
   });
+
+  it("demotes other tracks' areas even when the model marks them required", async () => {
+    const llm: LlmProvider = {
+      name: "fake",
+      json: async ({ schema }) =>
+        schema.parse({ role: "Intern", company: null, problems: [], requirements: [
+          { name: "Machine Learning", kind: "skill", importance: "required" },
+          { name: "React", kind: "skill", importance: "required" },
+        ] }),
+    };
+    const { requirements } = await analyzeJob(llm, "posting", "Full-Stack");
+    expect(requirements.map((r) => r.importance)).toEqual(["preferred", "required"]);
+  });
 });
 
 describe("parseResume", () => {

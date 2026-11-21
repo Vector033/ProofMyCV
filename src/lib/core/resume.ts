@@ -222,8 +222,13 @@ function profileFromHead(lines: string[]): DraftProfile {
 
 /**
  * Keeps only header text the file really contains (an LLM may tidy or invent it),
- * drops characters the PDF font cannot print, and title-cases an all-caps name.
+ * drops characters the PDF font cannot print, and title-cases an all-caps name or headline.
  */
+// Acronyms that stay capitals when an all-caps header line is title-cased.
+const ACRONYMS = new Set(["AI", "ML", "QA", "UI", "UX", "API", "IT", "CS", "SRE", "BI", "IOT", "AR", "VR"]);
+const unshout = (s: string) =>
+  s !== s.toUpperCase() ? s : s.toLowerCase().replace(/\p{L}+/gu, (w) => (ACRONYMS.has(w.toUpperCase()) ? w.toUpperCase() : w[0].toUpperCase() + w.slice(1)));
+
 export function finishProfile(p: DraftProfile, source: string): DraftProfile {
   const norm = (s: string) => s.toLowerCase().replace(/^https?:\/\/(www\.)?/, "").replace(/[^a-z0-9@.]/g, "");
   const file = norm(source);
@@ -234,11 +239,26 @@ export function finishProfile(p: DraftProfile, source: string): DraftProfile {
   const name = clean(p.fullName);
   const headline = clean(p.headline);
   return {
-    fullName: !inFile(name) ? "" : name === name.toUpperCase() ? name.toLowerCase().replace(/\b\p{L}/gu, (c) => c.toUpperCase()) : name,
-    headline: inFile(headline) ? headline.slice(0, 160) : "",
+    fullName: inFile(name) ? unshout(name) : "",
+    headline: inFile(headline) ? unshout(headline).slice(0, 160) : "",
     contact: parts(p.contact, 240),
     links: parts(p.links, 240),
   };
+}
+
+// "352 posts gathered so far", "It blocked 164/172": an outcome sentence, not an action.
+const OUTCOME_RE = /^(\d|(it|this|that|which)\s)/i;
+
+/** An outcome split into a fact of its own becomes the result of the fact before it, when that has none. */
+function joinOutcomes(facts: DraftFact[]): DraftFact[] {
+  const out: DraftFact[] = [];
+  for (const f of facts) {
+    const prev = out.at(-1);
+    if (prev && !prev.result?.trim() && !f.result?.trim() && OUTCOME_RE.test(f.did.trim()))
+      out[out.length - 1] = { ...prev, result: f.did, tech: [...prev.tech, ...f.tech] };
+    else out.push(f);
+  }
+  return out;
 }
 
 /**
@@ -261,7 +281,7 @@ export function finishDraft(experiences: DraftExperience[], source: string): Dra
     org: e.org.trim().slice(0, 160),
     startDate: written(e.startDate),
     endDate: written(e.endDate),
-    facts: e.facts.slice(0, MAX_DRAFT_FACTS).map((f) => {
+    facts: joinOutcomes(e.facts.slice(0, MAX_DRAFT_FACTS)).map((f) => {
       const did = f.did.trim().slice(0, 400);
       const result = f.result?.trim().slice(0, 300) || null;
       // The fact's own tools, plus the project's stack line, cleaned ("Next.js 16" -> Next.js).

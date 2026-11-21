@@ -2,7 +2,7 @@
 
 import { useActionState, useState, useTransition } from "react";
 import type { DraftExperience, DraftProfile, DraftResume } from "@/lib/core/resume";
-import type { ExperienceKind } from "@/lib/core/types";
+import { sameEntry, type ExperienceKind } from "@/lib/core/types";
 import { importRepoAction, importResumeAction, saveImportAction, type ImportState } from "../actions";
 
 const KINDS: [ExperienceKind, string][] = [
@@ -25,9 +25,7 @@ type EditExperience = {
   facts: EditFact[];
 };
 
-type Existing = { title: string; org: string };
-const sameEntry = (a: Existing, b: Existing) =>
-  a.title.trim().toLowerCase() === b.title.trim().toLowerCase() && a.org.trim().toLowerCase() === b.org.trim().toLowerCase();
+type Existing = { kind: ExperienceKind; title: string; org: string };
 
 const HEADER_FIELDS: [keyof DraftProfile, string][] = [
   ["fullName", "Full name"],

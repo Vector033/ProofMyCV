@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { canonicalTech, findTechTerms, mentions, normalizeTag } from "./vocab";
 import { checkBullet, extractNumbers } from "./guard";
-import { extractJobRuleBased } from "./jd";
+import { applyTrack, extractJobRuleBased } from "./jd";
 import { backs, matchRequirements } from "./match";
 import type { Fact } from "./types";
 
@@ -455,6 +455,8 @@ describe("normalizeTag", () => {
     expect(normalizeTag("Supabase (Postgres)").sort()).toEqual(["PostgreSQL", "Supabase"]);
     expect(normalizeTag("PromptPay QR v2")).toEqual(["PromptPay QR"]);
     expect(normalizeTag("  ")).toEqual([]);
+    expect(normalizeTag("SQLAlchemy 2 (async)")).toEqual(["SQLAlchemy"]);
+    expect(normalizeTag("Material 3 Design v1.2")).toEqual(["Material Design"]);
   });
 });
 
@@ -494,5 +496,25 @@ describe("matching v2 (requirement matching only)", () => {
 
   it("does not change mentions(), which the guard-side eval uses", () => {
     expect(mentions("Built a RAG study assistant with Gemini", "AI/RAG/OCR systems")).toBe(false);
+  });
+});
+
+describe("applyTrack", () => {
+  const analysis = {
+    role: "Intern",
+    company: null,
+    problems: [],
+    requirements: (["Cloud Engineering", "DevOps", "Machine Learning", "Data Science", "Data Engineering", "Cloud", "React", "AWS", "communication skills"] as const).map(
+      (name) => ({ name, kind: "skill" as const, importance: "required" as const }),
+    ),
+  };
+  const required = (track?: Parameters<typeof applyTrack>[1]) =>
+    applyTrack(analysis, track).requirements.filter((r) => r.importance === "required").map((r) => r.name);
+
+  it("makes other tracks' areas preferred, never tools or soft skills", () => {
+    expect(required("Full-Stack")).toEqual(["React", "AWS", "communication skills"]);
+    expect(required("DevOps")).toEqual(["Cloud Engineering", "DevOps", "Cloud", "React", "AWS", "communication skills"]);
+    expect(required("Applied AI")).toEqual(["Machine Learning", "Data Science", "React", "AWS", "communication skills"]);
+    expect(required()).toHaveLength(9);
   });
 });

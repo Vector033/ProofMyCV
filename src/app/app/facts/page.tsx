@@ -94,7 +94,7 @@ export default async function FactsPage() {
       <ImportResume
         demo={isDemoUser(user.email)}
         profile={{ fullName: profile.fullName, headline: profile.headline, contact: profile.contact, links: profile.links }}
-        existing={bank.experiences.map(({ title, org }) => ({ title, org }))}
+        existing={bank.experiences.map(({ kind, title, org }) => ({ kind, title, org }))}
       />
 
       <section className="space-y-4">

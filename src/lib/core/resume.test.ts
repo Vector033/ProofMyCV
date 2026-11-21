@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { finishDraft, finishProfile, parseDates, parseResumeRuleBased } from "./resume";
+import { sameEntry } from "./types";
 
 // Fictional resume text; no real person.
 const RESUME = `Ploy Sample
@@ -141,5 +142,49 @@ describe("finishDraft", () => {
       tech: ["Data Structures", "Python"],
       unverified: ["15%"],
     });
+  });
+});
+
+describe("import fixes from a real-resume trial", () => {
+  it("finds an entry already in the bank by its name, not its exact title", () => {
+    const project = (title: string, org = "") => ({ kind: "project" as const, title, org });
+    expect(sameEntry(project("MorPlan"), project("MorPlan \u2014 AI trip planner", "Personal"))).toBe(true);
+    expect(sameEntry(project("Project Z (team of 6)"), project("Project Z: course project"))).toBe(true);
+    expect(sameEntry(project("MorPlan"), project("PingKhana"))).toBe(false);
+    expect(sameEntry(project("MorPlan"), { kind: "job", title: "MorPlan", org: "" })).toBe(false);
+    const job = (title: string, org: string) => ({ kind: "job" as const, title, org });
+    expect(sameEntry(job("Software Intern - Backend", "Example Co."), job("Software Intern", "example co"))).toBe(true);
+    expect(sameEntry(job("Software Intern", "Example Co."), job("Software Intern", "Other Co."))).toBe(false);
+    const degree = (title: string) => ({ kind: "education" as const, title, org: "Example University" });
+    expect(sameEntry(degree("B.S. in Computer Science (Year 3)"), degree("Bachelor of Science in Computer Science"))).toBe(true);
+  });
+
+  it("keeps an outcome sentence as the result of the fact before it", () => {
+    const text = "Built a scraper for school news. 352 announcements gathered so far. Wrote a guard. It blocked 9 of 10.";
+    const [e] = finishDraft(
+      [{
+        kind: "project", title: "Reader", org: "", startDate: null, endDate: null,
+        facts: [
+          { did: "Built a scraper for school news", result: null, tech: [] },
+          { did: "352 announcements gathered so far", result: null, tech: [] },
+          { did: "Wrote a guard", result: null, tech: [] },
+          { did: "It blocked 9 of 10", result: null, tech: [] },
+          { did: "10 more checks added", result: null, tech: [] },
+        ],
+      }],
+      text,
+    );
+    expect(e.facts.map((f) => [f.did, f.result])).toEqual([
+      ["Built a scraper for school news", "352 announcements gathered so far"],
+      ["Wrote a guard", "It blocked 9 of 10"],
+      ["10 more checks added", null],
+    ]);
+  });
+
+  it("title-cases an all-caps headline but keeps acronyms", () => {
+    const head = "FULL-STACK DEVELOPER \u2014 AI TOOLS, JUN\u2013OCT 2027";
+    expect(finishProfile({ fullName: "", headline: head, contact: "", links: "" }, head).headline).toBe(
+      "Full-Stack Developer \u2014 AI Tools, Jun\u2013Oct 2027",
+    );
   });
 });

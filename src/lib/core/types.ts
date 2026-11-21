@@ -24,6 +24,20 @@ export type Fact = {
   tech: string[];
 };
 
+const squash = (s: string) => s.toLowerCase().replace(/[^\p{L}\p{N}]/gu, "");
+// "MorPlan - AI trip planner" and "MorPlan (Next.js)" name the same project as "MorPlan".
+const entryName = (title: string) => squash(title.split(/\s[-\u2013\u2014|:]\s|\s?[(:|\u2013\u2014]/)[0]);
+
+/** Whether an imported entry is already in the fact bank, so the import starts it unticked. */
+export function sameEntry(a: { kind: ExperienceKind; title: string; org: string }, b: { kind: ExperienceKind; title: string; org: string }): boolean {
+  if (a.kind !== b.kind) return false;
+  // Degree titles are worded many ways ("B.S." vs "Bachelor of Science"); the school decides.
+  if (a.kind === "education" && squash(a.org)) return squash(a.org) === squash(b.org);
+  const name = entryName(a.title);
+  if (!name || name !== entryName(b.title)) return false;
+  return a.kind === "project" || squash(a.org) === squash(b.org);
+}
+
 export type Importance = "required" | "preferred";
 
 export type Requirement = {
