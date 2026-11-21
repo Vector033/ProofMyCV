@@ -4,7 +4,7 @@ import { renderToBuffer } from "@react-pdf/renderer";
 import { ResumeDocument, orderedSkills, type ResumeData } from "./resume";
 
 const data: ResumeData = {
-  profile: { fullName: "Alex Demo", headline: "CS student", contact: "demo@factfit.test", links: "github.com/alexdemo" },
+  profile: { fullName: "Alex Demo", headline: "CS student", contact: "demo@proofmycv.test", links: "github.com/alexdemo" },
   experiences: [
     { id: "e1", kind: "job", title: "Intern", org: "Lanna Logistics", startDate: "2026-06", endDate: "2026-08" },
     { id: "e2", kind: "project", title: "Unused project", org: "", startDate: null, endDate: null },

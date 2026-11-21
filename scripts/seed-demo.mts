@@ -13,7 +13,7 @@ if (!/127\.0\.0\.1|localhost/.test(url) && !process.argv.includes("--remote")) {
   throw new Error("Not a local Supabase URL; pass --remote to seed the hosted project on purpose.");
 }
 // Local defaults so `npm run seed:demo` works without extra env.
-const email = process.env.DEMO_EMAIL ?? "demo@factfit.test";
+const email = process.env.DEMO_EMAIL ?? "demo@proofmycv.test";
 const password = process.env.DEMO_PASSWORD ?? "factfit-demo-2026";
 
 const admin = createClient(url, process.env.SUPABASE_SECRET_KEY!, { auth: { persistSession: false } });
