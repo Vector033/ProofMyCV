@@ -245,7 +245,7 @@ export async function fetchJobLinkAction(_prev: JobSourceState, fd: FormData): P
   const user = await requireUser();
   if (!(await hit(LIMITS.jobLink, user.id)).ok) return { error: "Too many links read in the last hour. Paste the text instead." };
   try {
-    return { text: await fetchJobText(String(fd.get("url") ?? "")), nonce: crypto.randomUUID() };
+    return { ...(await fetchJobText(String(fd.get("url") ?? ""))), nonce: crypto.randomUUID() };
   } catch (e) {
     if (e instanceof JobLinkError) return { error: e.message };
     console.error("job link failed", e instanceof Error ? e.name : e);

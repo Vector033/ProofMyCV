@@ -1,6 +1,6 @@
 // Mapping between job requirements and the fact bank, and the fit score.
 
-import { canonicalTech, contentWords, findTechTerms, mentions } from "./vocab";
+import { canonicalTech, contentWords, findTechTerms, mentions, withImplied } from "./vocab";
 import { factText, type Experience, type Fact, type JobAnalysis, type Requirement } from "./types";
 
 export type RequirementMatch = {
@@ -21,10 +21,22 @@ export const WEIGHTS = { required: 3, preferred: 1 } as const;
 // Matching only, never the guard: broader requirement words that a fact's tools prove.
 // A FastAPI fact backs "Backend APIs"; a Gemini fact backs "AI".
 const BROADER: [string[], string][] = [
-  [["FastAPI", "Express", "Django", "Flask", "Node.js", "REST", "GraphQL"], "backend api software development"],
+  [["FastAPI", "Express", "Django", "Flask", "Node.js", "REST", "GraphQL"], "backend api rest restful software development"],
   [["Next.js", "React", "Vue", "Angular", "Svelte"], "frontend web application software development"],
   [["Gemini", "OpenAI", "LLM"], "ai artificial intelligence llm"],
+  [["PostgreSQL", "MySQL", "SQLite", "Supabase"], "rdbms relational database sql data persistence"],
+  [["Firestore", "Firebase", "MongoDB", "Redis"], "nosql database data persistence"],
 ];
+// Matching only: a tool proves the wider skill a posting names (Next.js is React; TypeScript is JavaScript).
+const PROVES: Record<string, string[]> = {
+  React: ["Next.js"],
+  JavaScript: ["TypeScript", "Node.js", "React", "Next.js", "Vue", "Angular", "Svelte"],
+  REST: ["FastAPI", "Express", "Django", "Flask", "NestJS"],
+};
+// "Fluent in Thai" is a language, not a topic: "Thai slip reading" is no evidence of it.
+const LANGUAGE_RE =
+  /^(?:fluent (?:in )?|native |business |proficien\w* in )?(thai|english|japanese|chinese|mandarin|korean|french|german|spanish|vietnamese)(?: language| (?:speaking|writing|communication|proficiency|skills?))?$/i;
+const SPOKEN = "native|fluent|fluency|proficien\\w*|speak\\w*|spoken|written|language|toeic|ielts|toefl|cefr|jlpt|hsk";
 // Words that only say what kind of thing it is ("AI systems", "data tools").
 const GENERIC = new Set(["system", "solution", "tool", "technologi", "technology", "framework", "platform"]);
 
@@ -33,14 +45,19 @@ const GENERIC = new Set(["system", "solution", "tool", "technologi", "technology
  * broader words its tools prove, and any one part of a compound like "AI/RAG/OCR systems".
  */
 export function backs(text: string, requirement: string): boolean {
+  const lang = requirement.trim().match(LANGUAGE_RE)?.[1];
+  if (lang) return new RegExp(`\\b(${SPOKEN})\\W+(\\w+\\W+){0,3}${lang}\\b|\\b${lang}\\W+(\\w+\\W+){0,2}(${SPOKEN})\\b`, "i").test(text);
   if (mentions(text, requirement)) return true;
   const tech = findTechTerms(text);
+  const proven = withImplied(tech);
   const extra = BROADER.filter(([names]) => names.some((n) => tech.includes(n))).map(([, words]) => words);
   if (/\btesseract/i.test(text)) extra.push("ocr");
   const have = new Set(contentWords(`${text} ${extra.join(" ")}`));
-  const parts = requirement.includes("/") && !canonicalTech(requirement) ? requirement.split("/") : [requirement];
+  // "Java / C# / Python": any one option backs it.
+  const parts = requirement.includes("/") && !canonicalTech(requirement) ? requirement.split("/").map((p) => p.trim()) : [requirement];
   return parts.some((p) => {
-    if (canonicalTech(p)) return mentions(text, p);
+    const name = canonicalTech(p);
+    if (name) return mentions(text, p) || (PROVES[name] ?? []).some((n) => proven.has(n));
     const needed = contentWords(p).filter((w) => !GENERIC.has(w));
     return needed.length > 0 && needed.every((w) => have.has(w));
   });

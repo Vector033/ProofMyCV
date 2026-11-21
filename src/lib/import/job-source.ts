@@ -138,8 +138,25 @@ export function htmlToText(html: string): string {
     .join("\n");
 }
 
+const meta = (html: string, prop: string) =>
+  html.match(new RegExp(`<meta[^>]+(?:property|name)=["']${prop}["'][^>]*content=["']([^"']*)`, "i"))?.[1] ??
+  html.match(new RegExp(`<meta[^>]+content=["']([^"']*)["'][^>]*(?:property|name)=["']${prop}["']`, "i"))?.[1];
+
+/** Role and company from the page title ("Job Application for X at Agoda", "X | KPMG Thailand"). */
+export function pageTitle(html: string): { role?: string; company?: string } {
+  const raw = meta(html, "og:title") ?? html.match(/<title[^>]*>([^<]*)<\/title>/i)?.[1] ?? "";
+  const title = htmlToText(raw).replace(/\s+/g, " ").trim();
+  const site = meta(html, "og:site_name") ? htmlToText(meta(html, "og:site_name")!).trim() : undefined;
+  const at = title.match(/^(?:job application for\s+)?(.+?)\s+at\s+([^|\u2013\u2014-]+?)\s*$/i);
+  if (at) return { role: at[1].slice(0, 160), company: at[2].slice(0, 160) };
+  const [first, ...rest] = title.split(/\s+[|\u2013\u2014-]\s+/);
+  // A careers home page names no role.
+  const role = first && !/^(careers?|jobs?|home|job vacancies|join us)$/i.test(first) ? first.slice(0, 160) : undefined;
+  return { role, company: (site ?? rest.at(-1))?.slice(0, 160) || undefined };
+}
+
 /** The text of the job posting at a link, for the user to review before it is analysed. */
-export async function fetchJobText(raw: string): Promise<string> {
+export async function fetchJobText(raw: string): Promise<{ text: string; role?: string; company?: string }> {
   let url = checkJobUrl(raw);
   for (let hop = 0; ; hop++) {
     let res;
@@ -164,6 +181,6 @@ export async function fetchJobText(raw: string): Promise<string> {
     if (text.length < 200) {
       throw new JobLinkError("Almost no text came back; the site may need a login or load the posting with scripts. Paste the text or a screenshot instead.");
     }
-    return text;
+    return { text, ...(/text\/html/i.test(res.type) ? pageTitle(res.body) : {}) };
   }
 }

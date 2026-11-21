@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { checkJobUrl, fetchJobText, htmlToText, isPrivateAddress, sniffImage } from "./job-source";
+import { checkJobUrl, fetchJobText, htmlToText, isPrivateAddress, pageTitle, sniffImage } from "./job-source";
 
 describe("isPrivateAddress", () => {
   it("blocks private, loopback, link-local, metadata and mapped addresses", () => {
@@ -51,5 +51,18 @@ describe("htmlToText", () => {
       <nav>Home | Jobs</nav><h1>Backend Intern</h1><p>Build REST APIs &amp; tests.</p>
       <ul><li>Python</li><li>Docker</li></ul><footer>(c) Example</footer></body></html>`;
     expect(htmlToText(html)).toBe("Backend Intern\nBuild REST APIs & tests.\n- Python\n- Docker");
+  });
+});
+
+describe("pageTitle", () => {
+  it("reads role and company from the page title", () => {
+    expect(pageTitle("<title>Job Application for [Cooperative Internship 2027] Full-stack Internship BKK at Example Travel</title>")).toEqual({
+      role: "[Cooperative Internship 2027] Full-stack Internship BKK",
+      company: "Example Travel",
+    });
+    expect(pageTitle('<meta property="og:title" content="Data Intern | Example Co"><title>x</title>')).toEqual({ role: "Data Intern", company: "Example Co" });
+    expect(pageTitle('<title>Backend Intern</title><meta property="og:site_name" content="Lanna &amp; Co">')).toEqual({ role: "Backend Intern", company: "Lanna & Co" });
+    expect(pageTitle("<title>Careers | Example Co</title>")).toEqual({ role: undefined, company: "Example Co" });
+    expect(pageTitle("<p>no title</p>")).toEqual({ role: undefined, company: undefined });
   });
 });

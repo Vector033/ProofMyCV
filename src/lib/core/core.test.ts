@@ -518,3 +518,26 @@ describe("applyTrack", () => {
     expect(required()).toHaveLength(9);
   });
 });
+
+describe("matching fixes from a real-posting trial", () => {
+  it("lets a tool prove the wider skill a posting names", () => {
+    expect(backs("Built a timetable planner with Next.js", "React")).toBe(true);
+    expect(backs("Wrote a guard in TypeScript", "JavaScript")).toBe(true);
+    expect(backs("Split the monolith into 3 FastAPI services", "RESTful APIs")).toBe(true);
+    expect(backs("Stored plans in Supabase (Postgres)", "RDBMS")).toBe(true);
+    expect(backs("Kept chat history in Firestore", "NoSQL")).toBe(true);
+    expect(backs("Wrote a guard in TypeScript", "React")).toBe(false);
+  });
+
+  it("backs an either-or requirement with any one option", () => {
+    expect(backs("Wrote scrapers in Python", "Java / C# / JavaScript / Python")).toBe(true);
+    expect(backs("Wrote a bot in Rust", "Java / C# / Python")).toBe(false);
+  });
+
+  it("needs a language fact for a language requirement", () => {
+    expect(backs("Built Thai regulation Q&A that cites the document", "Thai")).toBe(false);
+    expect(backs("Built Thai slip reading with on-device OCR", "Fluent in Thai")).toBe(false);
+    expect(backs("Languages: Thai (native), English (fluent)", "Thai")).toBe(true);
+    expect(backs("TOEIC 850 English", "English")).toBe(true);
+  });
+});

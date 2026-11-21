@@ -27,6 +27,7 @@ Return the role title, the company if named, the requirements, and the problems 
 - "skill": a concrete technology, language, framework, tool or method (e.g. React, Docker, unit testing).
 - "keyword": a domain or soft term worth mirroring (e.g. "booking platform", "stakeholder communication").
 - importance is "preferred" only when the text says nice to have / plus / bonus / preferred.
+- When any one of several options is enough ("coding skill in any language e.g. Java, C#, Python", "a degree in IS, CS or Business"), return ONE requirement naming them joined by " / " ("Java / C# / Python"), never one requirement per option.
 - problems: up to 8 short phrases in the employer's words.
 Only list what the text says. Do not infer extra skills.`;
 

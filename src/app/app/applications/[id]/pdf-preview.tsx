@@ -6,11 +6,17 @@ import { useRef, useState } from "react";
 export function PdfPreview({ href }: { href: string }) {
   const dialog = useRef<HTMLDialogElement>(null);
   const [educationFirst, setEducationFirst] = useState(false);
+  // Rendered on each open, not on page load: a save since then must show, and an unopened preview costs nothing.
+  const [opens, setOpens] = useState(0);
   const src = educationFirst ? `${href}?education=first` : href;
 
   return (
     <>
-      <button type="button" className="btn min-h-11" onClick={() => dialog.current?.showModal()}>
+      <button type="button" className="btn min-h-11" onClick={() => {
+            setOpens((n) => n + 1);
+            dialog.current?.showModal();
+          }}
+        >
         Preview
       </button>
       <dialog
@@ -38,7 +44,9 @@ export function PdfPreview({ href }: { href: string }) {
             </button>
           </div>
           {/* Phones often cannot show a PDF inside a page; "Open PDF" works everywhere. */}
-          <iframe key={src} src={src} title="Your resume as a PDF" className="min-h-0 w-full flex-1 bg-slate-100" />
+          {opens > 0 && (
+            <iframe key={`${src}#${opens}`} src={src} title="Your resume as a PDF" className="min-h-0 w-full flex-1 bg-slate-100" />
+          )}
         </div>
       </dialog>
     </>
