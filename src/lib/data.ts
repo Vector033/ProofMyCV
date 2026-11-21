@@ -5,7 +5,7 @@ import { applications, experiences, facts, profiles, type SavedBullet } from "@/
 import { requireUser } from "./auth";
 import { extractJobRuleBased } from "./core/jd";
 import { DEMO_BANK, DEMO_JOB, DEMO_PROFILE } from "./demo-data";
-import type { Experience, ExperienceKind, Fact, JobAnalysis } from "./core/types";
+import type { ApplicationStatus, Experience, ExperienceKind, Fact, JobAnalysis } from "./core/types";
 
 // Data Access Layer. Every function resolves the signed-in user itself and
 // scopes its query to that user, so callers cannot ask for someone else's rows.
@@ -112,6 +112,9 @@ export async function listApplications() {
       role: applications.role,
       analysis: applications.analysis,
       bullets: applications.bullets,
+      status: applications.status,
+      deadline: applications.deadline,
+      statusNote: applications.statusNote,
       updatedAt: applications.updatedAt,
     })
     .from(applications)
@@ -146,7 +149,17 @@ export async function createApplication(input: {
 
 export async function updateApplication(
   applicationId: string,
-  patch: Partial<{ bullets: SavedBullet[]; score: number; analysis: JobAnalysis; analyzedBy: string; company: string; role: string }>,
+  patch: Partial<{
+    bullets: SavedBullet[];
+    score: number;
+    analysis: JobAnalysis;
+    analyzedBy: string;
+    company: string;
+    role: string;
+    status: ApplicationStatus;
+    deadline: string | null;
+    statusNote: string;
+  }>,
 ) {
   const { id } = await requireUser();
   await db

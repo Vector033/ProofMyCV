@@ -40,6 +40,18 @@ export type JobAnalysis = {
   problems: string[];
 };
 
+/** Where an application stands; one value per application. */
+export const APPLICATION_STATUSES = ["draft", "ready", "applied", "interviewing", "offer", "rejected"] as const;
+export type ApplicationStatus = (typeof APPLICATION_STATUSES)[number];
+export const STATUS_LABEL: Record<ApplicationStatus, string> = {
+  draft: "Draft",
+  ready: "Ready",
+  applied: "Applied",
+  interviewing: "Interviewing",
+  offer: "Offer",
+  rejected: "Rejected",
+};
+
 export type BulletDraft = {
   experienceId: string;
   text: string;

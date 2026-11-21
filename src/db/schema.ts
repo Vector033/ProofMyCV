@@ -1,6 +1,6 @@
-import { index, integer, jsonb, pgSchema, primaryKey, text, timestamp, uuid } from "drizzle-orm/pg-core";
+import { date, index, integer, jsonb, pgSchema, primaryKey, text, timestamp, uuid } from "drizzle-orm/pg-core";
 import { authUsers } from "drizzle-orm/supabase";
-import type { ExperienceKind, JobAnalysis } from "@/lib/core/types";
+import type { ApplicationStatus, ExperienceKind, JobAnalysis } from "@/lib/core/types";
 
 // All tables live in their own "factfit" schema: the hosted Supabase project is
 // shared with other apps (HarnKan, SlipJot), so FactFit never touches "public".
@@ -82,6 +82,10 @@ export const applications = factfit.table(
     analyzedBy: text("analyzed_by").notNull(),
     bullets: jsonb("bullets").$type<SavedBullet[]>().notNull().default([]),
     score: integer("score").notNull().default(0),
+    status: text("status").$type<ApplicationStatus>().notNull().default("draft"),
+    /** Application deadline, "YYYY-MM-DD"; null when there is none. */
+    deadline: date("deadline"),
+    statusNote: text("status_note").notNull().default(""),
     ...timestamps,
   },
   (t) => [index("applications_user_idx").on(t.userId)],

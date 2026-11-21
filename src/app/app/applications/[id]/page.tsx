@@ -7,7 +7,8 @@ import { matchRequirements } from "@/lib/core/match";
 import { getLlm } from "@/lib/llm/provider";
 import { IconAlert, IconCheck, IconDownload, IconMinus, IconShield } from "@/components/icons";
 import { ScoreBadge } from "@/components/score-badge";
-import { deleteApplicationAction, quickAddFactAction, reanalyseApplicationAction } from "../../actions";
+import { deleteApplicationAction, quickAddFactAction, reanalyseApplicationAction, updateStatusAction } from "../../actions";
+import { APPLICATION_STATUSES, STATUS_LABEL } from "@/lib/core/types";
 import { CAREER_TRACKS } from "@/lib/core/jd";
 import { canonicalTech } from "@/lib/core/vocab";
 import { TechChips } from "../../facts/tech-chips";
@@ -90,6 +91,28 @@ export default async function ApplicationPage({ params, searchParams }: PageProp
           </form>
         </div>
       </header>
+
+      <form action={updateStatusAction.bind(null, app.id)} className="card flex flex-wrap items-end gap-3 p-4">
+        <label className="block">
+          <span className="label">Status</span>
+          <select name="status" defaultValue={app.status} className="input w-auto">
+            {APPLICATION_STATUSES.map((s) => (
+              <option key={s} value={s}>
+                {STATUS_LABEL[s]}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label className="block">
+          <span className="label">Deadline</span>
+          <input type="date" name="deadline" defaultValue={app.deadline ?? ""} className="input w-auto tabular-nums" />
+        </label>
+        <label className="block min-w-0 flex-1 basis-56">
+          <span className="label">Note</span>
+          <input name="statusNote" maxLength={200} defaultValue={app.statusNote} placeholder="e.g. Online test 6–12 Jan" className="input" />
+        </label>
+        <button className="btn">Save status</button>
+      </form>
 
       <section className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         <div className="card min-w-0 p-5">

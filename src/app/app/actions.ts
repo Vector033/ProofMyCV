@@ -19,6 +19,7 @@ import { MAX_RESUME_BYTES, ResumeFileError, resumeText } from "@/lib/import/extr
 import { JobLinkError, MAX_POSTER_BYTES, fetchJobText, sniffImage } from "@/lib/import/job-source";
 import { RepoError, fetchRepo, parseRepo } from "@/lib/import/github";
 import { CAREER_TRACKS } from "@/lib/core/jd";
+import { APPLICATION_STATUSES } from "@/lib/core/types";
 
 const text = (max: number) => z.string().trim().max(max);
 const optional = (max: number) =>
@@ -306,6 +307,24 @@ export async function reanalyseApplicationAction(applicationId: string, fd: Form
   });
   revalidatePath("/app");
   redirect(`/app/applications/${id}?reanalysed=1`);
+}
+
+const statusSchema = z.object({
+  status: z.enum(APPLICATION_STATUSES),
+  deadline: z
+    .string()
+    .trim()
+    .regex(/^(\d{4}-\d{2}-\d{2})?$/)
+    .transform((s) => s || null),
+  statusNote: text(200),
+});
+
+/** Where the application stands, its deadline and a short note (e.g. test dates). */
+export async function updateStatusAction(applicationId: string, fd: FormData) {
+  const id = z.uuid().parse(applicationId);
+  await data.updateApplication(id, statusSchema.parse(form(fd)));
+  revalidatePath(`/app/applications/${id}`);
+  revalidatePath("/app");
 }
 
 /** A fact added straight from a missing requirement on an application page. */
