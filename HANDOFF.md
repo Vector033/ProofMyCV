@@ -16,7 +16,8 @@ commits and UI copy in English.
 ## Where things stand
 
 - **Live:** https://factfit-five.vercel.app. Repo github.com/Vector033/FactFit (private).
-  `main` = `7ea2e30`, pushed and deployed on 2026-11-21, with **migration 0001 applied on prod** (applications:
+  `main` = `eb99489`, pushed and deployed on 2026-11-21 (fixes from the owner's real-resume and real-posting
+  trial, see below). `7ea2e30` brought the redesign, with **migration 0001 applied on prod** (applications:
   `status`, `deadline`, `status_note`). It adds the 2026-11-21 redesign phases below. Checked on prod with the
   demo account: status filter/pill, status form, re-analyse, preview, quick-add, PDF `?education=first`, link
   intake from Vercel (and 169.254.169.254 refused), poster read by Gemini, no overflow at 375px, no errors.
@@ -108,6 +109,14 @@ Supabase admin API (`npx supabase status -o env` gives the service key).
 | 6bf3872 | Phase 3: job intake from a link (`lib/import/job-source.ts`, SSRF-guarded at socket lookup and per redirect), a poster/screenshot (Gemini `inlineData`), or text; career-track pills |
 | 647919f | Phase 4: re-analyse (keeps old analysis on AI failure), quick-add fact from missing skills, PDF preview + Education first, GitHub repo import (`lib/import/github.ts`) |
 | 7ea2e30 | Status tracker + migration 0001 |
+| 523fa9f | Real-resume trial: duplicate import check by name/kind (`sameEntry` in `core/types.ts`), outcome-only facts join the fact before, `applyTrack` in `jd.ts` (other tracks' areas become preferred in code), all-caps headline title-cased, `normalizeTag` drops brackets and inner versions |
+| f3c5998 | "Sem 1/2026" reads as the year 2026, not January |
+| eb99489 | Real-posting trial: PDF preview renders on open (showed stale bullets after Save), "any one of" options stay one requirement ("Java / C# / Python"), matching-only umbrella terms (Next.js->React, TypeScript->JavaScript, FastAPI->REST, PostgreSQL->RDBMS, Firestore/Redis->NoSQL), language requirements need a language fact, link intake fills role/company from the page title |
+
+Trial notes (owner's own account, 2026-11-21): applications for Gosoft, Agoda co-op and summer
+(Greenhouse links read fine), P&G (Workday needs scripts, so text was pasted) and KPMG. Re-analyse takes ~40 s
+on Gemini Flash-Lite and the button shows no pending state yet. Known guard limit: a draft can invent a cause
+("reached 90-100% mutation score by building JWT auth") because the guard checks numbers and tools only.
 
 Rules kept: the guard, `mentions()` and the eval are unchanged (eval numbers identical after every phase).
 Matching v2 lives in `match.ts` only because `mentions()` also feeds the eval's extraction recall.
