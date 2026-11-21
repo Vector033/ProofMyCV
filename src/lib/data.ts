@@ -185,7 +185,7 @@ export async function exportAll() {
 }
 
 
-/** Deletes every FactFit row of the signed-in user (facts go with their experiences). */
+/** Deletes every ProofMyCV row of the signed-in user (facts go with their experiences). */
 export async function deleteAllMyData() {
   const { id } = await requireUser();
   await db.transaction(async (tx) => {

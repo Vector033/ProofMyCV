@@ -2,8 +2,8 @@ import { date, index, integer, jsonb, pgSchema, primaryKey, text, timestamp, uui
 import { authUsers } from "drizzle-orm/supabase";
 import type { ApplicationStatus, ExperienceKind, JobAnalysis } from "@/lib/core/types";
 
-// All tables live in their own "factfit" schema: the hosted Supabase project is
-// shared with other apps (HarnKan, SlipJot), so FactFit never touches "public".
+// All tables live in their own "factfit" schema (the app's first name): the hosted Supabase project is
+// shared with other apps (HarnKan, SlipJot), so ProofMyCV never touches "public".
 // Every table hangs off auth.users with ON DELETE CASCADE. RLS is on with no
 // policies: the app reads through the server-side DATABASE_URL connection and
 // filters by user id itself, and the public Supabase API key cannot read these

@@ -9,7 +9,7 @@ const STEPS = [
   },
   {
     title: "Match the job's requirements",
-    body: "Paste any job posting. FactFit lists the skills it asks for and scores how many your facts already\u00A0back.",
+    body: "Paste any job posting. ProofMyCV lists the skills it asks for and scores how many your facts already\u00A0back.",
   },
   {
     title: "Export a single-column PDF",

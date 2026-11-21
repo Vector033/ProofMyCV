@@ -18,7 +18,7 @@ export default async function AppLayout({ children }: LayoutProps<"/app">) {
               F
             </span>
             <span>
-              Fact<span className="text-emerald-700">Fit</span>
+              ProofMy<span className="text-emerald-700">CV</span>
             </span>
           </Link>
 

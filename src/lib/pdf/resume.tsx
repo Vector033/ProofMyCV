@@ -74,7 +74,7 @@ export function ResumeDocument({ data, educationFirst = false }: { data: ResumeD
     <Document
       title={`${profile.fullName || "Resume"}${analysis.role ? ` - ${analysis.role}` : ""}`}
       author={profile.fullName}
-      creator="FactFit"
+      creator="ProofMyCV"
     >
       <Page size="A4" style={s.page}>
         <Text style={s.name}>{profile.fullName || "Your Name"}</Text>

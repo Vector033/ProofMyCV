@@ -15,7 +15,7 @@ commits and UI copy in English.
 
 ## Where things stand
 
-- **Live:** https://factfit-five.vercel.app. Repo github.com/Vector033/FactFit (private).
+- **Live:** https://proofmycv.vercel.app (renamed from FactFit on 2026-11-22 because another site already uses that name; factfit-five.vercel.app redirects there via `next.config.ts`; the DB schema, folder, env vars and demo email keep the old `factfit` name on purpose). Repo github.com/Vector033/FactFit (private).
   `main` = `eb99489`, pushed and deployed on 2026-11-21 (fixes from the owner's real-resume and real-posting
   trial, see below). `7ea2e30` brought the redesign, with **migration 0001 applied on prod** (applications:
   `status`, `deadline`, `status_note`). It adds the 2026-11-21 redesign phases below. Checked on prod with the

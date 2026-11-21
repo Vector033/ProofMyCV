@@ -1,6 +1,6 @@
-# FactFit design guide
+# ProofMyCV design guide
 
-The rules for any UI change in FactFit. The longer study notes this grew from (reference sites, video summaries,
+The rules for any UI change in ProofMyCV. The longer study notes this grew from (reference sites, video summaries,
 prompt recipes) are in git history: `git show 3254a6b:CLAUDE_DESIGN_GUIDE.md`.
 
 ## 1. Honesty (wins over everything below)

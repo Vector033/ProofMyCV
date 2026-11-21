@@ -13,7 +13,7 @@ const date = (iso: string | null) =>
 
 const OAUTH: Record<string, { tone: "ok" | "error"; text: string }> = {
   cancelled: { tone: "error", text: "Connecting Google was cancelled." },
-  failed: { tone: "error", text: "Google didn't connect. That Google account may already belong to another FactFit account." },
+  failed: { tone: "error", text: "Google didn't connect. That Google account may already belong to another ProofMyCV account." },
 };
 
 export default async function AccountPage({ searchParams }: PageProps<"/app/settings">) {
@@ -30,7 +30,7 @@ export default async function AccountPage({ searchParams }: PageProps<"/app/sett
       )}
 
       <Section title="Profile" description="Who you are signed in as.">
-        <Row label="Email" hint="Used to sign in. FactFit never emails you.">
+        <Row label="Email" hint="Used to sign in. ProofMyCV never emails you.">
           <div className="flex flex-wrap items-center gap-2">
             <span className="text-sm text-slate-900 [overflow-wrap:anywhere]">{account.email}</span>
             <Badge>Primary</Badge>

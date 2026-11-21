@@ -18,7 +18,7 @@ export function parseRepo(input: string): { owner: string; repo: string } | null
 }
 
 async function get(url: string, accept: string): Promise<Response> {
-  const headers: Record<string, string> = { accept, "user-agent": "FactFit repo importer" };
+  const headers: Record<string, string> = { accept, "user-agent": "ProofMyCV repo importer" };
   if (process.env.GITHUB_TOKEN) headers.authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
   return fetch(url, { headers, signal: AbortSignal.timeout(TIMEOUT_MS), redirect: "follow" });
 }

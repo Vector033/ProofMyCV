@@ -35,7 +35,7 @@ export async function authAction(_prev: AuthState, fd: FormData): Promise<AuthSt
   if (mode === "signup") {
     const problem = passwordProblem(password, email);
     if (problem) return { error: problem };
-    // Accounts are created server-side and marked confirmed. FactFit sends no
+    // Accounts are created server-side and marked confirmed. ProofMyCV sends no
     // email, so the Supabase project (shared with other apps) needs no
     // confirmation link or redirect URL configured for it.
     const { error } = await createAdminClient().auth.admin.createUser({ email, password, email_confirm: true });

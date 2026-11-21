@@ -438,7 +438,7 @@ export async function signOutAction() {
 }
 
 /**
- * Deletes every FactFit row of the signed-in user. The sign-in itself lives in
+ * Deletes every ProofMyCV row of the signed-in user. The sign-in itself lives in
  * a Supabase project shared with other apps, so it is not removed here.
  */
 export async function deleteAccountAction(fd: FormData) {

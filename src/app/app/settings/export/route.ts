@@ -5,7 +5,7 @@ export async function GET() {
   return new Response(JSON.stringify(data, null, 2), {
     headers: {
       "content-type": "application/json",
-      "content-disposition": 'attachment; filename="factfit-export.json"',
+      "content-disposition": 'attachment; filename="proofmycv-export.json"',
       "cache-control": "private, no-store",
     },
   });

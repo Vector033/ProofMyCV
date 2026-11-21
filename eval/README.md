@@ -1,4 +1,4 @@
-# FactFit eval
+# ProofMyCV eval
 
 60 fictional job-posting + fact-bank cases, hand-labelled, used to measure the fabrication guard, skill extraction
 and the live drafting pipeline. No real person's data is used.

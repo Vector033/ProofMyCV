@@ -14,27 +14,27 @@ const comparisonRows = [
   {
     feature: "Numbers",
     ai: "Told to “add impressive metrics”, Typhoon 2.5 invented or inflated 25 claims",
-    factfit: "Blocked 25 / 25 of them, and 547 / 547 on the tuning cases",
+    ours: "Blocked 25 / 25 of them, and 547 / 547 on the tuning cases",
   },
   {
     feature: "Tools",
     ai: "A draft can name tools that are not in your facts",
-    factfit: "Every tool name is checked against the cited facts (21 / 22 held-out)",
+    ours: "Every tool name is checked against the cited facts (21 / 22 held-out)",
   },
   {
     feature: "In an interview",
     ai: "No link from a sentence back to what you did",
-    factfit: "Every bullet cites 1 or more of your facts",
+    ours: "Every bullet cites 1 or more of your facts",
   },
   {
     feature: "Record",
     ai: "No record of where a claim came from",
-    factfit: "Each bullet stores the IDs of the facts it cites",
+    ours: "Each bullet stores the IDs of the facts it cites",
   },
   {
     feature: "PDF layout",
     ai: "Multi-column templates can be read out of order",
-    factfit: "Single column, selectable text, under 2.5 MB",
+    ours: "Single column, selectable text, under 2.5 MB",
   },
 ];
 
@@ -55,7 +55,7 @@ export default async function Home({ searchParams }: PageProps<"/">) {
               F
             </span>
             <span className="text-base text-slate-900">
-              Fact<span className="text-emerald-700">Fit</span>
+              ProofMy<span className="text-emerald-700">CV</span>
             </span>
           </Link>
 
@@ -99,7 +99,7 @@ export default async function Home({ searchParams }: PageProps<"/">) {
           role="status"
           className="border-b border-slate-200 bg-emerald-50 px-4 py-2.5 text-center text-xs font-medium text-emerald-900 sm:px-6"
         >
-          Your FactFit account and data have been permanently deleted.
+          Your ProofMyCV account and data have been permanently deleted.
         </div>
       )}
 
@@ -129,7 +129,7 @@ export default async function Home({ searchParams }: PageProps<"/">) {
 
             {/* Subtitle (50–75ch width, 1.6 line-height, natural wrapping) */}
             <p className="body-prose mx-auto mt-4 max-w-[60ch] text-lg text-slate-600 sm:text-xl">
-              AI resume tools can invent numbers and add skills you never used. FactFit matches your
+              AI resume tools can invent numbers and add skills you never used. ProofMyCV matches your
               real achievements to each job and blocks any claim it cannot trace to your
               Fact&nbsp;Bank.
             </p>
@@ -175,7 +175,7 @@ export default async function Home({ searchParams }: PageProps<"/">) {
           <div className="mx-auto max-w-6xl px-4 sm:px-6">
             <SectionHeader
               id="how-heading"
-              title="How FactFit works"
+              title="How ProofMyCV works"
               subtitle={"Three steps from what you actually did to a single-column PDF you can explain line by\u00A0line."}
             />
 
@@ -189,7 +189,7 @@ export default async function Home({ searchParams }: PageProps<"/">) {
             <SectionHeader
               id="arch-heading"
               title="Blocked by code, not by a prompt"
-              subtitle={"The model is asked to cite its facts, but FactFit never takes its word for it. Plain code checks every number, unit and tool name in a bullet before it can be\u00A0saved."}
+              subtitle={"The model is asked to cite its facts, but ProofMyCV never takes its word for it. Plain code checks every number, unit and tool name in a bullet before it can be\u00A0saved."}
             />
 
             <InView className="mt-8">
@@ -226,7 +226,7 @@ export default async function Home({ searchParams }: PageProps<"/">) {
             <SectionHeader
               id="comparison-heading"
               title="With and without a code check"
-              subtitle={"What an unchecked AI draft leaves you with, next to what FactFit checks before a bullet is\u00A0saved."}
+              subtitle={"What an unchecked AI draft leaves you with, next to what ProofMyCV checks before a bullet is\u00A0saved."}
             />
 
             <InView className="mt-10">
@@ -241,7 +241,7 @@ export default async function Home({ searchParams }: PageProps<"/">) {
                       Unchecked AI draft
                     </th>
                     <th scope="col" className="py-3.5 pr-6 pl-4">
-                      With FactFit
+                      With ProofMyCV
                     </th>
                   </tr>
                 </thead>
@@ -264,8 +264,8 @@ export default async function Home({ searchParams }: PageProps<"/">) {
                         <span className="flex items-start gap-2">
                           <IconCheck size={14} className="mt-1 shrink-0 text-emerald-700" />
                           <span>
-                            <span className="sr-only">With FactFit: </span>
-                            {row.factfit}
+                            <span className="sr-only">With ProofMyCV: </span>
+                            {row.ours}
                           </span>
                         </span>
                       </td>
@@ -316,13 +316,13 @@ export default async function Home({ searchParams }: PageProps<"/">) {
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-4 sm:px-6">
           <div className="flex items-center gap-2">
             <span className="font-semibold tracking-tight text-slate-900">
-              Fact<span className="text-emerald-700">Fit</span>
+              ProofMy<span className="text-emerald-700">CV</span>
             </span>
             <span aria-hidden className="text-slate-500">·</span>
             <span>Fact-checked resume tailoring</span>
           </div>
           <p>
-            FactFit stores only what you enter. Export or delete your data at any&nbsp;time.
+            ProofMyCV stores only what you enter. Export or delete your data at any&nbsp;time.
           </p>
         </div>
       </footer>

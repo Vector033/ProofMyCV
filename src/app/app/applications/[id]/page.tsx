@@ -153,7 +153,7 @@ export default async function ApplicationPage({ params, searchParams }: PageProp
                 <p className="mt-3 text-xs text-slate-500">
                   If you really have done one of these, add it as a fact below or in your{" "}
                   <Link href="/app/facts" className="font-medium text-slate-700 underline underline-offset-2">fact bank</Link>. Otherwise leave it out.
-                  FactFit will not write it for&nbsp;you.
+                  ProofMyCV will not write it for&nbsp;you.
                 </p>
                 {bank.experiences.length > 0 && (
                   <details className="group/quick mt-4 rounded-lg border border-slate-200 p-3">

@@ -32,7 +32,7 @@ function getReducedMotionSnapshot() {
 }
 
 /**
- * GPU-accelerated Hero background shader using FactFit's Slate & Emerald palette.
+ * GPU-accelerated Hero background shader using ProofMyCV's Slate & Emerald palette.
  * Enforces Section 6.2 guardrails:
  * - Instant --canvas (#f8fafc) CSS fallback during SSR (zero CLS)
  * - Pauses via speed={0} when prefers-reduced-motion is enabled

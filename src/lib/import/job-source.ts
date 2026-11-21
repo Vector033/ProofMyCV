@@ -88,7 +88,7 @@ function get(url: URL): Promise<{ status: number; location?: string; type: strin
       {
         lookup: safeLookup as unknown as typeof lookup,
         timeout: TIMEOUT_MS,
-        headers: { "user-agent": "FactFit job-link reader", accept: "text/html,text/plain;q=0.9" },
+        headers: { "user-agent": "ProofMyCV job-link reader", accept: "text/html,text/plain;q=0.9" },
       },
       (res) => {
         const status = res.statusCode ?? 0;

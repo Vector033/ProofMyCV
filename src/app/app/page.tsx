@@ -62,7 +62,7 @@ export default async function ApplicationsPage({ searchParams }: PageProps<"/app
       {apps.length === 0 ? (
         <div className="rounded-xl border border-dashed border-slate-300 px-6 py-12 text-center">
           <p className="font-medium text-slate-900">No applications yet</p>
-          <p className="mt-1 text-sm text-slate-600">Paste a job description and FactFit checks it against your facts.</p>
+          <p className="mt-1 text-sm text-slate-600">Paste a job description and ProofMyCV checks it against your facts.</p>
           <Link href="/app/applications/new" className="btn mt-5">
             Paste a job description
           </Link>

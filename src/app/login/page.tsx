@@ -33,7 +33,7 @@ export default async function LoginPage({ searchParams }: PageProps<"/login">) {
               F
             </span>
             <span className="text-base">
-              Fact<span className="text-emerald-300">Fit</span>
+              ProofMy<span className="text-emerald-300">CV</span>
             </span>
           </Link>
 
@@ -77,7 +77,7 @@ export default async function LoginPage({ searchParams }: PageProps<"/login">) {
 
               <div className="rounded-lg border border-emerald-400/35 bg-emerald-950/35 p-3.5">
                 <div className="flex items-center justify-between gap-2">
-                  <span className="text-xs font-medium text-emerald-200">Checked by FactFit</span>
+                  <span className="text-xs font-medium text-emerald-200">Checked by ProofMyCV</span>
                   <span className="inline-flex items-center gap-1 rounded-full bg-emerald-900/70 px-2 py-0.5 text-[11px] font-medium text-emerald-200">
                     <IconCheck size={11} /> Traceable
                   </span>
@@ -129,7 +129,7 @@ export default async function LoginPage({ searchParams }: PageProps<"/login">) {
               F
             </span>
             <span>
-              Fact<span className="text-emerald-700">Fit</span>
+              ProofMy<span className="text-emerald-700">CV</span>
             </span>
           </Link>
 

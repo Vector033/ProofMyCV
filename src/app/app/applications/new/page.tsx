@@ -11,7 +11,7 @@ export default function NewApplicationPage() {
       <header>
         <h1 className="text-2xl font-semibold tracking-tight">New application</h1>
         <p className="mt-1 text-sm text-slate-600">
-          Paste the full job description. FactFit lists the skills and problems it asks for and checks them against your
+          Paste the full job description. ProofMyCV lists the skills and problems it asks for and checks them against your
           fact&nbsp;bank.{" "}
           {!llm && "AI analysis is off on this server, so a built-in skill extractor is\u00A0used."}
         </p>

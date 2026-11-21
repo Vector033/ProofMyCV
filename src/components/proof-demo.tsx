@@ -102,7 +102,7 @@ export function ProofDemo() {
           {/* Right: the same fact, written faithfully. */}
           <div className="flex flex-col bg-emerald-50/30 p-5 sm:p-6">
             <div className="flex flex-wrap items-center justify-between gap-2">
-              <h3 className="text-sm font-semibold text-slate-900">Checked by FactFit</h3>
+              <h3 className="text-sm font-semibold text-slate-900">Checked by ProofMyCV</h3>
               <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-600/20 bg-emerald-50 px-2.5 py-0.5 text-xs font-medium whitespace-nowrap text-emerald-800 tabular-nums">
                 <IconShield size={13} />
                 {faithfulClaims.length} of {faithfulClaims.length} claims traced

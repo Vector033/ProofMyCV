@@ -6,7 +6,7 @@ const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: { default: "FactFit", template: "%s · FactFit" },
+  title: { default: "ProofMyCV", template: "%s · ProofMyCV" },
   description: "Tailor your resume to each job without inventing a single fact.",
 };
 

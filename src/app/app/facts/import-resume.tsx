@@ -93,7 +93,7 @@ export function ImportResume({ demo, profile, existing }: { demo: boolean; profi
       ) : (
         <>
           <p className="body-prose mt-1 text-sm text-slate-600">
-            Upload a .docx or .pdf of up to 2 MB. FactFit reads the text and suggests entries for you to check. The file
+            Upload a .docx or .pdf of up to 2 MB. ProofMyCV reads the text and suggests entries for you to check. The file
             is read in memory and not stored, and nothing is saved until you choose to save it.
           </p>
           <form

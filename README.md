@@ -1,17 +1,17 @@
-# FactFit
+# ProofMyCV
 
 Tailor your resume to each job description without inventing a single fact.
 
-AI resume writers happily make up numbers and tools. FactFit keeps a **fact bank** of what you actually did, maps a
+AI resume writers happily make up numbers and tools. ProofMyCV keeps a **fact bank** of what you actually did, maps a
 job description against it, and only lets a bullet onto your resume if every number and every technology in it can be
 traced back to a fact you wrote. That check is plain code, not a prompt.
 
-**Live:** https://factfit-five.vercel.app · press **Try the demo account** to use a shared account with a fictional
+**Live:** https://proofmycv.vercel.app (formerly FactFit at factfit-five.vercel.app, which now redirects here) · press **Try the demo account** to use a shared account with a fictional
 fact bank, no sign-up needed.
 
 | Landing page with the live guard demo | Bullet studio: one bullet traceable, one blocked |
 |---|---|
-| ![FactFit landing page](docs/screenshots/landing.png) | ![Bullet studio with a blocked bullet](docs/screenshots/bullet-studio.png) |
+| ![ProofMyCV landing page](docs/screenshots/landing.png) | ![Bullet studio with a blocked bullet](docs/screenshots/bullet-studio.png) |
 | **Job mapping and fit score** | **Fact bank** |
 | ![Application page with fit score](docs/screenshots/application.png) | ![Fact bank page](docs/screenshots/fact-bank.png) |
 | **Try the guard: type a draft, see what it blocks** | **The guard, step by step, on an invented draft** |
@@ -37,9 +37,9 @@ that is deleted afterwards, and so does the import review (a fictional resume).
 ## How it works
 
 1. **Fact bank.** Per job, project or degree you write short facts: what you did, the result, the number, the tools.
-   Or upload your resume (.docx or .pdf, up to 2 MB): FactFit reads it in memory without storing the file, suggests
+   Or upload your resume (.docx or .pdf, up to 2 MB): ProofMyCV reads it in memory without storing the file, suggests
    entries, marks any number or month the file does not contain, and saves only what you tick after editing.
-2. **Paste a job description.** FactFit extracts the skills, keywords and problems (Gemini with a JSON schema, or a
+2. **Paste a job description.** ProofMyCV extracts the skills, keywords and problems (Gemini with a JSON schema, or a
    built-in rule-based extractor when no API key is set).
 3. **Mapping and fit score.** Each requirement shows the facts that back it, or is listed as missing. The score is
    weighted (required ×3, nice-to-have ×1).
@@ -101,10 +101,10 @@ drizzle/           SQL migrations (RLS enabled, no public policies)
 
 ## Deployment
 
-Vercel (region sin1) with a hosted Supabase project shared with two other apps of mine, so everything FactFit stores
+Vercel (region sin1) with a hosted Supabase project shared with two other apps of mine, so everything ProofMyCV stores
 lives in its own Postgres schema `factfit` (migration log included). Accounts are created server-side through the
 Supabase admin API, so no confirmation emails or redirect URLs are configured on the shared project, and "Delete my
-data" removes every FactFit row while leaving the shared sign-in alone. Gemini calls are capped per user per day
+data" removes every ProofMyCV row while leaving the shared sign-in alone. Gemini calls are capped per user per day
 (and for the demo account as a whole) with Postgres-backed rate limits whose keys are HMAC hashes, never raw IPs or
 emails. The runtime connects through Supabase's transaction pooler: the session pooler allows only 15 clients for
 the whole project, and postgres.js stays reliable there as long as its pool is at least as large as the number of
@@ -125,7 +125,7 @@ appears when `GOOGLE_AUTH_ENABLED=true`. To turn it on:
    redirect URI: `https://<project-ref>.supabase.co/auth/v1/callback` (locally `http://127.0.0.1:54321/auth/v1/callback`).
 2. Supabase dashboard → Authentication → Sign In / Providers → Google: paste the client ID and secret, enable it.
    Same page: turn on *Allow manual linking* so "Connect Google" works in Settings.
-3. Authentication → URL Configuration → Redirect URLs: add `https://factfit-five.vercel.app/**`.
+3. Authentication → URL Configuration → Redirect URLs: add `https://proofmycv.vercel.app/**`.
 4. Set `GOOGLE_AUTH_ENABLED=true` in Vercel (and in `.env.local` for local use, together with
    `SUPABASE_AUTH_EXTERNAL_GOOGLE_CLIENT_ID` / `_SECRET` and `enabled = true` under `[auth.external.google]` in
    `supabase/config.toml`).
