@@ -87,7 +87,8 @@ export async function createFact(experienceId: string, input: FactInput) {
     .from(experiences)
     .where(and(eq(experiences.id, experienceId), eq(experiences.userId, id)));
   if (!owned) throw new Error("Experience not found");
-  await db.insert(facts).values({ ...input, experienceId, userId: id });
+  const [row] = await db.insert(facts).values({ ...input, experienceId, userId: id }).returning({ id: facts.id });
+  return row.id;
 }
 
 export async function updateFact(factId: string, input: FactInput) {

@@ -147,6 +147,11 @@ export const IconDownload = (p: P) => (
     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" />
   </Icon>
 );
+export const IconPlus = (p: P) => (
+  <Icon {...p}>
+    <path d="M12 5v14M5 12h14" />
+  </Icon>
+);
 
 /** Google's "G" mark, in its brand colours, for the sign-in button. */
 export function GoogleMark({ size = 18 }: { size?: number }) {

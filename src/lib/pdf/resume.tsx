@@ -1,7 +1,9 @@
 import { Document, Link, Page, StyleSheet, Text, View } from "@react-pdf/renderer";
-import type { BulletDraft, Experience, ExperienceKind, Fact, JobAnalysis } from "../core/types";
-import { mentions, normalizeTag } from "../core/vocab";
+import type { BulletDraft, Experience, Fact, JobAnalysis } from "../core/types";
+import { orderedResumeSections, orderedSkills, parseProfileLinks } from "../core/resume-layout";
 import { formatRange } from "../format";
+
+export { orderedSkills };
 
 // Single-column, text-only layout with a standard PDF font: every character is
 // selectable, ATS parsers read it top to bottom, and files stay a few KB.
@@ -39,36 +41,12 @@ const s = StyleSheet.create({
   link: { color: "#111", textDecoration: "none" },
 });
 
-const SECTIONS: { kind: ExperienceKind; title: string }[] = [
-  { kind: "job", title: "Experience" },
-  { kind: "project", title: "Projects" },
-  { kind: "education", title: "Education" },
-  { kind: "activity", title: "Activities" },
-];
-
-/** Skills from the fact bank, with the ones the job asks for first. */
-export function orderedSkills(facts: Fact[], analysis: JobAnalysis) {
-  const seen = new Set<string>();
-  const all = facts
-    .flatMap((f) => f.tech.flatMap(normalizeTag))
-    .filter((t) => !seen.has(t.toLowerCase()) && seen.add(t.toLowerCase()));
-  const rank = (t: string) => {
-    const i = analysis.requirements.findIndex((r) => mentions(t, r.name));
-    if (i === -1) return 1000;
-    return (analysis.requirements[i].importance === "required" ? 0 : 100) + i;
-  };
-  return all.sort((a, b) => rank(a) - rank(b)).slice(0, 24);
-}
-
 export function ResumeDocument({ data, educationFirst = false }: { data: ResumeData; educationFirst?: boolean }) {
   // Students often lead with their degree; everything else keeps its order.
-  const sections = educationFirst ? [...SECTIONS.filter((x) => x.kind === "education"), ...SECTIONS.filter((x) => x.kind !== "education")] : SECTIONS;
+  const sections = orderedResumeSections(educationFirst);
   const { profile, experiences, bullets, facts, analysis } = data;
   const skills = orderedSkills(facts, analysis);
-  const links = profile.links
-    .split(/\s*[·|,]\s*/)
-    .map((l) => l.trim())
-    .filter(Boolean);
+  const links = parseProfileLinks(profile.links);
 
   return (
     <Document

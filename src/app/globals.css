@@ -23,11 +23,11 @@
 }
 
 html {
-  scroll-padding-top: 1rem;
+  scroll-padding-top: 5rem;
 }
 @media (min-width: 768px) {
   html {
-    scroll-padding-top: 9rem; /* sticky top bar + bullet toolbar */
+    scroll-padding-top: 9rem; /* sticky top bar + workspace bar + bullet toolbar */
   }
 }
 

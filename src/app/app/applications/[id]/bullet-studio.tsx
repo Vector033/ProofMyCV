@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState, useTransition } from "react";
 import { checkBullet, describeViolation, describeWarning } from "@/lib/core/guard";
-import { factAsBullet } from "@/lib/core/bullets";
+import { bulletsEqual, factAsBullet } from "@/lib/core/bullets";
 import type { BulletDraft, Experience, Fact } from "@/lib/core/types";
 import type { BulletCandidate } from "@/lib/llm/tasks";
 import { IconAlert, IconArrowDown, IconArrowUp, IconCheck, IconDownload, IconX } from "@/components/icons";
@@ -12,18 +12,31 @@ type Props = {
   applicationId: string;
   experiences: Experience[];
   facts: Fact[];
-  initialBullets: BulletDraft[];
+  bullets: BulletDraft[];
+  savedBullets: BulletDraft[];
+  onBulletsChange: (next: BulletDraft[]) => void;
+  onBulletsSaved: (saved: BulletDraft[]) => void;
   canGenerate: boolean;
 };
 
-export function BulletStudio({ applicationId, experiences, facts, initialBullets, canGenerate }: Props) {
-  const [bullets, setBullets] = useState<BulletDraft[]>(initialBullets);
+export function BulletStudio({
+  applicationId,
+  experiences,
+  facts,
+  bullets,
+  savedBullets,
+  onBulletsChange,
+  onBulletsSaved,
+  canGenerate,
+}: Props) {
   const [candidates, setCandidates] = useState<BulletCandidate[]>([]);
   const [status, setStatus] = useState<{ tone: "ok" | "error"; text: string } | null>(null);
-  const [dirty, setDirty] = useState(false);
   const [removed, setRemoved] = useState<{ bullet: BulletDraft; index: number } | null>(null);
   const [generating, startGenerating] = useTransition();
   const [saving, startSaving] = useTransition();
+
+  // Compare against the last saved snapshot so reverting edits returns cleanly to "Saved".
+  const dirty = useMemo(() => !bulletsEqual(bullets, savedBullets), [bullets, savedBullets]);
 
   // The same guard the server runs on save, run live while the user edits.
   const checks = useMemo(() => bullets.map((b) => checkBullet(b, facts, experiences)), [bullets, facts, experiences]);
@@ -40,8 +53,7 @@ export function BulletStudio({ applicationId, experiences, facts, initialBullets
   }, [dirty]);
 
   const update = (next: BulletDraft[]) => {
-    setBullets(next);
-    setDirty(true);
+    onBulletsChange(next);
     setStatus(null);
     setRemoved(null);
   };
@@ -82,10 +94,11 @@ export function BulletStudio({ applicationId, experiences, facts, initialBullets
 
   const save = () =>
     startSaving(async () => {
-      const r = await saveBulletsAction(applicationId, bullets);
+      const normalized = bullets.map((b) => ({ ...b, text: b.text.trim() }));
+      const r = await saveBulletsAction(applicationId, normalized);
       if (r.error) setStatus({ tone: "error", text: r.error });
       else {
-        setDirty(false);
+        onBulletsSaved(normalized);
         setStatus({ tone: "ok", text: "Saved. Export the PDF when you are happy with it." });
       }
     });
@@ -98,8 +111,8 @@ export function BulletStudio({ applicationId, experiences, facts, initialBullets
         : `${bullets.length} ${bullets.length === 1 ? "bullet" : "bullets"}, all traceable to your facts.`;
 
   return (
-    <section aria-labelledby="bullets-heading" className="space-y-4">
-      <div className="fluted-glass z-[15] shadow-xs md:sticky md:top-16 -mx-4 flex flex-wrap items-center gap-3 border-b border-slate-200/80 px-4 py-3 sm:-mx-6 sm:px-6">
+    <section id="bullet-studio" aria-labelledby="bullets-heading" className="scroll-mt-32 space-y-4">
+      <div className="fluted-glass z-[15] shadow-xs md:sticky md:top-28 -mx-4 flex flex-wrap items-center gap-3 border-b border-slate-200/80 px-4 py-3 sm:-mx-6 sm:px-6">
         <div className="mr-auto min-w-0">
           <h2 id="bullets-heading" className="text-lg font-semibold tracking-tight">
             Bullets for this job

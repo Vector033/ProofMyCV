@@ -19,7 +19,7 @@ import { MAX_RESUME_BYTES, ResumeFileError, resumeText } from "@/lib/import/extr
 import { JobLinkError, MAX_POSTER_BYTES, fetchJobText, sniffImage } from "@/lib/import/job-source";
 import { RepoError, fetchRepo, parseRepo } from "@/lib/import/github";
 import { CAREER_TRACKS } from "@/lib/core/jd";
-import { APPLICATION_STATUSES } from "@/lib/core/types";
+import { APPLICATION_STATUSES, type Experience, type Fact } from "@/lib/core/types";
 
 const text = (max: number) => z.string().trim().max(max);
 const optional = (max: number) =>
@@ -327,12 +327,72 @@ export async function updateStatusAction(applicationId: string, fd: FormData) {
   revalidatePath("/app");
 }
 
+export type QuickAddFactResult =
+  | { ok: true; fact: Fact; experience?: Experience; score: number }
+  | { error: string };
+
 /** A fact added straight from a missing requirement on an application page. */
-export async function quickAddFactAction(applicationId: string, fd: FormData) {
-  const id = z.uuid().parse(applicationId);
-  await data.createFact(z.uuid().parse(fd.get("experienceId")), factSchema.parse(form(fd)));
+export async function quickAddFactAction(applicationId: string, fd: FormData): Promise<QuickAddFactResult> {
+  const idParsed = z.uuid().safeParse(applicationId);
+  if (!idParsed.success) return { error: "Application not found." };
+  const id = idParsed.data;
+  const app = await data.getApplication(id);
+  if (!app) return { error: "Application not found." };
+
+  const parsedFact = factSchema.safeParse({
+    did: fd.get("did") ?? "",
+    result: fd.get("result") ?? "",
+    tech: fd.get("tech") ?? "",
+  });
+  if (!parsedFact.success) {
+    return { error: "Describe what you really did (at least 3 characters)." };
+  }
+
+  const rawExpId = String(fd.get("experienceId") ?? "");
+  let experienceId: string;
+  let createdExperience: Experience | undefined;
+
+  if (rawExpId === "__new__") {
+    const parsedExp = experienceSchema.safeParse({
+      kind: fd.get("kind") ?? "project",
+      title: fd.get("title") ?? "",
+      org: fd.get("org") ?? "",
+      location: "",
+      startDate: "",
+      endDate: "",
+    });
+    if (!parsedExp.success) {
+      return { error: "Enter a title for the experience or project." };
+    }
+    experienceId = await data.createExperience(parsedExp.data);
+    createdExperience = { id: experienceId, ...parsedExp.data };
+  } else {
+    const parsedExpId = z.uuid().safeParse(rawExpId);
+    if (!parsedExpId.success) return { error: "Choose where you did this." };
+    experienceId = parsedExpId.data;
+  }
+
+  let factId: string;
+  try {
+    factId = await data.createFact(experienceId, parsedFact.data);
+  } catch {
+    return { error: "Selected experience was not found. Reload and try again." };
+  }
+
+  const bank = await data.getFactBank();
+  const score = matchRequirements(app.analysis, bank.facts, bank.experiences).score;
+  await data.updateApplication(id, { score });
+
   revalidatePath(`/app/applications/${id}`);
   revalidatePath("/app/facts");
+  revalidatePath("/app");
+
+  return {
+    ok: true,
+    fact: { id: factId, experienceId, ...parsedFact.data },
+    experience: createdExperience,
+    score,
+  };
 }
 
 export type FormState = { error?: string; values?: Record<string, string> };

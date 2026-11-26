@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const SIZES = {
   sm: { box: 44, stroke: 4, text: "text-xs" },
@@ -58,20 +58,29 @@ export function ScoreBadge({ score, size = "sm", animate = false }: { score: num
   );
 }
 
-// 900ms smooth roll-up matching ring-draw
+// 900ms smooth roll-up matching ring-draw (and live score updates)
 function useCountUp(target: number, enabled: boolean) {
   const [n, setN] = useState(enabled ? 0 : target);
+  const currentRef = useRef(enabled ? 0 : target);
+
   useEffect(() => {
     let frame = 0;
     if (!enabled || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      frame = requestAnimationFrame(() => setN(target));
+      frame = requestAnimationFrame(() => {
+        currentRef.current = target;
+        setN(target);
+      });
       return () => cancelAnimationFrame(frame);
     }
+    const from = currentRef.current;
+    if (from === target) return;
     const start = performance.now();
     const tick = (now: number) => {
       const p = Math.min(1, (now - start) / 900);
       // cubic-bezier(0.16, 1, 0.3, 1) approximation: 1 - (1 - p)^4
-      setN(Math.round(target * (1 - Math.pow(1 - p, 4))));
+      const next = Math.round(from + (target - from) * (1 - Math.pow(1 - p, 4)));
+      currentRef.current = next;
+      setN(next);
       if (p < 1) frame = requestAnimationFrame(tick);
     };
     frame = requestAnimationFrame(tick);

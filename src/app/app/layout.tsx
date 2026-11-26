@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { requireUser } from "@/lib/auth";
-import { IconCheck, IconLogout } from "@/components/icons";
+import { IconCheck } from "@/components/icons";
 import { signOutAction } from "./actions";
 import { AppNav } from "./nav";
+import { SignOutButton } from "./sign-out-button";
 
 export default async function AppLayout({ children }: LayoutProps<"/app">) {
   const user = await requireUser();
@@ -39,9 +40,7 @@ export default async function AppLayout({ children }: LayoutProps<"/app">) {
               <span className="hidden max-w-[14rem] truncate text-sm text-slate-700 lg:inline">{user.email}</span>
             </Link>
             <form action={signOutAction}>
-              <button className="btn-ghost size-11 text-slate-600" aria-label="Sign out" title="Sign out">
-                <IconLogout />
-              </button>
+              <SignOutButton />
             </form>
           </div>
         </div>
