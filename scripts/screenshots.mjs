@@ -69,7 +69,7 @@ export async function shoot(page, base = "http://localhost:3000", dir = "docs/sc
   await page.screenshot({ path: `${dir}application.png` });
 
   // Status tracker and quick-add from a missing skill (nothing is saved).
-  await page.getByText("+ Add a fact you really have").click();
+  await page.getByRole("button", { name: /Add a fact you really have/ }).click();
   await page.locator('form:has(select[name="status"])').scrollIntoViewIfNeeded();
   await page.evaluate(() => window.scrollBy(0, -80));
   await page.waitForTimeout(300);

@@ -6,7 +6,7 @@ AI resume writers happily make up numbers and tools. ProofMyCV keeps a **fact ba
 job description against it, and only lets a bullet onto your resume if every number and every technology in it can be
 traced back to a fact you wrote. That check is plain code, not a prompt.
 
-**Live:** https://proofmycv.vercel.app (formerly FactFit at factfit-five.vercel.app, which now redirects here) · press **Try the demo account** to use a shared account with a fictional
+**Live:** https://proofmycv.vercel.app (formerly FactFit at factfit-five.vercel.app, which now redirects here) · **[▶ Watch 16s Feature Showcase (1920×1080)](docs/demo/proofmycv-showcase.mp4)** · press **Try the demo account** to use a shared account with a fictional
 fact bank, no sign-up needed.
 
 | Landing page with the live guard demo | Bullet studio: one bullet traceable, one blocked |
